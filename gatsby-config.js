@@ -1,14 +1,14 @@
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Starter Blog`,
+    title: `EdPike365 Portfolio`,
     author: {
-      name: `Kyle Mathews`,
-      summary: `who lives and works in San Francisco building useful things.`,
+      name: `Ed Pike`,
+      summary: `who lives and works in the world at large, building useful things.`,
     },
-    description: `A starter blog demonstrating what Gatsby can do.`,
-    siteUrl: `https://gatsbystarterblogsource.gatsbyjs.io/`,
+    description: `A portfolio with a blog and other features demonstrating what Gatsby can do.`,
+    siteUrl: `https://www.edpike365.com/`,
     social: {
-      twitter: `kylemathews`,
+      twitter: `edpike365`,
     },
   },
   plugins: [
@@ -30,11 +30,17 @@ module.exports = {
     {
       resolve: `gatsby-transformer-remark`,
       options: {
+        gfm: true,
+        commonmark: true,
+        footnotes: true,
+        pedantic: true,
+        // blocks: ["h2"], Blocks option value can be provided here as an array.
+        excerpt_separator: `<!-- end -->`,        
         plugins: [
           {
             resolve: `gatsby-remark-images`,
             options: {
-              maxWidth: 630,
+              maxWidth: 740,
             },
           },
           {
@@ -43,14 +49,37 @@ module.exports = {
               wrapperStyle: `margin-bottom: 1.0725rem`,
             },
           },
+          `gatsby-remark-autolink-headers`,
           `gatsby-remark-prismjs`,
           `gatsby-remark-copy-linked-files`,
-          `gatsby-remark-smartypants`,
+          {
+            resolve: "gatsby-remark-smartypants",
+            options: {
+              dashes: "oldschool",
+            },
+          },
+          { 
+            resolve: `gatsby-remark-emoji`,
+            options: {
+              // default emojiConversion --> shortnameToUnicode
+              emojiConversion: 'shortnameToUnicode',
+              // when true, matches ASCII characters (in unicodeToImage and shortnameToImage)
+              // e.g. ;) --> 😉
+              ascii: true,
+            }
+          }, 
         ],
       },
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
+    {
+      resolve: `gatsby-plugin-catch-links`,
+      options: {
+        // Links are relative to this directory
+        excludeRegex: /excluded-link/,
+      },
+    },
     // {
     //   resolve: `gatsby-plugin-google-analytics`,
     //   options: {
