@@ -1,4 +1,4 @@
 # Production context: all deploys from the Production branch set in your site’s
 # deploy contexts will inherit these settings.
 [build.environment]
-  BLOG_STATUS='"published"'
+  BLOG_STATUS='"published", "draft"'

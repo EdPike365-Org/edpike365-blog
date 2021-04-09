@@ -9,6 +9,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 
   // We do not need to require dotenv because it was already done in gatsby-config.js ?
   const blogStatusList = `${process.env.BLOG_STATUS}`;
+  console.info(" gatsby-node.js blogStatusList = " + blogStatusList )
 
   // Get all markdown blog posts sorted by date
   const result = await graphql(
