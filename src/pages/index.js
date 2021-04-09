@@ -12,7 +12,7 @@ const BlogIndex = ({ data, location }) => {
   //which status blogs should we show?
   //we have to post filter them because there is no way to pass args to the page query !TODO
   const allowedBlogStatus = `${process.env.BLOG_STATUS}`; 
-  console.log("index.js" + allowedBlogStatus);
+  console.info("!!! index.js allowedBlogStatus = " + allowedBlogStatus);
 
   function shouldShowPost(post){
     const status = post.frontmatter.status;
