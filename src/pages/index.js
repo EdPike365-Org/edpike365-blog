@@ -11,8 +11,8 @@ const BlogIndex = ({ data, location }) => {
 
   //which status blogs should we show?
   //we have to post filter them because there is no way to pass args to the page query !TODO
-  const allowedBlogStatus = `${process.env.BLOG_STATUS}`; 
-  console.info("!!! index.js allowedBlogStatus = " + allowedBlogStatus);
+  const allowedBlogStatus = `${process.env.GATSBY_BLOG_STATUS}`; 
+  console.log("!!! index.js allowedBlogStatus = " + allowedBlogStatus);
 
   function shouldShowPost(post){
     const status = post.frontmatter.status;
@@ -25,6 +25,7 @@ const BlogIndex = ({ data, location }) => {
 
   const posts = data.allMarkdownRemark.nodes.filter(shouldShowPost)
 
+  //const posts = data.allMarkdownRemark.nodes
   if (posts.length === 0) {
     return (
       <Layout location={location} title={siteTitle}>
@@ -85,7 +86,7 @@ const BlogIndex = ({ data, location }) => {
 export default BlogIndex
 
 export const pageQuery = graphql`
-  query IndexPageQuery {
+  query IndexPageQuery{
     site {
       siteMetadata {
         title

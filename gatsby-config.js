@@ -42,6 +42,14 @@ module.exports = {
         excerpt_separator: `<!-- end -->`,        
         plugins: [
           {
+            resolve: 'gatsby-plugin-global-context',
+            options: {
+              context: {
+                GLOBAL_BLOG_STATUS: `${process.env.BLOG_STATUS}`
+              }
+            }
+          },
+          {
             resolve: `gatsby-remark-images`,
             options: {
               maxWidth: 740,
