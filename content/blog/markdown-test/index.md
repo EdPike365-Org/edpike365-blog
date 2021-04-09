@@ -1,6 +1,6 @@
 ---
-title: Galaxy Brain Mark Down Test In Gatsby
-status: published
+title: MarkDown It Test In Gatsby
+status: archived
 date: "2015-05-06T23:46:37.121Z"
 ---
 

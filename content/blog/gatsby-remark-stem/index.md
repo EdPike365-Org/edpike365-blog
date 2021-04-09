@@ -1,261 +1,43 @@
 ---
-title: "Unified Gatsby Remark Test"
-date: "2021-04-02T22:12:03.284Z"
-status: published
+title: "Gatsby MarkDown For STEM Blogging"
+date: "2021-04-03T22:12:03.284Z"
+status: draft
 author: EdPike365
 tags:
   - Gatsby
   - GatsbyJS
   - remark
   - MarkDown
+  - PrismJS
 ---
+This page demonstrates Gatsby MarkDown plugins useful for STEM (Science, Technology, Engineering, Math) bloggers using MD files. It does not cover MDX format pages.
 
-I've combined every page from the original Gatsby Markdown demo [mini site](https://using-remark.gatsbyjs.org/?__hstc=247646936.594c7150d69ca018c6dac822d8ef1a73.1611340662237.1617462079360.1617466517732.129&__hssc=247646936.1.1617466517732&__hsfp=4183638795). Why put them all together in this gigantic page? I want to see if there are any CSS or MD processing conflicts. Also, it's nice to be able to scroll through a single demo instead of jumping back and forth.
+Some of these topics were covered in another post: [Gatsby Remark Test](). This post adds more plugins and focuses more narrowly on STEM tooling. It will grow as I find more plugins.
 
-- Section Links:
-  - [Hello World: The remark Kitchen Sink](#hello)
-  - [Responsive Image and IFrames](#responsive-image)
-  - [Copying Linked Files and Intercepting Local Links](#copying-linked-files-a)
-  - [Code and Syntax Highlighting with PrismJS](#code-and-syntax)
-  - [Embed file contents within PrismJS blocks](#embed-file-contents)
-  - [Rendering math equations with KaTeX](#rendering-math-equations)
-  - [Using Exceprts](#using-excerpts)
-  - [Custom Components](#custom-components)
-  - [Graphviz](#graphviz)
+Generally Useful
+- Diagrams with [GraphViz](https://graphviz.org/)
+- Footnotes and References
 
-I tried to stay true to the original demo content so we can compare apples to apples. I added some notes and additional examples where I thought they were sorely needed. You'll see !TODO marking where I need to do some more work. 
+For Math
+- Tex/LaTeX Math Formulas with KaTeX
 
-If you run Lighthouse on this it won't do well for several reasons. As of posting, this blog site is not optimized for SEO, links, etc. But mainly the page is huge and apparently the large SVG files are causing some trouble.
+For Software Engineers
+- Embedding
+  - CodePen
+  - CodeSandbox
+  - Testing Playground
+  - Gist
+- Advanced PrismJS
 
-The content from each original demo page is seperated by a <span style="color:#bbbe74;">colored title div</span> like the one just below. I've added useful links for each section: to the original page and the MD source code.
+## Gatsy-Remark-Embedder
+[plugin](https://www.gatsbyjs.com/plugins/gatsby-remark-embedder/), [source](https://github.com/MichaelDeBoey/gatsby-remark-embedder)
 
-> EdPike365: Notes and changes are added in a block quote like this.
+Lets you embed many different sites. We are only interested in ones that support coding for now.
 
-> EdPike365: Original mini site [on github](https://github.com/gatsbyjs/gatsby/tree/master/examples/using-remark)
+## https://www.gatsbyjs.com/plugins/gatsby-remark-embed-gist/
 
-<a name="hello"></a>
-<div style="background-color:#bbbe74; padding: 1px 10px 10px 10px;">
-<h2>Hello World: The remark Kitchen Sink:</h2>
-Links: <a href="https://using-remark.gatsbyjs.org/hello-world-kitchen-sink/" target="_blank" >page</a>, <a href="https://raw.githubusercontent.com/gatsbyjs/gatsby/master/examples/using-remark/src/pages/2016-04-15---hello-world-kitchen-sink/index.md" target="_blank"> source </a>
-</div>
-<br>
-
-![A Mountain Lake](joshua-earle-CatpolIjez8-unsplash.jpg) _Photo by
-[Joshua Earle](https://unsplash.com/@joshuaearle) via
-[Unsplash](https://unsplash.com/photos/CatpolIjez8)_
-
-**_Note how all headlines below show an anchor link when you hover them?_**\
-That's [gatsby-remark-autolink-headers][5] hooking up all `MarkdownRemark` headers
-with anchor links for us.
-
-## Markdown in Gatsby
-
-Markdown parsing in Gatsby is done with [gatsby-transformer-remark][1], which
-uses the excellent [remark][2] under the hood.\
-Alongside remark we also use [gatsby-remark-smartypants][6], which provides smart
-punctuation through [retext-smartypants][7].
-
-The examples on this page cover the basic Markdown syntax and are adapted from
-[Markdown Here's Cheatsheet][3] ([CC-BY][4]).
-
----
-
-This is intended as a quick reference and showcase. For more complete info, see
-[John Gruber's original spec](https://daringfireball.net/projects/markdown/) and
-the
-[GitHub-flavored Markdown info page](https://github.github.com/github-flavored-markdown/).
-
-##### Table of Contents
-
-[Headers](#headers) [Emphasis](#emphasis) [Lists](#lists) [Links](#links)
-[Images](#images) [Tables](#tables) [Footnotes](#footnotes)
-[Blockquotes](#blockquotes) [Inline HTML](#html) [Horizontal Rule](#hr)
-[Line Breaks](#lines)
-
-<a name="headers"></a>
-
-## Headers
-
-```no-highlight
-# H1
-## H2
-### H3
-#### H4
-##### H5
-###### H6
-
-Alternatively, for H1 and H2, an underline-ish style:
-
-Alt-H1
-======
-
-Alt-H2
-------
-```
-
-# H1
-
-## H2
-
-### H3
-
-#### H4
-
-##### H5
-
-###### H6
-
-Alternatively, for H1 and H2, an underline-ish style:
-
-# Alt-H1
-
-## Alt-H2
-
-<a name="emphasis"></a>
-
-## Emphasis
-
-```no-highlight
-Emphasis, aka italics, with *asterisks* or _underscores_.
-
-Strong emphasis, aka bold, with **asterisks** or __underscores__.
-
-Combined emphasis with **asterisks and _underscores_**.
-
-Strikethrough uses two tildes. ~~Scratch this.~~
-```
-
-Emphasis, aka italics, with _asterisks_ or _underscores_.
-
-Strong emphasis, aka bold, with **asterisks** or **underscores**.
-
-Combined emphasis with **asterisks and _underscores_**.
-
-Strikethrough uses two tildes. ~~Scratch this.~~
-
-<a name="lists"></a>
-
-## Lists
-
-In this example, leading and trailing spaces are shown with dots: ⋅
-
-```no-highlight
-1. First ordered list item
-2. Another item
-⋅⋅⋅⋅* Unordered sub-list.
-1. Actual numbers don't matter, just that it's a number
-⋅⋅⋅⋅1. Ordered sub-list
-4. And another item.
-
-⋅⋅⋅You can have properly indented paragraphs within list items. Notice the blank line above, and the leading spaces (at least one, but we'll use three here to also align the raw Markdown).
-
-⋅⋅⋅To have a line break without a paragraph, you will need to use two trailing spaces.⋅⋅
-⋅⋅⋅Note that this line is separate, but within the same paragraph.⋅⋅
-
-* Unordered list can use asterisks
-- Or minuses
-+ Or pluses
-```
-
-1.  First ordered list item
-2.  Another item
-    - Unordered sub-list.
-3.  Actual numbers don't matter, just that it's a number
-    - sub 1 (EdPike365: This was a "1.", but it did not indent properly until I used "-")
-    - sub 2 (EdPike365: added, does not work with "1.", becomes a "2.")
-        - sub sub,(added by EdPike365)
-4.  And another item.
-
-You can have properly indented paragraphs within list items. Notice the blank
-line above, and the leading spaces (at least one, but we'll use three here to
-also align the raw Markdown).
-
-To have a line break without a paragraph, you will need to use two trailing
-spaces.\
- Note that this line is separate, but within the same paragraph.
-
-- Unordered list can use asterisks
-
-* Or minuses
-
-- Or pluses
-
-<a name="links"></a>
-
-## Links
-
-There are two ways to create links.
-
-```no-highlight
-[I'm an inline-style link](https://www.google.com)
-
-[I'm an inline-style link with title](https://www.google.com "Google's Homepage")
-
-[I'm a reference-style link][Arbitrary case-insensitive reference text]
-
-[I'm a relative reference to a repository file](../blob/master/LICENSE)
-
-[You can use numbers for reference-style link definitions][1]
-
-Or leave it empty and use the [link text itself].
-
-URLs and URLs in angle brackets will automatically get turned into links.
-http://www.example.com or <http://www.example.com> and sometimes
-example.com (but not on GitHub, for example).
-
-Some text to show that the reference links can follow later.
-
-[arbitrary case-insensitive reference text]: https://www.mozilla.org
-[1]: https://slashdot.org
-[link text itself]: https://www.reddit.com
-```
-
-[I'm an inline-style link](https://www.google.com)
-
-[I'm an inline-style link with title](https://www.google.com "Google's Homepage")
-
-[I'm a reference-style link][arbitrary case-insensitive reference text]
-
-[I'm a relative reference to a repository file](../blob/master/LICENSE)
-
-[You can use numbers for reference-style link definitions][1]
-
-Or leave it empty and use the [link text itself].
-
-URLs and URLs in angle brackets will automatically get turned into links.
-http://www.example.com or <http://www.example.com> and sometimes example.com
-(but not on GitHub, for example).
-
-Some text to show that the reference links can follow later.
-
-[arbitrary case-insensitive reference text]: https://www.mozilla.org
-[1]: http://slashdot.org
-[link text itself]: http://www.reddit.com
-
-<a name="images"></a>
-
-## Images
-
-```no-highlight
-Below are two ways to display an image (hover to see the title text):
-
-Inline-style:
-![alt text](https://pbs.twimg.com/profile_images/875556871427375106/Xuq8DypK_bigger.jpg "Logo Title Text 1")
-
-Reference-style:
-![alt text][logo]
-
-[logo]: https://pbs.twimg.com/profile_images/875556871427375106/Xuq8DypK_bigger.jpg "Logo Title Text 2"
-```
-
-Below are two ways to display an image (hover to see the title text):
-
-Inline-style:
-![alt text](https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/The_Great_Gatsby_cover_1925.jpg/640px-The_Great_Gatsby_cover_1925.jpg "Logo Title Text 1")
-
-Reference-style: ![alt text][logo]
-
-[logo]: https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/The_Great_Gatsby_cover_1925.jpg/640px-The_Great_Gatsby_cover_1925.jpg "Logo Title Text 2"
+Each plugin demo is seperated by a <span style="color:#bbbe74;">colored title div</span> like the one just below. I've added useful links: 
+- plugin page, github page, other things
 
 <a name="tables"></a>
 
@@ -338,7 +120,6 @@ Quote break.
 > > > Block 3
 
 ```
-The above code yields:
 
 > Blockquotes are very handy in email to emulate reply text. This line is part
 > of the same quote.
@@ -349,15 +130,12 @@ Quote break.
 > boy let's keep writing to make sure this is long enough to actually wrap for
 > everyone. Oh, you can _put_ **Markdown** into a blockquote.
 
-> EdPike365: I'm adding nested blockquotes 3 layers deep, seperated by 1 space each. 
+> EdPike365: I'm adding nested blockquotes 3 layers deep, seperated by 1 space each. It should work like [CommonMark](https://commonmark.org/help/tutorial/05-blockquotes.html#:~:text=To%20create%20a%20blockquote%2C%20start,can%20also%20contain%20other%20formatting.&text=To%20keep%20the%20quote%20together,quote%20must%20contain%20the%20%3E%20character.) 
+!TODO: modify CSS to add space between indents and trailing indents below content.
 
 > Block 1
 > > Block 2
 > > > Block 3
-
-> EdPike365: The nested blocks should work like [CommonMark](https://commonmark.org/help/tutorial/05-blockquotes.html#:~:text=To%20create%20a%20blockquote%2C%20start,can%20also%20contain%20other%20formatting.&text=To%20keep%20the%20quote%20together,quote%20must%20contain%20the%20%3E%20character.). The generated HTML is correct so it must be a CSS problem.
-![Nested Block Quotes](nested block quotes.png)
-!TODO: modify CSS to add space between indents and trailing indents below content.
 
 <a name="html"></a>
 
@@ -452,7 +230,6 @@ paragraph_.
 [6]: https://www.gatsbyjs.com/plugins/gatsby-remark-smartypants/
 [7]: https://github.com/wooorm/retext-smartypants
 
-<a name="responsive-image"></a>
 <div style="background-color:#bbbe74; padding: 1px 10px 10px 10px;">
 <h2>Responsive Image and IFrames:</h2>
 Links: <a href="https://using-remark.gatsbyjs.org/responsive-images-and-iframes/" target="_blank">page</a>, <a href="https://raw.githubusercontent.com/gatsbyjs/gatsby/master/examples/using-remark/src/pages/2017-01-02---responsive-images-and-iframes/index.md" target="_blank"> source </a>
@@ -531,7 +308,6 @@ Let's add a YouTube video to show off responsive iFrames real quick:
 [55]: https://www.gatsbyjs.com/plugins/gatsby-plugin-sharp/
 
 <br>
-<a name="copying-linked-files-a"></a>
 <div style="background-color:#bbbe74; padding: 1px 10px 10px 10px;">
 <h2>Copying Linked Files and Intercepting Local Links:</h2>
 Links: <a href="https://using-remark.gatsbyjs.org/copy-linked-files-intercepting-local-links/" target="_blank">page</a>, <a href="https://raw.githubusercontent.com/gatsbyjs/gatsby/master/examples/using-remark/src/pages/2017-03-21---copy-linked-files-intercepting-local-links/index.md" target="_blank"> source </a>
@@ -556,18 +332,17 @@ non-react pages and does a client-side `pushState` to avoid the browser having
 to refresh the page.
 
 Let's try linking to the 
-"[Emoji](../gatsby-remark-emoji/)"
+"[Hello World Blog Enty](../hello-world/)"
 article using a relative path.
 
-Also, let's link to "[Emoji](https://www.edpike365.com/gatsby-remark-emoji/)" article using an absolute path.
+Also, let's link to "[Hello World Blog Entry](http://localhost:8000/hello-world/)" article using an absolute path.
 
-And this [link will be excluded](/excluded-link), based on the plugin config.
+And this [link will be excluded](/excluded-link).
 
 [111]: https://www.gatsbyjs.com/plugins/gatsby-remark-copy-linked-files/
 [222]: https://www.gatsbyjs.com/plugins/gatsby-plugin-catch-links/
 
 <br>
-<a name="code-and-syntax"></a>
 <div style="background-color:#bbbe74; padding: 1px 10px 10px 10px;">
 <h2>Code and Syntax Highlighting with PrismJS:</h2>
 Links: <a href="https://using-remark.gatsbyjs.org/code-and-syntax-highlighting/" target="_blank">page</a>, <a href="https://github.com/gatsbyjs/gatsby/blob/master/examples/using-remark/src/pages/2017-04-04---code-and-syntax-highlighting/index.md" target="_blank"> source </a>
@@ -641,7 +416,50 @@ const App = () => {
 }
 ```
 
-> EdPike365: For File Title and Copy Code Button, see my UPCOMING blog on [Gatsby For STEM Bloggers](www.edpike365.com/gatsby-remark-stem).
+## File Title
+> EdPike365: I added this feature to the demo.
+
+You have to install `gatsby-remark-file-title` [link](https://www.gatsbyjs.com/plugins/gatsby-remark-code-titles/). I added it just above the "gatsby-remark-prism" plugin.
+
+There is an error in the documentation: the CSS must be named `gatsby-code-title`. I put mine just below the PrismJS highlighting and line numbering CSS.
+
+```javascript:title=example-file.js
+var s = "File Title Example"
+alert(s)
+```
+
+The title text cannot be combined with line highlighting or line numbering.
+You can work around this by pasting:
+```html
+<div class="gatsby-code-title">added with a div above</div>
+<!-- leave a blank line between that and the actual prism code block -->
+```
+
+<div class="gatsby-code-title">added with a div above</div>
+
+```javascript{2}{numberLines: true}
+var s = "File Title Example"
+alert(s)
+\\ line 3
+```
+
+## Code Copy Button
+> EdPike365: I added this feature to the demo. 
+
+<div style="color: white; background: red;">&nbsp; Warning!! If you implement this, Line numbering stops working.</div>
+
+This uses [gatsby-remark-code-buttons](https://www.gatsbyjs.com/plugins/gatsby-remark-code-buttons/). 
+I was able to simplify the CSS instructions by just adding this CSS code above the Prism highlight and linenumbering code. When I discovered that line numbering stopped working, I tried the CSS below the Prism CSS, but the problem persisted.
+
+In the end I removed the plugin because it broke line numbering. Also, when you look in the code you see that the copy button copies all the code from the code block *ahead of time, during SSR*. So any code is duplicated and shipped over the internet. For a developer's blog, that could add up. I will look for a better solution. In the meantime, I got it working and took a screen shot. Then I removed it.
+
+<div align="center">Copy Button showing, Line Numbers Not Showing</div>
+
+![](Line numbers not showing.png)
+
+<div align="center">Yellow Highlights Show Code Duplication</div>
+
+![](copy code duplicated.png)
 
 ## Line highlighting & numbering
 
@@ -649,7 +467,7 @@ const App = () => {
 differs a bit from PrismJS's own. You can find out everything about it in the
 [corresponding README][1].
 
-> EdPike365: You must implement special CSS code to get Highlighting and Line Numbering to work.   
+> EdPike365: You must implement special CSS code to get Highlighting and Line Numbering to work. 
 > Hightlighting: I'm currently using a styles.css file in the root folder. I added this block:
 ```css
 /* used by gatsby-remark-prismjs, colors for Okaidia theme */
@@ -663,7 +481,7 @@ differs a bit from PrismJS's own. You can find out everything about it in the
 }
 ```
 
-> EdPike365: Line Numbering: We have to add some CSS, below the highlighting CSS, to move the padding-left to make room for the line numbers. I also had to add padding-top as noted in the CSS.
+> EdPike365: Line Numbering: We have to add some CSS, below the highlighting CSS, to move the padding-left to make room for the line numbers. I also had to add padding-top as noted in the code.
 
 ```css
 /* If using PrismJS line numbering, add this. */
@@ -672,7 +490,7 @@ differs a bit from PrismJS's own. You can find out everything about it in the
   padding-top: var(--spacing-0); /* I had to add this to mine because otherwise the line numbers column was ignoring the padding-top of the code block to the right and was nearly 1 line above it. */
 }
 ```
-> EdPike365: Below here, the code is not rendering (which is what we want), and I can't tell how :-(. It is indented by 2 tabs or 4 spaces, but I can't reproduce it. 
+> EdPike365: Below here, the code is not rendering and I can't tell how. It is indented by 2 tabs or 4 spaces, but I can't reproduce it. 
 
     ```javascript{1-2,22}{numberLines: true}
     // In your gatsby-config.js
@@ -702,8 +520,6 @@ differs a bit from PrismJS's own. You can find out everything about it in the
       }
     ]
     ```
-
-Yields: 
 
 ```javascript{1-2,22}{numberLines: true}
 // In your gatsby-config.js
@@ -762,7 +578,7 @@ Let's do something crazy and add a list with another code example:
 
 - Roger that, now back to topic: _Highlighted code blocks work here, too_:
   
-  (This code gives the highlight command for lines 10 and 13.)
+  (This code is give the highlight command for lines 10 and 13.)
   <pre>
     ```css{10,13}
     .clearfix:after {
@@ -814,7 +630,6 @@ Let's do something crazy and add a list with another code example:
 [3]: http://prismjs.com/#languages-list
 
 <br>
-<a name="embed-file-contents"></a>
 <div style="background-color:#bbbe74; padding: 1px 10px 10px 10px;">
 <h2>Embed file contents within PrismJS blocks:</h2>
 Links: <a href="https://using-remark.gatsbyjs.org/embed-snippets/" target="_blank">page</a>, <a href="https://raw.githubusercontent.com/gatsbyjs/gatsby/master/examples/using-remark/src/pages/2017-04-05---embed-snippets/index.md" target="_blank"> source </a>
@@ -822,8 +637,8 @@ Links: <a href="https://using-remark.gatsbyjs.org/embed-snippets/" target="_blan
 <br>
 
 > EdPike365: \
-> Note 1: you must create a src/code-examples/ folder. Files for the folder are [here](https://github.com/gatsbyjs/gatsby/tree/master/examples/using-remark/src/code-examples).\
-> Note 2: to get highlighting, see the ["Code and Syntax Highlighting with PrismJS"](#code-and-syntax) section above.
+> Note 1: you must create a src/code-examples/ folder. Contents are [here](https://github.com/gatsbyjs/gatsby/tree/master/examples/using-remark/src/code-examples).\
+> Note 2: to get highlighting, see the "Code and Syntax Highlighting with PrismJS" section above.
 
 You can embed the contents of existing files within your Markdown using the [`gatsby-remark-embed-snippet`][1111] with [`gatsby-remark-prismjs`][2222].
 
@@ -841,7 +656,7 @@ This will look like:
 
 ## Highlight lines
 
-You can highlight specific lines by adding special comments **_to the source file_**. Let's see how this works in `src/code-examples/highlight-lines.js`.
+You can highlight specific lines by adding special comments to the source file. Let's see how this works in `src/code-examples/highlight-lines.js`.
 
 Take a look at the `highlight-line` comment on line 4 and the `highlight-range` comment on line 8:
 
@@ -857,7 +672,7 @@ it will display like this:
 
 ## Hide lines
 
-You can use similar comments **_in the source file_** to hide specific lines. Here's another example, this time using `src/code-examples/hide-lines.js`. Check out the `hide-line` comments on lines 1, 7, 13 and 14:
+You can use similar comments to hide specific lines. Here's another example, this time using `src/code-examples/hide-lines.js`. Check out the `hide-line` comments on lines 1, 7, 13 and 14:
 
 ![](hide-lines.png)
 
@@ -871,7 +686,7 @@ You can mix line highlighting and hiding in the same file. This is from `src/cod
 
 ![](hide-and-highlight-lines.png)
 
-It will look like this:
+It'll look like this:
 
 `embed:hide-and-highlight-lines.js`
 
@@ -888,7 +703,6 @@ If you'd prefer to write your code blocks directly within your Markdown, take a 
 
 
 <br>
-<a name="rendering-math-equations"></a>
 <div style="background-color:#bbbe74; padding: 1px 10px 10px 10px;">
 <h2>Rendering math equations with KaTeX:</h2>
 Links: <a href="https://using-remark.gatsbyjs.org/katex/" target="_blank">page</a>, <a href="https://raw.githubusercontent.com/gatsbyjs/gatsby/master/examples/using-remark/src/pages/2017-08-07---katex/index.md" target="_blank"> source </a>, <a href="https://katex.org/">KaTeX</a>
@@ -942,8 +756,6 @@ $$
 
 ### Advanced Examples:
 
-
-#### Fractions, Super and Subscripts
 ```
 Lift($L$) can be determined by Lift Coefficient ($C_L$) like the following equation.
 
@@ -957,10 +769,6 @@ Lift($L$) can be determined by Lift Coefficient ($C_L$) like the following equat
 $$
 L = \frac{1}{2} \rho v^2 S C_L
 $$
-
----
-
-#### Sum Sigma with Ranges
 
 ``` 
 \\ "\sum" is Sigma
@@ -972,20 +780,10 @@ $$
 $$
 \sum_{i=1}^n a_i
 $$
----
-####  Integral and Function Symbol
 
-` $\int_a^b f(x) = F(b) - F(a)$ `   
+` $\int_a^b f(x) = F(b) - F(a)$ ` yields $\int_a^b f(x) = F(b) - F(a)$
 
-yields:  
-  $\int_a^b f(x) = F(b) - F(a)$
-
----
-#### Limit with Approaches Subscript
-
-` $$f'(a) = \lim_{x \to a} \frac{f(x) - f(a)}{x-a}$$ ` 
-
-yields:
+` $$f'(a) = \lim_{x \to a} \frac{f(x) - f(a)}{x-a}$$ ` yields:
  
  $$
  f'(a) = \lim_{x \to a} \frac{f(x) - f(a)}{x-a}
@@ -997,10 +795,9 @@ yields:
 [45]: https://github.com/gatsbyjs/gatsby/blob/master/examples/using-remark/src/templates/template-blog-post.js
 
 <br>
-<a name="using-excerpts"></a>
 <div style="background-color:#bbbe74; padding: 1px 10px 10px 10px;">
 <h2>Using Excerpts:</h2>
-Links: <a href="https://using-remark.gatsbyjs.org/excerpts/" target="_blank">page</a>, <a href="https://raw.githubusercontent.com/gatsbyjs/gatsby/master/examples/using-remark/src/pages/2017-11-14---excerpts/index.md" target="_blank"> source </a>
+Links: <a href="https://using-remark.gatsbyjs.org/excerpts/" target="_blank">page</a>, <a href="https://github.com/gatsbyjs/gatsby/tree/master/examples/using-remark/src/pages/2017-11-14---excerpts" target="_blank"> source </a>
 </div>
 <br>
 
@@ -1034,24 +831,23 @@ Any file that does not have the given `excerpt_separator` will fall back to the 
 You can see the results [here](https://using-remark.gatsbyjs.org/excerpt-example)
 
 <br>
-<a name="custom-components"></a>
 <div style="background-color:#bbbe74; padding: 1px 10px 10px 10px;">
 <h2>Custom Components:</h2>
-Links: <a href="https://using-remark.gatsbyjs.org/custom-components/" target="_blank">page</a>, <a href="https://raw.githubusercontent.com/gatsbyjs/gatsby/master/examples/using-remark/src/pages/2018-01-27---custom-components/index.md" target="_blank"> source </a>
+Links: <a href="https://using-remark.gatsbyjs.org/custom-components/" target="_blank">page</a>, <a href="https://github.com/gatsbyjs/gatsby/tree/master/examples/using-remark/src/pages/2018-01-27---custom-components" target="_blank"> source </a>
 </div>
 <br>
 
-> EdPike365: I'm leaving this out because its a little confusing and I think the functionality has been superceded by MDX. IE, if you need custom components, you should really consider using MDX instead of MD.
+> EdPike365: I'm leaving this out because I think the functionality has been superceded by MDX.
+
 
 <br>
-<a name="graphviz"></a>
 <div style="background-color:#bbbe74; padding: 1px 10px 10px 10px;">
 <h2>Graphviz</h2>
 Links: <a href="https://using-remark.gatsbyjs.org/graphviz/" target="_blank">page</a>, <a href="https://github.com/gatsbyjs/gatsby/tree/master/examples/using-remark/src/pages/2019-02-06---graphviz" target="_blank"> source </a>, <a href="https://www.gatsbyjs.com/plugins/gatsby-remark-graphviz/" target="_blank">gatsby-remark-graphviz install</a>
 </div>
 <br>
 
-> EdPike365: *** It is very important that you follow the linked install directions above ***. The plugin must be added above the PrismJS plugin in your gatsby-config.js.
+> EdPike365: *It is very important that you follow the linked install directions*. The plugin must be above PrismJS plugin in your gatsby-config.js.
 
 ## Rendering dot code blocks
 
@@ -1445,7 +1241,34 @@ digraph graphname {
   buildHtml -> htmlFiles;
 }
 ```
-> EdPike365: Well thats it. When I have spare time I'll try to fix the !TODO's that you saw. This will mostly mean doing PR's on those plugins. If you work on any of the !TODO's in this article, make sure to share.
+
+<div style="background-color:#bbbe74; padding: 1px 10px 10px 10px;">
+<h2>Emoji</h2>
+</div>
+<br>
+
+I used [gatsby-remark-emoji](https://www.gatsbyjs.com/plugins/gatsby-remark-emoji/). NOTE: there is no trailing s.
+
+Contrary to the plugin's docs, it supports more than the [JS functions on JoyPixels](https://demos.joypixels.com/latest/index.html#js), I tried "shortnameToImage", and it worked but they were not scaled correctly so I switched back.
+
+
+
+## Gatsy-Remark-Embedder
+[plugin](https://www.gatsbyjs.com/plugins/gatsby-remark-embedder/), [source](https://github.com/MichaelDeBoey/gatsby-remark-embedder)
+
+Lets you embed many different sites. We are only interested in ones that support coding for now.
+CodePen
+CodeSandbox
+Testing Playground
+
+
+
+## https://www.gatsbyjs.com/plugins/gatsby-remark-embed-gist/
+
+
+## Remark-External-Links Plugin
+[plugin](https://www.gatsbyjs.com/plugins/gatsby-remark-external-links/)
+I added it to help the Lighthouse "Best Practices" score, which was 93.
 
 ---
 

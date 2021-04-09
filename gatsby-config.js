@@ -1,14 +1,18 @@
+require('dotenv').config({
+  path: `.env.${process.env.NODE_ENV}`,
+})
+
 module.exports = {
   siteMetadata: {
     title: `EdPike365 Portfolio`,
     author: {
-      name: `Ed Pike`,
-      summary: `who lives and works in the world at large, building useful things.`,
+      name: `EdPike365`,
+      summary: `: dad, full stack developer, tech educator, science enthusiast.`,
     },
-    description: `A portfolio with a blog and other features demonstrating what Gatsby can do.`,
+    description: `Portfolio and blog about programming, Gatsby, technology, science.`,
     siteUrl: `https://www.edpike365.com/`,
     social: {
-      twitter: `edpike365`,
+      twitter: process.env.TWITTER,
     },
   },
   plugins: [
@@ -43,13 +47,22 @@ module.exports = {
               maxWidth: 740,
             },
           },
+          `gatsby-remark-graphviz`,
           {
             resolve: `gatsby-remark-responsive-iframe`,
             options: {
               wrapperStyle: `margin-bottom: 1.0725rem`,
             },
           },
+          {
+            resolve: `gatsby-remark-embed-snippet`,
+            options: {
+              // Example code links are relative to this dir.
+              directory: `${__dirname}/src/code-examples/`,
+            },
+          },
           `gatsby-remark-autolink-headers`,
+          `gatsby-remark-code-titles`,
           `gatsby-remark-prismjs`,
           `gatsby-remark-copy-linked-files`,
           {
@@ -57,6 +70,13 @@ module.exports = {
             options: {
               dashes: "oldschool",
             },
+          },
+          {
+            resolve: `gatsby-remark-katex`,
+            options: {
+              // Add any KaTeX options from https://github.com/KaTeX/KaTeX/blob/master/docs/options.md here
+              strict: `ignore`
+            }
           },
           { 
             resolve: `gatsby-remark-emoji`,
@@ -67,7 +87,7 @@ module.exports = {
               // e.g. ;) --> 😉
               ascii: true,
             }
-          }, 
+          },
         ],
       },
     },
@@ -141,7 +161,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `Gatsby Starter Blog`,
+        name: `Gatsby Starter Blog, EdPike365 Custom`,
         short_name: `GatsbyJS`,
         start_url: `/`,
         background_color: `#ffffff`,

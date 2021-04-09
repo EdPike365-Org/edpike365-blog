@@ -6,8 +6,24 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 
 const BlogIndex = ({ data, location }) => {
+  
   const siteTitle = data.site.siteMetadata?.title || `Title`
-  const posts = data.allMarkdownRemark.nodes
+
+  //which status blogs should we show?
+  //we have to post filter them because there is no way to pass args to the page query !TODO
+  const allowedBlogStatus = `${process.env.BLOG_STATUS}`; 
+  console.log("index.js" + allowedBlogStatus);
+
+  function shouldShowPost(post){
+    const status = post.frontmatter.status;
+    if (status && allowedBlogStatus.includes(status)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  const posts = data.allMarkdownRemark.nodes.filter(shouldShowPost)
 
   if (posts.length === 0) {
     return (
@@ -27,8 +43,11 @@ const BlogIndex = ({ data, location }) => {
     <Layout location={location} title={siteTitle}>
       <SEO title="All posts" />
       <Bio />
+      Welcome to my Portfolio. It's just a blog for now, but big changes are coming! It's based on Gatsby v3 Starter Blog and I'll be documenting how I customize it.
+
       <ol style={{ listStyle: `none` }}>
-        {posts.map(post => {
+        {
+        posts.map(post => {
           const title = post.frontmatter.title || post.fields.slug
 
           return (
@@ -66,14 +85,13 @@ const BlogIndex = ({ data, location }) => {
 export default BlogIndex
 
 export const pageQuery = graphql`
-  query {
+  query IndexPageQuery {
     site {
       siteMetadata {
         title
       }
     }
     allMarkdownRemark(
-      filter: {frontmatter: {status: {eq: "published"}}} 
       sort: { fields: [frontmatter___date], order: DESC }) {
       nodes {
         excerpt
@@ -83,6 +101,7 @@ export const pageQuery = graphql`
         frontmatter {
           date(formatString: "MMMM DD, YYYY")
           title
+          status
           description
         }
       }

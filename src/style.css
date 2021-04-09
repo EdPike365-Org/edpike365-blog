@@ -247,7 +247,7 @@ a:focus {
 }
 
 .global-wrapper[data-is-root-path="true"] .bio {
-  margin-bottom: var(--spacing-20);
+  margin-bottom: var(--spacing-5);
 }
 
 .global-header {
@@ -288,7 +288,7 @@ a:focus {
 
 .bio {
   display: flex;
-  margin-bottom: var(--spacing-16);
+  margin-bottom: var(--spacing-1);
 }
 
 .bio p {
@@ -317,6 +317,38 @@ a:focus {
 
 .gatsby-highlight {
   margin-bottom: var(--spacing-8);
+}
+
+/* used by gatsby-remark-prismjs for highlighting, modified for Okaidia PrismJS theme */
+.gatsby-highlight-code-line {
+  background-color: #474643;
+  display: block;
+  margin-right: -1em;
+  margin-left: -1em;
+  padding-right: 1em;
+  padding-left: 0.75em;
+  border-left: 0.25em solid #569c3b;
+}
+/* If using PrismJS line numbering and highlighing, push the code to the right */
+.gatsby-highlight pre[class*="language-"].line-numbers {
+  padding-top: var(--spacing-0);
+  padding-left: 2.8em;
+}
+/* Assumes standard PrismJS CSS */
+.gatsby-code-title {
+  margin-bottom: -0.6rem;
+  padding: 0.5em 1em;
+  font-family: Consolas, 'Andale Mono WT', 'Andale Mono', 'Lucida Console',
+    'Lucida Sans Typewriter', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono',
+    'Liberation Mono', 'Nimbus Mono L', Monaco, 'Courier New', Courier,
+    monospace;
+
+  background-color: #5e5b24;
+  color: white;
+  z-index: 0;
+
+  border-top-left-radius: 0.3em;
+  border-top-right-radius: 0.3em;
 }
 
 /* Media queries */

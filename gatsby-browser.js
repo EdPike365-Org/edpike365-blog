@@ -6,5 +6,9 @@ import "./src/normalize.css"
 // custom CSS styles
 import "./src/style.css"
 
-// Highlighting for code blocks
-import "prismjs/themes/prism.css"
+// Theme for prismjs
+require("prismjs/themes/prism-okaidia.css")
+// Enable prismjs line numbering
+require("prismjs/plugins/line-numbers/prism-line-numbers.css")
+
+

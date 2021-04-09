@@ -1,6 +1,6 @@
 ---
 title: Hello World
-status: published
+status: archived
 date: "2015-05-01T22:12:03.284Z"
 description: "Hello World"
 ---
