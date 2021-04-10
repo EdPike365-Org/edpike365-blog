@@ -12,6 +12,8 @@ tags:
 
 I've combined every page from the original Gatsby Markdown demo [mini site](https://using-remark.gatsbyjs.org/?__hstc=247646936.594c7150d69ca018c6dac822d8ef1a73.1611340662237.1617462079360.1617466517732.129&__hssc=247646936.1.1617466517732&__hsfp=4183638795). Why put them all together in this gigantic page? I want to see if there are any CSS or MD processing conflicts. Also, it's nice to be able to scroll through a single demo instead of jumping back and forth.
 
+![Gatsby and MarkDown](gatsby_and_markdown.jpg "Gatsby and Markdown")
+
 - Section Links:
   - [Hello World: The remark Kitchen Sink](#hello)
   - [Responsive Image and IFrames](#responsive-image)

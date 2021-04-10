@@ -1,6 +1,6 @@
 ---
 title: MarkDown It Test In Gatsby
-status: archived
+status: draft
 date: "2015-05-06T23:46:37.121Z"
 ---
 
