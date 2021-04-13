@@ -9,7 +9,7 @@ const strBlogStatusesToShow = process.env.BLOG_STATUSES_TO_SHOW_LIST;
 const arBlogStatusesToShow = strBlogStatusesToShow.split(",");
 // To write out string '["abc", "xyz"]', call JSON.stringify(arBlogStatusesToShow) 
 console.info(" gatsby-node.js arBlogStatusesToShow = " + arBlogStatusesToShow )
-
+console.info(" gatsby-node.js arBlogStatusesToShow JSON = " + JSON.stringify(arBlogStatusesToShow)  )
 
 exports.createPages = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions
