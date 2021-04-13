@@ -1,23 +1,68 @@
 const path = require(`path`)
 const { createFilePath } = require(`gatsby-source-filesystem`)
 
+// We do not need to require dotenv because it was already done in gatsby-config.js 
+// We use this to create blog pages but also the list of blog summaries
+// CLEAN CODE: 1 operation per line, aids debugging
+const strBlogStatusesToShow = process.env.BLOG_STATUSES_TO_SHOW_LIST;
+// Change the comma seperated list to an array
+const arBlogStatusesToShow = strBlogStatusesToShow.split(",");
+// To write out string '["abc", "xyz"]', call JSON.stringify(arBlogStatusesToShow) 
+console.info(" gatsby-node.js arBlogStatusesToShow = " + arBlogStatusesToShow )
+
+
 exports.createPages = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions
+
+  // Define a template for index
+  const indexPage = path.resolve(`./src/templates/index.js`)
+
+  const blogPostListResults = await graphql(
+    `
+    query IndexPageQuery{
+      site {
+        siteMetadata {
+          title
+        }
+      }
+      allMarkdownRemark(
+        filter: {frontmatter: {status: { in: ` + JSON.stringify(arBlogStatusesToShow) + `  }}}
+        sort: { fields: [frontmatter___date], order: DESC }) {
+        nodes {
+          excerpt
+          fields {
+            slug
+          }
+          frontmatter {
+            date(formatString: "MMMM DD, YYYY")
+            title
+            status
+            description
+          }
+        }
+      }
+    }
+    `
+  )
+
+  createPage({
+    path: "/",
+    component: indexPage,
+    context: {
+      blogPostListResults,
+    },
+  })
 
   // Define a template for blog post
   const blogPost = path.resolve(`./src/templates/blog-post.js`)
 
-  // We do not need to require dotenv because it was already done in gatsby-config.js ?
-  const blogStatusList = `${process.env.GATSBY_BLOG_STATUS}`;
-  console.info(" gatsby-node.js blogStatusList = " + blogStatusList )
-
   // Get all markdown blog posts sorted by date
-  const result = await graphql(
+  const blogPostResults = await graphql(
     `
       {
         allMarkdownRemark(
           sort: { fields: [frontmatter___date], order: ASC }
-          filter: {frontmatter: {status: {in: [ ` + blogStatusList + ` ] }}}
+          filter: {frontmatter: {status: {in: ` + JSON.stringify(arBlogStatusesToShow) + ` }}}
           limit: 1000
         ) {
           nodes {
@@ -31,15 +76,15 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     `
   )
 
-  if (result.errors) {
+  if (blogPostResults.errors) {
     reporter.panicOnBuild(
       `There was an error loading your blog posts`,
-      result.errors
+      blogPostResults.errors
     )
     return
   }
 
-  const posts = result.data.allMarkdownRemark.nodes
+  const posts = blogPostResults.data.allMarkdownRemark.nodes
 
   // Create blog posts pages
   // But only if there's at least one markdown file found at "content/blog" (defined in gatsby-config.js)
@@ -75,6 +120,22 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
       node,
       value,
     })
+  }
+}
+
+exports.onCreatePage = ({ page, actions }) => {
+  const { createPage, deletePage } = actions
+  if(page.path == "/bloglist/"){
+    deletePage(page)
+    createPage({
+      ...page,
+      context: {
+        ...page.context,
+        allowedBlogStatuses: arBlogStatusesToShow,
+        testString: "my test string"
+      },
+    })
+  
   }
 }
 

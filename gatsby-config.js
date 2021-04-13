@@ -4,7 +4,7 @@ require('dotenv').config({
 
 module.exports = {
   siteMetadata: {
-    title: `EdPike365 Portfolio`,
+    title: `EdPike365's Portfolio`,
     author: {
       name: `EdPike365`,
       summary: `: dad, full stack developer, tech educator, science enthusiast.`,
@@ -41,14 +41,6 @@ module.exports = {
         // blocks: ["h2"], Blocks option value can be provided here as an array.
         excerpt_separator: `<!-- end -->`,        
         plugins: [
-          {
-            resolve: 'gatsby-plugin-global-context',
-            options: {
-              context: {
-                GLOBAL_BLOG_STATUS: `${process.env.BLOG_STATUS}`
-              }
-            }
-          },
           {
             resolve: `gatsby-remark-images`,
             options: {
@@ -169,13 +161,13 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `Gatsby Starter Blog, EdPike365 Custom`,
-        short_name: `GatsbyJS`,
+        name: `EdPike365 Portfolio and Blog`,
+        short_name: `EdPike365 Blog`,
         start_url: `/`,
         background_color: `#ffffff`,
         theme_color: `#663399`,
         display: `minimal-ui`,
-        icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
+        icon: `src/images/edpike365-site-icon.png`, // This path is relative to the root of the site.
       },
     },
     `gatsby-plugin-react-helmet`,

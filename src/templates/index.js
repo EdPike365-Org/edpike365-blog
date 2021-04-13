@@ -5,31 +5,18 @@ import Bio from "../components/bio"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
-const BlogIndex = ({ data, location }) => {
+const HomePage = ({pageContext, location }) => {
   
+  const data = pageContext.blogPostListResults.data;
+
   const siteTitle = data.site.siteMetadata?.title || `Title`
+  
+  const posts = data.allMarkdownRemark.nodes
 
-  //which status blogs should we show?
-  //we have to post filter them because there is no way to pass args to the page query !TODO
-  const allowedBlogStatus = `${process.env.GATSBY_BLOG_STATUS}`; 
-  console.log("!!! index.js allowedBlogStatus = " + allowedBlogStatus);
-
-  function shouldShowPost(post){
-    const status = post.frontmatter.status;
-    if (status && allowedBlogStatus.includes(status)) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  const posts = data.allMarkdownRemark.nodes.filter(shouldShowPost)
-
-  //const posts = data.allMarkdownRemark.nodes
   if (posts.length === 0) {
     return (
       <Layout location={location} title={siteTitle}>
-        <SEO title="All posts" />
+        <SEO title="Home" />
         <Bio />
         <p>
           No blog posts found. Add markdown posts to "content/blog" (or the
@@ -42,7 +29,7 @@ const BlogIndex = ({ data, location }) => {
 
   return (
     <Layout location={location} title={siteTitle}>
-      <SEO title="All posts" />
+      <SEO title="Home" />
       <Bio />
       Welcome to my Portfolio. It's just a blog for now, but big changes are coming! It's based on Gatsby v3 Starter Blog and I'll be documenting how I customize it.
 
@@ -83,29 +70,4 @@ const BlogIndex = ({ data, location }) => {
   )
 }
 
-export default BlogIndex
-
-export const pageQuery = graphql`
-  query IndexPageQuery{
-    site {
-      siteMetadata {
-        title
-      }
-    }
-    allMarkdownRemark(
-      sort: { fields: [frontmatter___date], order: DESC }) {
-      nodes {
-        excerpt
-        fields {
-          slug
-        }
-        frontmatter {
-          date(formatString: "MMMM DD, YYYY")
-          title
-          status
-          description
-        }
-      }
-    }
-  }
-`
+export default HomePage

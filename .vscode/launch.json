@@ -13,7 +13,7 @@
             "windows": {
               "program": "${workspaceRoot}/node_modules/gatsby/dist/bin/gatsby"
             },
-            "args": ["develop"],
+            "args": ["develop", "--verbose"],
             "runtimeArgs": ["--nolazy"],
             "console": "integratedTerminal"
           },

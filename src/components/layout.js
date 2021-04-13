@@ -28,6 +28,7 @@ const Layout = ({ location, title, children }) => {
       <header className="global-header">{header}</header>
       <main>{children}</main>
       <footer>
+        <Link to={"/bloglist/"} itemProp="url">Blog List</Link>,
         © {new Date().getFullYear()}, Built with
         {` `}
         <a href="https://www.gatsbyjs.com">Gatsby v3</a>, ({`${process.env.NODE_ENV}`} mode)
