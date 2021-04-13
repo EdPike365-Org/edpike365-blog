@@ -335,11 +335,13 @@ This seems to work; it only shows the summaries of the "published" blog posts. H
 
 As you can see in the "Network>Preview" tab, `result.data.allMarkdownRemark.nodes` contains blog entry summaries. Unfortunately, it contains __*all*__ blog articles, *regardless of status*. That means the summaries of all of my blog entries are shipped over the network every time the site loads. As my blog grows, this will become a serious problem.
 
-Appendix C: Deploying to Netlify
+### Appendix C: Deploying to Netlify
 
 I'm hosting on Github and Netlify. I'm not using the Gatsby Netlify plugin.
-There are two ways to store the env vars:
-- Config File: In a `netlify.toml` file in the root folder. This will also be in you git repo. This is not preferred because you will need to store secrets at some point.
+There are two options to store the env vars:
+
+- Option 1: Config File
+ In a `netlify.toml` file in the root folder. This will also be in you git repo. This is not preferred because you will need to store secrets at some point.
 
 ```
 # Production context: all deploys from the Production branch set in your site’s
@@ -348,7 +350,9 @@ There are two ways to store the env vars:
   # Format is "abc,xyz"
   BLOG_STATUSES_TO_SHOW_LIST="published"
 ```
-- Build Settings: Got to app.netlify.com/sites/_your_project_name_/settings/deploys
+
+- Option 2: Build Settings
+Got to app.netlify.com/sites/_your_project_name_/settings/deploys
 On that page go to "> Build & Deploy > Environment > Edit Settings button
 
 > GOTCHA: Do not put the values of your "Keys" in quotation marks. I use an array, so it looks like this:

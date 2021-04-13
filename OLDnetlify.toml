@@ -1,4 +1,5 @@
 # Production context: all deploys from the Production branch set in your site’s
 # deploy contexts will inherit these settings.
 [build.environment]
-  GATSBY_BLOG_STATUS='"published"'
+  # Format is "abc,xyz"
+  BLOG_STATUSES_TO_SHOW_LIST="published"
