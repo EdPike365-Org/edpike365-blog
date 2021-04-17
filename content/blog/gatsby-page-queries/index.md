@@ -4,26 +4,28 @@ date: "2021-04-12T22:12:03.284Z"
 status: published
 author: EdPike365
 tags:
-  - Gatsby
-  - createPage
-  - graphQL
   - GatsbyJS
+  - GraphQL
+  - "Environment Variables"
+  - Netlify
+  - React
 ---
+### Learn while implementing a Markdown Publishing Workflow
 
 ![Gatsby and GraphQL](gatsby_and_graphql.jpg)
 
-#### Learn GatsbyJS Page Queries with environment variables while Implementing an Markdown Publising Workflow
+#### Learn GatsbyJS Page Queries with environment variables while implementing a Markdown Publishing Workflow
 
-The core issue we'll cover is using variables with page queries for pages in the `src\pages` folder. This is apparently a common problem ([example](https://github.com/gatsbyjs/gatsby/issues/10023)). I definitely struggled with it before I got it working. 
+The core issue we'll cover is using environment variables with page queries for pages in the `src\pages` folder. This is apparently a common problem ([example](https://github.com/gatsbyjs/gatsby/issues/10023)). I definitely struggled with it before I got it working. We'll also cover page queries, variables and the `createPage` action.
 
 ### The Markdown Publishing Workflow:
-My blog uses the Gatsby Starter Blog, which loads blog articles from Markdown (MD) files. It lists and loads *ALL* the blog articles whether you are done writing them or not. 
+My blog uses the [Gatsby Starter Blog](https://www.gatsbyjs.com/starters/gatsbyjs/gatsby-starter-blog), which loads blog articles from Markdown (MD) files. It lists and loads *ALL* the blog articles whether you are done writing them or not. 
 
-I want a standard publising workflow: articles will be shown on the web site based on their "status". Status can be "draft", "published" or "archived". 
+I want a standard publishing workflow: articles will be shown on the web site based on their "status". Status can be "draft", "published" or "archived". 
 
 I want "published" *and* "draft" articles to be published when I'm in "gatsby develop" mode. I can then see what draft articles will look like as I edit/save them. 
 
-When I run 'gatsby build; gatsby serve', I want to only show articles that have status = "published". That is best accomplished using *environment variables*. 
+When I run `gatsby build; gatsby serve`, I want to only show articles that have status = "published". That is best accomplished using *environment variables (env vars)*. Env vars are most useful when you want to store information that changes (aka a variable) based on which mode (dev vs prod) or which location (China vs USA) you are publishing into.
 
 ### Frontmatter Status Field
 
@@ -39,11 +41,11 @@ author: EdPike365
 ---
 ```
 
-The queries below will be reading the status field value.
+The queries below will be reading the `status` field value.
 
 ### Using Environment Variables in Gatsby
 
-I'm using the node "environment variable" approach. Gatsby apparently ships with node env vars, you just have to "activate" it. To activate env vars, include this code at the top of `gatsby-config.js` or `gatsby-node.js`. 
+I'm using environment variables in node and the most popular package for that is [dotenv](https://www.npmjs.com/package/dotenv). Gatsby apparently ships with node env vars, you just have to "activate" it. To activate env vars, include this code at the top of `gatsby-config.js` or `gatsby-node.js`. 
 
 ```js
 // At top of gatsby-config.js
@@ -53,9 +55,10 @@ require('dotenv').config({
 ```
 
 Now, Gatsby will be looking for 2 files in the site's root folder: 
-  - NOTE: any changes to your .env files requires a restart.
-  - .env.development : it's values are loaded when you run "gatsby develop"
-  - .env.production : it's values are loaded when you run "gatsby build"
+  - `.env.development` : it's values are loaded when you run `gatsby develop`
+  - `.env.production` : it's values are loaded when you run `gatsby build`
+
+NOTE: any changes to your .env files requires a restart.
 
 ```js
 // in project root .env.development
@@ -69,17 +72,18 @@ BLOG_STATUSES_TO_SHOW_LIST="published,draft"
 BLOG_STATUSES_TO_SHOW_LIST="published"
 ```
 
-> NOTE: .env files should be *ignored* in your local git. These files typically end up holding __secrets__, like api keys, that should not be in your git repo. Gatsby adds `.env.*` to your .gitignore file automatically. To make env vars available in you hosting environment, they will need to be added there. Options vary by hosting service, like Netlify or Gatsby Cloud.
+> NOTE: .env files should be *ignored* in your local git. These files typically end up holding __secrets__, like api keys, that should not be in your git repo. Gatsby adds `.env.*` to your .gitignore file automatically. That means the .env files won't be in you git repo for your publishing service, like [Netlify](https://docs.netlify.com/configure-builds/environment-variables/) or [Gatsby Cloud](https://support.gatsbyjs.com/hc/en-us/articles/360053096753-Managing-Environment-Variables), to read. To make env vars available to your publishing service, you will need to copy them to the publishing service. Options vary by publishing service.
 
 
 ### Getting Environment Variables into our Code
 
-The variables that we are going to use in our queries can be declared locally or pulled in from Environment Variables (env vars). I'm focusing on env vars. 
+We will use the variable `arBlogStatusesToShow` to filter all the blog posts down to the ones we want to show. We will populate `arBlogStatusesToShow` based on the env var `BLOG_STATUSES_TO_SHOW_LIST`. I added "_LIST" there to make sure that anybody using the variable knows that it is a list of strings, not an array.
 
-We do not need to require dotenv because it was already done in gatsby-config.js, above.
-We will use arBlogStatusesToShow to create individual blog pages and lists of blog summaries
+> From years of experience, I recommend using very descriptive variable and function names. Most of your code will be edited by other people in the future or by you long after you've forgotten what's going on. Almost no one reads docs or the docs will be inaccurate. The code is the base source of truth and if its verbose and "prose like", programmers will [grok](https://en.wikipedia.org/wiki/Grok) it much quicker.
 
-```js
+My workflow requires filtering on the status field with a list of allowed statuses. Hence we convert `BLOG_STATUSES_TO_SHOW_LIST = "published,draft"` to a JavaScript array on line 7 below.
+
+```js{numberLines: true}
 // Near top of gatsby-node.js
 
 // CLEAN CODE: 1 operation per line, aids debugging
@@ -91,24 +95,28 @@ console.info("gatsby-node.js: arBlogStatusesToShow = " + arBlogStatusesToShow )
 
 ```
 
-### Gatsby graphQL Summary
+## Gatsby GraphQL Summary
 
-After getting my code to work, this is my understanding of graphQL variables in Gatsby. There are two major categories:
+After getting my code to work, this is my understanding of graphQL variables in Gatsby. **There are two major categories**:
 
 1. __Static Queries__ (aka "Component Queries") Only run once. No variables allowed. I'm not using any in my workflow.
-2. __Page Queries__ (aka "Normal Queries"). These come in two flavors:
+2. __Page Queries__ (aka "Normal Queries"). These come in **two flavors**:
     - Page Queries at the bottom of pages in the `src\pages` folder. Gatsby runs `createPage()` on these automatically. __You cannot pass variables directly to these queries during the auto build.__
-    - Page Queries executed in `gatsby-node.js`. This can create pages from:
-      - Using `src\template` files with the `createPage()` action.
-      - Deleting a `src\pages` page using `deletePage()`, then __recreating__ it with `createPage()`. __This is the only way to pass variables, including env vars, to a page in `src\pages`__. 
 
-### Using src\templates Files
+    - Page Queries executed in `gatsby-node.js`. 
+  
+Page Queries in `gatsby-node.js` can create pages from:
+  - Using `src\template` files with the `createPage()` action.
+  - Deleting a `src\pages` page using `deletePage()`, then __recreating__ it with `createPage()`. __This is the only way to pass variables, including env vars, to a page in `src\pages`__. 
 
-This approach is well documented in the [Gatsby Starter Blog](https://www.gatsbyjs.com/starters/gatsbyjs/gatsby-starter-blog). Below, we create an individual page for each blog post using a template file. My workflow modification requires filtering on the status field with a *list* of allowed statuses to show. 
+## Option 1: Using src\templates Files
 
-Note the filter code at line 10. I have to use `JSON.stringify(arBlogStatusesToShow)` to have the js array formatted correctly in the query.
+This approach is well documented in the [Gatsby Starter Blog](https://www.gatsbyjs.com/starters/gatsbyjs/gatsby-starter-blog). Below, we create an individual page for each blog post using a template file. 
+
+Note the filter code at line 10. I have to use `JSON.stringify(arBlogStatusesToShow)` to have the JavaScript array formatted correctly in the query.
 
 ```js{numberLines: true}
+// In gatsby-node.js
 // Define a template for blog post
 const blogPost = path.resolve(`./src/templates/blog-post.js`)
 
@@ -154,9 +162,10 @@ if (posts.length > 0) {
 }
 
 ```
-Note the use of graphQL query variables. They have the same name as the values in the `context` object that was passed in:
+Note the use of GraphQL query variables in lines 4-6  below. They have the same names as the values in the `context` object that was passed in above. **This is mandatory if you want the values passed in to the query.**
 
-```js
+```js{numberLines: true}
+// This is the page query at the bottom of src/templates/blog-post.js
 export const pageQuery = graphql`
   query BlogPostBySlug(
     $id: String!
@@ -173,9 +182,14 @@ export const pageQuery = graphql`
         ... rest of query
 ```
 
-### Using src\pages Files, Passing Variables to the Page Query
+## Option 2: Using src\pages Files: Delete Then Recreate
 
-This is the code at the bottom of my page in `src\pages\bloglist.js`. When it is automatically run during build, it will not return any blog posts because allowedBlogStatuses var will be "undefined":
+I added the page `src\pages\bloglist.js` to demonstrate one way to pass variables to a page query.
+
+Because its in the `pages` folder, the query on the page will run automatically during build. At that time, it will not return any blog posts because `allowedBlogStatuses` var will be "undefined".
+
+> **It's crucial to understand that the pages folder automatic query parsing, and attempted running, happens with no access to passed in variables. I wasted a lot of time looking for how to do it because I just could not believe it was not doable.**
+
 
 ```js
 // from bottom of src\pages\bloglist.js
@@ -193,13 +207,14 @@ export const pageQuery = graphql`
         excerpt
 ```
 
-This is the code to delete then recreate the page and pass in the array of allowed statuses as a variable. 
-- Notes:
-  - I did not have to `JSON.stringify()` the array.
-  - The variable name used by the `src\pages\bloglist.js` page is `allowedBlogStatuses`, as shown in the query above. Below, I pass in the context variable with that name.
-  - All of the context variables will be available in the `page-data.json` file in the web browser (see below).
+Next, in the code below, we delete then recreate the page and pass in the array of allowed statuses as a variable.
 
-```js
+- Notes:
+  - Using this method, I did NOT have to `JSON.stringify()` the array. Apparently Gatsby automatically does that for you when you use the `context` object.
+  - The variable name used above by the `src\pages\bloglist.js` page is `allowedBlogStatuses`. The one we pass in is `arBlogStatusesToShow`. This is fine as long as the variable name on the left side of the `context` object matches the variable name in the page query. The name on the right side is arbitrary, but by convention, it is the same. When the left and right side of the context variable are the same, you can simply state the name of the query variable, with no value assigned.
+  - Pay special attention to the `exports.onCreatePage` below, line 3.
+
+```js{numberLines: true}
 // From gatsby-node.js section
 // Whenever a page is created by any method, it emits onCreatePage
 exports.onCreatePage = ({ page, actions }) => {
@@ -219,15 +234,18 @@ exports.onCreatePage = ({ page, actions }) => {
 }
 ```
 
-This shows what is actually delivered to your web page at run time via `page-data.json` for `/bloglist/`. It only contains the blog posts that you want. It also includes the `testString` value. (click to enlarge):
+The image below is from Chrome dev tools. It shows what is actually delivered to your web page at run time via `page-data.json` for `/bloglist/`. It only contains the blog posts that you want. It also includes the `testString` value. (click to enlarge):
 
 ![data and pageContext](pagecontext variables screenshot.png "data and pageContext")
 
-### Using src\templates Files, Passing Query Results (record set)
+## Option 3: Using src\templates Files, Passing Query Results
 
-In this approach, my home page is in `src\templates\index.js`. There is no graphQL query *on the page*. Instead, I'm running the query in `gatsby-node.js` and passing in the entire result set via the `context` object.
+In this approach, I moved my home page from `src\pages\index.js` to `src\templates\index.js` to show you that file location is fairly arbitrary.
+
+**I also removed the GraphQL from the bottom of index.js. There is no GraphQL query on the page.** Instead, I'm writing and running the query entirely in `gatsby-node.js` and passing in the result set, `blogPostListResults` via the `context` object.
 
 ```js
+// From gatsby-node.js
 exports.createPages = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions
 
@@ -266,7 +284,9 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 ... create other pages...
 ```
 
-The `path: "/"` arg will cause the template to become the home page of __www.edpike365.com/__
+The `path: "/"` arg will cause the template to become the home page of [__www.edpike365.com/__](https://www.edpike365.com/).
+
+The code below does not use the `data` object. It will be empty. The `pageContext` object will contain a data object that contains all the info that the information that `data` normally contains.
 
 ```js
 // From top of src/templates/index.js
@@ -289,27 +309,83 @@ const HomePage = ({pageContext, location }) => {
 ```
 
 ### Appendix A: Magic `GATSBY_` Environment Variables
-Env vars named with `GATSBY_` at the beginning will be available to your server side NodeJS code (gatsby-config.js, gatsby-node.js and any code they import). 
+Env vars named with `GATSBY_ at` the beginning will be available to your server side NodeJS code just like any env var (gatsby-config.js, gatsby-node.js and any code they import).
 
-`GATSBY_` env var values are also injected into your page or template JSX wherever you refer to them, before the *page* is sent to the web browser. __They do NOT appear as variables in the page-data.json file__. 
 
-This is a screenshot from Chrome dev tools. Note the line with `var gatsbyTestValue`
+`GATSBY_` env var values are **also** injected into your page or template JSX wherever you refer to them, **before** the *page* is sent to the web browser. __They do NOT appear as variables in the page-data.json file__. 
+
+Declare in a .env file:
+
+```js
+// From .env.development
+# Format is "abc,xyz"
+BLOG_STATUSES_TO_SHOW_LIST="published"
+GATSBY_MAGIC_VAR="pumpkin pie"
+```
+
+Use in your page JSX (line 7):
+```js{numberLines: true}
+const HomePage = ({pageContext, location }) => {
+  
+  const data = pageContext.blogPostListResults.data;
+
+  const siteTitle = data.site.siteMetadata?.title || `Title`
+
+  const gatsbyTestValue = process.env.GATSBY_MAGIC_VAR;
+  console.log("index.js gatsbyTestValue = " + gatsbyTestValue);
+  
+  const posts = data.allMarkdownRemark.nodes
+```
+
+The value is injected into the source code. This is a screenshot from Chrome dev tools. Note line 28 with var `gatsbyTestValue`.
+
 ![chrome dev tools view](gatsby_env_var.png)
 
-**MAJOR GOTCHA**: if your page is in `src\pages`, `GATSBY_` evn vars are NOT available to the "in-page" queries. 
+> **MAJOR GOTCHA**: if your page is in `src\pages`, `GATSBY_` env vars are NOT available to the "in-page" queries. 
 
-### Appendix B: Using Queries to Filter Results In Client JSX: (Works but flawed)
+### Appendix B: Deploying to Netlify
+
+I'm hosting on Github and Netlify. I'm not using the Gatsby Netlify plugin.
+
+There are two options to store the env vars:
+
+### Option 1: Netlify Config File
+
+Put your env vars in a `netlify.tomlfile` in the root folder. They will be available in `process.env` just like using `.env` files. However, you MUST have this file in you git repo. This is not preferred because you will need to store secrets at some point.
+
+```
+# Example netlify.toml
+# Production context: all deploys from the Production branch set in your site’s
+# deploy contexts will inherit these settings.
+[build.environment]
+  # Format is "abc,xyz"
+  BLOG_STATUSES_TO_SHOW_LIST="published"
+```
+
+### Option 2: Netlify Build Settings
+Got to [app.netlify.com/sites/_your_project_name_/settings/deploys](app.netlify.com/sites/_your_project_name_/settings/deploys).
+
+On that page go to **> Build & Deploy > Environment > Edit Settings** button
+
+> *GOTCHA: Do not put the "Values" in quotation marks. They will be added for you when you refer to the process.env var. I use an array, so it looks like this:*
+
+![Netlify Environment Var config](netlify_env_vars.png)
+
+## Appendix C: Using Queries to Filter Results In Client JSX:
 I thought it was worth noting something that I learned along the way. Thankfully, I caught it before I shipped this version of my publishing work flow.
 
-In this approach, the query on `index.js` page query has no filter. You will get them all of the blog entries, regardless of status, in the page's "data" object. Then they are filtered based on the global `GATSBY_BLOG_STATUS` env var (detailed above). 
+In this approach, the query on `index.js` page query has no filter. You will get them all of the blog entries, regardless of status, in the page's "data" object, regardless of the `status`. Then I filter them based on the global `GATSBY_BLOG_STATUS` env var (detailed above). 
 
 Add it to your `.env.development` file. Don't forgot to restart Gatsby:
+
 ```js
 // in project root .env.development
 # Format is "abc,xyz"
 BLOG_STATUSES_TO_SHOW_LIST="published,draft"
-GATSBY_BLOG_STATUS="published"
+GATSBY_BLOG_STATUS="published,draft"
 ```
+
+Then it a filter function:
 
 ```js
   // From the top of index.js
@@ -329,34 +405,15 @@ GATSBY_BLOG_STATUS="published"
   
 ```
 
-This seems to work; it only shows the summaries of the "published" blog posts. However, it has a scalability problem that you can see in the image below:
+This seems to work; it only shows the summaries of the "published" and "draft" blog posts when you look at the web page. However, it has a scalability problem that you can see in the `page-data.json` below:
 
-![Version 2 page-data.json](v2-page-data.png  "Version 2 page-data.json")
+![page-data.json](v2-page-data.png )
 
-As you can see in the "Network>Preview" tab, `result.data.allMarkdownRemark.nodes` contains blog entry summaries. Unfortunately, it contains __*all*__ blog articles, *regardless of status*. That means the summaries of all of my blog entries are shipped over the network every time the site loads. As my blog grows, this will become a serious problem.
+As you can see in the Chrome dev tools "Network>Preview" tab, `result.data.allMarkdownRemark.nodes` contains blog entry summaries. Unfortunately, it contains __*all*__ blog articles, __*regardless of status*__. So even my "archived" blog post will be there.
 
-### Appendix C: Deploying to Netlify
+The summaries of **all** of my blog entries are shipped over the network every time the site loads ([PWA](https://web.dev/storage-for-the-web/) storage not withstanding). As my blog grows, this will become a serious problem.
 
-I'm hosting on Github and Netlify. I'm not using the Gatsby Netlify plugin.
-There are two options to store the env vars:
+On the other hand, if I want to be able to filter during run time, I have them all available. I could even add them all to a Redux store.
 
-- Option 1: Config File
- In a `netlify.toml` file in the root folder. This will also be in you git repo. This is not preferred because you will need to store secrets at some point.
 
-```
-# Production context: all deploys from the Production branch set in your site’s
-# deploy contexts will inherit these settings.
-[build.environment]
-  # Format is "abc,xyz"
-  BLOG_STATUSES_TO_SHOW_LIST="published"
-```
-
-- Option 2: Build Settings
-Got to app.netlify.com/sites/_your_project_name_/settings/deploys
-On that page go to "> Build & Deploy > Environment > Edit Settings button
-
-> GOTCHA: Do not put the values of your "Keys" in quotation marks. I use an array, so it looks like this:
-
-![Netflify Environment Var config](netlify_env_vars.png)
-
-## I hope this helped!
+## Well, that is all. I hope this helped!

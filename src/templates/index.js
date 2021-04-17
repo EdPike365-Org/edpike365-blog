@@ -10,7 +10,7 @@ const HomePage = ({pageContext, location }) => {
   const data = pageContext.blogPostListResults.data;
 
   const siteTitle = data.site.siteMetadata?.title || `Title`
-  
+
   const posts = data.allMarkdownRemark.nodes
 
   if (posts.length === 0) {
