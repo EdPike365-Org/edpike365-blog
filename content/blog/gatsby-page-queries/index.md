@@ -113,7 +113,7 @@ Page Queries in `gatsby-node.js` can create pages from:
 
 This approach is well documented in the [Gatsby Starter Blog](https://www.gatsbyjs.com/starters/gatsbyjs/gatsby-starter-blog). Below, we create an individual page for each blog post using a template file. 
 
-Note the filter code at line 10. I have to use `JSON.stringify(arBlogStatusesToShow)` to have the JavaScript array formatted correctly in the query.
+Note the filter code at line 11. I have to use `JSON.stringify(arBlogStatusesToShow)` to have the JavaScript array formatted correctly in the query.
 
 ```js{numberLines: true}
 // In gatsby-node.js
@@ -286,7 +286,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 
 The `path: "/"` arg will cause the template to become the home page of [__www.edpike365.com/__](https://www.edpike365.com/).
 
-The code below does not use the `data` object. It will be empty. The `pageContext` object will contain a data object that contains all the info that the information that `data` normally contains.
+The code below does not use the `data` object. It will be empty. The `pageContext.blogPostListResults` object will contain a data object that contains all the info that the information that `data` normally contains.
 
 ```js
 // From top of src/templates/index.js
@@ -309,12 +309,12 @@ const HomePage = ({pageContext, location }) => {
 ```
 
 ### Appendix A: Magic `GATSBY_` Environment Variables
-Env vars named with `GATSBY_ at` the beginning will be available to your server side NodeJS code just like any env var (gatsby-config.js, gatsby-node.js and any code they import).
+Env vars named with `GATSBY_` at the beginning will be available to your server side NodeJS code just like any env var (gatsby-config.js, gatsby-node.js and any code they import).
 
 
 `GATSBY_` env var values are **also** injected into your page or template JSX wherever you refer to them, **before** the *page* is sent to the web browser. __They do NOT appear as variables in the page-data.json file__. 
 
-Declare in a .env file:
+Declare `GATSBY_XYZ` in an .env file:
 
 ```js
 // From .env.development
@@ -324,6 +324,7 @@ GATSBY_MAGIC_VAR="pumpkin pie"
 ```
 
 Use in your page JSX (line 7):
+
 ```js{numberLines: true}
 const HomePage = ({pageContext, location }) => {
   
@@ -341,7 +342,7 @@ The value is injected into the source code. This is a screenshot from Chrome dev
 
 ![chrome dev tools view](gatsby_env_var.png)
 
-> **MAJOR GOTCHA**: if your page is in `src\pages`, `GATSBY_` env vars are NOT available to the "in-page" queries. 
+> **MAJOR GOTCHA**: if your page is in `src\pages`, `GATSBY_` env vars are NOT available to the "in-page" queries. I tried to use a GATSBY_ env var to inject a filter value into the GraphQL query on the page and it would not compile.
 
 ### Appendix B: Deploying to Netlify
 
@@ -351,7 +352,7 @@ There are two options to store the env vars:
 
 ### Option 1: Netlify Config File
 
-Put your env vars in a `netlify.tomlfile` in the root folder. They will be available in `process.env` just like using `.env` files. However, you MUST have this file in you git repo. This is not preferred because you will need to store secrets at some point.
+Put your env vars in a `netlify.toml` file in the root folder. They will be available in `process.env` just like using `.env` files. However, you MUST have this file in you git repo. This is not preferred because you will need to store secrets at some point.
 
 ```
 # Example netlify.toml
@@ -374,9 +375,9 @@ On that page go to **> Build & Deploy > Environment > Edit Settings** button
 ## Appendix C: Using Queries to Filter Results In Client JSX:
 I thought it was worth noting something that I learned along the way. Thankfully, I caught it before I shipped this version of my publishing work flow.
 
-In this approach, the query on `index.js` page query has no filter. You will get them all of the blog entries, regardless of status, in the page's "data" object, regardless of the `status`. Then I filter them based on the global `GATSBY_BLOG_STATUS` env var (detailed above). 
+In this approach, the query on `src\pages\index.js` page query has no filter. You will get all of the blog entries, in the page's "data" object, regardless of the `status`. Then I filter them based on the magic `GATSBY_BLOG_STATUS` env var (detailed above). 
 
-Add it to your `.env.development` file. Don't forgot to restart Gatsby:
+Add `GATSBY_BLOG_STATUS` to your `.env.development` file. Don't forgot to restart Gatsby:
 
 ```js
 // in project root .env.development
@@ -385,7 +386,7 @@ BLOG_STATUSES_TO_SHOW_LIST="published,draft"
 GATSBY_BLOG_STATUS="published,draft"
 ```
 
-Then it a filter function:
+Then filter the nodes with a filter function:
 
 ```js
   // From the top of index.js

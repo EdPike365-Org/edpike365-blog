@@ -11,8 +11,6 @@ const BlogList = ({data, location }) => {
     
   const posts = data.allMarkdownRemark.nodes
 
-  console.log(" proc env " + process.env.GATSBY_TEST)
-
   if (posts.length === 0) {
     return (
       <Layout location={location} title={siteTitle}>
