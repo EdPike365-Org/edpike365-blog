@@ -1,5 +1,6 @@
 import * as React from "react"
 import { Link, graphql } from "gatsby"
+import { getSrc } from "gatsby-plugin-image"
 
 import Bio from "../components/bio"
 import Layout from "../components/layout"
@@ -11,12 +12,16 @@ const BlogPostTemplate = ({ data, location }) => {
   const post = data.markdownRemark
   const siteTitle = data.site.siteMetadata?.title || `Title`
   const { previous, next } = data
+  const { ogimage } = post.frontmatter
+  //const ogImagePath = ogimage && ogimage.childImageSharp.fixed.src
+  const ogImagePath = ogimage && getSrc(ogimage)
 
   return (
     <Layout location={location} title={siteTitle}>
       <SEO
         title={post.frontmatter.title}
         description={post.frontmatter.description || post.excerpt}
+        image={ogImagePath}
       />
       <article
         className="blog-post"
@@ -89,6 +94,11 @@ export const pageQuery = graphql`
         title
         date(formatString: "MMMM DD, YYYY")
         description
+        ogimage { 
+          childImageSharp {
+            gatsbyImageData(layout: FIXED)
+          }
+        }
       }
     }
     previous: markdownRemark(id: { eq: $previousPostId }) {

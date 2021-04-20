@@ -1,8 +1,9 @@
 ---
-title: "Gatsby Page Queries with Environment Variables"
+title: "GatsbyJS Page Queries with Environment Variables"
 date: "2021-04-12T22:12:03.284Z"
 status: published
 author: EdPike365
+ogimage: "gatsby_and_graphql.jpg"
 tags:
   - GatsbyJS
   - GraphQL
@@ -13,8 +14,6 @@ tags:
 ### Learn while implementing a Markdown Publishing Workflow
 
 ![Gatsby and GraphQL](gatsby_and_graphql.jpg)
-
-#### Learn GatsbyJS Page Queries with environment variables while implementing a Markdown Publishing Workflow
 
 The core issue we'll cover is using environment variables with page queries for pages in the `src\pages` folder. This is apparently a common problem ([example](https://github.com/gatsbyjs/gatsby/issues/10023)). I definitely struggled with it before I got it working. We'll also cover page queries, variables and the `createPage` action.
 

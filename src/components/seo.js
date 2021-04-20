@@ -9,8 +9,12 @@ import * as React from "react"
 import PropTypes from "prop-types"
 import { Helmet } from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
+// og image should be 1,200 x 630 px
+// twitter size min 120 x 120, recommended 600 x 600 (also pinterest), max 1,200 x 1,200 (also facebook and instagram)
+import defaultOpenGraphImage from '/src/images/profile-pic.png'
 
-const SEO = ({ description, lang, meta, title }) => {
+const SEO = ({ description, lang, meta, title, image}) => {
+  
   const { site } = useStaticQuery(
     graphql`
       query {
@@ -18,6 +22,7 @@ const SEO = ({ description, lang, meta, title }) => {
           siteMetadata {
             title
             description
+            siteUrl
             social {
               twitter
             }
@@ -29,6 +34,7 @@ const SEO = ({ description, lang, meta, title }) => {
 
   const metaDescription = description || site.siteMetadata.description
   const defaultTitle = site.siteMetadata?.title
+  const ogImageUrl = site.siteMetadata.siteUrl + ( image || defaultOpenGraphImage )
 
   return (
     <Helmet
@@ -43,6 +49,10 @@ const SEO = ({ description, lang, meta, title }) => {
           content: metaDescription,
         },
         {
+          property: `image`,
+          content: ogImageUrl,
+        },
+        {
           property: `og:title`,
           content: title,
         },
@@ -53,6 +63,10 @@ const SEO = ({ description, lang, meta, title }) => {
         {
           property: `og:type`,
           content: `website`,
+        },
+        {
+           property: `og:image`,
+          content: ogImageUrl,
         },
         {
           name: `twitter:card`,
@@ -69,6 +83,10 @@ const SEO = ({ description, lang, meta, title }) => {
         {
           name: `twitter:description`,
           content: metaDescription,
+        },
+        {
+          property: `twitter:image`,
+          content: ogImageUrl,
         },
       ].concat(meta)}
     />
