@@ -106,7 +106,7 @@ After getting my code to work, this is my understanding of graphQL variables in 
   
 Page Queries in `gatsby-node.js` can create pages from:
   - Using `src\template` files with the `createPage()` action.
-  - Deleting a `src\pages` page using `deletePage()`, then __recreating__ it with `createPage()`. __This is the only way to pass variables, including env vars, to a page in `src\pages`__. 
+  - Deleting a `src\pages` page result using `deletePage()`, then __recreating__ it with `createPage()`. __This is the only way to pass variables, including env vars, to a page in `src\pages`__. 
 
 ## Option 1: Using src\templates Files
 
@@ -206,7 +206,7 @@ export const pageQuery = graphql`
         excerpt
 ```
 
-Next, in the code below, we delete then recreate the page and pass in the array of allowed statuses as a variable.
+Next, in the code below, we delete then recreate the "processed" page and pass in the array of allowed statuses as a variable.
 
 - Notes:
   - Using this method, I did NOT have to `JSON.stringify()` the array. Apparently Gatsby automatically does that for you when you use the `context` object.
@@ -236,6 +236,8 @@ exports.onCreatePage = ({ page, actions }) => {
 The image below is from Chrome dev tools. It shows what is actually delivered to your web page at run time via `page-data.json` for `/bloglist/`. It only contains the blog posts that you want. It also includes the `testString` value. (click to enlarge):
 
 ![data and pageContext](pagecontext variables screenshot.png "data and pageContext")
+
+> GOTCHA: Any time you use the `createPage()` function from `gatsby-node.js`, you will no longer get automatic incremental builds. If you want to see changes, you have to restart Gatsby. From [Gatsby Page Creation Docs](https://www.gatsbyjs.com/docs/creating-and-modifying-pages/#trade-offs-of-querying-for-all-fields-in-the-context-object-of-gatsby-nodejs)
 
 ## Option 3: Using src\templates Files, Passing Query Results
 

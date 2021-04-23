@@ -14,45 +14,6 @@ console.info(" gatsby-node.js arBlogStatusesToShow JSON = " + JSON.stringify(arB
 exports.createPages = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions
 
-  // Define a template for index
-  const indexPage = path.resolve(`./src/templates/index.js`)
-
-  const blogPostListResults = await graphql(
-    `
-    query IndexPageQuery{
-      site {
-        siteMetadata {
-          title
-        }
-      }
-      allMarkdownRemark(
-        filter: {frontmatter: {status: { in: ` + JSON.stringify(arBlogStatusesToShow) + `  }}}
-        sort: { fields: [frontmatter___date], order: DESC }) {
-        nodes {
-          excerpt
-          fields {
-            slug
-          }
-          frontmatter {
-            date(formatString: "MMMM DD, YYYY")
-            title
-            status
-            description
-          }
-        }
-      }
-    }
-    `
-  )
-
-  createPage({
-    path: "/",
-    component: indexPage,
-    context: {
-      blogPostListResults,
-    },
-  })
-
   // Define a template for blog post
   const blogPost = path.resolve(`./src/templates/blog-post.js`)
 
@@ -109,6 +70,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   }
 }
 
+// Seems to be adding the slug field to the graphql node
 exports.onCreateNode = ({ node, actions, getNode }) => {
   const { createNodeField } = actions
 
@@ -132,11 +94,20 @@ exports.onCreatePage = ({ page, actions }) => {
       context: {
         ...page.context,
         allowedBlogStatuses: arBlogStatusesToShow,
-        testString: "my test string"
       },
     })
-  
+  } else if(page.path == "/"){
+    deletePage(page)
+    createPage({
+      ...page,
+      context: {
+        ...page.context,
+        allowedBlogStatuses: arBlogStatusesToShow,
+        limit: 3,
+      },
+    })
   }
+
 }
 
 exports.createSchemaCustomization = ({ actions }) => {

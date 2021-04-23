@@ -5,34 +5,22 @@ import Bio from "../components/bio"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
-const HomePage = ({pageContext, location }) => {
+const HomePage = ({data, pageContext, location }) => {
   
-  const data = pageContext.blogPostListResults.data;
-
   const siteTitle = data.site.siteMetadata?.title || `Title`
-
   const posts = data.allMarkdownRemark.nodes
-
-  if (posts.length === 0) {
-    return (
-      <Layout location={location} title={siteTitle}>
-        <SEO title="Home" />
-        <Bio />
-        <p>
-          No blog posts found. Add markdown posts to "content/blog" (or the
-          directory you specified for the "gatsby-source-filesystem" plugin in
-          gatsby-config.js).
-        </p>
-      </Layout>
-    )
-  }
+  const numPostsToShow = pageContext.limit
+  const totalCount = data.allMarkdownRemark.totalCount
 
   return (
     <Layout location={location} title={siteTitle}>
       <SEO title="Home" />
       <Bio />
       Welcome to my Portfolio. It's just a blog for now, but big changes are coming! It's based on Gatsby v3 Starter Blog and I'll be documenting how I customize it.
-
+      <br />
+      <br />
+      {numPostsToShow} Most Recent Posts ( <Link to="/bloglist/">See all {totalCount}</Link>  )
+      <hr></hr>
       <ol style={{ listStyle: `none` }}>
         {
         posts.map(post => {
@@ -71,3 +59,35 @@ const HomePage = ({pageContext, location }) => {
 }
 
 export default HomePage
+
+export const pageQuery = graphql`
+  query HomePageQuery(
+    $allowedBlogStatuses: [String]
+    $limit: Int
+    ){
+    site {
+      siteMetadata {
+        title
+      }
+    }
+    allMarkdownRemark(
+      filter: {frontmatter: {status: { in: $allowedBlogStatuses  }}}
+      sort: { fields: [frontmatter___date], order: DESC }
+      limit: $limit
+      ){
+      totalCount
+      nodes {
+        excerpt
+        fields {
+          slug
+        }
+        frontmatter {
+          date(formatString: "MMMM DD, YYYY")
+          title
+          status
+          description
+        }
+      }
+    }
+  }
+  `

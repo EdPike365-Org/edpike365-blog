@@ -11,6 +11,7 @@ module.exports = {
     },
     description: `Portfolio and blog about programming, Gatsby, technology, science.`,
     siteUrl: `https://www.edpike365.com/`,
+    monetization: "$ilp.uphold.com/yLBeLwUyE2A2",
     social: {
       twitter: process.env.TWITTER,
     },

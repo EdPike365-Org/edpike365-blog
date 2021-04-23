@@ -13,8 +13,9 @@ const BlogPostTemplate = ({ data, location }) => {
   const siteTitle = data.site.siteMetadata?.title || `Title`
   const { previous, next } = data
   const { ogimage } = post.frontmatter
-  //const ogImagePath = ogimage && ogimage.childImageSharp.fixed.src
+  // const ogImagePath = ogimage && ogimage.childImageSharp.fixed.src
   const ogImagePath = ogimage && getSrc(ogimage)
+  // https://juliangaramendy.dev/blog/custom-open-graph-images-in-gatsby-blog
 
   return (
     <Layout location={location} title={siteTitle}>
