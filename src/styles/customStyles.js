@@ -1,3 +1,9 @@
+import { css } from '@emotion/react'
+
+// This is simply an emotion wrapper to the gatsby starter blog style.css file
+// this contains some special prismjs styles
+// note: I had to replace all the pips in the comments with ""s
+export const customStyles = css`
 /* CSS Custom Properties Definitions */
 
 :root {
@@ -363,3 +369,4 @@ a:focus {
     list-style-position: inside;
   }
 }
+`

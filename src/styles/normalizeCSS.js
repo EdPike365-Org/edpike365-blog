@@ -1,3 +1,8 @@
+import { css } from '@emotion/react'
+
+// This is simply an emotion wrapper to the normal normalize.css file
+// note: I had to replace all the pips in the comments with ""s
+export const normalizeCSS = css`
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
 
 /* Document
@@ -22,10 +27,11 @@ html {
 
 body {
   margin: 0;
+  color: white;
 }
 
 /**
- * Render the `main` element consistently in IE.
+ * Render the "main" element consistently in IE.
  */
 
 main {
@@ -33,8 +39,8 @@ main {
 }
 
 /**
- * Correct the font size and margin on `h1` elements within `section` and
- * `article` contexts in Chrome, Firefox, and Safari.
+ * Correct the font size and margin on "h1" elements within "section" and
+ * "article" contexts in Chrome, Firefox, and Safari.
  */
 
 h1 {
@@ -58,7 +64,7 @@ hr {
 
 /**
  * 1. Correct the inheritance and scaling of font size in all browsers.
- * 2. Correct the odd `em` font sizing in all browsers.
+ * 2. Correct the odd "em" font sizing in all browsers.
  */
 
 pre {
@@ -99,7 +105,7 @@ strong {
 
 /**
  * 1. Correct the inheritance and scaling of font size in all browsers.
- * 2. Correct the odd `em` font sizing in all browsers.
+ * 2. Correct the odd "em" font sizing in all browsers.
  */
 
 code,
@@ -118,7 +124,7 @@ small {
 }
 
 /**
- * Prevent `sub` and `sup` elements from affecting the line height in
+ * Prevent "sub" and "sup" elements from affecting the line height in
  * all browsers.
  */
 
@@ -234,9 +240,9 @@ fieldset {
 
 /**
  * 1. Correct the text wrapping in Edge and IE.
- * 2. Correct the color inheritance from `fieldset` elements in IE.
+ * 2. Correct the color inheritance from "fieldset" elements in IE.
  * 3. Remove the padding so developers are not caught out when they zero out
- *    `fieldset` elements in all browsers.
+ *    "fieldset" elements in all browsers.
  */
 
 legend {
@@ -304,7 +310,7 @@ textarea {
 
 /**
  * 1. Correct the inability to style clickable types in iOS and Safari.
- * 2. Change font properties to `inherit` in Safari.
+ * 2. Change font properties to "inherit" in Safari.
  */
 
 ::-webkit-file-upload-button {
@@ -341,3 +347,5 @@ summary {
 [hidden] {
   display: none;
 }
+
+`

@@ -5,6 +5,7 @@ import Bio from "../components/bio"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
+
 const HomePage = ({data, pageContext, location }) => {
   
   const siteTitle = data.site.siteMetadata?.title || `Title`
@@ -19,6 +20,7 @@ const HomePage = ({data, pageContext, location }) => {
       Welcome to my Portfolio. It's just a blog for now, but big changes are coming! It's based on Gatsby v3 Starter Blog and I'll be documenting how I customize it.
       <br />
       <br />
+
       {numPostsToShow} Most Recent Posts ( <Link to="/bloglist/">See all {totalCount}</Link>  )
       <hr></hr>
       <ol style={{ listStyle: `none` }}>

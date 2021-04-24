@@ -1,11 +1,9 @@
 // custom typefaces
 import "typeface-montserrat"
 import "typeface-merriweather"
-// normalize CSS across browsers
-import "./src/normalize.css"
-// custom CSS styles
-import "./src/style.css"
 
+
+// This css shows up in the common.css file after build
 // Theme for prismjs
 require("prismjs/themes/prism-okaidia.css")
 // Enable prismjs line numbering
