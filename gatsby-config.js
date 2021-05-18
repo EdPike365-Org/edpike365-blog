@@ -4,10 +4,10 @@ require('dotenv').config({
 
 module.exports = {
   siteMetadata: {
-    title: `EdPike365's Portfolio`,
+    title: `EdPike365`,
     author: {
       name: `EdPike365`,
-      summary: `: dad, full stack developer, tech educator, science enthusiast.`,
+      summary: `: Full stack developer, tech educator, science enthusiast.`,
     },
     description: `Portfolio and blog about programming, Gatsby, technology, science.`,
     siteUrl: `https://www.edpike365.com/`,
@@ -168,7 +168,7 @@ module.exports = {
         background_color: `#ffffff`,
         theme_color: `#663399`,
         display: `minimal-ui`,
-        icon: `src/images/edpike365-site-icon.png`, // This path is relative to the root of the site.
+        icon: `src/images/logo.svg`, // This path is relative to the root of the site.
       },
     },
     `gatsby-plugin-react-helmet`,

@@ -1,61 +1,42 @@
 import * as React from "react"
 import { Link, graphql } from "gatsby"
+import styled from "@emotion/styled"
 
-import Bio from "../components/bio"
-import Layout from "../components/layout"
-import SEO from "../components/seo"
+import Bio from "../components/Bio"
+import Layout from "../components/Layout"
+import SeO from "../components/SEO"
+import BlogPostSummary from "../components/BlogPostSummary"
 
+// location is auto passed in, but only for pages in "pages" and "templates", not "components"
+const HomePage = ({ data, pageContext, location }) => {
 
-const HomePage = ({data, pageContext, location }) => {
-  
-  const siteTitle = data.site.siteMetadata?.title || `Title`
-  const posts = data.allMarkdownRemark.nodes
   const numPostsToShow = pageContext.limit
+  const posts = data.allMarkdownRemark.nodes
   const totalCount = data.allMarkdownRemark.totalCount
 
+  const P = styled.p`
+    color: var(--color-text-primary);
+    font-size: 2rem;
+  `
   return (
-    <Layout location={location} title={siteTitle}>
-      <SEO title="Home" />
+    <Layout location={location} >
+      <SeO title="Home" />
+      <P>
+      Welcome to my Portfolio. It's just a blog for now, but big changes are
+      coming! It's based on Gatsby v3 Starter Blog and I'll be documenting how I
+      customize it.
+      </P>
+      {numPostsToShow} Most Recent Posts ({" "}
+      <Link to="/bloglist/">See all {totalCount}</Link> )
+      <hr/>
+      { /* Duplicate components need unique key to keep react from complaining */ }
+      {posts.map(post => {
+        return (
+          <BlogPostSummary key={ post.fields.slug } post={post} />
+        )
+      })}
+      <br />
       <Bio />
-      Welcome to my Portfolio. It's just a blog for now, but big changes are coming! It's based on Gatsby v3 Starter Blog and I'll be documenting how I customize it.
-      <br />
-      <br />
-
-      {numPostsToShow} Most Recent Posts ( <Link to="/bloglist/">See all {totalCount}</Link>  )
-      <hr></hr>
-      <ol style={{ listStyle: `none` }}>
-        {
-        posts.map(post => {
-          const title = post.frontmatter.title || post.fields.slug
-
-          return (
-            <li key={post.fields.slug}>
-              <article
-                className="post-list-item"
-                itemScope
-                itemType="http://schema.org/Article"
-              >
-                <header>
-                  <h2>
-                    <Link to={post.fields.slug} itemProp="url">
-                      <span itemProp="headline">{title}</span>
-                    </Link>
-                  </h2>
-                  <small>{post.frontmatter.date}</small>
-                </header>
-                <section>
-                  <p
-                    dangerouslySetInnerHTML={{
-                      __html: post.frontmatter.description || post.excerpt,
-                    }}
-                    itemProp="description"
-                  />
-                </section>
-              </article>
-            </li>
-          )
-        })}
-      </ol>
     </Layout>
   )
 }
@@ -63,20 +44,12 @@ const HomePage = ({data, pageContext, location }) => {
 export default HomePage
 
 export const pageQuery = graphql`
-  query HomePageQuery(
-    $allowedBlogStatuses: [String]
-    $limit: Int
-    ){
-    site {
-      siteMetadata {
-        title
-      }
-    }
+  query HomePageQuery($allowedBlogStatuses: [String], $limit: Int) {
     allMarkdownRemark(
-      filter: {frontmatter: {status: { in: $allowedBlogStatuses  }}}
+      filter: { frontmatter: { status: { in: $allowedBlogStatuses } } }
       sort: { fields: [frontmatter___date], order: DESC }
       limit: $limit
-      ){
+    ) {
       totalCount
       nodes {
         excerpt
@@ -92,4 +65,4 @@ export const pageQuery = graphql`
       }
     }
   }
-  `
+`

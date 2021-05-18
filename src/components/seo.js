@@ -6,7 +6,8 @@ import { useStaticQuery, graphql } from "gatsby"
 // twitter size min 120 x 120, recommended 600 x 600 (also pinterest), max 1,200 x 1,200 (also facebook and instagram)
 import defaultOpenGraphImage from '/src/images/profile-pic.png'
 
-const SEO = ({ description, lang, meta, title, image}) => {
+// Renaming to SeO to remove PasCal case lint warnings until I can figure out how to edit Gatsby's lint settings
+const SeO = ({ description, lang, meta, title, image}) => {
   
   const { site } = useStaticQuery(
     graphql`
@@ -86,17 +87,17 @@ const SEO = ({ description, lang, meta, title, image}) => {
   )
 }
 
-SEO.defaultProps = {
+SeO.defaultProps = {
   lang: `en`,
   meta: [],
   description: ``,
 }
 
-SEO.propTypes = {
+SeO.propTypes = {
   description: PropTypes.string,
   lang: PropTypes.string,
   meta: PropTypes.arrayOf(PropTypes.object),
   title: PropTypes.string.isRequired,
 }
 
-export default SEO
+export default SeO

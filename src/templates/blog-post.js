@@ -1,16 +1,31 @@
 import * as React from "react"
 import { Link, graphql } from "gatsby"
 import { getSrc } from "gatsby-plugin-image"
+import styled from "@emotion/styled"
 
-import Bio from "../components/bio"
-import Layout from "../components/layout"
-import SEO from "../components/seo"
+import Bio from "../components/Bio"
+import Layout from "../components/Layout"
+import SeO from "../components/SEO"
 
 require(`katex/dist/katex.min.css`)
+
+const BlogHeader = styled.header`
+ & > h1{
+   margin-top: 0rem;
+   margin-bottom: .5rem;
+   font-weight: var(--font-weight-light);
+   text-align: center;
+ }
+
+`
 
 const BlogPostTemplate = ({ data, location }) => {
   const post = data.markdownRemark
   const siteTitle = data.site.siteMetadata?.title || `Title`
+  
+  const title = post.frontmatter.title || post.fields.slug
+  const postDate = post.frontmatter.date
+
   const { previous, next } = data
   const { ogimage } = post.frontmatter
   // const ogImagePath = ogimage && ogimage.childImageSharp.fixed.src
@@ -19,7 +34,7 @@ const BlogPostTemplate = ({ data, location }) => {
 
   return (
     <Layout location={location} title={siteTitle}>
-      <SEO
+      <SeO
         title={post.frontmatter.title}
         description={post.frontmatter.description || post.excerpt}
         image={ogImagePath}
@@ -29,10 +44,10 @@ const BlogPostTemplate = ({ data, location }) => {
         itemScope
         itemType="http://schema.org/Article"
       >
-        <header>
-          <h1 itemProp="headline">{post.frontmatter.title}</h1>
-          <p>{post.frontmatter.date}</p>
-        </header>
+        <BlogHeader>
+          <h1 itemProp="headline">{ title }</h1>
+          <span className="overline">{ postDate }</span>
+        </BlogHeader>
         <section
           dangerouslySetInnerHTML={{ __html: post.html }}
           itemProp="articleBody"
