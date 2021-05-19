@@ -61,7 +61,7 @@ const GlobalGridDiv = styled.div`
 
     transform: ${props => (props.showNav ? "scale(1,1)" : "scale(0,1)")};
     transform-origin: left;
-    transition: transform 0.4s ease-out;
+    transition: transform 0.3s ease-out;
   }
 
   ${SideBarDiv} {

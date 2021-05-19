@@ -11,7 +11,7 @@ const Seo = ({ description, lang, meta, title, image}) => {
   
   const { site } = useStaticQuery(
     graphql`
-      query {
+      query SEOQuery {
         site {
           siteMetadata {
             title

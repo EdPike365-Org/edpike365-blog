@@ -84,7 +84,7 @@ const NavBar = ({ title }) => {
           FRONT END
           <Li>
             <LinK to={"/frontend/"} itemProp="url">
-              OG HTML, CSS, JS
+              HTML, CSS, JS
             </LinK>
           </Li>
           <Li>
