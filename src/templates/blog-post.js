@@ -5,7 +5,7 @@ import styled from "@emotion/styled"
 
 import Bio from "../components/Bio"
 import Layout from "../components/Layout"
-import SeO from "../components/SEO"
+import Seo from "../components/SEO"
 
 require(`katex/dist/katex.min.css`)
 
@@ -34,7 +34,7 @@ const BlogPostTemplate = ({ data, location }) => {
 
   return (
     <Layout location={location} title={siteTitle}>
-      <SeO
+      <Seo
         title={post.frontmatter.title}
         description={post.frontmatter.description || post.excerpt}
         image={ogImagePath}

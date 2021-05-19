@@ -1,5 +1,4 @@
 import React from "react"
-import { Link } from "gatsby"
 import styled from "@emotion/styled"
 
 const FootDiv = styled.footer`

@@ -7,7 +7,7 @@ import { useStaticQuery, graphql } from "gatsby"
 import defaultOpenGraphImage from '/src/images/profile-pic.png'
 
 // Renaming to SeO to remove PasCal case lint warnings until I can figure out how to edit Gatsby's lint settings
-const SeO = ({ description, lang, meta, title, image}) => {
+const Seo = ({ description, lang, meta, title, image}) => {
   
   const { site } = useStaticQuery(
     graphql`
@@ -87,17 +87,17 @@ const SeO = ({ description, lang, meta, title, image}) => {
   )
 }
 
-SeO.defaultProps = {
+Seo.defaultProps = {
   lang: `en`,
   meta: [],
   description: ``,
 }
 
-SeO.propTypes = {
+Seo.propTypes = {
   description: PropTypes.string,
   lang: PropTypes.string,
   meta: PropTypes.arrayOf(PropTypes.object),
   title: PropTypes.string.isRequired,
 }
 
-export default SeO
+export default Seo

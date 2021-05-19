@@ -4,7 +4,7 @@ import styled from "@emotion/styled"
 
 import Bio from "../components/Bio"
 import Layout from "../components/Layout"
-import SeO from "../components/SEO"
+import Seo from "../components/SEO"
 import BlogPostSummary from "../components/BlogPostSummary"
 
 // location is auto passed in, but only for pages in "pages" and "templates", not "components"
@@ -20,7 +20,7 @@ const HomePage = ({ data, pageContext, location }) => {
   `
   return (
     <Layout location={location} >
-      <SeO title="Home" />
+      <Seo title="Home" />
       <P>
       Welcome to my Portfolio. It's just a blog for now, but big changes are
       coming! It's based on Gatsby v3 Starter Blog and I'll be documenting how I

@@ -4,8 +4,8 @@ import { StaticImage } from "gatsby-plugin-image"
 import styled from "@emotion/styled"
 
 const Bio = () => {
-
-const data = useStaticQuery(graphql`
+  
+  const data = useStaticQuery(graphql`
     query BioQuery {
       site {
         siteMetadata {
@@ -23,17 +23,16 @@ const data = useStaticQuery(graphql`
 
   // Set these values by editing "siteMetadata" in gatsby-config.js
   const author = data.site.siteMetadata?.author
-  const social = data.site.siteMetadata?.social
 
   const BioDiv = styled.div`
     color: var(--color-text-secondary);
     display: flex;
-    justify-content: center; 
+    justify-content: center;
   `
   const ImgDiv = styled.span`
     /* emotion styled does not work with StaticImage */
     /* StaticImage lives inside a div > picture > img */
-    padding: .5rem;
+    padding: 0.5rem;
 
     & > div > picture > img {
       min-width: 50px;
@@ -42,7 +41,7 @@ const data = useStaticQuery(graphql`
   `
 
   const TextSpan = styled.span`
-  padding: .5rem;
+    padding: 0.5rem;
   `
 
   return (

@@ -1,9 +1,9 @@
 import * as React from "react"
 import { graphql } from "gatsby"
 
-import Bio from "../components/bio"
+import Bio from "../components/Bio"
 import Layout from "../components/Layout"
-import SeO from "../components/SEO"
+import Seo from "../components/SEO"
 import BlogPostSummary from "../components/BlogPostSummary"
 
 const BlogList = ({data, location }) => {
@@ -14,7 +14,7 @@ const BlogList = ({data, location }) => {
   if (posts.length === 0) {
     return (
       <Layout location={location} >
-        <SeO title="All Blog Posts" />
+        <Seo title="All Blog Posts" />
         <Bio />
         <p>
           No blog posts found. 
@@ -25,14 +25,14 @@ const BlogList = ({data, location }) => {
 
   return (
     <Layout location={location} >
-      <SeO title="All Blog Posts" />
+      <Seo title="All Blog Posts" />
       <h2>All {totalCount} Blog Entries</h2>
       Ordered by most recent.
       <ol style={{ listStyle: `none`, paddingInlineStart: `0px` }}>
         {
         posts.map(post => {
           return (
-            <li><BlogPostSummary key={ post.fields.slug } post={post} /></li>
+            <li key={ post.fields.slug } ><BlogPostSummary  post={post} /></li>
           )         
         })}
       </ol>

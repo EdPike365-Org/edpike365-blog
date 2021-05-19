@@ -14,9 +14,10 @@ const Layout = ( {children, location }) => {
   // If we are on the home page, make the logos not be links
   // I'm only doing this as a demonstration
   // location object must be passed from pages into components
+  /*
   const rootPath = `${__PATH_PREFIX__}/`
   const isRootPath = location.pathname === rootPath
-
+*/
   return (
     <NavContextProvider >
       <Global styles={coreTheme} />

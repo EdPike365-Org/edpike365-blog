@@ -5,7 +5,6 @@ import styled from "@emotion/styled"
 import HamburgerButton from "./HamburgerButton"
 import LogoIcon from "./LogoIcon"
 import LogoText from "./LogoText"
-import HollowBellIcon from "./HollowBellIcon"
 
 //TODO
 //const SettingsIcon
