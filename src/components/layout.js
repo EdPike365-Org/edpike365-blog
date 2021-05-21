@@ -8,8 +8,9 @@ import SideBar from "./SideBar"
 import Main from "./Main"
 import Footer from "./Footer"
 import { NavContextProvider} from "../contexts/NavContext"
+import { ThemeContextListener } from "../components/ThemeSetters"
 
-const Layout = ( {children, location }) => {
+const Layout = ( {children}) => {
 
   // If we are on the home page, make the logos not be links
   // I'm only doing this as a demonstration
@@ -20,7 +21,7 @@ const Layout = ( {children, location }) => {
 */
   return (
     <NavContextProvider >
-      <Global styles={coreTheme} />
+      <ThemeContextListener/>
       <LayoutGrid >
         <Header />
         <NavBar />

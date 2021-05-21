@@ -17,6 +17,7 @@ import { SideBarDiv } from "./SideBar"
     All I had to do was move this component into its own class and call useContext here.
   */
 
+/* By default we are in Mobile mode, nav is hidden, page should load faster for mobile */
 const GlobalGridDiv = styled.div`
   /* height vh is necessary to establish a location for header and footer on page load, so they can be sticky */
   height: 100vh;
@@ -30,59 +31,38 @@ const GlobalGridDiv = styled.div`
   grid-template-areas:
     "header"
     "content"
+
     "footer";
 
-  ${StyledHeader} {
-    height: var(--header-height-mobile);
-    padding-top: 0rem;
-    padding-bottom: 0rem;
-    padding-left: 1rem;
-    padding-right: 1 rem;
-  }
+    /* TODO: figure out how to pass the props into the actual Nav component */
+    ${Nav} {
+      transform: ${props => (props.showNav ? "scale(1,1)" : "scale(0,1)")};
+    }
 
-  /* hide the logo icon */
-  ${LogoDiv} {
-    & > a > span:first-of-type {
+    ${SideBarDiv} {
       display: none;
     }
-    & > a > span:nth-of-type(2) {
-      font-size: 2.5rem;
-    }
-  }
 
-  /* By default we are in Mobile mode, nav is hidden, page should load faster for mobile */
-  ${Nav} {
-    /* display: ${props => (props.showNav ? "flex" : "none")}; */
-    
-    position: absolute;
-    top: var(--header-height-mobile);
-    bottom: 0%; /* using this vs height 100%, we get no vert scroll bar */
-    width: 100%;
-
-    transform: ${props => (props.showNav ? "scale(1,1)" : "scale(0,1)")};
-    transform-origin: left;
-    transition: transform 0.3s ease-out;
-  }
-
-  ${SideBarDiv} {
-    display: none;
-  }
-
+  /*-------------------- Tablet  --------------------*/
   /* tablet-ish, I can't get the var(--xyz) to work, so hard coded */
-  @media only screen and (min-width: 640px) {
+  @media only screen and (min-width: 852px) {
+    
     /* using auto keeps the sidebar from growing and let the content take all the space */
-    grid-template-columns: minmax(min-content, max-content) minmax(75%, max-content);
+    grid-template-columns: minmax(min-content, max-content) minmax(
+        75%,
+        max-content
+      );
     grid-template-rows: auto 1fr auto;
     grid-template-areas:
       "header  header"
       "sidebar content"
       "footer  footer";
 
+    /* make the header height a little bigger so we can fit the logo icon and bigger font */
     ${StyledHeader} {
-      height: var(--header-height-laptop);
-      padding-top: 0rem;
-      padding-bottom: 0rem;
+      height: var(--header-height-tablet);
     }
+
     /* show the logo icon */
     ${LogoDiv} {
       & > a > span:nth-of-type(1) {
@@ -90,21 +70,9 @@ const GlobalGridDiv = styled.div`
       }
     }
 
-    /* grow the logo text font */
-
-    /* hide the nav bar unless the nav button is on */
     ${Nav} {
-      position: absolute;
-      top: var(--header-height-laptop);
-      bottom: 0%; /* using this vs height 100%, we get no vert scroll bar */
-      width: 100%;
-
-      /* this has to be here or it blinks when you reduce width 
-      display: ${props => (props.showNav ? "flex" : "flex")}; 
-      */
       transform: ${props => (props.showNav ? "scale(1,1)" : "scale(0,1)")};
-      transform-origin: left;
-      transition: transform 0.2s ease-out;
+      top: var(--header-height-tablet);
     }
 
     ${SideBarDiv} {
@@ -112,8 +80,8 @@ const GlobalGridDiv = styled.div`
     }
   }
 
-  /* desktop */
-  @media only screen and (min-width: 1280px) {
+  /*-------------------- LapTop  --------------------*/
+  @media only screen and (min-width: 1366px) {
     /* using auto keeps the nav and sidebar from growing and let the content take all the space */
     grid-template-columns: auto 1fr auto;
     grid-template-rows: auto 1fr auto;
@@ -122,19 +90,24 @@ const GlobalGridDiv = styled.div`
       "nav content sidebar"
       "footer footer footer";
 
-    /* show the nav bar fixed on the left */
+
+    /* show the nav bar fixed open on the left */
     ${Nav} {
       /* 
       OMG, I had quotes on "flex" here and it would not work, but it did not tell me 
-      because it is not "compiled". But for some reason, it would obey the props.showNav, 
+      because it is not "compiled". But for some reason, it would obey the props.showNav on first render, 
       I'm guessing because that was the last legit setting because it did NOT have the quotes 
       */
       display: flex;
-      position: static; /* smaller sizes are absolute */
+      position: static; /* the smaller media sizes above are absolute */
 
       /* it was hidden off to the left, we have to bring it back, setting display to flex is not doing it */
       transform: translateX(0);
-      /* we have to do this to overide the slow transition or we get a white flash */
+
+      /* if the nav div is hidden (showNav is false) in tablet/mobile mode, and we grow the screen to desktop mode
+        we have to overide the slow transition that opens the nav 
+        or we get a white flash before the navbar fills the newly created nav void on the left side of the screen
+      */
       transition-duration: 0s;
     }
 
@@ -142,11 +115,13 @@ const GlobalGridDiv = styled.div`
       display: none;
     }
 
-    /* keeping to show how to apply animation
+    /* keeping to show how to apply animation to move logo to left */
     ${LogoDiv}{
-      animation: ${SlideLogoDivLeft} 2s ease infinite;
+      /* animation: ${SlideLogoDivLeft} 2s ease-in-out; */
+      margin-right: auto;
+
     }
-    */
+    
   }
 `
 

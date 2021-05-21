@@ -5,6 +5,7 @@ export const NavContext = createContext({
     toggleShowNav: () => {},
 })
 
+// multiple states in one context https://stackoverflow.com/questions/60866924/how-to-pass-multiple-states-through-react-context-api
 export const NavContextProvider = (props) => {
 
   // context actually holds a "state", confusing as heck
