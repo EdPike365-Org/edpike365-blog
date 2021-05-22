@@ -5,6 +5,7 @@ import { defaultThemeObject } from "../styles/themes"
 // It should not modify state anywhere
 export const ThemeContext = createContext()
 
+//preventing flash before darkmode load: https://hangindev.com/blog/avoid-flash-of-default-theme-an-implementation-of-dark-mode-in-react-app
 export const ThemeContextProvider = ({children}) => {
   // a context actually holds a "useState" pair
   // essentially, useContext is just a wrapper for a useState

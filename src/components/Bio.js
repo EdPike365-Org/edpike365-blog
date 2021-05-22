@@ -38,9 +38,10 @@ const Bio = () => {
   `
   // Emotion styled(StaticImage) does not work because of the fancy code down in StaticImage
   // I tried to create a css class and pass in the name to className, but that does not work.
-  // Emotion has a very small note that ifyou are using css from @emotion/react, the css class name is not defreffed, it is a property on an object
+  // Emotion has a very small note that if you are using css from @emotion/react, the css class name is not defreffed, it is a property on an object
   // So I tried passing in myCSSClass.name. Still did not work !!!!
   // It took me forever to figure out how to use Emotion css in StaticImage. Emotion site docs were not helpful.
+  // For example, you do not need to add any jsx anotation as desribed here https://emotion.sh/docs/introduction
   // The trick was to NOT use className={css``}, but css={css``}. The css is turned into "className" by Emotion.
   // Answer was here https://github.com/gatsbyjs/gatsby/blob/master/docs/docs/reference/built-in-components/gatsby-plugin-image.md
   return (

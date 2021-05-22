@@ -9,6 +9,7 @@ import { css } from "@emotion/react"
 // If you try to put this in a .txt file, you get a webpack handler error.
 // TODO figure out how to exclude some css files. Maybe it just needs to be in another folder.
 export const darkTheme = css`
+/*! darkTheme.js */
   :root {
     /* sets scroll bar colors */
     color-scheme: dark;
