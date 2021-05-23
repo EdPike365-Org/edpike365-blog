@@ -39,6 +39,13 @@ module.exports = {
       },
     },
     {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `cssfiles`,
+        path: `${__dirname}/src/styles`,
+      },
+    },    
+    {
       resolve: `gatsby-transformer-remark`,
       options: {
         gfm: true,

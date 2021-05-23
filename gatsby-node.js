@@ -1,15 +1,18 @@
 const path = require(`path`)
-const { createFilePath } = require(`gatsby-source-filesystem`)
+const { createFilePath, loadNodeContent } = require(`gatsby-source-filesystem`)
 
-// We do not need to require dotenv because it was already done in gatsby-config.js 
+// We do not need to require dotenv because it was already done in gatsby-config.js
 // We use this to create blog pages but also the list of blog summaries
 // CLEAN CODE: 1 operation per line, aids debugging
-const strBlogStatusesToShow = process.env.BLOG_STATUSES_TO_SHOW_LIST;
+const strBlogStatusesToShow = process.env.BLOG_STATUSES_TO_SHOW_LIST
 // Change the comma seperated list to an array
-const arBlogStatusesToShow = strBlogStatusesToShow.split(",");
-// To write out string '["abc", "xyz"]', call JSON.stringify(arBlogStatusesToShow) 
-console.info(" gatsby-node.js arBlogStatusesToShow = " + arBlogStatusesToShow )
-console.info(" gatsby-node.js arBlogStatusesToShow JSON = " + JSON.stringify(arBlogStatusesToShow)  )
+const arBlogStatusesToShow = strBlogStatusesToShow.split(",")
+// To write out string '["abc", "xyz"]', call JSON.stringify(arBlogStatusesToShow)
+console.info(" gatsby-node.js arBlogStatusesToShow = " + arBlogStatusesToShow)
+console.info(
+  " gatsby-node.js arBlogStatusesToShow JSON = " +
+    JSON.stringify(arBlogStatusesToShow)
+)
 
 exports.createPages = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions
@@ -23,7 +26,9 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       {
         allMarkdownRemark(
           sort: { fields: [frontmatter___date], order: ASC }
-          filter: {frontmatter: {status: {in: ` + JSON.stringify(arBlogStatusesToShow) + ` }}}
+          filter: {frontmatter: {status: {in: ` +
+      JSON.stringify(arBlogStatusesToShow) +
+      ` }}}
           limit: 1000
         ) {
           nodes {
@@ -82,12 +87,26 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
       node,
       value,
     })
+  } else if (node.extension === `css`) {
+    // if its a css file, we are going to access the content
+    // but to get it you have to call loadNodeContent and then shove results into the content field
+    // special thanks to https://stackoverflow.com/questions/59555277/how-to-access-text-contents-of-file-returned-by-a-file-or-allfiles-graphql-q
+    console.info("Found css file: " + node.name)
+    const x = loadNodeContent(node)
+      .then(function (result) {
+        //console.log(""+result);
+        node.internal.content = result
+      })
+      .catch(function (error) {
+        console.error(error)
+        node.internal.content = error
+      })
   }
 }
 
 exports.onCreatePage = ({ page, actions }) => {
   const { createPage, deletePage } = actions
-  if(page.path == "/bloglist/"){
+  if (page.path == "/bloglist/") {
     deletePage(page)
     createPage({
       ...page,
@@ -96,7 +115,7 @@ exports.onCreatePage = ({ page, actions }) => {
         allowedBlogStatuses: arBlogStatusesToShow,
       },
     })
-  } else if(page.path == "/"){
+  } else if (page.path == "/") {
     deletePage(page)
     createPage({
       ...page,
@@ -107,7 +126,6 @@ exports.onCreatePage = ({ page, actions }) => {
       },
     })
   }
-
 }
 
 exports.createSchemaCustomization = ({ actions }) => {

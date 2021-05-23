@@ -17,21 +17,6 @@ export default function HTML(props) {
         />
 
         {props.headComponents}
-
-        <style css={css`
-label: "purple";
-:root{
-  
---color-primary-light: purple;
---color-primary-main: yellow;
---color-primary-dark: green;
---color-primary-text: #fff;
-
-}
-
-`}/>
-
-
       </head>
       <body {...props.bodyAttributes}>
         {props.preBodyComponents}
