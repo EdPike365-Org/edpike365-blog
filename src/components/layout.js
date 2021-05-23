@@ -1,6 +1,4 @@
 import React from "react"
-import { Global } from "@emotion/react"
-import { coreTheme } from "../styles/coreTheme.js"
 import LayoutGrid from "./LayoutGrid"
 import Header from "./Header"
 import NavBar from "./NavBar"
@@ -8,7 +6,8 @@ import SideBar from "./SideBar"
 import Main from "./Main"
 import Footer from "./Footer"
 import { NavContextProvider} from "../contexts/NavContext"
-import { ThemeContextListener } from "../components/ThemeSetters"
+import HeaderTags from "./HeadersTags"
+
 
 const Layout = ( {children}) => {
 
@@ -21,7 +20,7 @@ const Layout = ( {children}) => {
 */
   return (
     <NavContextProvider >
-      <ThemeContextListener/>
+      <HeaderTags />
       <LayoutGrid >
         <Header />
         <NavBar />

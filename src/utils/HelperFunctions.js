@@ -7,3 +7,5 @@ export function arrayEquals(a, b) {
       a.every((val, index) => val === b[index])
     )
   }
+
+export const minifyCSSString = (css) => css.replace(/\n/g, '').replace(/\s\s+/g, ' ')
