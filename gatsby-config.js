@@ -9,6 +9,9 @@ require('dotenv').config({
 // If you want to customize html.js template: https://www.gatsbyjs.com/docs/custom-html/
 
 module.exports = {
+  flags: {
+    DEV_SSR: true
+  },
   siteMetadata: {
     title: `EdPike365`,
     author: {
@@ -38,13 +41,6 @@ module.exports = {
         path: `${__dirname}/src/images`,
       },
     },
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `cssfiles`,
-        path: `${__dirname}/src/styles`,
-      },
-    },    
     {
       resolve: `gatsby-transformer-remark`,
       options: {

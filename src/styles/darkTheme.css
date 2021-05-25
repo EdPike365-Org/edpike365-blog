@@ -1,9 +1,9 @@
 /*! darkTheme.css */
 :root {
-  /* sets scroll bar colors */
+ /* color-scheme is new tag that sets scroll bar colors, only works for dark */
   color-scheme: dark;
 
-  --color-theme-name: "dark";
+  --color-theme-name: "Dark";
 
   --color-primary-light: #7986cb;
   --color-primary-main: #3f51b5;

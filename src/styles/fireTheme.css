@@ -1,11 +1,9 @@
 /*! redTheme.css */
 :root {
-  /* sets scroll bar colors */
-  color-scheme: red;
 
   --color-theme-name: "dark";
 
-  --color-primary-light: pink;
+  --color-primary-light: yellow;
   --color-primary-main: orange;
   --color-primary-dark: red;
   --color-primary-text: #fff;

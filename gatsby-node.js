@@ -56,7 +56,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   // But only if there's at least one markdown file found at "content/blog" (defined in gatsby-config.js)
   // `context` is available in the template as a prop and as a variable in GraphQL
 
-  console.log("gnode.js: got num posts = " + posts.length)
+  console.info("gatsby-node.js: got num blog posts = " + posts.length)
   if (posts.length > 0) {
     posts.forEach((post, index) => {
       const previousPostId = index === 0 ? null : posts[index - 1].id
@@ -91,7 +91,8 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
     // if its a css file, we are going to access the content
     // but to get it you have to call loadNodeContent and then shove results into the content field
     // special thanks to https://stackoverflow.com/questions/59555277/how-to-access-text-contents-of-file-returned-by-a-file-or-allfiles-graphql-q
-    console.info("Found css file: " + node.name)
+    /*
+    console.info("Found css file: " + node.dir + " " + node.name)
     const x = loadNodeContent(node)
       .then(function (result) {
         //console.log(""+result);
@@ -101,6 +102,7 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
         console.error(error)
         node.internal.content = error
       })
+      */
   }
 }
 

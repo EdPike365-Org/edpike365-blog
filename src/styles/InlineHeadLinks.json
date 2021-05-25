@@ -1,0 +1,38 @@
+{
+  "folder": "./src/styles/",
+  "idPrefix": "HeadInlinedStyles_",
+  "headInlinedStyleTags": {
+    "inlinedStyles": [
+      {
+        "title": "",
+        "displayName": "",
+        "fileName": "normalize2",
+        "use": "always"
+      },
+      {
+        "title": "",
+        "displayName": "",
+        "fileName": "coreTheme",
+        "use": "always"
+      },
+      {
+        "title": "",
+        "displayName": "Light",
+        "fileName": "lightTheme",
+        "use": "default"
+      },
+      {
+        "title": "",
+        "displayName": "Dark",
+        "fileName": "darkTheme",
+        "use": "dark"
+      },
+      {
+        "title": "",
+        "displayName": "Fire",
+        "fileName": "fireTheme",
+        "use": "alternate"
+      }
+    ]
+  }
+}
