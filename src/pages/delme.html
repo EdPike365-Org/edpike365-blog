@@ -190,133 +190,1187 @@
       href="/icons/icon-512x512.png?v=9402b9183bfd606a761cac998376c753"
     />
     <title data-react-helmet="true"></title>
+    <style
+      data-filename="normalize2.css"
+      data-displayname="Noramlize2 Reset"
+      data-use="always"
+      data-key="420557"
+      id="StyleHeadGamesID_normalize2"
+      title=""
+      type="text/css"
+    >
+      /*! normalize2.css */
+      /* from https://github.com/andy-piccalilli/modern-css-reset */
+      /* this is a smaller, more modern alternative to normalize css */
+      /* Box sizing rules */
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      /* Remove default margin */
+      body,
+      h1,
+      h2,
+      h3,
+      h4,
+      p,
+      figure,
+      blockquote,
+      dl,
+      dd {
+        margin: 0;
+      }
+
+      /* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+      ul[role="&quot;list&quot;"],
+      ol[role="&quot;list&quot;"] {
+        list-style: none;
+      }
+
+      /* Set core root defaults */
+      html:focus-within {
+        scroll-behavior: smooth;
+      }
+
+      /* Set core body defaults */
+      body {
+        min-height: 100vh;
+        text-rendering: optimizeSpeed;
+        line-height: 1.5;
+      }
+
+      /* A elements that don&#x27;t have a class get default styles */
+      a:not([class]) {
+        text-decoration-skip-ink: auto;
+      }
+
+      /* Make images easier to work with */
+      img,
+      picture {
+        max-width: 100%;
+        display: block;
+      }
+
+      /* Inherit fonts for inputs and buttons */
+      input,
+      button,
+      textarea,
+      select {
+        font: inherit;
+      }
+
+      /* Remove all animations and transitions for people that prefer not to see them */
+      @media (prefers-reduced-motion: reduce) {
+        html:focus-within {
+          scroll-behavior: auto;
+        }
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+          scroll-behavior: auto !important;
+        }
+      }
+    </style>
+    <style
+      data-filename="coreTheme.css"
+      data-displayname="Core Theme"
+      data-use="always"
+      data-key="517513"
+      id="StyleHeadGamesID_coreTheme"
+      title=""
+      type="text/css"
+    >
+      /*! coreTheme.css */
+      :root {
+      /* sets scroll bar colors */
+      color-scheme: light;
+
+      /* Warning: this is included on every page. Lets try to shrink it! */
+      /* Theme variables are loosely based on Material Design, so you can migrate to that easily */
+      /* https://material.io/design/material-theming/implementing-your-theme.html  */
+      /* Typography https://medium.com/swlh/everything-you-need-to-know-about-designing-for-web-typography-69cec6ca8230 */
+      /* CSS Acceleration https://medium.com/outsystems-experts/mobile-web-applications-top-css-techniques-for-optimal-performance-b66e3111c733 */
+
+      /* screen width breakpoints, material ui standard */
+      /* NOTE: using vars in the media selector widths does not work */
+      --media-width-xs: 360px; /* old smart phone */
+      --media-width-sm: 600px;
+      --media-width-tablet: 852px; /* 851 is pixel 5 landscape */
+      --media-width-md: 960px;
+      --media-width-laptop: 1366px; /* HD Laptop 768p, iPad Pro 12 Landscape = max 1366 */
+      --media-width-lg: 1280px; /* aka &quot;desktop&quot; */
+      --media-width-xl: 1600px; /* Vice max width */
+      --media-width-xxl: 1920px; /* 1080p display, Full HD */
+
+      /* heights are based on screen width, sm = media-width-sm */
+      --header-height-mobile: 3rem;
+      --header-height-tablet: 4rem;
+      --toolbar-min-height-width-lt-sm-landscape: 48;
+      --toolbar-min-height-width-lt-sm: 56;
+      --toolbar-min-height-widht-gte-sm: 64;
+
+      /* PALLETTE, COLOR THEMING */
+      /* https://material.io/develop/web/theming/color , */
+      /* values from https://material-ui.com/customization/default-theme/?expand-path=$.typography */
+      /* this are the colors for the ---light theme--- */
+      /* what about &quot;color-on&quot; for secondary, hint, disabled, icon text? */
+      --color-theme-name: &quot;light&quot;;
+
+      --color-common-black: #000;
+      --color-common-white: #fff;
+
+      --color-primary-light: #7986cb;
+      --color-primary-main: #3f51b5;
+      --color-primary-dark: #303f9f;
+      --color-primary-text: #fff; /* aka contrastText, color-on-primary */
+
+      --color-secondary-light: #ff4081;
+      --color-secondary-main: #f50057;
+      --color-secondary-dark: #c51162;
+      --color-secondary-text: #fff;
+
+      --color-error-light: #e57373;
+      --color-error-main: #f44336;
+      --color-error-dark: #d32f2f;
+      --color-error-text: #fff;
+
+      --color-warning-light: #ffb74d;
+      --color-warning-main: #ff9800;
+      --color-warning-dark: #f57c00;
+      --color-warning-text: rgba(0, 0, 0, 0.87);
+
+      --color-info-light: #64b5f6;
+      --color-info-main: #2196f3;
+      --color-info-dark: #1976d2;
+      --color-info-text: #fff;
+
+      --color-success-light: #81c784;
+      --color-success-main: #4caf50;
+      --color-success-dark: #388e3c;
+      --color-success-text: rgba(0, 0, 0, 0.87);
+
+      --color-grey-50: #fafafa;
+      --color-grey-100: #f5f5f5;
+      --color-grey-200: #eeeeee;
+      --color-grey-300: #e0e0e0;
+      --color-grey-400: #bdbdbd;
+      --color-grey-500: #9e9e9e;
+      --color-grey-600: #757575;
+      --color-grey-700: #616161;
+      --color-grey-800: #424242;
+      --color-grey-900: #212121;
+      --color-grey-A100: #d5d5d5;
+      --color-grey-A200: #aaaaaa;
+      --color-grey-A400: #303030;
+      --color-grey-A700: #616161;
+
+      /* edpike365: material naming conventions here are not intuitive */
+      --color-text-primary: rgba(0, 0, 0, 0.87); /* use on default bg */
+      --color-text-secondary: rgba(0, 0, 0, 0.54); /* use on paper bg */
+      --color-text-secondary2: rgba(255, 255, 255, 0.7);
+      --color-text-disabled: rgba(0, 0, 0, 0.38);
+      --color-text-hint: rgba(0, 0, 0, 0.38);
+
+      --color-divider: rgba(0, 0, 0, 0.12);
+
+      --color-background-default: #fafafa; /* aka color-background, should be darker than surface */
+      --color-background-paper: #fff; /* aka color-surface */
+
+      /* these are alpha channel effects applied to objects based on actions */
+      --palette-action-active: rgba(0, 0, 0, 0.54);
+      --palette-action-hover: rgba(0, 0, 0, 0.04);
+      --palette-action-hover-opacity: 0.08;
+      --palette-action-selected: rgba(0, 0, 0, 0.08);
+      --palette-action-selected-opacity: 0.08;
+      --palette-action-disabled: rgba(0, 0, 0, 0.26);
+      --palette-action-disabled-background: rgba(0, 0, 0, 0.12);
+      --palette-action-disabled-opacity: 0.38;
+      --palette-action-focus: rgba(0, 0, 0, 0.12);
+      --palette-action-focus-opacity: 0.12;
+      --palette-action-activated-opacity: 0.12;
+
+      /* TYPOGRAPHY */
+      /* material ui explorer https://material-ui.com/customization/default-theme/?expand-path=$.typography */
+      /* https://material.io/develop/web/guides/typography */
+
+      --font-family-default: &quot;Segoe UI&quot;,
+        &quot;Helvetica Neue&quot;, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;,
+        &quot;Segoe UI Symbol&quot;;
+
+      --font-weight-light: 300;
+      --font-weight-regular: 400;
+      --font-weight-medium: 500;
+      --font-weight-bold: 700;
+
+      /* &quot;rem&quot; is relative to root html font-size-default, browser industry default is 16px.
+         Thats not really big enough, especially for my blog focused site, so
+         I&#x27;m upping it to 18px. Mat UI puts it down at 14px, I believe, good for dashboards.
+         I&#x27;m using major 3rd scaling, from https://type-scale.com/
+         I changed the names of the 9 default scales from material ui&#x27;s because these are more common sense.
+         You can always view a heading, etc, to get a relative idea of font settings.
+         */
+      --font-size-default: 18px; /* aka html font size, bumped up from normal 16px */
+
+      --font-size-h1: 3.052rem; /* MatUI has this as 6rem, for h1, thats too big */
+      --font-size-h2: 2.441rem;
+      --font-size-h3: 1.953rem;
+      --font-size-h4: 1.563rem;
+      --font-size-h5: 1.25rem;
+      --font-size-h6: 1rem;
+      --font-size-body1-subtitle1: 1rem; /* subtitle 1, body 1, 1x html font  */
+      --font-size-body2-subtitle2-button-smaller: 0.875rem; /* subtitle 2, body 2, button */
+      --font-size-caption-overline: 0.75rem; /* caption and overline */
+
+      /* Line Height
+          These sizings were based on material UI settings
+          They are more of them than font sizes because some font sizes are shared.
+        */
+      --font-line-height-h1: 1.167;
+      --font-line-height-h2: 1.2;
+      --font-line-height-h3: 1.167; /* seems like typo */
+      --font-line-height-h4: 1.235;
+      --font-line-height-h5: 1.334;
+      --font-line-height-h6: 1.6;
+
+      --font-line-height-subtitle1: 1.75;
+      --font-line-height-body1: 1.5;
+
+      --font-line-height-subtitle2: 1.57;
+      --font-line-height-body2: 1.43;
+
+      --font-line-height-button: 1.75;
+      --font-line-height-caption: 1.66;
+      --font-line-height-overline: 2.66;
+
+      /* Letter Spacing */
+      --font-letter-spacing-h1: -0.01562em;
+      --font-letter-spacing-h2: -0.00833em;
+      --font-letter-spacing-h3: 0em;
+      --font-letter-spacing-h4: 0.00735em;
+      --font-letter-spacing-h5: 0em;
+      --font-letter-spacing-h6: 0.0075em;
+
+      --font-letter-spacing-subtitle1: 0.00938em;
+      --font-letter-spacing-body1: 0.00938em;
+
+      --font-letter-spacing-subtitle2: 0.00714em;
+      --font-letter-spacing-body2: 0.01071em;
+
+      --font-letter-spacing-button: 0.02857em;
+      --font-letter-spacing-caption: 0.03333em;
+      --font-letter-spacing-overline: 0.08333em;
+
+      /* SHAPES */
+      --shape-border-radius: 4px;
+      --shape-border: 1px solid var(--color-divider);
+      --shape-box-shadow: rgb(0 0 0 / 12%) 0px 1px 2px, rgb(0 0 0 / 5%) 0px 0px 1px;
+
+      /* TRANSITIONS */
+      /* easing */
+      --easing-ease-in-out: &quot;cubic-bezier(0.4, 0, 0.2, 1)&quot;;
+      --easing-ease-out: &quot;cubic-bezier(0.0, 0, 0.2, 1)&quot;;
+      --easing-ease-in: &quot;cubic-bezier(0.4, 0, 1, 1)&quot;;
+      --easing-sharp: &quot;cubic-bezier(0.4, 0, 0.6, 1)&quot;;
+
+      /* duration */
+      --duration-shortest: 150;
+      --duration-shorter: 200;
+      --duration-short: 250;
+      --duration-standard: 300;
+      --duration-complex: 375;
+      --duration-entering-screen: 225;
+      --duration-leaving-screen: 195;
+
+      /* ZINDEX, lowest to highest */
+      --zindex-mobile-stepper: 1000;
+      --zindex-speed-dial: 1050;
+      --zindex-app-bar: 1100;
+      --zindex-drawer: 1200;
+      --zindex-modal: 1300;
+      --zindex-snackbar: 1400;
+      --zindex-tooltip: 1500;
+
+      /* FORMATTING defaults */
+      --p-text-indent: 50px; /* first line indent in a paragraph */
+      --a-link-color-unvisited: blue;
+      --a-link-color-visited: blue;
+      --a-link-color-hover: lightblue;
+      --a-link-active: lightblue;
+
+      --border-spacing: 8px;
+
+      --margin-top-bottom: 0px;
+      --margin-right-left: 0px;
+
+      --padding-top-bottom: 10px;
+      --padding-right-left: 10px;
+      }
+
+      /* HTML elements, most settings should be inside the components but refer to root vars */
+
+      *,
+      :after,
+      :before {
+      box-sizing: border-box;
+      }
+
+      html {
+
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+
+      /* let user agent dictate the default font size. May change with REM with media queries */
+      }
+
+      /* media queries */
+      /* &quot;mobile first&quot; defaults */
+      /* tablet-ish */
+      @media only screen and (min-width: 640px ) {
+      body {
+        font-size: 1rem;
+      }
+      }
+
+      /* desktop */
+      @media only screen and (min-width: 1280px) {
+      body {
+        font-size: 1rem;
+      }
+      }
+
+      body {
+      font-family: var(--font-family-default);
+      font-weight: var(--font-weight-regular);
+
+      line-height: var(--font-line-height-body1);
+      letter-spacing: var(--font-letter-spacing-body1);
+
+      background-color: var(--color-background-default);
+      /* dont confuse with color-primary-text, which is associated with branding */
+      color: var(--color-text-primary);
+
+      word-wrap: break-word;
+      font-kerning: normal;
+      }
+
+      hr {
+      background: var(--color-divider);
+      height: 2px;
+      border: 0;
+      }
+
+      /* Headings: default font weights get heavier for smaller headings */
+      h1 {
+      font-family: var(--font-family-default);
+      font-weight: var(--font-weight-light);
+      font-size: var(--font-size-h1);
+      line-height: var(--font-line-height-h1);
+      letter-spacing: var(--font-letter-spacing-h1);
+      }
+
+      h2 {
+      font-family: var(--font-family-default);
+      font-weight: var(--font-weight-light);
+      font-size: var(--font-size-h2);
+      line-height: var(--font-line-height-h2);
+      letter-spacing: var(--font-letter-spacing-h2);
+      }
+
+      h3 {
+      font-family: var(--font-family-default);
+      font-weight: var(--font-weight-regular);
+      font-size: var(--font-size-h3);
+      line-height: var(--font-line-height-h3);
+      letter-spacing: var(--font-letter-spacing-h3);
+      }
+
+      h4 {
+      font-family: var(--font-family-default);
+      font-weight: var(--font-weight-regular);
+      font-size: var(--font-size-h4);
+      line-height: var(--font-line-height-h4);
+      letter-spacing: var(--font-letter-spacing-h4);
+      }
+
+      h5 {
+      font-family: var(--font-family-default);
+      font-weight: var(--font-weight-regular);
+      font-size: var(--font-size-h5);
+      line-height: var(--font-line-height-h5);
+      letter-spacing: var(--font-letter-spacing-h5);
+      }
+
+      h6 {
+      font-family: var(--font-family-default);
+      font-weight: var(--font-weight-h6);
+      font-size: var(--font-size-h6);
+      line-height: var(--font-line-height-h6);
+      letter-spacing: var(--font-letter-spacing-h6);
+      }
+
+      /* subtitles are smaller than headlines, plain, but same size as body fonts */
+      .subtitle1 {
+      font-family: var(--font-family-default);
+      font-weight: var(--font-weight-regular);
+      font-size: var(--font-size-body1-subtitle1);
+      line-height: var(--font-line-height-subtitle1);
+      letter-spacing: var(--font-letter-spacing-subtitle1);
+      }
+
+      .subtitle2 {
+      font-family: var(--font-family-default);
+      font-weight: var(--font-weight-medium);
+      font-size: var(--font-size-body2-subtitle2-button-smaller);
+      line-height: var(--font-line-height-subtitle2);
+      letter-spacing: var(--font-letter-spacing-subtitle2);
+      }
+
+      /* body1 class setting are applied to body up top */
+
+      /* For bigger text blocks. sans serif */
+      .body2 {
+      font-family: var(--font-family-default);
+      font-weight: var(--font-weight-regular);
+      font-size: var(--font-size-body2-subtitle2-button-smaller);
+      line-height: var(--font-line-height-body2);
+      letter-spacing: var(--font-letter-spacing-body2);
+      }
+
+      /* Text on buttons. Call to action. Sans. typically ALL CAPS, plain */
+      .button-text {
+      font-family: var(--font-family-default);
+      font-weight: var(--font-weight-medium);
+      font-size: var(--font-size-body2-subtitle2-button-smaller);
+      line-height: var(--font-line-height-button);
+      letter-spacing: var(--font-letter-spacing-buton);
+      text-transform: uppercase;
+      }
+
+      /* Smallest text, use for notes below a picture or form field */
+      .caption {
+      font-family: var(--font-family-default);
+      font-weight: var(--font-weight-regular);
+      font-size: var(--font-size-caption-overline);
+      line-height: var(--font-line-height-caption);
+      letter-spacing: var(--font-letter-spacing-caption);
+      }
+
+      /* Small text with a line or image above it, also for stringer, bold but simple, ALL CAPS */
+      .overline {
+      font-family: var(--font-family-default);
+      font-weight: var(--font-weight-regular);
+      font-size: var(--font-size-caption-overline);
+      line-height: var(--font-line-height-overline);
+      letter-spacing: var(--font-letter-spacing-overline);
+      text-transform: uppercase;
+      margin-top: 0px;
+      margin-bottom: 0px;
+      }
+
+
+      blockquote {
+      color: var(--color-text-primary);
+      margin: var(--margin-right-left);
+      padding: 0.25rem 1rem 1rem .5rem;
+      border-left: 0.25rem solid var(--color-primary-light);
+      font-size: 1rem;
+      font-style: italic;
+      margin-bottom: 1rem;
+      }
+
+      blockquote &gt; :last-child {
+      margin-bottom: 0;
+      }
+
+      blockquote &gt; ul,
+      blockquote &gt; ol {
+      list-style-position: inside;
+      }
+
+      table {
+      width: 100%;
+      margin-bottom: 2rem;
+      border: 1px solid var(--color-grey-500);
+      border-collapse: collapse;
+      border-spacing: 0.25rem;
+      box-shadow: var(--shape-box-shadow);
+
+      }
+
+      tbody tr:nth-of-type(odd) {
+      background: var(--color-grey-200);
+      }
+
+      tr:hover {
+      background: var(--palette-action-hover);
+      }
+
+      table thead tr th {
+      border-bottom: 2px solid var(--color-grey-500);
+      }
+
+      /* Link */
+
+      a {
+      color: var(--color-primary-main);
+      }
+
+      a:hover,
+      a:focus {
+      text-decoration: none;
+      }
+
+      /* Custom classes */
+      /* ideally these should all be in components */
+
+      .gatsby-highlight {
+      margin-bottom: 2rem;
+      }
+
+      /* used by gatsby-remark-prismjs for highlighting, modified for Okaidia PrismJS theme */
+      .gatsby-highlight-code-line {
+      background-color: #474643;
+      display: block;
+      margin-right: -1em;
+      margin-left: -1em;
+      padding-right: 1em;
+      padding-left: 0.75em;
+      border-left: 0.25em solid #569c3b;
+      }
+      /* If using PrismJS line numbering and highlighing, push the code to the right */
+      .gatsby-highlight pre[class*=&quot;language-&quot;].line-numbers {
+      padding-top: 0;
+      padding-left: 2.8em;
+      }
+      /* Assumes standard PrismJS CSS */
+      .gatsby-code-title {
+      margin-bottom: -0.6rem;
+      padding: 0.5em 1em;
+      font-family: Consolas, &quot;Andale Mono WT&quot;, &quot;Andale Mono&quot;, &quot;Lucida Console&quot;,
+        &quot;Lucida Sans Typewriter&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Bitstream Vera Sans Mono&quot;,
+        &quot;Liberation Mono&quot;, &quot;Nimbus Mono L&quot;, Monaco, &quot;Courier New&quot;, Courier,
+        monospace;
+
+      background-color: #5e5b24;
+      color: white;
+      z-index: 0;
+
+      border-top-left-radius: 0.3em;
+      border-top-right-radius: 0.3em;
+      }
+    </style>
+    <style
+      data-filename="lightTheme.css"
+      data-displayname="Default, Light Theme"
+      data-use="default"
+      data-key="351579"
+      id="StyleHeadGamesID_lightTheme"
+      title=""
+      type="text/css"
+    >
+      /*! lightTheme.css */
+      :root {
+      --color-theme-name: &quot;Light&quot;;
+      }
+    </style>
+    <style
+      data-filename="darkTheme.css"
+      data-displayname="Dark Theme"
+      data-use="alternate dark"
+      data-key="458607"
+      id="StyleHeadGamesID_darkTheme"
+      title=""
+      type="text/css"
+    >
+      /*! darkTheme.css */
+      :root {
+      /* color-scheme is new tag that sets scroll bar colors, only works for dark */
+      color-scheme: dark;
+
+      --color-theme-name: &quot;Dark&quot;;
+
+      --color-primary-light: #7986cb;
+      --color-primary-main: #3f51b5;
+      --color-primary-dark: #7986cb;
+      --color-primary-text: #fff;
+
+      --color-text-primary: rgba(255, 255, 255, 0.7); /* use on default bg */
+      --color-text-secondary: rgba(255, 255, 255, 0.9); /* use on paper bg */
+      --color-text-disabled: rgba(255, 255, 255, 0.05);
+      --color-text-hint: rgba(255, 255, 255, 0.5);
+
+      --color-divider: rgba(255, 255, 255, 0.12);
+
+      /* these colors were inspired by gmail dark mode */
+      --color-background-default: #030303; /* aka color-background, the far background */
+      --color-background-paper: #111111; /* aka color-surface, as in components */
+      --color-foreground: #303030; /* flyouts, popups */
+
+      /* these are affects applied, mainly alpha channel, to objects based on actions */
+      --palette-action-active: #fff;
+      --palette-action-hover: rgba(255, 255, 255, 0.08);
+      --palette-action-hover-opacity: 0.08;
+      --palette-action-selected: rgba(255, 255, 255, 0.16);
+      --palette-action-selected-opacity: 0.16;
+      --palette-action-disabled: rgba(255, 255, 255, 0.3);
+      --palette-action-disabled-background: rgba(255, 255, 255, 0.12);
+      --palette-action-disabled-opacity: 0.38;
+      --palette-action-focus: rgba(255, 255, 255, 0.12);
+      --palette-action-focus-opacity: 0.12;
+      --palette-action-activated-opacity: 0.24;
+      }
+
+      tbody tr:nth-of-type(odd) {
+      background: var(--color-grey-900);
+      }
+
+      ::-webkit-scrollbar {
+      width: auto;
+      height: auto;
+      }
+      ::-webkit-scrollbar-button {
+      background-color: #1b1e34;
+      border-left: 1px solid var(--color-primary-main);
+      border-right: 1px solid var(--color-primary-main);
+      background-image: linear-gradient(
+        90deg,
+        rgba(41, 54, 107, 1) 0%,
+        #1b1e34 49%,
+        #212058 83%
+      );
+      }
+      ::-webkit-scrollbar-track {
+      border: 3px solid var(--color-primary-main);
+      }
+      ::-webkit-scrollbar-track-piece {
+      background-image: linear-gradient(#212058, #1b1e34);
+      border-top: 1px solid var(--color-primary-main);
+      border-bottom: 1px solid var(--color-primary-main);
+      }
+      ::-webkit-scrollbar-thumb {
+      background-color: var(--color-grey-900);
+      border-radius: 20px; /* roundness of the scroll thumb */
+      border: 1px solid var(--color-primary-main);
+      background-image: linear-gradient(
+        90deg,
+        rgba(41, 54, 107, 1) 0%,
+        #1b1e34 49%,
+        #212058 83%
+      );
+      }
+      ::-webkit-scrollbar-corner {
+      color: pink;
+      border-radius: 20px;
+      }
+      ::-webkit-resizer {
+      background-color: purple;
+      }
+    </style>
+    <style
+      data-filename="fireTheme.css"
+      data-displayname="Fire Theme"
+      data-use="alternate"
+      data-key="590850"
+      id="StyleHeadGamesID_fireTheme"
+      title=""
+      type="text/css"
+    >
+      /*! redTheme.css */
+      :root {
+
+      --color-theme-name: &quot;dark&quot;;
+
+      --color-primary-light: yellow;
+      --color-primary-main: orange;
+      --color-primary-dark: red;
+      --color-primary-text: #fff;
+
+      --color-text-primary: rgba(255, 255, 255, 0.7); /* use on default bg */
+      --color-text-secondary: rgba(255, 255, 255, 0.9); /* use on paper bg */
+      --color-text-disabled: rgba(255, 255, 255, 0.05);
+      --color-text-hint: rgba(255, 255, 255, 0.5);
+
+      --color-divider: rgba(255, 255, 255, 0.12);
+
+      /* these colors were inspired by gmail dark mode */
+      --color-background-default: #030303; /* aka color-background, the far background */
+      --color-background-paper: #111111; /* aka color-surface, as in components */
+      --color-foreground: #303030; /* flyouts, popups */
+
+      /* these are affects applied, mainly alpha channel, to objects based on actions */
+      --palette-action-active: #fff;
+      --palette-action-hover: rgba(255, 255, 255, 0.08);
+      --palette-action-hover-opacity: 0.08;
+      --palette-action-selected: rgba(255, 255, 255, 0.16);
+      --palette-action-selected-opacity: 0.16;
+      --palette-action-disabled: rgba(255, 255, 255, 0.3);
+      --palette-action-disabled-background: rgba(255, 255, 255, 0.12);
+      --palette-action-disabled-opacity: 0.38;
+      --palette-action-focus: rgba(255, 255, 255, 0.12);
+      --palette-action-focus-opacity: 0.12;
+      --palette-action-activated-opacity: 0.24;
+      }
+
+      tbody tr:nth-of-type(odd) {
+      background: var(--color-grey-900);
+      }
+
+      ::-webkit-scrollbar {
+      width: auto;
+      height: auto;
+      }
+      ::-webkit-scrollbar-button {
+      background-color: #1b1e34;
+      border-left: 1px solid var(--color-primary-main);
+      border-right: 1px solid var(--color-primary-main);
+      background-image: linear-gradient(
+        90deg,
+        rgba(41, 54, 107, 1) 0%,
+        #1b1e34 49%,
+        #212058 83%
+      );
+      }
+      ::-webkit-scrollbar-track {
+      border: 3px solid var(--color-primary-main);
+      }
+      ::-webkit-scrollbar-track-piece {
+      background-image: linear-gradient(#212058, #1b1e34);
+      border-top: 1px solid var(--color-primary-main);
+      border-bottom: 1px solid var(--color-primary-main);
+      }
+      ::-webkit-scrollbar-thumb {
+      background-color: var(--color-grey-900);
+      border-radius: 20px; /* roundness of the scroll thumb */
+      border: 1px solid var(--color-primary-main);
+      background-image: linear-gradient(
+        90deg,
+        rgba(41, 54, 107, 1) 0%,
+        #1b1e34 49%,
+        #212058 83%
+      );
+      }
+      ::-webkit-scrollbar-corner {
+      color: pink;
+      border-radius: 20px;
+      }
+      ::-webkit-resizer {
+      background-color: purple;
+      }
+    </style>
     <script src="/socket.io/socket.io.js"></script>
     <link rel="stylesheet" href="/commons.css" />
   </head>
   <body>
     <script>
       ;(function () {
-        window.__onThemeChange = function () {}
+        //UI can register to listen to this
+        window.__onSHGStyleChange = function () {}
 
-        console.log("!!!! Flash Prevention Code is running")
+        console.log("!!!! StyleHeadGames Flash Prevention Code is running")
 
-        function setTheme(newTheme) {
-          window.__theme = newTheme
-          preferredTheme = newTheme
-          setActiveStyle(newTheme)
-          //document.body.className = newTheme;
-          window.__onThemeChange(newTheme)
+        // SHGModel is populated before page load. It should match StyleHeadGames.json
+        // However, SHGModel will be more accurate because it is populated on page load
+        // and reflects the styles that ACTUALLY got inserted on SSR.
+        const SHGModel = {
+          //idPrefix doubles as local storage Key
+          idPrefix: "StyleHeadGamesID_",
+          styleElements: [],
         }
 
-        function getLastWithUse(useVal, inlinedStyles) {
-          let result = null
-          for (var i = 0; i < inlinedStyles.length; i++) {
-            let thisStyle = inlinedStyles[i]
-            if (thisStyle.dataset.use.includes(useVal)) {
-              result = thisStyle
-              continue
+        function populateSHGModelFromPage() {
+          console.log("populateSHGModel() running...")
+
+          SHGModel.styleElements = document.querySelectorAll(
+            "[id*='" + SHGModel.idPrefix + "']"
+          )
+
+          console.log(
+            "populateSHGModelFromPage(): done populating, found " +
+              SHGModel.styleElements.length +
+              " style Elements."
+          )
+        }
+
+        populateSHGModelFromPage()
+
+        function getStylesWithUse(useVal, styles) {
+          let results = []
+          styles.forEach(style => {
+            if (style.dataset.use.includes(useVal)) {
+              results.push(style)
             }
+          })
+          if (results.length == 0) {
+            console.log(
+              "Could not find any styles with USE containing " + useVal
+            )
           }
-          return result
+          return results
         }
 
-        function getLastWithID(idVal, inlinedStyles) {
-          let result = null
-          for (var i = 0; i < inlinedStyles.length; i++) {
-            let thisStyle = inlinedStyles[i]
-            if (thisStyle.id === idVal) {
-              result = thisStyle
-              continue
+        function getLastStyleWithUse(useVal, styles) {
+          let results = getStylesWithUse(useVal, styles)
+          if (results.length > 0) {
+            return results[results.length - 1]
+          } else {
+            return null
+          }
+        }
+
+        function getStylesWithID(idVal, styles) {
+          let results = []
+          styles.forEach(style => {
+            if (style.id === idVal) {
+              results.push(style)
             }
+          })
+          if (results.length == 0) {
+            console.log("Could not find any styles with ID containing " + idVal)
           }
-          return result
+          return results
         }
 
-        function toggleStyle(styleToEnable, inlinedStyles) {
-          for (var i = 0; i < inlinedStyles.length; i++) {
-            let thisStyle = inlinedStyles[i]
-            if (thisStyle.dataset.use == "always") {
-              continue
-            } else if (thisStyle.id === styleToEnable.id) {
-              thisStyle.disabled = false
-              continue
+        function getLastStyleWithID(idVal, styles) {
+          let results = getStylesWithID(idVal, styles)
+          if (results.length > 0) {
+            return results[results.length - 1]
+          } else {
+            return null
+          }
+        }
+
+        function enableStyle(style) {
+          if (style) {
+            style.disabled = false
+            console.log("Enabled style id = " + style.id)
+          }
+        }
+
+        function disableStyle(style) {
+          if (style) {
+            style.disabled = true
+            console.log("Disabled style id = " + style.id)
+          }
+        }
+
+        function toggleEnabledStyles(styleToEnable, styles) {
+          styles.forEach(style => {
+            if (style.dataset.use.includes("always")) {
+              //skip, always enabled
+            } else if (style.id === styleToEnable.id) {
+              enableStyle(style)
             } else {
-              thisStyle.disabled = true
+              disableStyle(style)
             }
+          })
+        }
+
+        function getStoredStyleID() {
+          var styleID = null
+          try {
+            styleID = localStorage.getItem(SHGModel.idPrefix)
+            console.log("getStoredStyleID(): found stored styleID " + styleID)
+          } catch (err) {
+            console.log("getStoredStyleID(): " + err)
+          }
+          return styleID
+        }
+
+        function storeStyleID(styleID) {
+          try {
+            localStorage.setItem(SHGModel.idPrefix, styleID)
+          } catch (err) {
+            console.log("storeStyleID(): " + err)
           }
         }
 
-        function enableLastWithUse(useVal, inlinedStyles) {
-          const lastUse = getLastWithUse(useVal, inlinedStyles)
-          if (lastUse != null) {
-            toggleStyle(lastUse, inlinedStyles)
+        function setAndSaveStyle(style) {
+          // final failsafe
+          if (style) {
+            toggleEnabledStyles(style, SHGModel.styleElements)
+            storeStyleID(style.id)
+            window.__onSHGStyleChange(true) //Let the UI know
+          } else {
+            console.log(
+              "setAndSaveStyle(): Someone tried to set Style to " + style
+            )
+          }
+        }
+
+        const darkQuery = window.matchMedia("(prefers-color-scheme: dark)")
+
+        function getStyleForDarkQuery() {
+          if (darkQuery.matches) {
+            return getLastStyleWithUse("dark", SHGModel.styleElements)
+          } else {
+            return getLastStyleWithUse("light", SHGModel.styleElements)
+          }
+        }
+
+        //---------------Initialization--------------
+        function getStyleForStoredStyleID() {
+          const styleID = getStoredStyleID()
+          return (style = getLastStyleWithID(styleID, SHGModel.styleElements))
+        }
+
+        function setInitialStyle() {
+          console.log("setInitialStyle(): running...")
+          let style = getStyleForStoredStyleID(SHGModel.styleElements)
+          if (!style) {
+            console.log(
+              "setInitialStyle(): could not get style for stored styleID, so trying dark mode"
+            )
+            style = getStyleForDarkQuery(SHGModel.styleElements)
+          }
+          if (!style) {
+            console.log(
+              "setInitialStyle(): Could not get style for store ID or dark mode. Setting to default."
+            )
+            style = getLastStyleWithUse("default", SHGModel.styleElements)
+          }
+          setAndSaveStyle(style)
+        }
+
+        setInitialStyle()
+
+        //set ui listener here: we do not want the user changing styles while loading (they should not be able to anyway)
+        // this function is global, can be called from app code
+        window.__setSHGStyleID = function (styleID) {
+          console.log("__setSHGStyleID(): trying to set for :" + styleID)
+          let style = getLastStyleWithID(styleID, SHGModel.styleElements)
+          if (style) {
+            setAndSaveStyle(style)
             return true
           } else {
             return false
           }
         }
 
-        function setActiveStyle(styleID) {
-          console.log("setActiveStyle(): " + styleID)
-          //get all the inlinedHeadStyles
-          const inlinedStyles = document.querySelectorAll("[id*='HeadInlined']")
-
-          // "use" case: no styleID
-          if (!styleID || styleID === "") {
-            enableLastWithUse("default", inlinedStyles)
-            return
-          }
-
-          // request for "dark" is special "use" case
-          if (styleID === "dark") {
-            if (enableLastWithUse("dark", inlinedStyles)) {
-              return
-            } //otherwise fall through
-          }
-
-          // try to find one with the styleID, aka themeName
-          const lastWithID = getLastWithID(styleID, inlinedStyles)
-          if (lastWithID != null) {
-            toggleStyle(lastWithID, inlinedStyles)
-            return
-          }
-
-          //there was a styleID but nothing matched
-          enableLastWithUse("default", inlinedStyles)
-        }
-
-        var preferredTheme
-        try {
-          preferredTheme = localStorage.getItem("HeadInlinedStyles_ID")
-        } catch (err) {
-          console.log(err)
-        }
-
-        window.__setPreferredTheme = function (newTheme) {
-          setTheme(newTheme)
-          try {
-            localStorage.setItem("HeadInlinedStyles_ID", newTheme)
-          } catch (err) {
-            console.log(err)
-          }
-        }
-
-        var darkQuery = window.matchMedia("(prefers-color-scheme: dark)")
-        darkQuery.addListener(function (e) {
+        //set event listeners here: we dont want an event listener interfering with setInitialStyle
+        darkQuery.addEventListener("change", function (e) {
           console.log(
-            "darkQueryListener: about to call __setPreferredTheme, wants dark = " +
+            "darkQueryListener: prefers-color-scheme just changed, wants dark = " +
               e.matches
           )
-          window.__setPreferredTheme(e.matches ? "dark" : "light")
+          let style = getStyleForDarkQuery(SHGModel.styleElements)
+          if (!style) {
+            console.log(
+              "darkQuery eventListener: Could not get style for use light, setting to default."
+            )
+            style = getLastStyleWithUse("default", SHGModel.styleElements)
+          }
+          setAndSaveStyle(style)
         })
-
-        //call setTheme when script first runs
-        console.log(
-          "first run: about to call setTheme. preferredTheme = " +
-            preferredTheme
-        )
-        setTheme(preferredTheme || (darkQuery.matches ? "dark" : "light"))
       })()
+    </script>
+    <script>
+      ;(function () {
+        //HELOO
+        //UI can register to listen to this
+        window.__onSHGStyleChange = function () {}
+
+        console.log("!!!! StyleHeadGames Flash Prevention Code is running")
+
+        // SHGModel is populated before page load. It should match StyleHeadGames.json
+        // However, SHGModel will be more accurate because it is populated on page load
+        // and reflects the styles that ACTUALLY got inserted on SSR.
+        const SHGModel = {
+          //idPrefix doubles as local storage Key
+          idPrefix: "StyleHeadGamesID_",
+          styleElements: [],
+        }
+
+        function populateSHGModelFromPage() {
+          console.log("populateSHGModel() running...")
+
+          SHGModel.styleElements = document.querySelectorAll(
+            "[id*='" + SHGModel.idPrefix + "']"
+          )
+
+          console.log(
+            "populateSHGModelFromPage(): done populating, found " +
+              SHGModel.styleElements.length +
+              " style Elements."
+          )
+        }
+
+        populateSHGModelFromPage()
+
+        function getStylesWithUse(useVal, styles) {
+          let results = []
+          styles.forEach(style => {
+            if (style.dataset.use.includes(useVal)) {
+              results.push(style)
+            }
+          })
+          if (results.length == 0) {
+            console.log(
+              "Could not find any styles with USE containing " + useVal
+            )
+          }
+          return results
+        }
+
+        function getLastStyleWithUse(useVal, styles) {
+          let results = getStylesWithUse(useVal, styles)
+          if (results.length > 0) {
+            return results[results.length - 1]
+          } else {
+            return null
+          }
+        }
+
+        function getStylesWithID(idVal, styles) {
+          let results = []
+          styles.forEach(style => {
+            if (style.id === idVal) {
+              results.push(style)
+            }
+          })
+          if (results.length == 0) {
+            console.log("Could not find any styles with ID containing " + idVal)
+          }
+          return results
+        }
+
+        function getLastStyleWithID(idVal, styles) {
+          let results = getStylesWithID(idVal, styles)
+          if (results.length > 0) {
+            return results[results.length - 1]
+          } else {
+            return null
+          }
+        }
+
+        function enableStyle(style) {
+          if (style) {
+            style.disabled = false
+            console.log("Enabled style id = " + style.id)
+          }
+        }
+
+        function disableStyle(style) {
+          if (style) {
+            style.disabled = true
+            console.log("Disabled style id = " + style.id)
+          }
+        }
+
+        function toggleEnabledStyles(styleToEnable, styles) {
+          styles.forEach(style => {
+            if (style.dataset.use.includes("always")) {
+              //skip, always enabled
+            } else if (style.id === styleToEnable.id) {
+              enableStyle(style)
+            } else {
+              disableStyle(style)
+            }
+          })
+        }
+
+        function getStoredStyleID() {
+          var styleID = null
+          try {
+            styleID = localStorage.getItem(SHGModel.idPrefix)
+            console.log("getStoredStyleID(): found stored styleID " + styleID)
+          } catch (err) {
+            console.log("getStoredStyleID(): " + err)
+          }
+          return styleID
+        }
+
+        function storeStyleID(styleID) {
+          try {
+            localStorage.setItem(SHGModel.idPrefix, styleID)
+          } catch (err) {
+            console.log("storeStyleID(): " + err)
+          }
+        }
+
+        function setAndSaveStyle(style) {
+          // final failsafe
+          if (style) {
+            toggleEnabledStyles(style, SHGModel.styleElements)
+            storeStyleID(style.id)
+            window.__onSHGStyleChange(true) //Let the UI know
+          } else {
+            console.log(
+              "setAndSaveStyle(): Someone tried to set Style to " + style
+            )
+          }
+        }
+
+        const darkQuery = window.matchMedia("(prefers-color-scheme: dark)")
+
+        function getStyleForDarkQuery() {
+          if (darkQuery.matches) {
+            return getLastStyleWithUse("dark", SHGModel.styleElements)
+          } else {
+            return getLastStyleWithUse("light", SHGModel.styleElements)
+          }
+        }
+
+        //---------------Initialization--------------
+        function getStyleForStoredStyleID() {
+          const styleID = getStoredStyleID()
+          return (style = getLastStyleWithID(styleID, SHGModel.styleElements))
+        }
+
+        function setInitialStyle() {
+          console.log("setInitialStyle(): running...")
+          let style = getStyleForStoredStyleID(SHGModel.styleElements)
+          if (!style) {
+            console.log(
+              "setInitialStyle(): could not get style for stored styleID, so trying dark mode"
+            )
+            style = getStyleForDarkQuery(SHGModel.styleElements)
+          }
+          if (!style) {
+            console.log(
+              "setInitialStyle(): Could not get style for store ID or dark mode. Setting to default."
+            )
+            style = getLastStyleWithUse("default", SHGModel.styleElements)
+          }
+          setAndSaveStyle(style)
+        }
+
+        setInitialStyle()
+
+        //set ui listener here: we do not want the user changing styles while loading (they should not be able to anyway)
+        // this function is global, can be called from app code
+        window.__setSHGStyleID = function (styleID) {
+          console.log("__setSHGStyleID(): trying to set for :" + styleID)
+          let style = getLastStyleWithID(styleID, SHGModel.styleElements)
+          if (style) {
+            setAndSaveStyle(style)
+            return true
+          } else {
+            return false
+          }
+        }
+
+        //set event listeners here: we dont want an event listener interfering with setInitialStyle
+        darkQuery.addEventListener("change", function (e) {
+          console.log(
+            "darkQueryListener: prefers-color-scheme just changed, wants dark = " +
+              e.matches
+          )
+          let style = getStyleForDarkQuery(SHGModel.styleElements)
+          if (!style) {
+            console.log(
+              "darkQuery eventListener: Could not get style for use light, setting to default."
+            )
+            style = getLastStyleWithUse("default", SHGModel.styleElements)
+          }
+          setAndSaveStyle(style)
+        })
+      })()
+      
     </script>
     <div id="___gatsby"></div>
     <script src="/polyfill.js" nomodule=""></script>

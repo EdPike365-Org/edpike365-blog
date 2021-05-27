@@ -6,8 +6,6 @@ import SideBar from "./SideBar"
 import Main from "./Main"
 import Footer from "./Footer"
 import { NavContextProvider} from "../contexts/NavContext"
-import HeadInlinedStyles from "./HeadInlinedStyles"
-
 
 const Layout = ( {children}) => {
 
@@ -20,7 +18,6 @@ const Layout = ( {children}) => {
 */
   return (
     <NavContextProvider >
-      <HeadInlinedStyles />
       <LayoutGrid >
         <Header />
         <NavBar />

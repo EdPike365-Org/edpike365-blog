@@ -1,0 +1,54 @@
+{
+  "WARNING": "You should not use Title attribute. Check README for why.",
+  "folder": "./src/styles/",
+  "idPrefix": "StyleHeadGamesID_",
+  "styleElements": {
+    "styles": [
+      {
+        "data-filename": "normalize2.css",
+        "data-displayname" : "Noramlize2 Reset",
+        "data-use" : "always",
+        "id" : "StyleHeadGamesID_normalize2",
+        "data-key" : "",
+        "title" : "",
+        "type" : "text/css"
+      },
+      {
+        "data-filename": "coreTheme.css",
+        "data-displayname" : "Core Theme",
+        "data-use" : "always",
+        "id" : "StyleHeadGamesID_coreTheme",
+        "data-key" : "",
+        "title" : "",
+        "type" : "text/css"
+      },
+      {
+        "data-filename": "lightTheme.css",
+        "data-displayname" : "Default, Light Theme",
+        "data-use" : "default",
+        "id" : "StyleHeadGamesID_lightTheme",
+        "data-key" : "",
+        "title" : "",
+        "type" : "text/css"        
+      },
+      {
+        "data-filename": "darkTheme.css",
+        "data-displayname" : "Dark Theme",
+        "data-use" : "alternate dark",
+        "id" : "StyleHeadGamesID_darkTheme",
+        "data-key" : "",
+        "title" : "",
+        "type" : "text/css"
+      },
+      {
+        "data-filename": "fireTheme.css",
+        "data-displayname" : "Fire Theme",
+        "data-use" : "alternate",
+        "id" : "StyleHeadGamesID_fireTheme",
+        "data.key" : "",
+        "title" : "",
+        "type" : "text/css"
+      }
+    ]
+  }
+}

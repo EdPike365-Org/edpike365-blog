@@ -7,11 +7,13 @@ require('dotenv').config({
 // webpack.config.js is in C:\Users\EdPike365\code\edpike365-blog\node_modules\gatsby\dist\utils
 // How to modify gatsby webpack: https://gist.github.com/m-allanson/8fc8943f621a6e5460fb9aa65d2451a9
 // If you want to customize html.js template: https://www.gatsbyjs.com/docs/custom-html/
-
-module.exports = {
+/*
   flags: {
     DEV_SSR: true
   },
+*/
+module.exports = {
+
   siteMetadata: {
     title: `EdPike365`,
     author: {
