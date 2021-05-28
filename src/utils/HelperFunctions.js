@@ -8,4 +8,14 @@ export function arrayEquals(a, b) {
     )
   }
 
-export const minifyCSSString = (css) => css.replace(/\n/g, '').replace(/\s\s+/g, ' ')
+export const minifyCSSString = (s) => {
+  s.replace(/\n/g, '').replace(/\s\s+/g, ' ')
+}
+
+export const minifyJSString = (s) => {
+  s.replace(/\n/g, '').replace(/\s\s+/g, ' ')
+}
+
+export const makeRandomNumberKey = ( max = 1000000) => {
+  return Math.floor(Math.random() * max)
+}

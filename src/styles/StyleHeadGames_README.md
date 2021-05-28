@@ -88,3 +88,5 @@ https://github.com/gaearon/overreacted.io/blob/master/src/html.js
 
 - this is a really good thread about inlining css in the header, trying to modify webpack
 I think this is the default webpack minifier https://survivejs.com/webpack/styling/separating-css/
+
+JS wrapped as IIFE to use private variables and functions

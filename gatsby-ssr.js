@@ -1,5 +1,9 @@
 import fs from "fs"
-import { getSHGStyleElements, getSHGPageFunction } from "./src/styles/StyleHeadGames_Utils"
+import {
+  getSHGConfigFromFile,
+  getSHGStyleElements,
+  getSHGPageFunction,
+} from "./src/styles/StyleHeadGames_Utils"
 //import dotenv from "dotenv"
 //dotenv.config( {path: `.env.${process.env.NODE_ENV}`,} )
 
@@ -13,16 +17,34 @@ export const onPreRenderHTML = ({
   replacePreBodyComponents,
 }) => {
 
-  console.info("gatsby-ssr.js onPreRenderHTML(): SHG loading and injecting styles.")
+  const SHGConfig = getSHGConfigFromFile(fs)
+  injectSHGStylesIntoHead( SHGConfig, getHeadComponents, replaceHeadComponents)
+  injectSHGClientJSIntoTopOfBody( SHGConfig, getPreBodyComponents, replacePreBodyComponents)
+
+}
+
+const injectSHGStylesIntoHead = (  SHGConfig, getHeadComponents, replaceHeadComponents) => {
+  console.info(
+    "gatsby-ssr.js onPreRenderHTML(): SHG loading and injecting styles..."
+  )
   const headComps = getHeadComponents()
-  const styleElements = getSHGStyleElements(fs)
+  const { styleElements } = getSHGStyleElements(SHGConfig, fs)
   const newHeadComps = [].concat(headComps, styleElements)
   replaceHeadComponents(newHeadComps)
+  "gatsby-ssr.js onPreRenderHTML(): Replaced HeadComponets."
+}
 
-  console.info("gatsby-ssr.js onPreRenderHTML(): Getting SHG function from js file.")
+const injectSHGClientJSIntoTopOfBody = ( SHGConfig, getPreBodyComponents, replacePreBodyComponents ) => {
+
+  console.info(
+    "gatsby-ssr.js onPreRenderHTML(): Getting SHG function from js file, injecting at top of body."
+  )
   const bodyComps = getPreBodyComponents()
-  const pageFunction = getSHGPageFunction(fs)
+  const pageFunction = getSHGPageFunction(SHGConfig.clientJSFilePath, fs, SHGConfig.minifyJS)
+  // make sure its on top
   const newBodyComps = [].concat(pageFunction, bodyComps)
   replacePreBodyComponents(newBodyComps)
-
+  console.info(
+    "gatsby-ssr.js onPreRenderHTML(): Replaced PreBodyComponets."
+  )
 }

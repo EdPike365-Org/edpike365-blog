@@ -1,88 +1,100 @@
 import * as React from "react"
+import { minifyCSSString, minifyJSString, makeRandomNumberKey } from "../utils/HelperFunctions"
 
-export const getSHGStyleElements = (fs) => {
+export const getSHGConfigFromFile = fs => {
 
-    let rawData = null
-    try{
-      rawData = fs.readFileSync("./src/styles/StyleHeadGames.json")
-      fs.close
-    }catch(err){
-      console.error("gatsby-ssr.js onPreRenderHTML(): " + err)
-      fs.close      
-      process.exit();
-    }
-  
-    const SHGConfig = JSON.parse(rawData)
-    const styles = SHGConfig.styleElements.styles
-  
-    const loadedStyles = []
-    styles.forEach(styleDef => {
-  
-      // having to use [] because field names have dashes for consistency with element attribute names
-      const fileName = SHGConfig.folder + styleDef["data-filename"]
-      console.log("Loading css file: " + fileName)
-  
-      let cssString = ""
-      try {
-        cssString = fs.readFileSync(fileName, "utf-8")
-        fs.close
-      } catch (err) {
-          console.error(
-              "Could not find css file " + fileName +
-                ". Check json config file.")
-          console.error(err)
-        fs.close
-      }
-  
-      styleDef.content = cssString
-      // data-key is for React
-      //styleDef["key"] = makeReactKey()
-  
-      loadedStyles.push(styleDef)
-    })
-  
-    const styleElements = loadedStyles.map(styleInfo => {
-      return (
-        <style
-          data-filename={styleInfo["data-filename"]}
-          data-displayname={styleInfo["data-displayname"]}
-          data-use={styleInfo["data-use"]}
-          key={makeReactKey()}
-          id={styleInfo.id}
-          title={styleInfo.title}
-          type={styleInfo.type}
-        >
-          {styleInfo.content}
-        </style>
-      )
-    })
-  
-    return styleElements;
+  let rawData = null
+  try {
+    rawData = fs.readFileSync("./src/styles/StyleHeadGames.json")
+    fs.close
+  } catch (err) {
+    console.error("SHG_Utils getSHGConfigFromFile: " + err)
+    fs.close
+    throw (err)
+  }
+
+  const SHGConfig = JSON.parse(rawData) //one op per line
+  return SHGConfig
+
 }
 
-const makeReactKey = () => {
-  return Math.floor(Math.random() * 1000000)
+export const getSHGStyleElements = (SHGConfig, fs) => {
+
+  const styleElements = []
+  // read the config content, then create a <style> element for each style config
+  // one big loop to minimize RAM usage on SSR
+  SHGConfig.styleElements.styles.forEach(styleConfig => {
+    const styleDef = getDefFromConfig(styleConfig, SHGConfig.stylesFolder, fs)
+    const styleElement = getElementFromDef(styleDef, SHGConfig.minifyCSS) //one op per line
+    styleElements.push(styleElement)
+  })
+  return { styleElements : styleElements }
 }
 
-export const getSHGPageFunction = (fs) => {
-    let jsString = null
-    try{
-        const fileName = "./src/styles/StyleHeadGames_browser.js"
-        jsString = fs.readFileSync(fileName, "utf-8")
-        fs.close
-      }catch(err){
-        console.error("gatsby-ssr.js getSHGPageFunction(): " + err)
-        fs.close      
-        process.exit();
-      }
+const getDefFromConfig = (styleConfig, stylesFolder, fs) => {
 
-    function createMarkup(){
-        return {__html: jsString}
-    }
+  const filePath = stylesFolder + styleConfig["data-filename"]
+  console.log("SHGUtils.getDefFromConfig(): Loading css file: " + filePath)
 
-    //need to key to suppress React warning
-    return(
-        <script key={makeReactKey} dangerouslySetInnerHTML={ createMarkup() } />
+  let cssString = ""
+  try {
+    cssString = fs.readFileSync(filePath, "utf-8")
+    fs.close
+  } catch (err) {
+    console.error(
+      "SHGUtils.getDefFromConfig(): Could not find css file " + filePath + ". Check json config file."
     )
+    console.error(err)
+    fs.close
+    throw(err)
+  }
 
+  styleConfig.content = cssString
+  return styleConfig
 }
+
+const getElementFromDef = (styleDef, minifyCSS) => {
+  // Having to use [] because field names have dashes.
+  // They have dashes for consistency with <style> element attribute names
+  // Key attr to keep React happy
+  return (
+    <style
+      data-filename={styleDef["data-filename"]}
+      data-displayname={styleDef["data-displayname"]}
+      data-use={styleDef["data-use"]}
+      key={makeRandomNumberKey}
+      id={styleDef.id}
+      title={styleDef.title}
+      type={styleDef.type}
+    >
+      { minifyCSS
+        ? minifyCSSString(styleDef.content)
+        : styleDef.content}
+    </style>
+  )
+}
+
+export const getSHGPageFunction = (clientJSFilePath, fs, minifyJS) => {
+
+  let jsString = null
+  try {
+    jsString = fs.readFileSync(clientJSFilePath, "utf-8")
+    fs.close
+  } catch (err) {
+    console.error("gatsby-ssr.js getSHGPageFunction(): " + err)
+    fs.close
+    throw(err)
+  }
+
+  if(minifyJS){
+    jsString = minifyJSString(jsString)
+  } 
+
+  function createDangerMarkup(jsString) {
+    return { __html: jsString }
+  }
+
+  // key attr to suppress React warning
+  return <script key={makeRandomNumberKey} dangerouslySetInnerHTML={createDangerMarkup(jsString)} />
+}
+

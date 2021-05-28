@@ -1,7 +1,11 @@
 {
   "WARNING": "You should not use Title attribute. Check README for why.",
-  "folder": "./src/styles/",
+  "stylesFolder": "./src/styles/",
+  "clientJSFilePath": "./src/styles/StyleHeadGames_browser.js",
+  "clientComponentFolder": "./src/styles/",
   "idPrefix": "StyleHeadGamesID_",
+  "minifyCSS": false,
+  "minifyJS": false,
   "styleElements": {
     "styles": [
       {
