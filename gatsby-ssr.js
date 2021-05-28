@@ -1,3 +1,4 @@
+import { SHGStyleContextWrapper } from "./src/contexts/SHGContext"
 import fs from "fs"
 import {
   getSHGConfigFromFile,
@@ -6,6 +7,9 @@ import {
 } from "./src/styles/StyleHeadGames_Utils"
 //import dotenv from "dotenv"
 //dotenv.config( {path: `.env.${process.env.NODE_ENV}`,} )
+
+export const wrapRootElement = SHGStyleContextWrapper
+
 
 //https://github.com/gatsbyjs/gatsby/issues/15519
 

@@ -1,6 +1,10 @@
 // custom typefaces
 //import "typeface-montserrat"
 //import "typeface-merriweather"
+import { SHGStyleContextWrapper } from "./src/contexts/SHGContext"
+
+export const wrapRootElement = SHGStyleContextWrapper
+
 
 // This css shows up in the common.css file after build
 // Theme for prismjs
