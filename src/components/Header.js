@@ -5,7 +5,7 @@ import styled from "@emotion/styled"
 import HamburgerButton from "./HamburgerButton"
 import LogoIcon from "./LogoIcon"
 import LogoText from "./LogoText"
-import { StyleSelector } from "./ThemeSetters"
+import { DarkModeToggle } from "./ThemeSetters"
 
 //TODO
 //const SettingsIcon
@@ -88,7 +88,7 @@ const Header = () => {
         </LogoLink>
       </LogoDiv>
       <SocialDiv>
-        < StyleSelector />
+        <DarkModeToggle />
       </SocialDiv>
     </StyledHeader>
   )

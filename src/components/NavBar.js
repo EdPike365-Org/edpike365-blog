@@ -88,6 +88,11 @@ const NavBar = (props) => {
             Contact
           </LinK>
         </Li>
+        <Li>
+          <LinK to={"/settings/"} itemProp="url">
+            Settings
+          </LinK>
+        </Li>
         <SubUL>
           FRONT END
           <Li>

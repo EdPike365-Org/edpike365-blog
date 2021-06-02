@@ -4,49 +4,82 @@ import { css } from "@emotion/react"
 import { SHGStyleContext } from "../contexts/SHGContext"
 //import { themeOptions, getThemeObject } from "../styles/themes"
 
-export const ThemeContextListener = ({showText}) => {
-
+export const StyleSummary = () => {
   const { SHGModel } = useContext(SHGStyleContext)
-
-//  const selectedTheme = getThemeObject(themeName)
-//  console.log("ThemeContextListener: setting Global styles to :" + selectedTheme.value)   
-
-  //TODO: if you have more than one <Global> tags, and both try to update at same time
-  //you will get a narsty surprise. In my case it only happens when switching from light to dark
-  //there is some sort of node insert out of order error coming from Emotion
-
-
-
-    return (
-      <div>
-        <h5  css={css` margin-bottom: .25rem; `}>SHG Style Model State</h5>
-        <ul css={css` margin-top: .25rem; `}>
-          <li>Style Label = ({SHGModel.idPrefix}).</li>
-          <li>Style ID = ({SHGModel.idPrefix}).</li>
-        </ul>
-      </div>
-    )
-
+  const model = SHGModel.model
+  return (
+    <div>
+      <h5
+        css={css`
+          margin-bottom: 0.25rem;
+        `}
+      >
+        SHG Style Model State
+      </h5>
+      <ul
+        css={css`
+          margin-top: 0.25rem;
+        `}
+      >
+        <li>idPrefix = ({model.idPrefix}).</li>
+        <li>
+          Styles ({model.styles.length})
+          <table>
+              <thead><th>Display Name</th><th>Uses</th><th>Enabled</th><th>FileName</th></thead>
+            {Array.from(model.styles).map(style => (
+              <tr>
+                <td>{style.dataset.displayname}</td>
+                <td>{style.dataset.use}</td>
+                <td>{ style.disabled ? "no" : "yes" }</td>
+                <td>{style.dataset.filename}</td>
+              </tr>
+            ))}
+          </table>
+        </li>
+      </ul>
+    </div>
+  )
 }
 
 export const StyleSelector = () => {
-  
-  const { SHGModel, setSHGModel } = useContext(SHGStyleContext)
+  const { SHGModel } = useContext(SHGStyleContext)
 
-  const styleElements = SHGModel.styleElements
+  const model = SHGModel.model
 
   function handleChange(e) {
     console.log("StyleSelector: handleChange, value = " + e.target.value)
-    //saveThemeName(e.target.value);
-    //updateThemeName(e.target.value)
+    model.setSHGStyleByID(e.target.value)
   }
 
-  const styleArray = Array.from(styleElements)
+  let selectedStyleID = ""
+  const lastEnabledStyle = model.getLastEnabledOptionalStyle()
+  if (lastEnabledStyle) selectedStyleID = lastEnabledStyle.id
+  console.log(
+    "!!!!!!!!! select style: calced selectedStyleID " + selectedStyleID
+  )
+
+  const styleOptions = []
+  // this node array is not iterable, has to be converted to normal array
+  const styleArray = Array.from(model.getOptionalStyles())
+  for (var i = 0; i < styleArray.length; i++) {
+    const styleEl = styleArray[i]
+    const thisOption = {
+      key: styleEl.dataset.key,
+      label: styleEl.dataset.displayname,
+      value: styleEl.id,
+    }
+    if (styleEl.id === selectedStyleID) {
+      thisOption.selected = "selected"
+    }
+
+    styleOptions.push(thisOption)
+  }
+
   return (
-    <select onChange={handleChange} value={"kj"}>
-      {styleArray.map(styleEl => (
-        <option key={styleEl.id} value={styleEl.id}>
-          {styleEl.dataset.displayname}
+    <select onChange={handleChange} value={selectedStyleID}>
+      {styleOptions.map(option => (
+        <option key={option.value} value={option.value}>
+          {option.label}
         </option>
       ))}
     </select>
@@ -54,33 +87,7 @@ export const StyleSelector = () => {
 }
 
 export const DarkModeToggle = () => {
-  
-  const { SHGModel, setSHGModel } = useContext(SHGStyleContext)
-
-  function toggleDarkMode() {
-    console.log(
-      "DarkModeToggle: toggleDarkMode() called. "
-    )
-/*
-    if (themeName === "darkTheme") {
-      
-      console.log(
-        "DarkModeToggle: setting themeName to lightTheme. "
-      )
-      saveThemeName("lightTheme")
-      updateThemeName("lightTheme")
-
-    } else {
-      
-      console.log(
-        "DarkModeToggle: setting themeName to darkTheme. "
-      )
-      saveThemeName("darkTheme")
-      updateThemeName("darkTheme")
-
-    }
-    */
-  }
+  const { SHGModel } = useContext(SHGStyleContext)
 
   const Button = styled.button`
     font-size: 1.6rem;
@@ -93,12 +100,17 @@ export const DarkModeToggle = () => {
     background-color: var(--color-background-paper);
     white-space: pre-wrap;
   `
-  const themeName = "darkTheme"
+  const isDark = () => {
+    return SHGModel.model.isUsingADarkStyle()
+  }
+
+  const handleClick = () => {
+    SHGModel.model.toggleDarkStyle()
+  }
+
   return (
     <>
-      <Button onClick={toggleDarkMode}>
-        {themeName === "darkTheme" ? "☼ " : "☽ "}
-      </Button>
+      <Button onClick={handleClick}>{isDark() ? "☼ " : "☽ "}</Button>
     </>
   )
 }

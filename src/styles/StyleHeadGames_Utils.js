@@ -56,13 +56,15 @@ const getDefFromConfig = (styleConfig, stylesFolder, fs) => {
 const getElementFromDef = (styleDef, minifyCSS) => {
   // Having to use [] because field names have dashes.
   // They have dashes for consistency with <style> element attribute names
-  // Key attr to keep React happy
+  // key attr to keep React happy, data-key is to be able to pass it in to the on page element
+  const myKey = makeRandomNumberKey()
   return (
     <style
       data-filename={styleDef["data-filename"]}
       data-displayname={styleDef["data-displayname"]}
       data-use={styleDef["data-use"]}
-      key={makeRandomNumberKey}
+      data-key={myKey}
+      key={myKey}
       id={styleDef.id}
       title={styleDef.title}
       type={styleDef.type}
