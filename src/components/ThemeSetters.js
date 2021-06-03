@@ -7,6 +7,7 @@ import { SHGStyleContext } from "../contexts/SHGContext"
 export const StyleSummary = () => {
   const { SHGModel } = useContext(SHGStyleContext)
   const model = SHGModel.model
+  const styles = ((typeof window === "undefined")? [] : model.styles )
   return (
     <div>
       <h5
@@ -23,10 +24,10 @@ export const StyleSummary = () => {
       >
         <li>idPrefix = ({model.idPrefix}).</li>
         <li>
-          Styles ({model.styles.length})
+          Styles ({ styles.length})
           <table>
               <thead><th>Display Name</th><th>Uses</th><th>Enabled</th><th>FileName</th></thead>
-            {Array.from(model.styles).map(style => (
+            {Array.from(styles).map(style => (
               <tr>
                 <td>{style.dataset.displayname}</td>
                 <td>{style.dataset.use}</td>
@@ -43,16 +44,19 @@ export const StyleSummary = () => {
 
 export const StyleSelector = () => {
   const { SHGModel } = useContext(SHGStyleContext)
-
   const model = SHGModel.model
 
   function handleChange(e) {
-    console.log("StyleSelector: handleChange, value = " + e.target.value)
-    model.setSHGStyleByID(e.target.value)
+    if(typeof window !== "undefined"){
+      console.log("StyleSelector: handleChange, value = " + e.target.value)
+      model.setSHGStyleByID(e.target.value)
+    }
   }
 
   let selectedStyleID = ""
-  const lastEnabledStyle = model.getLastEnabledOptionalStyle()
+  let lastEnabledStyle = null
+  if (typeof window !== "undefined"){ lastEnabledStyle = model.getLastEnabledOptionalStyle() }
+  
   if (lastEnabledStyle) selectedStyleID = lastEnabledStyle.id
   console.log(
     "!!!!!!!!! select style: calced selectedStyleID " + selectedStyleID
@@ -60,7 +64,8 @@ export const StyleSelector = () => {
 
   const styleOptions = []
   // this node array is not iterable, has to be converted to normal array
-  const styleArray = Array.from(model.getOptionalStyles())
+  let styleArray = []
+  if (typeof window !== "undefined"){ styleArray = Array.from(model.getOptionalStyles())}
   for (var i = 0; i < styleArray.length; i++) {
     const styleEl = styleArray[i]
     const thisOption = {
@@ -88,6 +93,7 @@ export const StyleSelector = () => {
 
 export const DarkModeToggle = () => {
   const { SHGModel } = useContext(SHGStyleContext)
+  const model = SHGModel.model
 
   const Button = styled.button`
     font-size: 1.6rem;
@@ -101,11 +107,11 @@ export const DarkModeToggle = () => {
     white-space: pre-wrap;
   `
   const isDark = () => {
-    return SHGModel.model.isUsingADarkStyle()
+    return ( (typeof window === "undefined") ? false : model.isUsingADarkStyle());
   }
 
   const handleClick = () => {
-    SHGModel.model.toggleDarkStyle()
+    (typeof window === "undefined") ? null: model.toggleDarkStyle();
   }
 
   return (
