@@ -2,12 +2,13 @@ import React, { useContext } from "react"
 import styled from "@emotion/styled"
 import { css } from "@emotion/react"
 import { SHGStyleContext } from "../contexts/SHGContext"
-//import { themeOptions, getThemeObject } from "../styles/themes"
+
+export const isSSR = () => { return typeof window === "undefined" }
 
 export const StyleSummary = () => {
   const { SHGModel } = useContext(SHGStyleContext)
   const model = SHGModel.model
-  const styles = ((typeof window === "undefined")? [] : model.styles )
+  const styles = ( isSSR() ? [] : model.styles )
   return (
     <div>
       <h5
@@ -26,15 +27,17 @@ export const StyleSummary = () => {
         <li>
           Styles ({ styles.length})
           <table>
-              <thead><th>Display Name</th><th>Uses</th><th>Enabled</th><th>FileName</th></thead>
+            <thead><tr><th>Display Name</th><th>Uses</th><th>Enabled</th><th>FileName</th></tr></thead>
+            <tbody>
             {Array.from(styles).map(style => (
-              <tr>
+              <tr key={style.dataset.filename}>
                 <td>{style.dataset.displayname}</td>
                 <td>{style.dataset.use}</td>
-                <td>{ style.disabled ? "no" : "yes" }</td>
+                <td>{style.disabled ? "no" : "yes" }</td>
                 <td>{style.dataset.filename}</td>
               </tr>
             ))}
+            </tbody>
           </table>
         </li>
       </ul>
@@ -47,25 +50,21 @@ export const StyleSelector = () => {
   const model = SHGModel.model
 
   function handleChange(e) {
-    if(typeof window !== "undefined"){
-      console.log("StyleSelector: handleChange, value = " + e.target.value)
+    if( !isSSR() ){
       model.setSHGStyleByID(e.target.value)
     }
   }
 
   let selectedStyleID = ""
   let lastEnabledStyle = null
-  if (typeof window !== "undefined"){ lastEnabledStyle = model.getLastEnabledOptionalStyle() }
+  if ( !isSSR() ){ lastEnabledStyle = model.getLastEnabledOptionalStyle() }
   
   if (lastEnabledStyle) selectedStyleID = lastEnabledStyle.id
-  console.log(
-    "!!!!!!!!! select style: calced selectedStyleID " + selectedStyleID
-  )
 
   const styleOptions = []
-  // this node array is not iterable, has to be converted to normal array
   let styleArray = []
-  if (typeof window !== "undefined"){ styleArray = Array.from(model.getOptionalStyles())}
+  // this node array is not iterable, has to be converted to normal array
+  if ( !isSSR() ){ styleArray = Array.from(model.getOptionalStyles())}
   for (var i = 0; i < styleArray.length; i++) {
     const styleEl = styleArray[i]
     const thisOption = {
@@ -107,16 +106,22 @@ export const DarkModeToggle = () => {
     white-space: pre-wrap;
   `
   const isDark = () => {
-    return ( (typeof window === "undefined") ? false : model.isUsingADarkStyle());
+    return ( isSSR() ? false : model.isUsingADarkStyle())
   }
 
   const handleClick = () => {
-    (typeof window === "undefined") ? null: model.toggleDarkStyle();
+      if (!isSSR()) model.toggleDarkStyle()
   }
 
   return (
-    <>
-      <Button onClick={handleClick}>{isDark() ? "☼ " : "☽ "}</Button>
-    </>
+    <Button onClick={handleClick} display={isSSR()? "none" : "inline-block" }>{isDark() ? "☼ " : "☽ "}</Button>
   )
+}
+
+export const PrefersDarkMode = () => {
+  const { SHGModel } = useContext(SHGStyleContext)
+  const model = SHGModel.model
+
+  return <span>Prefers Dark Mode = { model.darkQuery.matches? "true": "false" }.</span>
+
 }

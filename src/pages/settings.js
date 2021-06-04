@@ -1,17 +1,18 @@
 import * as React from "react"
 import Layout from "../components/Layout"
-import { DarkModeToggle, StyleSelector, StyleSummary } from "../components/ThemeSetters"
+import { DarkModeToggle, StyleSelector, StyleSummary, PrefersDarkMode } from "../components/StyleHeadGames"
+import Content from "../components/Content"
 
 const Settings = () => {
   return (
     <Layout>
-      <h3>Settings</h3>
-        Dark Mode Toggle: <DarkModeToggle/>
-        <hr/>
-        <StyleSelector/>
-        <hr/>
+      <h2>Settings</h2>
+      <Content title="Style">
+        <PrefersDarkMode/><br/>
+        Dark Mode Toggle: <DarkModeToggle/><br/>
+        Style Selector: <StyleSelector/>
         <StyleSummary/>
-      
+      </Content>
     </Layout>
   )
 }

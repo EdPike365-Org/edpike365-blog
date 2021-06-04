@@ -36,6 +36,17 @@ const BlogPostSummary = ({ post }) => {
   const description = post.frontmatter.description || post.excerpt
 
   // article: https://medium.com/reactbrasil/using-structured-data-to-improve-your-seo-score-688875adfd7b
+ /* renaming LINK to LinK with PascalCase to avoid lint warning :-( */
+  /* this uses the props to className overrided functionality of Emotion */
+  const LinK = styled(props => <Link {...props} />)`
+    color: var(--color-text-secondary);
+    text-decoration: none;
+
+    :hover {
+      color: var(--color-text-primary);
+    }
+
+  `
 
   return (
     <article
@@ -45,9 +56,9 @@ const BlogPostSummary = ({ post }) => {
     >
       <SummaryContainer>
         <Header>
-            <Link to={slug} itemProp="url">
+            <LinK to={slug} itemProp="url">
               <span itemProp="headline">{title}</span>
-            </Link>
+            </LinK>
         </Header>
         <span className="overline">{postDate}</span>
         <BlogPostDescription>

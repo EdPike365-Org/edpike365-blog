@@ -54,10 +54,18 @@ const getDefFromConfig = (styleConfig, stylesFolder, fs) => {
 }
 
 const getElementFromDef = (styleDef, minifyCSS) => {
-  // Having to use [] because field names have dashes.
-  // They have dashes for consistency with <style> element attribute names
-  // key attr to keep React happy, data-key is to be able to pass it in to the on page element
+  // Having to use styleDef["data-xyz"] because field names have dashes.
+  // They have dashes because they are non-standard attributes and React wont render theme
+  // unless they are prefixed with "data-"
+  // The key attr keeps React happy, React makes it disappear at render time.
+  // The data-key is to be able to pass it in to the on page element so we can look it up for debug
+  // The dangerouslySetInnerHTML is there, instead of {content}, because React escapes the " in your CSS (HTML) into &quote, for security reasons(?)
   const myKey = makeRandomNumberKey()
+  
+  let content = styleDef.content
+  //TODO! implement minfication, the method below does not work, need a library
+  //if(true) content = minifyCSSString(content)
+
   return (
     <style
       data-filename={styleDef["data-filename"]}
@@ -68,11 +76,9 @@ const getElementFromDef = (styleDef, minifyCSS) => {
       id={styleDef.id}
       title={styleDef.title}
       type={styleDef.type}
-    >
-      { minifyCSS
-        ? minifyCSSString(styleDef.content)
-        : styleDef.content}
-    </style>
+      dangerouslySetInnerHTML={{__html: content}}
+    />
+
   )
 }
 

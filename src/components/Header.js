@@ -5,7 +5,7 @@ import styled from "@emotion/styled"
 import HamburgerButton from "./HamburgerButton"
 import LogoIcon from "./LogoIcon"
 import LogoText from "./LogoText"
-import { DarkModeToggle } from "./ThemeSetters"
+import { DarkModeToggle } from "./StyleHeadGames"
 
 //TODO
 //const SettingsIcon

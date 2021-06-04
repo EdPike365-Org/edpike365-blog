@@ -13,7 +13,7 @@ export const HamButton = styled.button`
 const HamburgerButton = () => {
   const { toggleShowNav } = useContext(NavContext)
   return (
-    <HamButton onClick={toggleShowNav}>
+    <HamButton onClick={toggleShowNav} aria-label={"Navigation"}>
       <HamburgerIcon fontHeight="1.5rem" />
     </HamButton>
   )

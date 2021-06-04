@@ -32,7 +32,6 @@
   /* values from https://material-ui.com/customization/default-theme/?expand-path=$.typography */
   /* this are the colors for the ---light theme--- */
   /* what about "color-on" for secondary, hint, disabled, icon text? */
-  --color-theme-name: "light";
 
   --color-common-black: #000;
   --color-common-white: #fff;
@@ -111,9 +110,13 @@
   /* material ui explorer https://material-ui.com/customization/default-theme/?expand-path=$.typography */
   /* https://material.io/develop/web/guides/typography */
 
-  --font-family-default: "Segoe UI",
+  --old-font-family-default: "Segoe UI",
     "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
     "Segoe UI Symbol";
+  --font-family-default: "Helvetica Neue World", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-family-dek: "Helvetica Neue World", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-family-accent: "Source Code Pro", Monaco, monospace;
+  --font-family-body: Lora, Georgia, serif;
 
   --font-weight-light: 300;
   --font-weight-regular: 400;
@@ -275,6 +278,13 @@ hr {
   background: var(--color-divider);
   height: 2px;
   border: 0;
+}
+
+body, h1, h2, h3, h4, p, figure, blockquote, dl, dd {
+  margin-top: 0em;
+  margin-right: 0em;
+  margin-bottom: 1em;
+  margin-left: 0em;
 }
 
 /* Headings: default font weights get heavier for smaller headings */

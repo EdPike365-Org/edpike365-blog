@@ -3,8 +3,6 @@
  /* color-scheme is new tag that sets scroll bar colors, only works for dark */
   --color-scheme: dark;
 
-  --color-theme-name: "Dark";
-
   --color-primary-light: #7986cb;
   --color-primary-main: #3f51b5;
   --color-primary-dark: #7986cb;
