@@ -122,6 +122,6 @@ export const PrefersDarkMode = () => {
   const { SHGModel } = useContext(SHGStyleContext)
   const model = SHGModel.model
 
-  return <span>Prefers Dark Mode = { model.darkQuery.matches? "true": "false" }.</span>
+  return <span>Prefers Dark Mode = { (!isSSR() && model.darkQuery.matches)? "true": "false" }.</span>
 
 }
