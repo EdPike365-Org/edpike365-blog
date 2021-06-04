@@ -1,41 +1,27 @@
 import React from "react"
-import styled from "@emotion/styled"
-
-const HamburgerSpan = styled.span`
-
-  padding: 0rem;
-
-  & > svg {
-    fill: var(--color-text-secondary);
-    stroke: var(--color-text-secondary);
-    display: inline-block;
-    font-size: inherit;
-    height: ${props => (props.fontHeight ? props.fontHeight : "1rem")};
-    overflow: visible;
-    vertical-align: -0.125em;
-  }
-`
+import { css } from "@emotion/react"
 
 const HamburgerIcon = props => {
   return (
-    <HamburgerSpan fontHeight={props.fontHeight}>
-      <svg
-        aria-hidden="true"
-        focusable="false"
-        data-prefix="far"
-        data-icon="bars"
-        role="img"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 448 512"
-        className="svg-inline--fa fa-bars fa-w-14 fa-2x"
-      >
-        <path
-
-          d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"
-          className=""
-        ></path>
-      </svg>
-    </HamburgerSpan>
+    <svg
+      aria-hidden="true"
+      focusable="false"
+      data-prefix="fas"
+      data-icon="bars"
+      css={css`
+        fill: var(--color-text-secondary);
+        stroke: var(--color-text-secondary);
+        display: inline-block;
+        height: 1.5rem;
+      `}
+      role="img"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 448 512"
+    >
+      <path
+        d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"
+      ></path>
+    </svg>
   )
 }
 

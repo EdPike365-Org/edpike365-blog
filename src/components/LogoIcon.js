@@ -8,8 +8,8 @@ const LogoIconSpan = styled.span`
   & > svg {
     fill: var(--color-primary-dark);
     stroke: var(--color-primary-dark);
-    width: 50px;
-    height: 50px;
+    width: auto;
+    height: auto;
     vertical-align: middle;
     transition: transform 0.2s ease-out;
   }
@@ -27,15 +27,19 @@ const LogoIconSpan = styled.span`
 //https://wattenberger.com/guide/scaling-svg
 //#9699B8
 const LogoIcon = () => {
+  //        <g transform="scale(0.018765, 0.018765) " >
+  //<circle cx="1280" cy="1280" r="1280" strokeWidth="100" fill="none" />
   return (
     <LogoIconSpan>
       <svg
         mlns="http://www.w3.org/2000/svg"
-        viewBox="-1 -49 50 50"
+        width="30px"
+        height="30px"
+        viewBox="-10 -10 276 276"
         preserveAspectRatio="xMidYMid meet"
       >
-        <g transform="scale(0.018765, -0.018765) " >
-          <circle cx="1280" cy="1280" r="1280" strokeWidth="100" fill="none" />
+        <g transform="scale(0.1, 0.1) " >
+          <circle cx="1280" cy="1280" r="1320" strokeWidth="120" fill="none" />
           <path
             d="M1145 2349 c-446 -61 -794 -374 -912 -817 -23 -86 -26 -117 -26 -262
 0 -146 3 -176 26 -263 70 -263 230 -491 443 -633 172 -115 347 -171 555 -181

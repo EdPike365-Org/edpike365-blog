@@ -5,14 +5,9 @@ import styled from "@emotion/styled"
 import HamburgerButton from "./HamburgerButton"
 import LogoIcon from "./LogoIcon"
 import LogoText from "./LogoText"
-import { DarkModeToggle } from "./StyleHeadGames"
+import { DarkModeToggle } from "./SHG_Components"
+import UserIcon from "./UserIcon"
 
-//TODO
-//const SettingsIcon
-//const SettingsPanel
-
-// mobile first
-// cell phone width: hamburger, logo, logotext, notifications, login
 export const StyledHeader = styled.header`
   grid-area: header;
 
@@ -29,12 +24,12 @@ export const StyledHeader = styled.header`
 
   z-index: 999;
 
-  overflow-y: hidden;
+  overflow: hidden;
 
   display: flex;
   justify-content: space-between; /* this will flush logodiv to left if the nav button is hidden */
   align-items: center; /* align vertical center */
-  overflow: hidden;
+
 `
 
 export const LogoDiv = styled.div`
@@ -44,12 +39,12 @@ export const LogoDiv = styled.div`
 
   /* logo icon */
   & > a > span:first-of-type {
-    display: none;
+    height: 2rem;
   }
 
   /* logo font */
   & > a > span:nth-of-type(2) {
-    font-size: 2.5rem;
+    font-size: 2rem;
   }
 `
 
@@ -69,17 +64,18 @@ const LogoLink = styled(Link)`
   text-decoration: none;
 `
 
-const SocialDiv = styled.div`
+const FlexDiv = styled.div`
   display: flex;
   align-items: center;
+  height: 1.5rem;
 `
 
 const Header = () => {
   return (
     <StyledHeader>
-      <div>
-        <HamburgerButton />
-      </div>
+      <FlexDiv>
+        <HamburgerButton/>
+      </FlexDiv>
       <LogoDiv>
         <LogoLink to="/">
           <LogoIcon />
@@ -87,9 +83,10 @@ const Header = () => {
           <LogoText />
         </LogoLink>
       </LogoDiv>
-      <SocialDiv>
+      <FlexDiv>
         <DarkModeToggle />
-      </SocialDiv>
+        <UserIcon/>
+      </FlexDiv>
     </StyledHeader>
   )
 }

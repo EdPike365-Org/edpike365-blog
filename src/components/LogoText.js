@@ -9,7 +9,7 @@ const LogoTextSpan = styled.span`
   font-weight: 700;
   font-size: 3.052rem;
   line-height: 1.167;
-  letter-spacing: 0.5rem;
+  letter-spacing: 0.4rem;
 
   /* desktop */
   @media only screen and (min-width: 1280px) {
