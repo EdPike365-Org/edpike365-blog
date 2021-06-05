@@ -2,26 +2,27 @@ import * as React from "react"
 import styled from "@emotion/styled"
 import Layout from "../components/Layout"
 import { DarkModeToggle, StyleSelector, StyleSummary, PrefersDarkMode } from "../components/SHG_Components"
-import Content from "../components/Content"
+import Section from "../components/Section"
 
 const FlexDiv = styled.div`
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  height: 1.5rem;
+  height: 2.8rem;
 `
 
 const Settings = () => {
   return (
     <Layout>
       <h2>Settings</h2>
-      <Content title="Style">
+      <Section title="Style">
+        Style Selector: <StyleSelector/>
+        <hr/>
         <PrefersDarkMode/>
         <hr/>
         <FlexDiv>Dark Mode Toggle: <DarkModeToggle/></FlexDiv>
-        <hr/>
-        Style Selector: <StyleSelector/>
+
         <StyleSummary/>
-      </Content>
+      </Section>
     </Layout>
   )
 }

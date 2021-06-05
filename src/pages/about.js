@@ -1,7 +1,6 @@
 import * as React from "react"
 import Layout from "../components/Layout"
 import Seo from "../components/SEO"
-import LogoIcon from "../components/LogoIcon"
 
 const About = ({location}) => {
   

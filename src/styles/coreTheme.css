@@ -280,7 +280,7 @@ hr {
   border: 0;
 }
 
-body, h1, h2, h3, h4, p, figure, blockquote, dl, dd {
+h1, h2, h3, h4, p, figure, blockquote, dl, dd {
   margin-top: 0em;
   margin-right: 0em;
   margin-bottom: 1em;

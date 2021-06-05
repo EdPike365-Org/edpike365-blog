@@ -4,6 +4,7 @@ import styled from "@emotion/styled"
 const LogoIconSpan = styled.span`
 
   padding: 0rem;
+  padding-left: 0.4rem;
 
   & > svg {
     fill: var(--color-primary-dark);

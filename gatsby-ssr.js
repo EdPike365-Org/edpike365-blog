@@ -1,10 +1,10 @@
-import { SHGStyleContextWrapper } from "./src/contexts/SHGContext"
+import { SHGStyleContextWrapper } from "./src/contexts/SHG_Context"
 import fs from "fs"
 import {
   getSHGConfigFromFile,
   getSHGStyleElements,
   getSHGPageFunction,
-} from "./src/styles/StyleHeadGames_Utils"
+} from "./src/styles/SHG_Utils"
 //import dotenv from "dotenv"
 //dotenv.config( {path: `.env.${process.env.NODE_ENV}`,} )
 

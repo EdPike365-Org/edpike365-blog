@@ -5,7 +5,7 @@ export const getSHGConfigFromFile = fs => {
 
   let rawData = null
   try {
-    rawData = fs.readFileSync("./src/styles/StyleHeadGames.json")
+    rawData = fs.readFileSync("./src/styles/SHG_Config.json")
     fs.close
   } catch (err) {
     console.error("SHG_Utils getSHGConfigFromFile: " + err)
@@ -34,7 +34,7 @@ export const getSHGStyleElements = (SHGConfig, fs) => {
 const getDefFromConfig = (styleConfig, stylesFolder, fs) => {
 
   const filePath = stylesFolder + styleConfig["data-filename"]
-  console.log("SHGUtils.getDefFromConfig(): Loading css file: " + filePath)
+  console.log("SHG_Utils.getDefFromConfig(): Loading css file: " + filePath)
 
   let cssString = ""
   try {
@@ -42,7 +42,7 @@ const getDefFromConfig = (styleConfig, stylesFolder, fs) => {
     fs.close
   } catch (err) {
     console.error(
-      "SHGUtils.getDefFromConfig(): Could not find css file " + filePath + ". Check json config file."
+      "SHG_Utils.getDefFromConfig(): Could not find css file " + filePath + ". Check json config file."
     )
     console.error(err)
     fs.close

@@ -1,7 +1,7 @@
 import React from "react"
 import styled from "@emotion/styled"
 
-const Container = styled.div`
+const StyledSection = styled.section`
   padding: 10px;
   margin: 0rem;
   background-color: var(--color-background-paper);
@@ -15,16 +15,16 @@ const Title = styled.h3`
     margin-bottom: .4rem;
 `
 
-const Content = ({ title , children}) => {
+const Section = ({ title , children}) => {
 
     return (
-      <Container>
+      <StyledSection>
         <Title>
            <span itemProp="headline">{title}</span>
         </Title>
         { children }
-      </Container>
+      </StyledSection>
   )
 }
 
-export default Content
+export default Section

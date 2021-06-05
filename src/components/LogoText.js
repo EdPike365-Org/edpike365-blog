@@ -8,8 +8,9 @@ const LogoTextSpan = styled.span`
   font-family: Arial;
   font-weight: 700;
   font-size: 3.052rem;
-  line-height: 1.167;
+
   letter-spacing: 0.4rem;
+  padding-left: 0.4rem; /* added to balance out the letter-spacing trailing space */
 
   /* desktop */
   @media only screen and (min-width: 1280px) {

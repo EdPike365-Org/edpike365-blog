@@ -1,31 +1,22 @@
 import React from "react"
+import Wrapper from "./Wrapper"
 import LayoutGrid from "./LayoutGrid"
 import Header from "./Header"
 import NavBar from "./NavBar"
-import SideBar from "./SideBar"
 import Main from "./Main"
-import Footer from "./Footer"
-import { NavContextProvider} from "../contexts/NavContext"
+import { NavContextProvider } from "../contexts/NavContext"
 
-const Layout = ( {children}) => {
-
-  // If we are on the home page, make the logos not be links
-  // I'm only doing this as a demonstration
-  // location object must be passed from pages into components
-  /*
-  const rootPath = `${__PATH_PREFIX__}/`
-  const isRootPath = location.pathname === rootPath
-*/
+const Layout = ({ children }) => {
   return (
-    <NavContextProvider >
-      <LayoutGrid >
-        <Header />
-        <NavBar />
-        <Main>{children}</Main>
-        <SideBar />
-        <Footer />
-      </LayoutGrid>
-    </NavContextProvider>
+    <Wrapper>
+      <NavContextProvider>
+        <LayoutGrid>
+          <Header />
+          <NavBar />
+          <Main>{children}</Main>
+        </LayoutGrid>
+      </NavContextProvider>
+    </Wrapper>
   )
 }
 

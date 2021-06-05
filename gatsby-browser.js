@@ -1,7 +1,7 @@
 // custom typefaces
 //import "typeface-montserrat"
 //import "typeface-merriweather"
-import { SHGStyleContextWrapper } from "./src/contexts/SHGContext"
+import { SHGStyleContextWrapper } from "./src/contexts/SHG_Context"
 
 export const wrapRootElement = SHGStyleContextWrapper
 

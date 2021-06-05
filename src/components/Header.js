@@ -6,7 +6,7 @@ import HamburgerButton from "./HamburgerButton"
 import LogoIcon from "./LogoIcon"
 import LogoText from "./LogoText"
 import { DarkModeToggle } from "./SHG_Components"
-import UserIcon from "./UserIcon"
+import UserButton from "./UserButton"
 
 export const StyledHeader = styled.header`
   grid-area: header;
@@ -17,10 +17,7 @@ export const StyledHeader = styled.header`
   height: var(--header-height-mobile);
 
   box-shadow: var(--shape-box-shadow);
-  padding-top: 0rem;
-  padding-bottom: 0rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
+  padding: 0rem;
 
   z-index: 999;
 
@@ -34,8 +31,10 @@ export const StyledHeader = styled.header`
 
 export const LogoDiv = styled.div`
   padding: 0rem;
+  margins: 0rem;
   display: flex;
   align-items: center;
+  justify-content: center;
 
   /* logo icon */
   & > a > span:first-of-type {
@@ -73,19 +72,16 @@ const FlexDiv = styled.div`
 const Header = () => {
   return (
     <StyledHeader>
-      <FlexDiv>
-        <HamburgerButton/>
-      </FlexDiv>
+      <HamburgerButton/>
       <LogoDiv>
         <LogoLink to="/">
           <LogoIcon />
-          &nbsp;
           <LogoText />
         </LogoLink>
       </LogoDiv>
       <FlexDiv>
-        <DarkModeToggle />
-        <UserIcon/>
+        <div style={{ display: "none" }}><DarkModeToggle/></div>
+        <UserButton/>
       </FlexDiv>
     </StyledHeader>
   )

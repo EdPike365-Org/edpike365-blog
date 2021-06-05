@@ -1,18 +1,19 @@
 import React, { useContext } from "react"
 import styled from "@emotion/styled"
-import HamburgerIcon from "./HamburgerIcon"
-import XIconRegular from "./XIconRegular"
-import XIconSolid from "./XIconSolid"
+import HamburgerIcon from "../icons/HamburgerIcon"
+import XIconRegular from "../icons/XIconRegular"
 import { NavContext } from "../contexts/NavContext"
 
 export const HamButton = styled.button`
   display: inline-flex;
   align-items: center;
-  justify-items: center;
+  justify-content: center;
   
-  padding: 0rem;
+  padding: .25rem;
   margin: 0rem;
-  width: 1.4rem; /* need to pad to the widest icon to prevent resize */
+  /* need to pad to the widest icon to prevent resize */
+  width: 2.8rem;
+  height: 2.8rem;
   
   border: none;
   letter-spacing: 0px;

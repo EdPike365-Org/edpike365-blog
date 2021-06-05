@@ -3,7 +3,7 @@ import styled from "@emotion/styled"
 
 export const StyledMain = styled.main`
   background-color: var(--color-text-default);
-  padding: 1rem;
+  padding: .25rem;
 
   /* this is a mobile first UI 
     We will have a navbar on the footer in the future.

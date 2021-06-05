@@ -30,9 +30,7 @@ const GlobalGridDiv = styled.div`
   grid-template-rows: auto 1fr auto;
   grid-template-areas:
     "header"
-    "content"
-
-    "footer";
+    "content";
 
     /* TODO: figure out how to pass the props into the actual Nav component */
     ${Nav} {
@@ -44,8 +42,9 @@ const GlobalGridDiv = styled.div`
     }
 
   /*-------------------- Tablet  --------------------*/
+  /* TODO! make hamburger appear first, make logo appear second so it does not mover over to right after hamburger */
   /* tablet-ish, I can't get the var(--xyz) to work, so hard coded */
-  @media only screen and (min-width: 852px) {
+  @media only screen and (min-width: 768px) {
     
     /* using auto keeps the sidebar from growing and let the content take all the space */
     grid-template-columns: minmax(min-content, max-content) minmax(
@@ -78,6 +77,7 @@ const GlobalGridDiv = styled.div`
     ${SideBarDiv} {
       display: flex;
     }
+
   }
 
   /*-------------------- LapTop  --------------------*/

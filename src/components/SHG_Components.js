@@ -1,9 +1,9 @@
 import React, { useContext } from "react"
 import styled from "@emotion/styled"
 import { css } from "@emotion/react"
-import { SHGStyleContext } from "../contexts/SHGContext"
-import MoonIconSolid from "./MoonIconSolid"
-import SunIconSolid from "./SunIconSolid"
+import { SHGStyleContext } from "../contexts/SHG_Context"
+import MoonIconSolid from "../icons/MoonIconSolid"
+import SunIconSolid from "../icons/SunIconSolid"
 
 export const isSSR = () => {
   return typeof window === "undefined"
@@ -105,11 +105,12 @@ export const DarkModeToggle = () => {
   const Button = styled.button`
     display: inline-flex;
     align-items: center;
-    justify-items: center;
+    justify-content: center;
 
-    padding: 0rem;
-    margin: 0rem 0.5rem;
-    width: 1.4rem; /* need to pad to the widest icon to prevent resize */
+    padding: .25rem;
+    margin: 0rem;
+    width: 2.8rem;
+    height: 2.8rem;
 
     border: none;
     cursor: pointer;
