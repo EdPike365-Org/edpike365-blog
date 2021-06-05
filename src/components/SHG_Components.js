@@ -59,13 +59,22 @@ export const StyleSelector = () => {
     }
   }
 
-  let selectedStyleID = ""
-  let lastEnabledStyle = null
-  if (!isSSR()) {
-    lastEnabledStyle = model.getLastEnabledOptionalStyle()
+  function getSelectedStyleID(){
+    let lastEnabledStyle = null
+    console.log("getsSelectedStyleID()...")
+    if (!isSSR()) {
+      console.log("!isSSR() so getting style from model..")
+      lastEnabledStyle = model.getLastEnabledOptionalStyle()
+    }
+
+    let selectedStyleID = ""
+    if (lastEnabledStyle) selectedStyleID = lastEnabledStyle.id
+    
+    console.log("SHG_Components: selectedStyleID = " + selectedStyleID)
+    return selectedStyleID;
   }
 
-  if (lastEnabledStyle) selectedStyleID = lastEnabledStyle.id
+  const selectedStyleID = getSelectedStyleID()
 
   const styleOptions = []
   let styleArray = []
@@ -87,23 +96,32 @@ export const StyleSelector = () => {
     styleOptions.push(thisOption)
   }
 
-  return (
-    <select onChange={handleChange} value={selectedStyleID}>
-      {styleOptions.map(option => (
+  /*
+        {styleOptions.map(option => (
         <option key={option.value} value={option.value}>
           {option.label}
         </option>
       ))}
+    */
+  const options = styleOptions.map( option => {
+    return <option key={option.value} value={option.value} selected={option.selected}>{option.label}</option>;
+  })
+
+  //    <select onChange={handleChange} value={selectedStyleID} >
+  return (
+    <select onChange={handleChange} >
+      {options}
     </select>
   )
 }
 
-export const DarkModeToggle = () => {
+export const DarkModeToggle = ({hide}) => {
   const { SHGModel } = useContext(SHGStyleContext)
   const model = SHGModel.model
 
   const Button = styled.button`
-    display: inline-flex;
+    display: ${props =>
+    props.hide ? 'none' : 'inline-flex'};
     align-items: center;
     justify-content: center;
 
@@ -121,23 +139,39 @@ export const DarkModeToggle = () => {
   `
 
   const isDark = () => {
-    return isSSR() ? false : model.isUsingADarkStyle()
+    if (isSSR()){
+      return false
+    }else{
+      return model.isUsingADarkStyle()
+    }
   }
 
   const shouldNotDisplayYet = () => {
-    return isSSR() || model === null
+    const res = (isSSR() || model === null)
+    console.log("SHG_Components: shouldNotRenderYet() was " + res)
+    return res
   }
 
   const handleClick = () => {
     if (!isSSR()) model.toggleDarkStyle()
   }
+  
   //  { isDark() ? "☼ " : "☽ "}
+  let iconToRender;
+  if(shouldNotDisplayYet()){
+    console.log("SHG_Components: shouldNotRenderYet() was true, iconToRender is being set to null")
+    iconToRender = null
+  }else{
+    if(isDark()){
+      iconToRender = <SunIconSolid/>;
+    }else{
+      iconToRender = <MoonIconSolid/>;
+    }
+  } 
+
   return (
-    <Button
-      onClick={handleClick}
-      display={shouldNotDisplayYet() ? "none" : "inline-block"}
-    >
-      {isDark() ? <SunIconSolid /> : <MoonIconSolid />}
+    <Button onClick={handleClick} hide={hide} >
+      {iconToRender}
     </Button>
   )
 }

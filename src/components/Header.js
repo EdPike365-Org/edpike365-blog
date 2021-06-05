@@ -68,7 +68,7 @@ const FlexDiv = styled.div`
   align-items: center;
   height: 1.5rem;
 `
-
+//<div style={{ display: "none" }}><DarkModeToggle/></div>
 const Header = () => {
   return (
     <StyledHeader>
@@ -80,7 +80,7 @@ const Header = () => {
         </LogoLink>
       </LogoDiv>
       <FlexDiv>
-        <div style={{ display: "none" }}><DarkModeToggle/></div>
+        <DarkModeToggle hide />
         <UserButton/>
       </FlexDiv>
     </StyledHeader>

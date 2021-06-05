@@ -12,10 +12,11 @@
       console.log("SHGModel constructor() running...");
       this.idPrefix = "StyleHeadGamesID_";
       this.styles = [];
-      this.darkQuery = window.matchMedia("(prefers-color-scheme: dark)");
       
+      this.darkQuery = window.matchMedia("(prefers-color-scheme: dark)");
       // If you use the arrow function, "this" will be the real this, and not the media query list's "this"
       this.darkQuery.addEventListener("change", evt => this.handleDarkQueryChange(evt) );
+
       this.populateSHGModelFromPage();
       this.enableInitialStyle();
       console.log("SHGModel constructor() done!");
