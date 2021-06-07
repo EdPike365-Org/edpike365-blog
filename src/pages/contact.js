@@ -6,7 +6,7 @@ const Contact = ({location}) => {
   
  return (
     <Layout location={location}>
-      <Seo title="Contact EdPike365" />
+      <Seo title="Contact" />
       <h2>Contact</h2>
       <ol>Will hold:
       <li>Email list signup</li>

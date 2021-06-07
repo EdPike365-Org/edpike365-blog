@@ -7,17 +7,16 @@ export const UserButt = styled.button`
   align-items: center;
   justify-content: center;
   
-  padding: .25rem;
-  margin: 0rem;
-  /* need to pad to the widest icon to prevent resize */
-  width: 2.8rem;
-  height: 2.8rem;
+  padding: 5px;
+  margin: 5px 5px;
+  width: 30px;
+  height: 30px;
   
   border: none;
   letter-spacing: 0px;
   cursor: pointer;
   background-color: var(--color-background-paper);
-
+  
 `
 //Note: if button has no dimensions, or no text, icons wont render
 const UserButton = () => {

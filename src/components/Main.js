@@ -2,7 +2,9 @@ import React from "react"
 import styled from "@emotion/styled"
 
 export const StyledMain = styled.main`
-  background-color: var(--color-text-default);
+  grid-area: content;
+
+  background-color: var(--color-background-default);
   padding: .25rem;
 
   /* this is a mobile first UI 
@@ -13,8 +15,7 @@ export const StyledMain = styled.main`
     Overflow auto keeps the footer from being pushed off. 
   */
   overflow: auto; 
-
-  grid-area: content;
+  
 `
 const Main = ({ children }) => {
   return <StyledMain>{children}</StyledMain>

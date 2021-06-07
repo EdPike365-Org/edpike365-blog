@@ -1,15 +1,16 @@
 ;(function () {
-  console.log("!!!! StyleHeadGames Flash Prevention Code is running")
-
+  console.log("StyleHeadGames Flash Prevention Code is running in the body.");
+  log = null; 
   // SHGModel is populated before page load. It should roughly match StyleHeadGames.json
   // However, this local SHGModel will be more accurate because it is populated on page load
   // and reflects the style elements that ACTUALLY got inserted on SSR, and their actual state.
   // One of my references https://hangindev.com/blog/avoid-flash-of-default-theme-an-implementation-of-dark-mode-in-react-app  
   class SHGModel {
-    // idPrefix doubles as local storage Key
-    // TODO: get idPrefix from config file, probably via a meta tag, allow any REGEX
+
     constructor() {
-      console.log("SHGModel constructor() running...");
+      if(log)console.log("SHGModel constructor() running...");
+      // idPrefix doubles as local storage Key
+      // TODO: get idPrefix from config file, probably via a meta tag, allow any REGEX
       this.idPrefix = "StyleHeadGamesID_";
       this.styles = [];
       
@@ -19,7 +20,7 @@
 
       this.populateSHGModelFromPage();
       this.enableInitialStyle();
-      console.log("SHGModel constructor() done!");
+      if(log)console.log("SHGModel constructor() done!");
     }
 
     //------------------------- Public Facing Methods ----------------
@@ -51,7 +52,7 @@
     }
 
     setSHGStyleByID = function (styleID) {
-      console.log("__setSHGStyleID(): trying to set for :" + styleID)
+      if(log)console.log("setSHGStyleID(): trying to set for :" + styleID)
       const style = this.getLastStyleWithID(styleID)
       if (style) {
         this.setAndSaveStyle(style)
@@ -62,7 +63,6 @@
     }
 
     setSHGStyleByUse = function (styleUse) {
-      console.log("__setSHGStyleUse(): trying to set for :" + styleUse)
       const style = this.getLastStyleWithUse(styleUse)
       if (style) {
         this.setAndSaveStyle(style)
@@ -83,12 +83,12 @@
     // ---------------- SHGModel initiation --------------------------
     populateSHGModelFromPage = () => {
 
-      //TODO: this could ALSO contain style links, but that would jeapardize fast loads
+      //TODO: this could ALSO contain links to remote style sheets, but that would jeapardize fast site loads
       this.styles = document.querySelectorAll(
         "[id*='" + this.idPrefix + "']"
       )
 
-      console.log(
+      if(log)console.log(
         "populateSHGModelFromPage(): done populating, found " +
         this.styles.length +
           " style Elements."
@@ -101,7 +101,7 @@
         style = this.getStyleForDarkQueryState()
       }
       if (!style) {
-        console.log(
+        if(log)console.log(
           "setInitialStyle(): Could not get style for stored ID or dark mode. Setting to use contais default."
         )
         style = this.getLastStyleWithUse("default")
@@ -110,13 +110,13 @@
     }
 
     handleDarkQueryChange(evt) {
-      console.log(
+      if(log)console.log(
         "darkQueryListener: prefers-color-scheme just changed, wants dark = " +
           evt.matches
       )
       let style = this.getStyleForDarkQueryState()
       if (!style) {
-        console.log(
+        if(log)console.log(
           "darkQuery eventListener: Could not get style for use light, setting to default."
         )
         style = this.getLastStyleWithUse("default")
@@ -136,7 +136,7 @@
         this.setStoredStyleID(style.id)
         this.modelStateChanged(this) //Let the UI components know something changed
       } else {
-        console.log("!!!Error: setAndSaveStyle(): Someone tried to set Style to " + style)
+        console.log("ERROR: SHGModel.setAndSaveStyle(): Someone tried to set Style to " + style)
       }
     }
 
@@ -164,21 +164,23 @@
       let style = this.getLastStyleWithUse("light");
       if(!style) style = this.getLastStyleWithUse("default");
       if(!style) style = this.getOptionalStyles().slice(-1)[0];
-      if(!style) console.log("getLightOrDefaultOrAnyOptionalStyle(): could not find any optional styles.");
+      if(!style){
+        if(log)console.log("WARNING: SHGModel getLightOrDefaultOrAnyOptionalStyle(): could not find any optional styles.");
+      } 
       return style;  
     }
 
     enableStyle = style => {
       if (style) {
         style.disabled = false
-        console.log("Enabled style id = " + style.id)
+        if(log)console.log("Enabled style id = " + style.id)
       }
     }
 
     disableStyle = style => {
       if (style) {
         style.disabled = true
-        console.log("Disabled style id = " + style.id)
+        if(log)console.log("Disabled style id = " + style.id)
       }
     }
 
@@ -199,7 +201,7 @@
         }
       })
       if (results.length == 0) {
-        console.log("Could not find any styles with USE containing " + useVal)
+        if(log)console.log("WARNING: SHGModel Could not find any styles with USE containing " + useVal)
       }
       return results
     }
@@ -221,7 +223,7 @@
         }
       })
       if (results.length == 0) {
-        console.log("Could not find any styles with ID === " + idVal)
+        if(log)console.log("WARNING: SHGModel Could not find any styles with ID === " + idVal)
       }
       return results
     }
@@ -235,9 +237,9 @@
       var styleID = null
       try {
         styleID = localStorage.getItem(this.idPrefix)
-        console.log("getStoredStyleID(): found stored styleID " + styleID)
+        if(log)console.log("getStoredStyleID(): found stored styleID " + styleID)
       } catch (err) {
-        console.log("getStoredStyleID(): " + err)
+        console.log("ERROR: SHGModel getStoredStyleID(): " + err)
       }
       return styleID
     }
@@ -246,11 +248,9 @@
       try {
         localStorage.setItem(this.idPrefix, styleID)
       } catch (err) {
-        console.log("setStoredStyleID(): " + err)
+        console.log("ERROR: SHGModel setStoredStyleID(): " + err)
       }
     }
-
-
   }
 
   const thisSHGModel = new SHGModel()

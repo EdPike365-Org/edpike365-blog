@@ -4,10 +4,7 @@ import { css } from "@emotion/react"
 import { SHGStyleContext } from "../contexts/SHG_Context"
 import MoonIconSolid from "../icons/MoonIconSolid"
 import SunIconSolid from "../icons/SunIconSolid"
-
-export const isSSR = () => {
-  return typeof window === "undefined"
-}
+import {isSSR} from "../utils/HelperFunctions"
 
 export const StyleSummary = () => {
   const { SHGModel } = useContext(SHGStyleContext)
@@ -59,19 +56,16 @@ export const StyleSelector = () => {
     }
   }
 
-  function getSelectedStyleID(){
+  function getSelectedStyleID() {
     let lastEnabledStyle = null
-    console.log("getsSelectedStyleID()...")
     if (!isSSR()) {
-      console.log("!isSSR() so getting style from model..")
       lastEnabledStyle = model.getLastEnabledOptionalStyle()
     }
 
     let selectedStyleID = ""
     if (lastEnabledStyle) selectedStyleID = lastEnabledStyle.id
-    
-    console.log("SHG_Components: selectedStyleID = " + selectedStyleID)
-    return selectedStyleID;
+
+    return selectedStyleID
   }
 
   const selectedStyleID = getSelectedStyleID()
@@ -95,84 +89,78 @@ export const StyleSelector = () => {
 
     styleOptions.push(thisOption)
   }
-
-  /*
-        {styleOptions.map(option => (
-        <option key={option.value} value={option.value}>
-          {option.label}
-        </option>
-      ))}
-    */
-  const options = styleOptions.map( option => {
-    return <option key={option.value} value={option.value} selected={option.selected}>{option.label}</option>;
+  //Using "selected" above makes React poop a big red warning, but only in dev
+  const options = styleOptions.map(option => {
+//       selected={option.selected}
+    return (
+      <option
+        key={option.value}
+        value={option.value}
+      >
+        {option.label}
+      </option>
+    )
   })
 
   //    <select onChange={handleChange} value={selectedStyleID} >
-  return (
-    <select onChange={handleChange} >
-      {options}
-    </select>
-  )
+  return <select onChange={handleChange} value={selectedStyleID} >{options}</select>
 }
 
-export const DarkModeToggle = ({hide}) => {
+export const DarkModeButton = styled.button`
+  display: ${props => (props.hide ? "none" : "inline-flex")};
+  align-items: center;
+  justify-content: center;
+
+  padding: 5px;
+  margin: 5px 5px;
+  width: 30px;
+  height: 30px;
+
+  border: none;
+  cursor: pointer;
+  background-color: var(--color-background-paper);
+
+  color: var(--color-text-secondary);
+  white-space: pre-wrap;
+`
+
+export const DarkModeToggle = ({ hide }) => {
   const { SHGModel } = useContext(SHGStyleContext)
   const model = SHGModel.model
 
-  const Button = styled.button`
-    display: ${props =>
-    props.hide ? 'none' : 'inline-flex'};
-    align-items: center;
-    justify-content: center;
-
-    padding: .25rem;
-    margin: 0rem;
-    width: 2.8rem;
-    height: 2.8rem;
-
-    border: none;
-    cursor: pointer;
-    background-color: var(--color-background-paper);
-
-    color: var(--color-text-secondary);
-    white-space: pre-wrap;
-  `
-
   const isDark = () => {
-    if (isSSR()){
+    if (isSSR()) {
       return false
-    }else{
+    } else {
       return model.isUsingADarkStyle()
     }
   }
 
   const shouldNotDisplayYet = () => {
-    const res = (isSSR() || model === null)
-    console.log("SHG_Components: shouldNotRenderYet() was " + res)
+    const res = isSSR() || model === null
     return res
   }
 
   const handleClick = () => {
     if (!isSSR()) model.toggleDarkStyle()
   }
-  
+
   //  { isDark() ? "☼ " : "☽ "}
-  let iconToRender;
-  if(shouldNotDisplayYet()){
-    console.log("SHG_Components: shouldNotRenderYet() was true, iconToRender is being set to null")
+  let iconToRender
+  if (shouldNotDisplayYet()) {
     iconToRender = null
-  }else{
-    if(isDark()){
-      iconToRender = <SunIconSolid/>;
-    }else{
-      iconToRender = <MoonIconSolid/>;
+  } else {
+    if (isDark()) {
+      iconToRender = <SunIconSolid />
+    } else {
+      iconToRender = <MoonIconSolid />
     }
-  } 
+  }
 
   return (
-    <Button onClick={handleClick} hide={hide} >
+    <DarkModeButton onClick={handleClick} hide={hide}>
       {iconToRender}
-    </Button>
+    </DarkModeButton>
   )
 }
 

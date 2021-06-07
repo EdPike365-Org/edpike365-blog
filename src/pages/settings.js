@@ -1,6 +1,7 @@
 import * as React from "react"
 import styled from "@emotion/styled"
 import Layout from "../components/Layout"
+import Seo from "../components/SEO"
 import { DarkModeToggle, StyleSelector, StyleSummary, PrefersDarkMode } from "../components/SHG_Components"
 import Section from "../components/Section"
 
@@ -13,6 +14,7 @@ const FlexDiv = styled.div`
 const Settings = () => {
   return (
     <Layout>
+      <Seo title="Settings" />
       <h2>Settings</h2>
       <Section title="Style">
         Style Selector: <StyleSelector/>

@@ -11,9 +11,11 @@
 
   /* screen width breakpoints, material ui standard */
   /* NOTE: using vars in the media selector widths does not work */
-  --media-width-xs: 360px; /* old smart phone */
-  --media-width-sm: 600px;
-  --media-width-tablet: 852px; /* 851 is pixel 5 landscape */
+  /* smaller than this: no logo icon */
+  --media-width-xs: 320px; /* smallest smart phone is 320 wide, galaxy fold is 280, logoicon, 2 icons, xsmall logo */
+  --media-width-sm: 360px; /* iphone 6/7/8 = 375, pixel 2 is 411 wide, 2 icons */
+  --media-width-sm2: 540px; /* surface duo = 540, room for 4 icons */
+  --media-width-tablet: 700px; /* iPad 1 = 768, pixel 5 landscape = 851*/
   --media-width-md: 960px;
   --media-width-laptop: 1366px; /* HD Laptop 768p, iPad Pro 12 Landscape = max 1366 */
   --media-width-lg: 1280px; /* aka "desktop" */
@@ -21,11 +23,13 @@
   --media-width-xxl: 1920px; /* 1080p display, Full HD */
 
   /* heights are based on screen width, sm = media-width-sm */
-  --header-height-mobile: 3rem;
-  --header-height-tablet: 4rem;
-  --toolbar-min-height-width-lt-sm-landscape: 48;
-  --toolbar-min-height-width-lt-sm: 56;
-  --toolbar-min-height-widht-gte-sm: 64;
+  --header-height-tiny: 32px;
+  --header-height-mobile: 48px;
+  --header-height-tablet: 64px;
+
+  --toolbar-min-height-width-lt-sm-landscape: 48px;
+  --toolbar-min-height-width-lt-sm: 56px;
+  --toolbar-min-height-widht-gte-sm: 64px;
 
   /* PALLETTE, COLOR THEMING */
   /* https://material.io/develop/web/theming/color , */
@@ -81,7 +85,7 @@
   --color-grey-A400: #303030;
   --color-grey-A700: #616161;
 
-  /* edpike365: material naming conventions here are not intuitive */
+  /* edpike365: some material ui naming conventions here are not intuitive */
   --color-text-primary: rgba(0, 0, 0, 0.87); /* use on default bg */
   --color-text-secondary: rgba(0, 0, 0, 0.54); /* use on paper bg */
   --color-text-secondary2: rgba(255, 255, 255, 0.7);
@@ -90,6 +94,7 @@
 
   --color-divider: rgba(0, 0, 0, 0.12);
 
+  --color-background-body: black; /* This is what appears around the border of the app, you should only see this at large screen sizes */
   --color-background-default: #fafafa; /* aka color-background, should be darker than surface */
   --color-background-paper: #fff; /* aka color-surface */
 
@@ -266,7 +271,7 @@ body {
   line-height: var(--font-line-height-body1);
   letter-spacing: var(--font-letter-spacing-body1);
 
-  background-color: var(--color-background-default);
+  background-color: var(--color-background-body);
   /* dont confuse with color-primary-text, which is associated with branding */
   color: var(--color-text-primary); 
 

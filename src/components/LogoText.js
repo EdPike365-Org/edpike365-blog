@@ -2,19 +2,18 @@ import React from "react"
 import styled from "@emotion/styled"
 import { useStaticQuery, graphql } from "gatsby"
 
+// Works with smallest screen width 280. Let parents manipulate as needed.
 const LogoTextSpan = styled.span`
   color: var(--color-primary-dark);
 
   font-family: Arial;
   font-weight: 700;
-  font-size: 3.052rem;
+  font-size: 25px;
 
   letter-spacing: 0.4rem;
-  padding-left: 0.4rem; /* added to balance out the letter-spacing trailing space */
-
-  /* desktop */
-  @media only screen and (min-width: 1280px) {
-  }
+  /* added to balance out the letter-spacing trailing space */
+  /*padding-left: 0.4rem; */
+ 
 `
 
 const LogoText = () => {
