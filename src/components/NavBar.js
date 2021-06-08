@@ -1,5 +1,5 @@
 import React, { useContext } from "react"
-import { Nav, NavUL, SubUL, NavLI, NavLink } from "./NavComps"
+import { Nav, NavUL, SubUL, NavLI, NavLink } from "./NavBarComps"
 import { NavSubMenu } from "./NavSubMenu"
 import { NavContext } from "../contexts/NavContext"
 
@@ -16,6 +16,11 @@ const NavBar = () => {
           </NavLink>
         </NavLI>
         <NavLI>
+          <NavLink to={"/settings/"} itemProp="url">
+            Settings
+          </NavLink>
+        </NavLI>        
+        <NavLI>
           <NavLink to={"/about/"} itemProp="url">
             About
           </NavLink>
@@ -28,11 +33,6 @@ const NavBar = () => {
         <NavLI>
           <NavLink to={"/contact/"} itemProp="url">
             Contact
-          </NavLink>
-        </NavLI>
-        <NavLI>
-          <NavLink to={"/settings/"} itemProp="url">
-            Settings
           </NavLink>
         </NavLI>
         <NavSubMenu

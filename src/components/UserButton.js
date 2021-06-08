@@ -1,4 +1,5 @@
 import React from "react"
+import {navigate} from "gatsby"
 import styled from "@emotion/styled"
 import UserIcon from "../icons/UserIcon"
 
@@ -21,8 +22,12 @@ export const UserButt = styled.button`
 //Note: if button has no dimensions, or no text, icons wont render
 const UserButton = () => {
 
+  const handleClick = () => {
+    navigate( "/settings/")
+  }
+
   return (
-    <UserButt aria-label={"Navigation"}>
+    <UserButt aria-label={"Navigation"} onClick={handleClick} >
       <UserIcon/>
     </UserButt>
   )

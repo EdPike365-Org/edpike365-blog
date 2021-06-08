@@ -16,7 +16,9 @@ const Settings = () => {
     <Layout>
       <Seo title="Settings" />
       <h2>Settings</h2>
+      I put the link to this page up high in the nav to make it more likely that you'll come here to see my stuff.
       <Section title="Style">
+        <hr/>
         Style Selector: <StyleSelector/>
         <hr/>
         <PrefersDarkMode/>
