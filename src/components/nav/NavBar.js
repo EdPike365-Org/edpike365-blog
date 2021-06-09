@@ -1,14 +1,15 @@
 import React, { useContext } from "react"
 import { Nav, NavUL, SubUL, NavLI, NavLink } from "./NavBarComps"
-import { NavSubMenu } from "./NavSubMenu"
-import { NavContext } from "../contexts/NavContext"
+import { NavSubMenu } from "./NavBarSubMenu"
+import { NavContext } from "../../contexts/NavContext"
 
 const NavBar = () => {
   const { showNavState } = useContext(NavContext)
-  const [showNav] = showNavState;
+  const [showNav] = showNavState
   
+  // The line breaks at bottom are there to handle too short scroll bars on short screens
   return (
-    <Nav showNav={showNav} >
+    <Nav showNav={showNav}>
       <NavUL>
         <NavLI>
           <NavLink to={"/"} itemProp="url">
@@ -19,7 +20,7 @@ const NavBar = () => {
           <NavLink to={"/settings/"} itemProp="url">
             Settings
           </NavLink>
-        </NavLI>        
+        </NavLI>
         <NavLI>
           <NavLink to={"/about/"} itemProp="url">
             About
@@ -88,7 +89,51 @@ const NavBar = () => {
             </NavLink>
           </NavLI>
         </SubUL>
+        <NavSubMenu
+          title={"DEVOPS"}
+          uuid={"b2cea402-c66f-11eb-b8bc"}
+        >
+          <NavLI>
+            <NavLink to={"/devops/"} itemProp="url">
+              Jenkins, GitHub Actions
+            </NavLink>
+          </NavLI>
+          <NavLI>
+            <NavLink to={"/devops/"} itemProp="url">
+              Maven, Gradle
+            </NavLink>
+          </NavLI>
+          <NavLI>
+          <NavLink to={"/frontend/"} itemProp="url">
+              React, Emotion
+            </NavLink>
+          </NavLI>
+          <NavLI>
+            <NavLink to={"/frontend/"} itemProp="url">
+              Gatsby
+            </NavLink>
+          </NavLI>
+          <NavLI>
+            <NavLink to={"/frontend/"} itemProp="url">
+              SEO
+            </NavLink>
+          </NavLI>
+        </NavSubMenu>
+        <NavLI>
+          <NavLink to={"/about/"} itemProp="url">
+            About
+          </NavLink>
+        </NavLI>
+        <NavLI>
+          <NavLink to={"/bloglist/"} itemProp="url">
+            Blog
+          </NavLink>
+        </NavLI>
       </NavUL>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
     </Nav>
   )
 }

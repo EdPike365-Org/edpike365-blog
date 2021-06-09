@@ -3,14 +3,15 @@ import styled from "@emotion/styled"
 import { useStaticQuery, graphql } from "gatsby"
 
 // Works with smallest screen width 280. Let parents manipulate as needed.
-const LogoTextSpan = styled.span`
+export const LogoTextSpan = styled.span`
   color: var(--color-primary-dark);
-
+  transition: color 400ms ease-in-out;
+  
   font-family: Arial;
   font-weight: 700;
   font-size: 25px;
 
-  letter-spacing: 0.4rem;
+  letter-spacing: 0.25em;
   /* added to balance out the letter-spacing trailing space */
   /*padding-left: 0.4rem; */
  

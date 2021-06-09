@@ -12,10 +12,11 @@ const GlobalGridDiv = styled.div`
   display: grid;
   gap: 0px;
   grid-template-columns: auto;
-  grid-template-rows: auto 1fr;
+  grid-template-rows: auto auto 1fr;
   grid-template-areas:
     "header"
-    "content";
+    "nav"
+    "main";
 
 
   /*-------------------- Tablet  --------------------*/
@@ -25,18 +26,18 @@ const GlobalGridDiv = styled.div`
     grid-template-columns: auto 1fr;
     grid-template-rows: auto 1fr;
     grid-template-areas:
-      "header  header"
-      "content content";
+      "header header"
+      "nav main";
   }
 
   /*-------------------- LapTop  --------------------*/
   /* Show nav, open on left, hide hamburger */
   @media only screen and (min-width: 1366px) {
     grid-template-columns: auto 1fr;
-    grid-template-rows: auto 1fr;
+    grid-template-rows:  auto 1fr;
     grid-template-areas:
       "header header"
-      "nav content";
+      "nav main";
   }
 `
 

@@ -1,8 +1,8 @@
 import React, { useContext } from "react"
 import styled from "@emotion/styled"
-import HamburgerIcon from "../icons/HamburgerIcon"
-import XIconRegular from "../icons/XIconRegular"
-import { NavContext } from "../contexts/NavContext"
+import HamburgerIcon from "../../icons/HamburgerIcon"
+import XIconRegular from "../../icons/XIconRegular"
+import { NavContext } from "../../contexts/NavContext"
 
 export const HamButton = styled.button`
   display: inline-flex;
@@ -19,7 +19,7 @@ export const HamButton = styled.button`
   letter-spacing: 0px;
   cursor: pointer;
   background-color: var(--color-background-paper);
-
+  transition: color 400ms ease-in-out, background-color 400ms ease-in-out;
   
 `
 //Note: if button has no dimensions, or no text, icons wont render

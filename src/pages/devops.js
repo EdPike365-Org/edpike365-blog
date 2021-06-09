@@ -2,17 +2,15 @@ import * as React from "react"
 import Layout from "../components/layout/Layout"
 import Seo from "../components/SEO"
 
-const Contact = ({location}) => {
+const DevOps = ({location}) => {
   
  return (
     <Layout location={location}>
-      <Seo title="Contact" />
-      <h2>Contact</h2>
-      <ol>Will hold:
-      <li>Email list signup</li>
-      </ol>
+      <Seo title="DevOps" />
+      <h2>DevOps</h2>
+      
     </Layout>
   )
 }
 
-export default Contact
+export default DevOps

@@ -1,9 +1,9 @@
 import React from "react"
 import {navigate} from "gatsby"
 import styled from "@emotion/styled"
-import UserIcon from "../icons/UserIcon"
+import UserIcon from "../../icons/UserIcon"
 
-export const UserButt = styled.button`
+export const UserButton = styled.button`
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -17,20 +17,21 @@ export const UserButt = styled.button`
   letter-spacing: 0px;
   cursor: pointer;
   background-color: var(--color-background-paper);
+  transition: color 400ms ease-in-out, background-color 400ms ease-in-out;
   
 `
 //Note: if button has no dimensions, or no text, icons wont render
-const UserButton = () => {
+const UserIconButton = () => {
 
   const handleClick = () => {
     navigate( "/settings/")
   }
 
   return (
-    <UserButt aria-label={"Navigation"} onClick={handleClick} >
+    <UserButton aria-label={"Navigation"} onClick={handleClick} >
       <UserIcon/>
-    </UserButt>
+    </UserButton>
   )
 }
 
-export default UserButton
+export default UserIconButton

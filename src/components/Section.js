@@ -9,6 +9,7 @@ const StyledSection = styled.section`
   border: var(--shape-border);
   box-shadow: var(--shape-box-shadow);
   color: var(--color-text-primary);
+  transition: color 400ms ease-in-out, background-color 400ms ease-in-out;
 `
 const Title = styled.h3`
     margin-top: 0px;

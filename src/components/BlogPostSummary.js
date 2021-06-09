@@ -4,18 +4,20 @@ import { Link } from "gatsby"
 
 const SummaryContainer = styled.div`
   padding: 10px;
-  margin: 0.5rem;
+  
   background-color: var(--color-background-paper);
   border-radius: var(--shape-border-radius);
   border: var(--shape-border);
   box-shadow: var(--shape-box-shadow);
   color: var(--color-text-primary);
+  transition: color 400ms ease-in-out, background-color 400ms ease-in-out; 
 `
 
 // & is a placeholder for the generated class name
 const Header = styled.h3`
     margin-top: 0px;
     margin-bottom: 0px;
+    transition: color 400ms ease-in-out, background-color 400ms ease-in-out; 
 
   & > a:link {
     text-decoration: none;
@@ -41,7 +43,7 @@ const BlogPostSummary = ({ post }) => {
   const LinK = styled(props => <Link {...props} />)`
     color: var(--color-text-secondary);
     text-decoration: none;
-
+    transition: color 400ms ease-in-out, background-color 400ms ease-in-out; 
     :hover {
       color: var(--color-text-primary);
     }

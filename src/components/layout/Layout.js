@@ -1,9 +1,9 @@
 import React from "react"
 import Wrapper from "./AppWrapper"
 import LayoutGrid from "./LayoutGrid"
-import NavHeader from "./NavHeader"
-import NavBar from "./NavBar"
 import Main from "./Main"
+import NavHeader from "../nav/NavHeader"
+import NavBar from "../nav/NavBar"
 
 const Layout = ({ children }) => {
   return (

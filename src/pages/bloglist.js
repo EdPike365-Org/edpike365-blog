@@ -2,7 +2,7 @@ import * as React from "react"
 import { graphql } from "gatsby"
 
 import Bio from "../components/Bio"
-import Layout from "../components/Layout"
+import Layout from "../components/layout/Layout"
 import Seo from "../components/SEO"
 import BlogPostSummary from "../components/BlogPostSummary"
 

@@ -1,10 +1,10 @@
 import React, { useContext } from "react"
 import styled from "@emotion/styled"
 import { css } from "@emotion/react"
-import { SHGStyleContext } from "../contexts/SHG_Context"
-import MoonIconSolid from "../icons/MoonIconSolid"
-import SunIconSolid from "../icons/SunIconSolid"
-import { isSSR } from "../utils/HelperFunctions"
+import { SHGStyleContext } from "../../contexts/SHG_Context"
+import MoonIconSolid from "../../icons/MoonIconSolid"
+import SunIconSolid from "../../icons/SunIconSolid"
+import { isSSR } from "../../utils/HelperFunctions"
 
 export const StyleSummary = () => {
   const { SHGModel } = useContext(SHGStyleContext)
@@ -127,10 +127,13 @@ export const DarkModeButton = styled.button`
 
   border: none;
   cursor: pointer;
-  background-color: var(--color-background-paper);
 
   color: var(--color-text-secondary);
   white-space: pre-wrap;
+
+  background-color: var(--color-background-paper);
+  transition: color 400ms ease-in-out, background-color 400ms ease-in-out; 
+
 `
 
 export const DarkModeToggle = ({ hide }) => {

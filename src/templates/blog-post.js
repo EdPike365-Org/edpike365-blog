@@ -4,25 +4,24 @@ import { getSrc } from "gatsby-plugin-image"
 import styled from "@emotion/styled"
 
 import Bio from "../components/Bio"
-import Layout from "../components/Layout"
+import Layout from "../components/layout/Layout"
 import Seo from "../components/SEO"
 
 require(`katex/dist/katex.min.css`)
 
 const BlogHeader = styled.header`
- & > h1{
-   margin-top: 0rem;
-   margin-bottom: .5rem;
-   font-weight: var(--font-weight-light);
-   text-align: center;
- }
-
+  & > h1 {
+    margin-top: 0rem;
+    margin-bottom: 0.5rem;
+    font-weight: var(--font-weight-light);
+    text-align: center;
+  }
 `
 
 const BlogPostTemplate = ({ data, location }) => {
   const post = data.markdownRemark
   const siteTitle = data.site.siteMetadata?.title || `Title`
-  
+
   const title = post.frontmatter.title || post.fields.slug
   const postDate = post.frontmatter.date
 
@@ -45,8 +44,8 @@ const BlogPostTemplate = ({ data, location }) => {
         itemType="http://schema.org/Article"
       >
         <BlogHeader>
-          <h1 itemProp="headline">{ title }</h1>
-          <span className="overline">{ postDate }</span>
+          <h1 itemProp="headline">{title}</h1>
+          <span className="overline">{postDate}</span>
         </BlogHeader>
         <section
           dangerouslySetInnerHTML={{ __html: post.html }}
@@ -100,9 +99,7 @@ export const pageQuery = graphql`
         title
       }
     }
-    markdownRemark(
-        id: { eq: $id }
-      ) {
+    markdownRemark(id: { eq: $id }) {
       id
       excerpt(pruneLength: 160)
       html
@@ -110,7 +107,7 @@ export const pageQuery = graphql`
         title
         date(formatString: "MMMM DD, YYYY")
         description
-        ogimage { 
+        ogimage {
           childImageSharp {
             gatsbyImageData(layout: FIXED)
           }
