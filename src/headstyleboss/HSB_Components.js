@@ -1,48 +1,48 @@
 import React, { useContext } from "react"
-import styled from "@emotion/styled"
-import { css } from "@emotion/react"
+import * as styles from "./HSB.module.css"
 import { HSBStyleContext } from "./HSB_Context"
 import { isSSR } from "./HSB_Helpers"
 import MoonIconSolid from "./MoonIconSolid"
 import SunIconSolid from "./SunIconSolid"
 
-export const StyleSummary = () => {
+export const DarkModeToggle = () => {
   const { HSBModel } = useContext(HSBStyleContext)
   const model = HSBModel.model
-  const styles = isSSR() ? [] : model.styles
+
+  const isDark = () => {
+    if (isSSR()) {
+      return false
+    } else {
+      return model.isUsingADarkStyle()
+    }
+  }
+
+  // This was an effort to keep the dark mode button from flashing
+  // TODO try getting rid of it.
+  const shouldNotDisplayYet = () => {
+    const res = isSSR() || model === null
+    return res
+  }
+
+  const handleClick = () => {
+    if (!isSSR()) model.toggleDarkStyle()
+  }
+
+  let iconToRender
+  if (shouldNotDisplayYet()) {
+    iconToRender = null
+  } else {
+    if (isDark()) {
+      iconToRender = <SunIconSolid />
+    } else {
+      iconToRender = <MoonIconSolid />
+    }
+  }
+
   return (
-    <div>
-      <h5
-        css={css`
-          margin-bottom: 0.25rem;
-        `}
-      >
-        HSB Style Model State
-      </h5>
-      idPrefix: "{model.idPrefix}".
-      <br />
-      Styles: {styles.length}
-      <table>
-        <thead>
-          <tr>
-            <th>Display Name</th>
-            <th>Uses</th>
-            <th>Enabled</th>
-            <th>FileName</th>
-          </tr>
-        </thead>
-        <tbody>
-          {Array.from(styles).map(style => (
-            <tr key={style.dataset.filename}>
-              <td>{style.dataset.displayname}</td>
-              <td>{style.dataset.use}</td>
-              <td>{style.disabled ? "no" : "yes"}</td>
-              <td>{style.dataset.filename}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+    <button onClick={handleClick} className={`dark-mode-button ${styles.dark_mode_button}` } >
+      {iconToRender}
+    </button>
   )
 }
 
@@ -62,6 +62,7 @@ export const StyleSelector = () => {
   const getStyleOptions = () => {
     const selectedStyleID = getSelectedStyleID()
     // this node array is not iterable, has to be converted to normal array
+    // TODO try map, etc.
     let styleArray = Array.from(model.getOptionalStyles())
 
     const styleOptions = []
@@ -84,8 +85,8 @@ export const StyleSelector = () => {
 
   const getSelectOptions = () => {
     const styleOptions = getStyleOptions()
-    //Setting "selected" attribute makes React poop a big red warning, but only in dev
-    //However, if I use the recommended approach instead, in PROD, if I reload the page
+    //Setting "selected" attribute makes React poop a big red warning --in Gatsby dev--
+    //However, if I use the recommended approach instead, -- if I'm in Gatsby PROD--, --if I reload the page--
     //the select draws the original version, which has nothing selected.
     //I tried everything to make it rerender. useState, useEffect. useState would be accurate
     //but the select WOULD NOT RERENDER to reflect the state because technically the state had not changed
@@ -109,70 +110,45 @@ export const StyleSelector = () => {
   }
 
   return (
-    <select onChange={handleChange} >
+    <select onChange={handleChange} className={`style-selector ${styles.style_selector}`} >
       {selectOptions}
     </select>
   )
 }
 
-export const DarkModeButton = styled.button`
-  display: ${props => (props.hide ? "none" : "inline-flex")};
-  align-items: center;
-  justify-content: center;
-
-  padding: 5px;
-  margin: 5px 5px;
-  width: 30px;
-  height: 30px;
-
-  border: none;
-  cursor: pointer;
-
-  color: var(--color-text-secondary);
-  white-space: pre-wrap;
-
-  background-color: var(--color-background-paper);
-  transition: color 400ms ease-in-out, background-color 400ms ease-in-out; 
-
-`
-
-export const DarkModeToggle = ({ hide }) => {
+export const StylesSummary = () => {
   const { HSBModel } = useContext(HSBStyleContext)
   const model = HSBModel.model
 
-  const isDark = () => {
-    if (isSSR()) {
-      return false
-    } else {
-      return model.isUsingADarkStyle()
-    }
-  }
-
-  const shouldNotDisplayYet = () => {
-    const res = isSSR() || model === null
-    return res
-  }
-
-  const handleClick = () => {
-    if (!isSSR()) model.toggleDarkStyle()
-  }
-
-  //  { isDark() ? "☼ " : "☽ "}
-  let iconToRender
-  if (shouldNotDisplayYet()) {
-    iconToRender = null
-  } else {
-    if (isDark()) {
-      iconToRender = <SunIconSolid />
-    } else {
-      iconToRender = <MoonIconSolid />
-    }
-  }
-
+  const myStyles = isSSR() ? [] : model.styles
+  
   return (
-    <DarkModeButton onClick={handleClick} hide={hide}>
-      {iconToRender}
-    </DarkModeButton>
+    <div className={ `styles-summary ${styles.styles_summary}` } >
+      <h4>HSB Style Model State</h4>
+      idPrefix: "{model.idPrefix}".
+      <br />
+      Styles: {myStyles.length}
+      <table>
+        <thead>
+          <tr>
+            <th>Display Name</th>
+            <th>Uses</th>
+            <th>Enabled</th>
+            <th>FileName</th>
+          </tr>
+        </thead>
+        <tbody>
+          {Array.from(myStyles).map(style => (
+            <tr key={style.dataset.filename}>
+              <td>{style.dataset.displayname}</td>
+              <td>{style.dataset.use}</td>
+              <td>{style.disabled ? "no" : "yes"}</td>
+              <td>{style.dataset.filename}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   )
 }
 
@@ -181,7 +157,7 @@ export const PrefersDarkMode = () => {
   const model = HSBModel.model
 
   return (
-    <span>
+    <span className={ `prefers-dark-mode-status ${styles.prefers_dark_mode_status}` }>
       Prefers Dark Mode ={" "}
       {!isSSR() && model.darkQuery.matches ? "true" : "false"}.
     </span>

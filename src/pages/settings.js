@@ -2,7 +2,7 @@ import * as React from "react"
 import styled from "@emotion/styled"
 import Layout from "../components/layout/Layout"
 import Seo from "../components/SEO"
-import { DarkModeToggle, StyleSelector, StyleSummary, PrefersDarkMode } from "../headstyleboss/HSB_Components"
+import { DarkModeToggle, StyleSelector, StylesSummary, PrefersDarkMode } from "../headstyleboss/HSB_Components"
 import Section from "../components/Section"
 
 const FlexDiv = styled.div`
@@ -25,7 +25,7 @@ const Settings = () => {
         <hr/>
         <FlexDiv>Dark Mode Toggle: <DarkModeToggle/></FlexDiv>
 
-        <StyleSummary/>
+        <StylesSummary/>
       </Section>
     </Layout>
   )

@@ -95,8 +95,8 @@
   --color-divider: rgba(0, 0, 0, 0.12);
 
   --color-background-body: black; /* This is what appears around the border of the app, you should only see this at large screen sizes */
-  --color-background-default: #fafafa; /* aka color-background, should be darker than surface */
-  --color-background-paper: #fff; /* aka color-surface */
+  --color-background-default: #fafafa; /* aka color-background, should be darker than surface/paper */
+  --color-background-paper: #fff; /* aka color-surface/paper */
 
   /* these are alpha channel effects applied to objects based on actions */
   --palette-action-active: rgba(0, 0, 0, 0.54);
@@ -199,6 +199,7 @@
   --easing-sharp: "cubic-bezier(0.4, 0, 0.6, 1)";
   /* transition variable dont seem to work (media queries dont either)*/
   --transition-default-all: "all 220ms ease-in-out";
+  --transition-color-bgcolor: "color 400ms ease-in-out, background-color 400ms ease-in-out";
 
   /* duration */
   --duration-shortest: 150;
@@ -287,10 +288,10 @@ hr {
   border: 0;
 }
 
-h1, h2, h3, h4, p, figure, blockquote, dl, dd {
+h1, h2, h3, h4, h5, h6, p, figure, blockquote, dl, dd {
   margin-top: 0em;
   margin-right: 0em;
-  margin-bottom: 1em;
+  margin-bottom: .5em;
   margin-left: 0em;
 }
 

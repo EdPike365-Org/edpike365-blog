@@ -1,13 +1,10 @@
 import React from "react"
-import { css } from "@emotion/react"
+import * as styles from "./HSB.module.css"
 
-const SunIconSolid = props => {
+const SunIconSolid = () => {
   return (
     <svg
-      css={css`
-        fill: var(--color-text-secondary);
-        stroke: var(--color-text-secondary);
-      `}
+      className={`sun-icon ${styles.icon}`} 
       viewBox="0 0 512 512"
       role="img"
       aria-hidden="true"

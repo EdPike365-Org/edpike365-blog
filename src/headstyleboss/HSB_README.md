@@ -1,15 +1,15 @@
 <div style="display: flex; width: 100%;">
-<div>
-<img src="headstyleboss.jpg" alt="Head Style Boss Logo" title="Gary Larsons Farside Boss Lady" style="width: 100px; height: auto; padding: 0px 20px;" >
-</div>
-<div style="height: 150px;">
-<h1> Head <i>Style</i> Boss (HSB) </h1>
-<i>Boss The Styles in Your Head Element</i>
-<li>JS and ReactJS, Supports GatsbyJS SSR</li>
-<li>Dark Mode with no loading flash</li>
-<li>Supports Multiple User Selected Styles</li>
-<li>Use CSS style sheets in your head, use <i>whatever</i> in your components.</li>
-</div>
+  <div>
+  <img src="headstyleboss.jpg" alt="Head Style Boss Logo" title="Gary Larsons Farside Boss Lady" style="width: 100px; height: auto; padding: 0px 20px;" >
+  </div>
+  <div style="height: 150px;">
+    <h1> Head <i>Style</i> Boss (HSB) </h1>
+    <i>Boss The Styles in Your Head Element</i>
+    <li>JS and ReactJS, Supports GatsbyJS SSR</li>
+    <li>Dark Mode with no loading flash</li>
+    <li>Supports Multiple User Selected Styles</li>
+    <li>Use CSS style sheets in your head, use <i>whatever</i> in your components.</li>
+  </div>
 </div>
 
 ## Features
@@ -28,8 +28,8 @@
   - Style Selector: List all of your style options based on HSB_Config.
   - Style State Display: Real time feedback on the status of all managed styles.
   - Show user's live "prefers dark mode" setting.
-- No external node dependencies.
-
+- No external dependencies. Default styles use css vars. Define the vars in your :root or edit the module.css file.
+- Caveat: If you change values on the HSB managed style sheets, you must bounce Gatsby. This works fine for me because I mostly only use :root variables (ex: "--media-width-xs: 320px;") on the style sheets and style my components independently.
 
 ## How?
 
@@ -37,42 +37,42 @@
   - Configured style attributes become "data" attributes written into the `<style>` elements during SSR.
   - `HSB_Browser.js` is injected just below the `<body>` tag. It reads the configured styles into a `HSBModel` object at runtime.
   - Style state (`enabled`) is then managed via HSBModel.
-  - Each CSS file is configured for 1 or more *uses* (via `data-use` attribute):
+  - Each CSS file is configured for 1 or more _uses_ (via `data-use` attribute):
     - "always" enabled styles
     - Optionally Enabled Styles
       - "default" styles
       - "dark" styles
       - generic "alternative" styles
   - Styles are injected in the order listed.
-  - Setting styles by `use` will `enable` the last style with that `use`, and disable all other *optional* styles.
+  - Setting styles by `use` will `enable` the last style with that `use`, and disable all other _optional_ styles.
   - You can always manually set `enable` state via SHBModel method calls.
 
-  
-> **WARNING: Title Attr and "Alternate" Style Sheets**    
+> **WARNING: Title Attr and "Alternate" Style Sheets**  
 > There is an ancient tech called "Alternate Style Sheets". If you use the `title` attr on more than 1 style, the browser will only enable the first one it finds. It will disable any named sheets or styles past that one. Its a bit like radio buttons for styles.
-**_The javascript code will be ignored by the browser (at least on Chrome)._**
-I'm leaving title implemented in case someone wants to get their freak on but I highly recommend that you don't use the _title_ field in the config file.
+> **_The javascript code will be ignored by the browser (at least on Chrome)._**
+> I'm leaving title implemented in case someone wants to get their freak on but I highly recommend that you don't use the _title_ field in the config file.
 
 ### Components:
-  
+
 - The on page style mgt code is in `HSB_Browser.js`. It is an [IIFE](https://developer.mozilla.org/en-US/docs/Glossary/IIFE). It is mandartory for everything else to work. It must appear just below the `<body>` element. Import the mandatory `onPreRenderHTML` function into `gatsby-ssr.js` and to inject the CSS
 - Get the required javascript function on Gatsby's html.js template.
   - Option 1: Import the onPreBody function to `gatsby-ssr.js` which injects the code.
   - Option 2: Not recommended. Copy the Gatsby `html.js` page to your local project root and paste the code in. Do this if you already have a custom `html.js`.
 
 ### Installation
+
 - Copy and paste the `headstyleboss` folder into:
   - Gatsby: `src` folder.
 - Modify `HSB_Config`. If your css file is already minified, leave `minifyCSS` setting as false.
 - Use `HSB_Context` (or `HSBStyleContextProvider` if you have mulitple contexts) in `gatsby-browser.js` and `gatsby-server.js`. See examples.
 - Use `HSB_Utils` in `gatsby-ssr.js` to do file injections. You will also need a ref to `fs` filesystem. See examples.
 
-  
-> Typical minimal setup: 
-> - You have a legacy/core CSS file that always needs to be enabled.    
-> - You have a _modifying_ CSS file for dark mode. 
-> - In the HSB config file, list the core file first, configure it with use="default always". 
-> - List the "dark" file second, configure it with use="dark". When dark mode is activated, the dark css cascades over the core. The JS code on the html page handles everything. 
+> Typical minimal setup:
+>
+> - You have a legacy/core CSS file that always needs to be enabled.
+> - You have a _modifying_ CSS file for dark mode.
+> - In the HSB config file, list the core file first, configure it with use="default always".
+> - List the "dark" file second, configure it with use="dark". When dark mode is activated, the dark css cascades over the core. The JS code on the html page handles everything.
 > - You can optionally add React components like the ToggleDarkMode component. If you use your own toggler, it has to work with `HSB_Context`.
 
 ## Notes For Hackers
@@ -119,31 +119,34 @@ I'm leaving title implemented in case someone wants to get their freak on but I 
 - DarkModeToggle: Will enable the last style with `use` containing `dark`.
 
 ## Coming Soon
-  - Manually test on more browsers
-  - Node module, Gatsby plugin
-  - Manage CSS style sheet `<link>`s (currently only tested on `<style>`)
-  - Minify your style sheets and `HSB_Browser.js` at SSR.
-  - More efficient SSR **build**: change to read files once, inject many times. Currently, during build, runs entire process on every page.
-  - Auto JS unit test. Selenium test for runtime.
-  - Add `use` `never` for those edge cases.
-  - Move `minifyCSS` setting to per style entry.
+
+- Manually test on more browsers
+- Node module, Gatsby plugin
+- Manage CSS style sheet `<link>`s (currently only tested on `<style>`)
+- Minify your style sheets and `HSB_Browser.js` at SSR.
+- More efficient SSR **build**: change to read files once, inject many times. Currently, during build, runs entire process on every page.
+- Auto JS unit test. Selenium test for runtime.
+- Add `use` `never` for those edge cases.
+- Move `minifyCSS` setting to per style entry.
 
 ## History
 
 Written originally for Gatsby 3 to fix dynamic theming issues.
 
 ### Wish List
+
 - Dark Mode
 - No bright flash on initial Dark Mode load.
 - Multiple User Selectable Styles
 - CSS variables in the `:root` and offer the styles by modifying the variable values using layered css sheets, not by assigning whole new classes to the body, etc., with JS.
-- No black box plugins. 
+- No black box plugins.
 - Compatible with `Emotion CSS`
 
 ### The Problem
+
 - If CSS files were loaded by a React component using `import`, Gatsby 3's Webpack configuration combined the contents with multiple CSS files into one common CSS file, in unpredicatable order, wrecking cascading behavior. The Webpack config was super complicated so I did not want to modify it.
 - I attempted to add CSS configuration in the `gatsby-config` file and to leverage Gatsby's cool GraphQL. I had the file contents loaded into GraphQL as well. But when I tried to inject them into `html.js` via `gatsby-ssr.js`, I could not get access to GraphQL, so I could not access the configuration or inject the styles or JS code (using `onPreRenderHTML()`).
-- I tried to use the `use-dark-mode` Gatsby plugin but it did not support multiple style sheets being enabled and disabled. It forces you to modify the "body" class. Too limited. 
+- I tried to use the `use-dark-mode` Gatsby plugin but it did not support multiple style sheets being enabled and disabled. It forces you to modify the "body" class. Too limited.
 - Luckily, `gatsby-ssr.js` **_does_** allow access to the file system because it only runs on the server. Head Style Boss takes advantage of this to turn my dreams into reality....
 
 ## Helpful Links
@@ -161,8 +164,10 @@ Written originally for Gatsby 3 to fix dynamic theming issues.
   I think this is the default webpack minifier https://survivejs.com/webpack/styling/separating-css/
 
 JS wrapped as IIFE to use private variables and functions
+https://hangindev.com/blog/avoid-flash-of-default-theme-an-implementation-of-dark-mode-in-react-app
 
 ---
+
 Free for reuse but not sale
 
 Copyright 2021, Ed Pike (EdPike365), All rights reserved.

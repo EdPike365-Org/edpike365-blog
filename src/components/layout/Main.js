@@ -12,7 +12,7 @@ export const StyledMain = styled.main`
   overflow: auto;
 
   background-color: var(--color-background-default);
-  padding: 0.25rem;
+  padding: 1rem;
   transition: color 400ms ease-in-out, background-color 400ms ease-in-out;
 
   /*-------------------- Decent Phones  --------------------*/

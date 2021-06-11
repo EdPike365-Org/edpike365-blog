@@ -1,13 +1,10 @@
 import React from "react"
-import { css } from "@emotion/react"
+import * as styles from "./HSB.module.css"
 
-const MoonIconSolid = props => {
+const MoonIconSolid = () => {
   return (
     <svg
-      css={css`
-        fill: var(--color-text-secondary);
-        stroke: var(--color-text-secondary);
-      `}
+      className={`moon-icon ${styles.icon}`} 
       viewBox="0 0 512 512"
       aria-hidden="true"
       focusable="false"

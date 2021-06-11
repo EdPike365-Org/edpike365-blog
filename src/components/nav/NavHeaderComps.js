@@ -4,13 +4,12 @@ import styled from "@emotion/styled"
 import { HamButton } from "./HamburgerButton"
 import { LogoIconDiv } from "./Logo"
 import { LogoTextSpan } from "./LogoText"
-import { DarkModeButton } from "../../headstyleboss/HSB_Components"
 import { UserButton } from "./UserIconButton"
 
-// default to smallest supported size of width 280 (Galaxy Fold)
+// Default to smallest supported size of width 280 (Galaxy Fold)
 // We modify visibilty and size of all components in the Header
 // or here in major subcomponents (vs letting them set themselves)
-// NOTE: dimensions are in px units because we need precision
+// NOTE: dimensions are in px units because we need precision in the header (and nav)
 export const LogoLink = styled(Link)`
   display: flex;
   align-items: center;
@@ -25,20 +24,20 @@ export const ButtonDivRight = styled.div`
   justify-content: center;
 
   /* Turn off the DarkMode toggle on the header (not every instance of DarkMode toggle!) */
-  & > ${DarkModeButton} {
+  & > .dark-mode-button {
     display: none;
   }
 
   /* ---------------- Larger Phones ---------------- */
   @media only screen and (min-width: 540px) {
-    & > ${DarkModeButton} {
+    & > .dark-mode-button {
       display: inline-flex;
     }
   }
 
   /*-------------------- Tablet  --------------------*/
   @media only screen and (min-width: 700px) {
-    & > ${DarkModeButton} {
+    & > .dark-mode-button {
       width: 42px;
       height: 42px;
     }
@@ -46,7 +45,6 @@ export const ButtonDivRight = styled.div`
       width: 42px;
       height: 42px;
     }
-
   }
 `
 
@@ -185,14 +183,14 @@ export const LogoDiv = styled.div`
       transform: translateX(30vw);
     }
     1% {
-
-     -ms-transform: translateX(30vw); /* IE 9 */
-     -webkit-transform: translateX(30vw); /* Chrome, Safari, Opera */
+     -ms-transform: translateX(30vw) rotate(0deg); 
+     -webkit-transform: translateX(30vw) rotate(0deg); 
      transform: translateX(30vw) rotate(0deg);
    }
     100% {
+      -ms-transform: translateX(.1vw) rotate(360deg); 
+      -webkit-transform: translateX(.1vw) rotate(360deg); 
       transform: translateX(.1vw) rotate(360deg);
-    
     }
   }
 
@@ -217,12 +215,12 @@ export const LogoDiv = styled.div`
   
   }
 `
-
+/*
 export const SlideLogoDivLeft = keyframes`
   0% {
     margin-left: 35%;
-    -ms-transform: rotate(180deg); /* IE 9 */
-    -webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */
+    -ms-transform: rotate(180deg); 
+    -webkit-transform: rotate(180deg); 
     transform: rotate(180deg);
     transition: transform 0.2s ease-out;
   }
@@ -230,3 +228,4 @@ export const SlideLogoDivLeft = keyframes`
     margin-left: 0px;
   }
 `
+*/

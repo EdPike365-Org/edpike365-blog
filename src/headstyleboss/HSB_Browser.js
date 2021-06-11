@@ -1,10 +1,9 @@
 ;(function () {
-  console.log("HeadStyleBoss Flash Prevention Code is running in the body.");
+  // The odd code above is special for an IIFE. Do not modify
+  console.log("Head Style Boss Flash Prevention Code is running in the body.");
   log = null; 
-  // HSBModel is an IIFE and populated before page load. It should roughly match HSB_Config.json
-  // However, this local HSBModel will be more accurate because it is populated on page load
-  // and reflects the style elements that ACTUALLY got inserted on SSR, and their actual state.
-  // One of my references https://hangindev.com/blog/avoid-flash-of-default-theme-an-implementation-of-dark-mode-in-react-app  
+  // HSBModel is an IIFE and runs before the body loads. 
+  // So it reflects the style elements that ACTUALLY got inserted on SSR, and their actual state.
   class HSBModel {
 
     constructor() {
@@ -15,7 +14,8 @@
       this.styles = [];
       
       this.darkQuery = window.matchMedia("(prefers-color-scheme: dark)");
-      // If you use the arrow function, "this" will be the real this, and not the media query list's "this"
+      // If you use the arrow function, "this" will be the real this,
+      // and not the media query list's "this".
       this.darkQuery.addEventListener("change", evt => this.handleDarkQueryChange(evt) );
 
       this.populateHSBModelFromPage();
@@ -24,7 +24,6 @@
     }
 
     //------------------------- Public Facing Methods ----------------
-
     isUsingADarkStyle(){
       let darkStyles = this.getStylesWithUse("dark");
       darkStyles = darkStyles.filter( style => style.disabled == false );
@@ -72,8 +71,8 @@
       }
     }
 
-    // The UI will have a listener mapped here, probs in Context code.
-    // They will pull the model every time it changes
+    // The HSB_Context code will have a listener mapped here.
+    // It will pull the model every time the model changes.
     modelStateChanged = () => {
       //check it out!
     }
@@ -83,7 +82,8 @@
     // ---------------- HSBModel initiation --------------------------
     populateHSBModelFromPage = () => {
 
-      //TODO: this could ALSO contain links to remote style sheets, but that would jeapardize fast site loads
+      // TODO: this could ALSO contain links to remote style sheets,
+      // but that would jeapardize fast site loads
       this.styles = document.querySelectorAll(
         "[id*='" + this.idPrefix + "']"
       )
@@ -127,10 +127,10 @@
     //-----------------End Initiation Methods ----------------------------
     
     // --------------- Private Access and Mutate -------------------------
-    // this should be the ONLY place that commits changes after initiation.
-    // If you do it somewhere else, rememeber to call modelStateChanged(this)
+    // This function should be the ONLY place that commits model changes after initiation.
+    // If you do it somewhere else, rememeber to call HSB_Context modelStateChanged(this)
     setAndSaveStyle = (style) => {
-      // final failsafe
+      // final failsafe,
       if (style) {
         this.toggleEnabledStyles(style)
         this.setStoredStyleID(style.id)
@@ -255,4 +255,5 @@
 
   const thisHSBModel = new HSBModel()
   window.__HSBModel = thisHSBModel
+  // The odd () code below is special for an IIFE. Do not modify
 })()

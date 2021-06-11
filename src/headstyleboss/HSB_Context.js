@@ -6,9 +6,10 @@ export const HSBStyleContext = createContext({})
 export function HSBStyleContextProvider({ children }) {
   // This gets called when page loads or reloads,
   // or when something changes the model state, which calls updateModel()
-  // **IF** in production mode, page reload is called.
-  // Then context reinitializes accurately, but components dont redraw because React can't tell HSBModel changed.
-  // So I add a timestamp to make sure the data changes enough to trigger rerender on subscribers
+  // **IF** in Gatsby production mode, page reload is called.
+  // Then context reinitializes accurately, but components dont redraw 
+  // because React can't tell HSBModel changed.
+  // So I add a timestamp to make sure the data changes enough to trigger rerender on subscribers.
   const getHSBModel = () => {
     const newState = {
       timestamp: Date.now(),

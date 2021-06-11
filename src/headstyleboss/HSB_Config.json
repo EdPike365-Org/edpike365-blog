@@ -1,5 +1,5 @@
 {
-  "WARNING": "You should not use Title attribute. Check README for why.",
+  "WARNING": "You should not use Title attribute. Read README for why.",
   "stylesFolder": "./src/styles/",
   "clientJSFilePath": "./src/headstyleboss/HSB_Browser.js",
   "clientComponentFolder": "./src/styles/",
