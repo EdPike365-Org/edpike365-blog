@@ -4,7 +4,7 @@ import styled from "@emotion/styled"
 import { HamButton } from "./HamburgerButton"
 import { LogoIconDiv } from "./Logo"
 import { LogoTextSpan } from "./LogoText"
-import { DarkModeButton } from "./SHG_Components"
+import { DarkModeButton } from "../../headstyleboss/HSB_Components"
 import { UserButton } from "./UserIconButton"
 
 // default to smallest supported size of width 280 (Galaxy Fold)

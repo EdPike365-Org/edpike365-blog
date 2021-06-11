@@ -75,7 +75,7 @@ const NavBar = () => {
           </NavLI>
           <NavLI>
             <NavLink to={"/backend/"} itemProp="url">
-              Java, JUnit
+              Java, JUnit, Selenium
             </NavLink>
           </NavLI>
           <NavLI>
@@ -100,35 +100,15 @@ const NavBar = () => {
           </NavLI>
           <NavLI>
             <NavLink to={"/devops/"} itemProp="url">
-              Maven, Gradle
+              Maven, Gradle, WebPack
             </NavLink>
           </NavLI>
           <NavLI>
-          <NavLink to={"/frontend/"} itemProp="url">
-              React, Emotion
-            </NavLink>
-          </NavLI>
-          <NavLI>
-            <NavLink to={"/frontend/"} itemProp="url">
-              Gatsby
-            </NavLink>
-          </NavLI>
-          <NavLI>
-            <NavLink to={"/frontend/"} itemProp="url">
-              SEO
+          <NavLink to={"/devops/"} itemProp="url">
+              AppDynamics
             </NavLink>
           </NavLI>
         </NavSubMenu>
-        <NavLI>
-          <NavLink to={"/about/"} itemProp="url">
-            About
-          </NavLink>
-        </NavLI>
-        <NavLI>
-          <NavLink to={"/bloglist/"} itemProp="url">
-            Blog
-          </NavLink>
-        </NavLI>
       </NavUL>
       <br/>
       <br/>

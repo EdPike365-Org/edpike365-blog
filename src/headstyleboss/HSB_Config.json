@@ -1,9 +1,9 @@
 {
   "WARNING": "You should not use Title attribute. Check README for why.",
   "stylesFolder": "./src/styles/",
-  "clientJSFilePath": "./src/styles/SHG_Browser.js",
+  "clientJSFilePath": "./src/headstyleboss/HSB_Browser.js",
   "clientComponentFolder": "./src/styles/",
-  "idPrefix": "StyleHeadGamesID_",
+  "idPrefix": "HeadStyleBossID_",
   "minifyCSS": false,
   "minifyJS": false,
   "styleElements": {
@@ -12,7 +12,7 @@
         "data-filename": "normalize2.css",
         "data-displayname" : "Noramlize2 Reset",
         "data-use" : "always",
-        "id" : "StyleHeadGamesID_normalize2",
+        "id" : "HeadStyleBossID_normalize2",
         "data-key" : "",
         "title" : "",
         "type" : "text/css"
@@ -21,7 +21,7 @@
         "data-filename": "coreTheme.css",
         "data-displayname" : "Core Theme",
         "data-use" : "always",
-        "id" : "StyleHeadGamesID_coreTheme",
+        "id" : "HeadStyleBossID_coreTheme",
         "data-key" : "",
         "title" : "",
         "type" : "text/css"
@@ -30,7 +30,7 @@
         "data-filename": "lightTheme.css",
         "data-displayname" : "Default, Light Theme",
         "data-use" : "default",
-        "id" : "StyleHeadGamesID_lightTheme",
+        "id" : "HeadStyleBossID_lightTheme",
         "data-key" : "",
         "title" : "",
         "type" : "text/css"        
@@ -39,7 +39,7 @@
         "data-filename": "darkTheme.css",
         "data-displayname" : "Dark Theme",
         "data-use" : "alternate dark",
-        "id" : "StyleHeadGamesID_darkTheme",
+        "id" : "HeadStyleBossID_darkTheme",
         "data-key" : "",
         "title" : "",
         "type" : "text/css"
@@ -48,7 +48,7 @@
         "data-filename": "fireTheme.css",
         "data-displayname" : "Fire Theme",
         "data-use" : "alternate",
-        "id" : "StyleHeadGamesID_fireTheme",
+        "id" : "HeadStyleBossID_fireTheme",
         "data.key" : "",
         "title" : "",
         "type" : "text/css"

@@ -1,40 +1,42 @@
 import * as React from "react"
-import { minifyCSSString, minifyJSString, makeRandomNumberKey } from "../utils/HelperFunctions"
+import { minifyCSSString, minifyJSString, makeRandomNumberKey } from "./HSB_Helpers"
 
-export const getSHGConfigFromFile = fs => {
+const pathToConfig = "./src/headstyleboss/HSB_Config.json"
+
+export const getHSBConfigFromFile = fs => {
 
   let rawData = null
   try {
-    rawData = fs.readFileSync("./src/styles/SHG_Config.json")
+    rawData = fs.readFileSync(pathToConfig)
     fs.close
   } catch (err) {
-    console.error("SHG_Utils getSHGConfigFromFile: " + err)
+    console.error("HSB_Utils getHSBConfigFromFile: " + err)
     fs.close
     throw (err)
   }
 
-  const SHGConfig = JSON.parse(rawData) //one op per line
-  return SHGConfig
+  const HSBConfig = JSON.parse(rawData) //one op per line
+  return HSBConfig
 
 }
 
-export const getSHGStyleElements = (SHGConfig, fs) => {
+export const getHSBStyleElements = (HSBConfig, fs) => {
 
-  const styleElements = []
+  const HSBStyleElements = []
   // read the config content, then create a <style> element for each style config
   // one big loop to minimize RAM usage on SSR
-  SHGConfig.styleElements.styles.forEach(styleConfig => {
-    const styleDef = getDefFromConfig(styleConfig, SHGConfig.stylesFolder, fs)
-    const styleElement = getElementFromDef(styleDef, SHGConfig.minifyCSS) //one op per line
-    styleElements.push(styleElement)
+  HSBConfig.styleElements.styles.forEach(styleConfig => {
+    const styleDef = getDefFromConfig(styleConfig, HSBConfig.stylesFolder, fs)
+    const styleElement = getElementFromDef(styleDef, HSBConfig.minifyCSS) //one op per line
+    HSBStyleElements.push(styleElement)
   })
-  return { styleElements : styleElements }
+  return HSBStyleElements
 }
 
 const getDefFromConfig = (styleConfig, stylesFolder, fs) => {
 
   const filePath = stylesFolder + styleConfig["data-filename"]
-  console.log("SHG_Utils.getDefFromConfig(): Loading css file: " + filePath)
+  console.log("HSB_Utils.getDefFromConfig(): Loading css file: " + filePath)
 
   let cssString = ""
   try {
@@ -42,7 +44,7 @@ const getDefFromConfig = (styleConfig, stylesFolder, fs) => {
     fs.close
   } catch (err) {
     console.error(
-      "SHG_Utils.getDefFromConfig(): Could not find css file " + filePath + ". Check json config file."
+      "HSB_Utils.getDefFromConfig(): Could not find css file " + filePath + ". Check json config file."
     )
     console.error(err)
     fs.close
@@ -82,14 +84,14 @@ const getElementFromDef = (styleDef, minifyCSS) => {
   )
 }
 
-export const getSHGPageFunction = (clientJSFilePath, fs, minifyJS) => {
+export const getHSBPageFunction = (clientJSFilePath, fs, minifyJS) => {
 
   let jsString = null
   try {
     jsString = fs.readFileSync(clientJSFilePath, "utf-8")
     fs.close
   } catch (err) {
-    console.error("gatsby-ssr.js getSHGPageFunction(): " + err)
+    console.error("gatsby-ssr.js getHSBPageFunction(): " + err)
     fs.close
     throw(err)
   }
@@ -102,7 +104,33 @@ export const getSHGPageFunction = (clientJSFilePath, fs, minifyJS) => {
     return { __html: jsString }
   }
 
-  // key attr to suppress React warning
+  // add key attr to suppress React warning
   return <script key={makeRandomNumberKey} dangerouslySetInnerHTML={createDangerMarkup(jsString)} />
 }
+
+export const injectHSBStylesIntoHead = (
+  HSBStyleElements,
+  getHeadComponents,
+  replaceHeadComponents
+) => {
+
+  const headComps = getHeadComponents()
+  const newHeadComps = [].concat(headComps, HSBStyleElements)
+  replaceHeadComponents(newHeadComps)
+  
+}
+
+export const injectHSBClientJSIntoTopOfBody = (
+  HSBPageFunction,
+  getPreBodyComponents,
+  replacePreBodyComponents
+) => {
+
+  const bodyComps = getPreBodyComponents()
+  // make sure HSB stuff is on top
+  const newBodyComps = [].concat(HSBPageFunction, bodyComps)
+  replacePreBodyComponents(newBodyComps)
+
+}
+
 

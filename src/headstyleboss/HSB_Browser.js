@@ -1,26 +1,26 @@
 ;(function () {
-  console.log("StyleHeadGames Flash Prevention Code is running in the body.");
+  console.log("HeadStyleBoss Flash Prevention Code is running in the body.");
   log = null; 
-  // SHGModel is populated before page load. It should roughly match StyleHeadGames.json
-  // However, this local SHGModel will be more accurate because it is populated on page load
+  // HSBModel is an IIFE and populated before page load. It should roughly match HSB_Config.json
+  // However, this local HSBModel will be more accurate because it is populated on page load
   // and reflects the style elements that ACTUALLY got inserted on SSR, and their actual state.
   // One of my references https://hangindev.com/blog/avoid-flash-of-default-theme-an-implementation-of-dark-mode-in-react-app  
-  class SHGModel {
+  class HSBModel {
 
     constructor() {
-      if(log)console.log("SHGModel constructor() running...");
+      if(log)console.log("HSBModel constructor() running...");
       // idPrefix doubles as local storage Key
       // TODO: get idPrefix from config file, probably via a meta tag, allow any REGEX
-      this.idPrefix = "StyleHeadGamesID_";
+      this.idPrefix = "HeadStyleBossID_";
       this.styles = [];
       
       this.darkQuery = window.matchMedia("(prefers-color-scheme: dark)");
       // If you use the arrow function, "this" will be the real this, and not the media query list's "this"
       this.darkQuery.addEventListener("change", evt => this.handleDarkQueryChange(evt) );
 
-      this.populateSHGModelFromPage();
+      this.populateHSBModelFromPage();
       this.enableInitialStyle();
-      if(log)console.log("SHGModel constructor() done!");
+      if(log)console.log("HSBModel constructor() done!");
     }
 
     //------------------------- Public Facing Methods ----------------
@@ -34,9 +34,9 @@
     toggleDarkStyle(){
       if(this.isUsingADarkStyle()){
         const style = this.getLightOrDefaultOrAnyOptionalStyle();
-        if(style) this.setSHGStyleByID(style.id);
+        if(style) this.setHSBStyleByID(style.id);
       }else{
-        this.setSHGStyleByUse("dark")
+        this.setHSBStyleByUse("dark")
       }
     }
 
@@ -51,8 +51,8 @@
       return optStyles.slice(-1)[0];
     }
 
-    setSHGStyleByID = function (styleID) {
-      if(log)console.log("setSHGStyleID(): trying to set for :" + styleID)
+    setHSBStyleByID = function (styleID) {
+      if(log)console.log("setHSBStyleID(): trying to set for :" + styleID)
       const style = this.getLastStyleWithID(styleID)
       if (style) {
         this.setAndSaveStyle(style)
@@ -62,7 +62,7 @@
       }
     }
 
-    setSHGStyleByUse = function (styleUse) {
+    setHSBStyleByUse = function (styleUse) {
       const style = this.getLastStyleWithUse(styleUse)
       if (style) {
         this.setAndSaveStyle(style)
@@ -80,8 +80,8 @@
             
     //---------------------- Begin Private Facing -------------------------------
 
-    // ---------------- SHGModel initiation --------------------------
-    populateSHGModelFromPage = () => {
+    // ---------------- HSBModel initiation --------------------------
+    populateHSBModelFromPage = () => {
 
       //TODO: this could ALSO contain links to remote style sheets, but that would jeapardize fast site loads
       this.styles = document.querySelectorAll(
@@ -89,7 +89,7 @@
       )
 
       if(log)console.log(
-        "populateSHGModelFromPage(): done populating, found " +
+        "populateHSBModelFromPage(): done populating, found " +
         this.styles.length +
           " style Elements."
       )
@@ -136,7 +136,7 @@
         this.setStoredStyleID(style.id)
         this.modelStateChanged(this) //Let the UI components know something changed
       } else {
-        console.log("ERROR: SHGModel.setAndSaveStyle(): Someone tried to set Style to " + style)
+        console.log("ERROR: HSBModel.setAndSaveStyle(): Someone tried to set Style to " + style)
       }
     }
 
@@ -165,7 +165,7 @@
       if(!style) style = this.getLastStyleWithUse("default");
       if(!style) style = this.getOptionalStyles().slice(-1)[0];
       if(!style){
-        if(log)console.log("WARNING: SHGModel getLightOrDefaultOrAnyOptionalStyle(): could not find any optional styles.");
+        if(log)console.log("WARNING: HSBModel getLightOrDefaultOrAnyOptionalStyle(): could not find any optional styles.");
       } 
       return style;  
     }
@@ -201,7 +201,7 @@
         }
       })
       if (results.length == 0) {
-        if(log)console.log("WARNING: SHGModel Could not find any styles with USE containing " + useVal)
+        if(log)console.log("WARNING: HSBModel Could not find any styles with USE containing " + useVal)
       }
       return results
     }
@@ -223,7 +223,7 @@
         }
       })
       if (results.length == 0) {
-        if(log)console.log("WARNING: SHGModel Could not find any styles with ID === " + idVal)
+        if(log)console.log("WARNING: HSBModel Could not find any styles with ID === " + idVal)
       }
       return results
     }
@@ -239,7 +239,7 @@
         styleID = localStorage.getItem(this.idPrefix)
         if(log)console.log("getStoredStyleID(): found stored styleID " + styleID)
       } catch (err) {
-        console.log("ERROR: SHGModel getStoredStyleID(): " + err)
+        console.log("ERROR: HSBModel getStoredStyleID(): " + err)
       }
       return styleID
     }
@@ -248,11 +248,11 @@
       try {
         localStorage.setItem(this.idPrefix, styleID)
       } catch (err) {
-        console.log("ERROR: SHGModel setStoredStyleID(): " + err)
+        console.log("ERROR: HSBModel setStoredStyleID(): " + err)
       }
     }
   }
 
-  const thisSHGModel = new SHGModel()
-  window.__SHGModel = thisSHGModel
+  const thisHSBModel = new HSBModel()
+  window.__HSBModel = thisHSBModel
 })()

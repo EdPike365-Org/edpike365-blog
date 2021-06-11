@@ -1,72 +1,46 @@
 import React from "react"
-import { SHGStyleContextProvider } from "./src/contexts/SHG_Context"
+import { HSBStyleContextProvider } from "./src/headstyleboss/HSB_Context"
 import { NavContextWrapper } from "./src/contexts/NavContext"
 import fs from "fs"
 import {
-  getSHGConfigFromFile,
-  getSHGStyleElements,
-  getSHGPageFunction,
-} from "./src/styles/SHG_Utils"
+  getHSBConfigFromFile,
+  getHSBStyleElements,
+  getHSBPageFunction,
+  injectHSBStylesIntoHead,
+  injectHSBClientJSIntoTopOfBody
+} from "./src/headstyleboss/HSB_Utils"
+
 //import dotenv from "dotenv"
 //dotenv.config( {path: `.env.${process.env.NODE_ENV}`,} )
 
 export const wrapRootElement = props => {
   return (
-    <SHGStyleContextProvider>
+    <HSBStyleContextProvider>
       <NavContextWrapper {...props} />
-    </SHGStyleContextProvider>
+    </HSBStyleContextProvider>
   )
 }
 
+// I have not figured out how to get access to GraphQL down in the function.
 //https://github.com/gatsbyjs/gatsby/issues/15519
 
+
+// Pre load all the file system stuff because
+// onPreRenderHTML, etc, runs once per page in prod, so would be big hit
+const HSBConfig = getHSBConfigFromFile(fs)
+const HSBStyleElements = getHSBStyleElements(HSBConfig, fs)
+const HSBPageFunction = getHSBPageFunction( HSBConfig.clientJSFilePath, fs, HSBConfig.minifyJS)
+
 // you can only export this hook once
+// in dev it only runs once. in prod, it runs once per page.
 export const onPreRenderHTML = ({
   getHeadComponents,
   replaceHeadComponents,
   getPreBodyComponents,
   replacePreBodyComponents,
 }) => {
-  const SHGConfig = getSHGConfigFromFile(fs)
-  injectSHGStylesIntoHead(SHGConfig, getHeadComponents, replaceHeadComponents)
-  injectSHGClientJSIntoTopOfBody(
-    SHGConfig,
-    getPreBodyComponents,
-    replacePreBodyComponents
-  )
+  injectHSBStylesIntoHead(HSBStyleElements, getHeadComponents, replaceHeadComponents)
+  injectHSBClientJSIntoTopOfBody( HSBPageFunction, getPreBodyComponents, replacePreBodyComponents )
+  //console.info("gatsby-ssr.js onPreRenderHTML(): Injected HSB styles and PageFunction into ...")
 }
 
-const injectSHGStylesIntoHead = (
-  SHGConfig,
-  getHeadComponents,
-  replaceHeadComponents
-) => {
-  console.info(
-    "gatsby-ssr.js onPreRenderHTML(): SHG loading and injecting styles..."
-  )
-  const headComps = getHeadComponents()
-  const { styleElements } = getSHGStyleElements(SHGConfig, fs)
-  const newHeadComps = [].concat(headComps, styleElements)
-  replaceHeadComponents(newHeadComps)
-  ;("gatsby-ssr.js onPreRenderHTML(): Replaced HeadComponets.")
-}
-
-const injectSHGClientJSIntoTopOfBody = (
-  SHGConfig,
-  getPreBodyComponents,
-  replacePreBodyComponents
-) => {
-  console.info(
-    "gatsby-ssr.js onPreRenderHTML(): Getting SHG function from js file, injecting at top of body."
-  )
-  const bodyComps = getPreBodyComponents()
-  const pageFunction = getSHGPageFunction(
-    SHGConfig.clientJSFilePath,
-    fs,
-    SHGConfig.minifyJS
-  )
-  // make sure its on top
-  const newBodyComps = [].concat(pageFunction, bodyComps)
-  replacePreBodyComponents(newBodyComps)
-  console.info("gatsby-ssr.js onPreRenderHTML(): Replaced PreBodyComponets.")
-}

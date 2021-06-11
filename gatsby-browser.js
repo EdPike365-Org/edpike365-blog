@@ -1,12 +1,12 @@
 import React from "react"
-import { SHGStyleContextProvider } from "./src/contexts/SHG_Context"
+import { HSBStyleContextProvider } from "./src/headstyleboss/HSB_Context"
 import { NavContextWrapper } from "./src/contexts/NavContext"
 
 export const wrapRootElement = props => {
   return (
-    <SHGStyleContextProvider>
+    <HSBStyleContextProvider>
       <NavContextWrapper {...props} />
-    </SHGStyleContextProvider>
+    </HSBStyleContextProvider>
   )
 }
 

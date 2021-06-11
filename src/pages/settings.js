@@ -2,7 +2,7 @@ import * as React from "react"
 import styled from "@emotion/styled"
 import Layout from "../components/layout/Layout"
 import Seo from "../components/SEO"
-import { DarkModeToggle, StyleSelector, StyleSummary, PrefersDarkMode } from "../components/nav/SHG_Components"
+import { DarkModeToggle, StyleSelector, StyleSummary, PrefersDarkMode } from "../headstyleboss/HSB_Components"
 import Section from "../components/Section"
 
 const FlexDiv = styled.div`

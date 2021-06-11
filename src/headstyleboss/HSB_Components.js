@@ -1,14 +1,14 @@
 import React, { useContext } from "react"
 import styled from "@emotion/styled"
 import { css } from "@emotion/react"
-import { SHGStyleContext } from "../../contexts/SHG_Context"
-import MoonIconSolid from "../../icons/MoonIconSolid"
-import SunIconSolid from "../../icons/SunIconSolid"
-import { isSSR } from "../../utils/HelperFunctions"
+import { HSBStyleContext } from "./HSB_Context"
+import { isSSR } from "./HSB_Helpers"
+import MoonIconSolid from "./MoonIconSolid"
+import SunIconSolid from "./SunIconSolid"
 
 export const StyleSummary = () => {
-  const { SHGModel } = useContext(SHGStyleContext)
-  const model = SHGModel.model
+  const { HSBModel } = useContext(HSBStyleContext)
+  const model = HSBModel.model
   const styles = isSSR() ? [] : model.styles
   return (
     <div>
@@ -17,7 +17,7 @@ export const StyleSummary = () => {
           margin-bottom: 0.25rem;
         `}
       >
-        SHG Style Model State
+        HSB Style Model State
       </h5>
       idPrefix: "{model.idPrefix}".
       <br />
@@ -47,8 +47,8 @@ export const StyleSummary = () => {
 }
 
 export const StyleSelector = () => {
-  const { SHGModel } = useContext(SHGStyleContext)
-  const model = SHGModel.model
+  const { HSBModel } = useContext(HSBStyleContext)
+  const model = HSBModel.model
  
   function getSelectedStyleID() {
     let styleID = ""
@@ -100,7 +100,7 @@ export const StyleSelector = () => {
   }
 
   function handleChange(e) {
-    model.setSHGStyleByID(e.target.value)
+    model.setHSBStyleByID(e.target.value)
   }
 
   let selectOptions = []
@@ -137,8 +137,8 @@ export const DarkModeButton = styled.button`
 `
 
 export const DarkModeToggle = ({ hide }) => {
-  const { SHGModel } = useContext(SHGStyleContext)
-  const model = SHGModel.model
+  const { HSBModel } = useContext(HSBStyleContext)
+  const model = HSBModel.model
 
   const isDark = () => {
     if (isSSR()) {
@@ -177,8 +177,8 @@ export const DarkModeToggle = ({ hide }) => {
 }
 
 export const PrefersDarkMode = () => {
-  const { SHGModel } = useContext(SHGStyleContext)
-  const model = SHGModel.model
+  const { HSBModel } = useContext(HSBStyleContext)
+  const model = HSBModel.model
 
   return (
     <span>
