@@ -8,30 +8,11 @@ import {
   injectHSBClientJSIntoTopOfBody
 } from "./gatsby/HSB_Utils"
 
-//import dotenv from "dotenv"
-//dotenv.config( {path: `.env.${process.env.NODE_ENV}`,} )
-
-/*
-import { NavContextWrapper } from "./src/contexts/NavContext"
-export const wrapRootElement = props => {
-  return (
-    <HSBStyleContextProvider>
-      <NavContextWrapper {...props} />
-    </HSBStyleContextProvider>
-  )
-}
-
-*/
-
 export const wrapRootElement = ({ element }) => {
   return (
     <HSBStyleContextProvider >{element}</HSBStyleContextProvider >
   )
 }
-
-// I have not figured out how to get access to GraphQL down in the function.
-//https://github.com/gatsbyjs/gatsby/issues/15519
-
 
 // Pre load all the file system stuff because
 // onPreRenderHTML, etc, runs once per page in prod, so would be big hit
@@ -51,7 +32,6 @@ export const onPreRenderHTML = ({
   replacePreBodyComponents,
 }) => {
   injectHSBStylesIntoHead(HSBStyleElements, getHeadComponents, replaceHeadComponents)
-  injectHSBClientJSIntoTopOfBody( HSBPageFunction, getPreBodyComponents, replacePreBodyComponents )
-  //console.info("gatsby-ssr.js onPreRenderHTML(): Injected HSB styles and PageFunction into ...")
+  injectHSBClientJSIntoTopOfBody( HSBPageFunction, getPreBodyComponents, replacePreBodyComponents )  
 }
 
