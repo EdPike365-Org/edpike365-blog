@@ -1,14 +1,18 @@
 import React from "react"
-import { HSBStyleContextProvider } from "./src/headstyleboss/HSB_Context"
-import { NavContextWrapper } from "./src/contexts/NavContext"
-
+import { NavContextProvider } from "./src/contexts/NavContext"
+/*
 export const wrapRootElement = props => {
   return (
-    <HSBStyleContextProvider>
       <NavContextWrapper {...props} />
-    </HSBStyleContextProvider>
   )
 }
+*/
+export const wrapRootElement = ({ element }) => {
+  return (
+    <NavContextProvider >{element}</NavContextProvider>
+  )
+}
+
 
 // This css shows up in the common.css file after build
 // Theme for prismjs

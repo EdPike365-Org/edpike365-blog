@@ -29,6 +29,7 @@ module.exports = {
   },
   plugins: [
     `gatsby-plugin-image`,
+    `head-style-boss`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {

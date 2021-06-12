@@ -31,7 +31,15 @@
 - No external dependencies. Default styles use css vars. Define the vars in your :root or edit the module.css file.
 - Caveat: If you change values on the HSB managed style sheets, you must bounce Gatsby. This works fine for me because I mostly only use :root variables (ex: "--media-width-xs: 320px;") on the style sheets and style my components independently.
 
-## How?
+## Installation
+
+- Copy and paste the `headstyleboss` folder into:
+  - Gatsby: `src` folder.
+- Modify `HSB_Config`. If your css file is already minified, leave `minifyCSS` setting as false.
+- Use `HSB_Context` (or `HSBStyleContextProvider` if you have mulitple contexts) in `gatsby-browser.js` and `gatsby-server.js`. See examples.
+- Use `HSB_Utils` in `gatsby-ssr.js` to do file injections. You will also need a ref to `fs` filesystem. See examples.
+
+## How Does it Work?
 
 - Edit the HSB_Config.json configuration file:
   - Configured style attributes become "data" attributes written into the `<style>` elements during SSR.
@@ -59,21 +67,20 @@
   - Option 1: Import the onPreBody function to `gatsby-ssr.js` which injects the code.
   - Option 2: Not recommended. Copy the Gatsby `html.js` page to your local project root and paste the code in. Do this if you already have a custom `html.js`.
 
-### Installation
 
-- Copy and paste the `headstyleboss` folder into:
-  - Gatsby: `src` folder.
-- Modify `HSB_Config`. If your css file is already minified, leave `minifyCSS` setting as false.
-- Use `HSB_Context` (or `HSBStyleContextProvider` if you have mulitple contexts) in `gatsby-browser.js` and `gatsby-server.js`. See examples.
-- Use `HSB_Utils` in `gatsby-ssr.js` to do file injections. You will also need a ref to `fs` filesystem. See examples.
 
-> Typical minimal setup:
->
-> - You have a legacy/core CSS file that always needs to be enabled.
-> - You have a _modifying_ CSS file for dark mode.
-> - In the HSB config file, list the core file first, configure it with use="default always".
-> - List the "dark" file second, configure it with use="dark". When dark mode is activated, the dark css cascades over the core. The JS code on the html page handles everything.
-> - You can optionally add React components like the ToggleDarkMode component. If you use your own toggler, it has to work with `HSB_Context`.
+## Typical minimal setup:
+
+- You have a normalize CSS file and a legacy core CSS file. They must always be enabled and come in the same order. 
+- You have a _modifying_ CSS file for dark mode (and maybe more options). It is meant to overwrite some previous values. It can be enabled or disabled.
+- In the HSB config file, list the files in order of how they should cascade: 
+  - normalize.css, use "always"
+  - yourtheme.css, use "always"
+  - yourdarkmode.css, use "dark"
+- Add HSB_Context.
+- Add HSB_Components DarkModeToggle to a page.
+- When dark mode is activated, the dark css cascades over the core. The JS code on the html page handles everything.
+- You can optionally add React components like the ToggleDarkMode component. If you use your own toggler, it has to work with `HSB_Context`.
 
 ## Notes For Hackers
 

@@ -7,7 +7,7 @@ export const NavContext = createContext({
 })
 
 // multiple states in one context 
-export const NavContextProvider = props => {
+export const NavContextProvider = (element) => {
   const [showNav, setShowNav] = useState(false)
   const toggleShowNav = () => {
     setShowNav(!showNav)
@@ -46,13 +46,8 @@ export const NavContextProvider = props => {
 
   return (
     <NavContext.Provider value={stateValues}>
-      {props.children}
+      {element.children}
     </NavContext.Provider>
   )
 }
 
-/* this is for Gatsby to use to wrap the root element, 
-but only works if this is the only one OR its the innermost one */
-export const NavContextWrapper = ({ element }) => (
-  <NavContextProvider>{element}</NavContextProvider>
-)

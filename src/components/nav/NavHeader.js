@@ -3,7 +3,7 @@ import { NavContext } from "../../contexts/NavContext"
 import HamburgerButton from "./HamburgerButton"
 import Logo from "./Logo"
 import LogoText from "./LogoText"
-import { DarkModeToggle } from "../../headstyleboss/HSB_Components"
+import { DarkModeToggle } from "../../../plugins/head-style-boss/components/HSB_Components"
 import UserButton from "./UserIconButton"
 import { Header, LogoDiv, LogoLink, ButtonDivRight } from "./NavHeaderComps"
 
