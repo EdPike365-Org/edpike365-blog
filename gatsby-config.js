@@ -1,4 +1,4 @@
-require('dotenv').config({
+require("dotenv").config({
   path: `.env.${process.env.NODE_ENV}`,
 })
 
@@ -13,7 +13,6 @@ require('dotenv').config({
   },
 */
 module.exports = {
-
   siteMetadata: {
     title: `EdPike365`,
     author: {
@@ -29,7 +28,72 @@ module.exports = {
   },
   plugins: [
     `gatsby-plugin-image`,
-    `gatsby-head-style-boss`,
+    {
+      resolve: `gatsby-head-style-boss`,
+      options: {
+        config: {
+          stylesFolder: "./src/styles/",
+          idPrefix: "HeadStyleBossID_",
+          minifyBrowserFunction: false,
+          styleElements: {
+            styles: [
+              {
+                "data-filename": "normalize2.css",
+                "data-displayname": "Noramlize2 Reset",
+                "data-use": "always",
+                id: "HeadStyleBossID_normalize2",
+                minifyCSS: false,
+              },
+              {
+                "data-filename": "coreTheme.css",
+                "data-displayname": "Core Theme",
+                "data-use": "always",
+                id: "HeadStyleBossID_coreTheme",
+                minifyCSS: false,
+              },
+              {
+                "data-filename": "lightTheme.css",
+                "data-displayname": "Default, Light Theme",
+                "data-use": "default",
+                id: "HeadStyleBossID_lightTheme",
+                minifyCSS: false,
+              },
+              {
+                "data-filename": "darkTheme.css",
+                "data-displayname": "Dark Theme",
+                "data-use": "alternate dark",
+                id: "HeadStyleBossID_darkTheme",
+                minifyCSS: false,
+              },
+              {
+                "data-filename": "fireTheme.css",
+                "data-displayname": "Fire Theme",
+                "data-use": "alternate",
+                id: "HeadStyleBossID_fireTheme",
+                minifyCSS: false,
+              },
+            ],
+          },
+        },
+        plugins: [
+          {
+            resolve: `gatsby-source-filesystem`,
+            options: {
+              path: `${__dirname}/node_modules/gatsby-head-style-boss/ssr`,
+              name: `page-function`,
+            },
+          },
+          {
+            resolve: `gatsby-source-filesystem`,
+            options: {
+              path: `${__dirname}/src/styles`,
+              name: `styles-folder`,
+            },
+          },
+
+        ],
+      },
+    },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -52,7 +116,7 @@ module.exports = {
         footnotes: true,
         pedantic: true,
         // blocks: ["h2"], Blocks option value can be provided here as an array.
-        excerpt_separator: `<!-- end -->`,        
+        excerpt_separator: `<!-- end -->`,
         plugins: [
           {
             resolve: `gatsby-remark-images`,
@@ -88,18 +152,18 @@ module.exports = {
             resolve: `gatsby-remark-katex`,
             options: {
               // Add any KaTeX options from https://github.com/KaTeX/KaTeX/blob/master/docs/options.md here
-              strict: `ignore`
-            }
+              strict: `ignore`,
+            },
           },
-          { 
+          {
             resolve: `gatsby-remark-emoji`,
             options: {
               // default emojiConversion --> shortnameToUnicode
-              emojiConversion: 'shortnameToUnicode',
+              emojiConversion: "shortnameToUnicode",
               // when true, matches ASCII characters (in unicodeToImage and shortnameToImage)
               // e.g. ;) --> 😉
               ascii: true,
-            }
+            },
           },
         ],
       },

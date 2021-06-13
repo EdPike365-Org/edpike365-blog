@@ -2,13 +2,11 @@ import * as React from "react"
 import styled from "@emotion/styled"
 import Layout from "../components/layout/Layout"
 import Seo from "../components/SEO"
-import {
-  DarkModeToggle,
-  StyleSelector,
-  StylesSummary,
-  PrefersDarkMode,
-} from "gatsby-head-style-boss/components/HSB_Components"
 import Section from "../components/Section"
+import DarkModeToggle from "gatsby-head-style-boss/components/DarkModeToggle"
+import StyleSelector from "gatsby-head-style-boss/components/StyleSelector"
+import StylesSummary from "gatsby-head-style-boss/components/StylesSummary"
+import PrefersDarkMode from "gatsby-head-style-boss/components/PrefersDarkMode"
 
 const FlexDiv = styled.div`
   display: inline-flex;
