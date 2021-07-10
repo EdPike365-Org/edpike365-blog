@@ -44,6 +44,7 @@ const HomePage = ({ data, pageContext, location }) => {
       })}
       <br />
       <Bio />
+      timestamp: 7/10
     </Layout>
   )
 }
