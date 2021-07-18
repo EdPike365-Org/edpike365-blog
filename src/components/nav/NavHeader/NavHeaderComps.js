@@ -5,6 +5,7 @@ import { LogoIconDiv } from "./Logo"
 import { LogoTextSpan } from "./LogoText"
 import { UserButton } from "./UserIconButton"
 
+// THIS IS WHERE THE MESSY MEDIA QUERY STUFF LIVES
 // Default to smallest supported size of width 280 (Galaxy Fold)
 // We modify visibilty and size of all components in the Header
 // or here in major subcomponents (vs letting them set themselves)
