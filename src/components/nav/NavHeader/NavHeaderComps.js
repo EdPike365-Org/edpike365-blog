@@ -1,5 +1,4 @@
 import { Link } from "gatsby"
-import { keyframes } from "@emotion/react"
 import styled from "@emotion/styled"
 import { HamButton } from "./HamburgerButton"
 import { LogoIconDiv } from "./Logo"
@@ -24,20 +23,20 @@ export const ButtonDivRight = styled.div`
   justify-content: center;
 
   /* Turn off the DarkMode toggle on the header (not every instance of DarkMode toggle!) */
-  & > .dark-mode-button {
+  & > .dark-mode-toggle {
     display: none;
   }
 
   /* ---------------- Larger Phones ---------------- */
   @media only screen and (min-width: 540px) {
-    & > .dark-mode-button {
+    & > .dark-mode-toggle {
       display: inline-flex;
     }
   }
 
   /*-------------------- Tablet  --------------------*/
   @media only screen and (min-width: 700px) {
-    & > .dark-mode-button {
+    & > .dark-mode-toggle {
       width: 42px;
       height: 42px;
     }

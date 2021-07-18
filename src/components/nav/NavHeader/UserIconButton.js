@@ -1,7 +1,7 @@
 import React from "react"
 import {navigate} from "gatsby"
 import styled from "@emotion/styled"
-import UserIcon from "../../icons/UserIcon"
+import UserIcon from "../../../icons/UserIcon"
 
 export const UserButton = styled.button`
   display: inline-flex;

@@ -1,7 +1,7 @@
 import React from "react"
 import styled from "@emotion/styled"
 import { keyframes, css } from "@emotion/react"
-import LogoIcon from "../../icons/LogoIcon"
+import LogoIcon from "../../../icons/LogoIcon"
 
 const SpinAnim = keyframes`
   0% {

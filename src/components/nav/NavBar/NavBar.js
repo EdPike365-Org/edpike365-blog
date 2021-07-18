@@ -1,9 +1,11 @@
 import React, { useContext } from "react"
 import { Nav, NavUL, SubUL, NavLI, NavLink } from "./NavBarComps"
 import { NavSubMenu } from "./NavBarSubMenu"
-import { NavContext } from "../../contexts/NavContext"
+import { NavContext } from "../../../contexts/NavContext"
 
 const NavBar = () => {
+
+  //TODO review this code
   const { showNavState } = useContext(NavContext)
   const [showNav] = showNavState
   

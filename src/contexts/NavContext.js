@@ -16,7 +16,7 @@ export const NavContextProvider = (element) => {
   const [runLogoAnim, setRunLogoAnim] = useState(false)
   let mediaQuery = null
   if (!isSSR()) {
-    mediaQuery = global.window.matchMedia("(min-width: 1366px)")
+    mediaQuery = window.matchMedia("(min-width: 1366px)")
   }
 
   const handleMediaQueryChange = () => {

@@ -4,7 +4,9 @@ import styled from "@emotion/styled"
 /* By default we are in Mobile mode, nav is hidden */
 /* Should look OK at 280 wide, good at 320 */
 const GlobalGridDiv = styled.div`
-  /* height vh is necessary to establish a location for header and footer on page load, so they can be sticky */
+  /* height vh is necessary to establish a location for header and footer on page load, 
+      so they can be sticky 
+  */
   height: 100vh;
 
   overflow-y: hidden;

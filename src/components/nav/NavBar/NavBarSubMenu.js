@@ -43,8 +43,10 @@ export const Slide = keyframes`
 const SlideClosed = css` animation: ${Slide} 2s;  display: none;`
 
 export const NavSubMenu = ({ title, uuid, children }) => {
+  
   const [isActive, setIsActive] = useState(false)
 
+  //TODO why uuid and not empty
   useEffect(() => {
     // loaded as string, convert to bool
     const statusStr = sessionStorage.getItem(uuid) || "false"

@@ -1,7 +1,7 @@
 {
-  "name": "gatsby-grid-blog",
+  "name": "edpike365-blog",
   "private": true,
-  "description": "A blog powered by Markdown, Emotion and Style Head Boss.",
+  "description": "A blog powered by Gatsby, Markdown, Emotion and Head Style Boss.",
   "version": "0.1.0",
   "author": "Ed Pike <edpike365@gmail.com>",
   "bugs": {

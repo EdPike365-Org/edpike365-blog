@@ -26,7 +26,9 @@ const HomePage = ({ data, pageContext, location }) => {
     border-bottom: 2px solid transparent;
     transition: color 400ms ease-in-out, background-color 400ms ease-in-out;
   `
-
+  const today = new Date()
+  const builtString = `Last Built:  ${ today.getFullYear()}/${ today.getUTCMonth() + 1 }/${ today.getUTCDate() } ` 
+  
   return (
     <Layout location={location}>
       <Seo title="Home" />
@@ -44,7 +46,7 @@ const HomePage = ({ data, pageContext, location }) => {
       })}
       <br />
       <Bio />
-      timestamp: 7/10
+      {builtString}
     </Layout>
   )
 }

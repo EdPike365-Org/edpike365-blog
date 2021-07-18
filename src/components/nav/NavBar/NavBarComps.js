@@ -1,9 +1,9 @@
 import React, { useContext } from "react"
 import styled from "@emotion/styled"
 import { Link } from "gatsby"
-import { NavContext } from "../../contexts/NavContext"
+import { NavContext } from "../../../contexts/NavContext"
 
-//TODO move prop logic up to render
+//TODO move prop logic up to render. useEffect?
 export const Nav = styled.nav`
   grid-area: nav;
 

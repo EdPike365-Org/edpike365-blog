@@ -12,7 +12,11 @@ const WrapperDiv = styled.div`
 `
 
 const Wrapper = ({ children }) => {
-  return <WrapperDiv>{children}</WrapperDiv>
+  return(
+    <WrapperDiv>
+    {children}
+    </WrapperDiv>
+  )
 }
 
 export default Wrapper

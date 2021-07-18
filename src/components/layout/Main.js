@@ -26,6 +26,7 @@ export const StyledMain = styled.main`
   }
 `
 // The line breaks at bottom are there to handle too short scroll bars on short screens
+// TODO fix that
 const Main = ({ children }) => {
   return (
     <StyledMain>

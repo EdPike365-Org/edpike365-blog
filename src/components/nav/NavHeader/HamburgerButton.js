@@ -1,8 +1,8 @@
 import React, { useContext } from "react"
 import styled from "@emotion/styled"
-import HamburgerIcon from "../../icons/HamburgerIcon"
-import XIconRegular from "../../icons/XIconRegular"
-import { NavContext } from "../../contexts/NavContext"
+import HamburgerIcon from "../../../icons/HamburgerIcon"
+import XIconRegular from "../../../icons/XIconRegular"
+import { NavContext } from "../../../contexts/NavContext"
 
 export const HamButton = styled.button`
   display: inline-flex;

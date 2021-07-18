@@ -1,5 +1,5 @@
 import React, { useContext } from "react"
-import { NavContext } from "../../contexts/NavContext"
+import { NavContext } from "../../../contexts/NavContext"
 import HamburgerButton from "./HamburgerButton"
 import Logo from "./Logo"
 import LogoText from "./LogoText"
@@ -8,8 +8,10 @@ import UserButton from "./UserIconButton"
 import { Header, LogoDiv, LogoLink, ButtonDivRight } from "./NavHeaderComps"
 
 const NavHeader = () => {
+
+  //TODO useeffect?
   const { runLogoAnimState } = useContext(NavContext)
-  const [runLogoAnim] = runLogoAnimState
+  const [runLogoAnim] = runLogoAnimState // custome useState?
 
   return (
     <Header>
