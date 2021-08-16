@@ -1,6 +1,4 @@
 /*! lightTheme.css */
 :root {
   --color-theme-name: "Light";
-  --color-background-default: #c2629a; /* aka color-background, the far background */
-  --color-background-paper: #90cbe7; /* aka color-surface, as in components */
 }

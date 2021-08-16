@@ -3,9 +3,9 @@
  /* color-scheme is new tag that sets scroll bar colors, only works for dark */
   --color-scheme: dark;
 
-  --color-primary-light: #7986cb;
-  --color-primary-main: #3f51b5;
-  --color-primary-dark: #7986cb;
+  --color-primary-light: #91a0ec;
+  --color-primary-main: #7986cb;
+  --color-primary-dark: #6570a7;
   --color-primary-text: #fff;
 
   --color-text-primary: rgba(255, 255, 255, 0.7); /* use on default bg */
@@ -19,6 +19,12 @@
   --color-background-default: #030303; /* aka color-background, the far background */
   --color-background-paper: #111111; /* aka color-surface, as in components */
   --color-foreground: #303030; /* flyouts, popups */
+
+  --scrollbarTrackBG: var(--color-grey-900);
+  --scrollbarThumbBG: #6570a7;
+  --scrollbarThumbBorder: #7986cb;
+  scrollbar-gutter: stable;
+
 
   /* these are affects applied, mainly alpha channel, to objects based on actions */
   --palette-action-active: #fff;
@@ -38,48 +44,17 @@ tbody tr:nth-of-type(odd) {
   background: var(--color-grey-900);
 }
 
-/* Only use custom scroll bars on Ipad or bigger */
-@media only screen and (min-width: 700px) {
-  ::-webkit-scrollbar {
-    width: auto;
-    height: auto;
-  }
-  ::-webkit-scrollbar-button {
-    background-color: #1b1e34;
-    border-left: 1px solid var(--color-primary-main);
-    border-right: 1px solid var(--color-primary-main);
-    background-image: linear-gradient(
-      90deg,
-      rgba(41, 54, 107, 1) 0%,
-      #1b1e34 49%,
-      #212058 83%
-    );
-  }
- 
-  ::-webkit-scrollbar-track {
-    border: 3px solid var(--color-primary-main);
-  }
-  ::-webkit-scrollbar-track-piece {
-    background-image: linear-gradient(#212058, #1b1e34);
-    border-top: 1px solid var(--color-primary-main);
-    border-bottom: 1px solid var(--color-primary-main);
-  }
-  ::-webkit-scrollbar-thumb {
-    background-color: var(--color-grey-900);
-    border-radius: 20px; /* roundness of the scroll thumb */
-    border: 1px solid var(--color-primary-main);
-    background-image: linear-gradient(
-      90deg,
-      rgba(41, 54, 107, 1) 0%,
-      #1b1e34 49%,
-      #212058 83%
-    );
-  }
-  ::-webkit-scrollbar-corner {
-    color: pink;
-    border-radius: 20px;
-  }
-  ::-webkit-resizer {
-    background-color: purple;
-  }
+::-webkit-scrollbar-track-piece {
+  background-image: linear-gradient(#212058, #1b1e34);
 }
+
+::-webkit-scrollbar-thumb {
+  border: 1px solid var(--scrollbarThumbBorder);
+  background-image: linear-gradient(
+    90deg,
+    rgba(41, 54, 107, 1) 0%,
+    #1b1e34 49%,
+    #212058 83%
+  );
+}
+

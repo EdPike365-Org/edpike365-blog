@@ -1,5 +1,6 @@
 import React from "react"
 import styled from "@emotion/styled"
+import Helmet from "react-helmet"
 
 //https://css-tricks.com/best-way-implement-wrapper-css/
 const WrapperDiv = styled.div`
@@ -11,9 +12,25 @@ const WrapperDiv = styled.div`
   box-shadow: var(--shape-box-shadow);
 `
 
+/*
+      <Helmet>
+        <link  
+        rel="preload" 
+        as="style" 
+        type="text/css" 
+        href="/src/styles/burger.css" 
+        data-hsb-managed="true"
+        data-hsb-key="hsb_1234"
+        data-hsb-displayname="Burger King"
+        data-hsb-always-enabled="false"
+        data-hsb-uses=""
+        />
+      </Helmet>
+    */
 const Wrapper = ({ children }) => {
   return(
     <WrapperDiv>
+
     {children}
     </WrapperDiv>
   )

@@ -39,20 +39,19 @@ module.exports = {
               key: "normalize",
               displayName: "Normalize2 Reset",
               alwaysEnabled: true,
-              uses: "",
-              componentType: "LINK",
+              componentType: "STYLE",
+              crossorigin: "false",
+              media: "(max-width: 600px)",
               pathToCSSFile: "./src/styles/normalize2.css",
-              remoteHREF: "",
-              cacheRemoteHREF: false,
               staticFileNameOverride: "normalize22.css",
-              minify: false,
             },
             {
               key: "core",
               displayName: "Core Theme",
               alwaysEnabled: true,
               uses: "",
-              componentType: "LINK",
+              componentType: "STYLE",
+              crossorigin: "false",
               pathToCSSFile: "./src/styles/coreTheme.css",
               remoteHREF: "",
               cacheRemoteHREF: false,
@@ -63,7 +62,7 @@ module.exports = {
               displayName: "Default, Light Theme",
               alwaysEnabled: false,
               uses: "default",
-              componentType: "LINK",
+              componentType: "STYLE",
               pathToCSSFile: "./src/styles/lightTheme.css",
               remoteHREF: "",
               cacheRemoteHREF: false,
@@ -93,22 +92,6 @@ module.exports = {
             },
           ],
         },
-        plugins: [
-          {
-            resolve: `gatsby-source-filesystem`,
-            options: {
-              path: `${__dirname}/node_modules/gatsby-head-style-boss/ssr`,
-              name: `page-function`,
-            },
-          },
-          {
-            resolve: `gatsby-source-filesystem`,
-            options: {
-              path: `${__dirname}/src/styles`,
-              name: `styles-folder`,
-            },
-          },
-        ],
       },
     },
     {
@@ -266,6 +249,7 @@ module.exports = {
     },
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-emotion`,
+    `gatsby-plugin-build-date`,
     `gatsby-plugin-gatsby-cloud`,
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline

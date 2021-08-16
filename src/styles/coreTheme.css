@@ -41,8 +41,8 @@
   --color-common-white: #fff;
 
   --color-primary-light: #7986cb;
-  --color-primary-main: #3f51b5;
-  --color-primary-dark: #303f9f;
+  --color-primary-main: #6772ac;
+  --color-primary-dark: #474f77;
   --color-primary-text: #fff; /* aka contrastText, color-on-primary */
 
   --color-secondary-light: #ff4081;
@@ -97,6 +97,10 @@
   --color-background-body: black; /* This is what appears around the border of the app, you should only see this at large screen sizes */
   --color-background-default: #fafafa; /* aka color-background, should be darker than surface/paper */
   --color-background-paper: #fff; /* aka color-surface/paper */
+
+  --scrollbarTrackBG: #fafafa;
+  --scrollbarThumbBG: #bdbdbd;
+  --scrollbarThumbBorder: lightgrey;
 
   /* these are alpha channel effects applied to objects based on actions */
   --palette-action-active: rgba(0, 0, 0, 0.54);
@@ -233,7 +237,24 @@
 
   --padding-top-bottom: 10px;
   --padding-right-left: 10px;
+
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbarThumbBG) var(--scrollbarTrackBG);
 }
+
+::-webkit-scrollbar {
+  width: 11px;
+}
+::-webkit-scrollbar-track {
+  background: var(--scrollbarTrackBG);
+}
+::-webkit-scrollbar-thumb {
+  height: 2rem;
+  background-color: var(--scrollbarThumbBG) ;
+  border-radius: 6px;
+  border: 3px solid var(--scrollbarThumbBorder);
+}
+
 
 /* HTML elements, most settings should be inside the components but refer to root vars */
 

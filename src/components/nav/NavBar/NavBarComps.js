@@ -98,7 +98,7 @@ export const Nav = styled.nav`
 `
 
 export const NavUL = styled.ul`
-  color: var(--color-primary-dark);
+  color: var(--color-primary-main);
   list-style-type: none;
   margin: 0;
   padding: 0;

@@ -11,8 +11,8 @@ const LogoIcon = () => {
   return (
     <svg
       css={css`
-        fill: var(--color-primary-dark);
-        stroke: var(--color-primary-dark);
+        fill: var(--color-primary-main);
+        stroke: var(--color-primary-main);
       `}
       viewBox="-10 -10 276 276"
       preserveAspectRatio="xMidYMid meet"

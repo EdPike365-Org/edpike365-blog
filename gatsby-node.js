@@ -79,6 +79,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 exports.onCreateNode = ({ node, actions, getNode }) => {
   const { createNodeField } = actions
 
+  // this is for rss feed
   if (node.internal.type === `MarkdownRemark`) {
     const value = createFilePath({ node, getNode })
 
@@ -106,6 +107,7 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
   }
 }
 
+// limit which blog posts appear on home page or bloglist page
 exports.onCreatePage = ({ page, actions }) => {
   const { createPage, deletePage } = actions
   if (page.path == "/bloglist/") {

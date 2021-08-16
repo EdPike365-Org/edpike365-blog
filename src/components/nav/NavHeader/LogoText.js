@@ -4,7 +4,7 @@ import { useStaticQuery, graphql } from "gatsby"
 
 // Works with smallest screen width 280. Let parents manipulate as needed.
 export const LogoTextSpan = styled.span`
-  color: var(--color-primary-dark);
+  color: var(--color-primary-main);
   transition: color 400ms ease-in-out;
   
   font-family: Arial;

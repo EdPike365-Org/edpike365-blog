@@ -4,7 +4,7 @@ import { keyframes, css } from "@emotion/react"
 //TODO: add option for exclusive open
 const SubMenu = styled.ul`
   list-style-type: none;
-  color: var(--color-primary-dark);
+  color: var(--color-primary-main);
   letter-spacing: var(--font-letter-spacing-overline);
   padding: 0.5rem 1rem;
   display: flex;
@@ -20,7 +20,7 @@ const SubMenuButton = styled.button`
   padding: 0px;
   margin: 0px;
 
-  color: var(--color-primary-dark);
+  color: var(--color-primary-main);
   letter-spacing: var(--font-letter-spacing-overline);
   cursor: pointer;
   transition: color 400ms ease-in-out, background-color 400ms ease-in-out; 
@@ -57,7 +57,6 @@ export const NavSubMenu = ({ title, uuid, children }) => {
     // setItem auto converts isActive to string
     sessionStorage.setItem(uuid, isActive)
   }, [uuid, isActive])
-
 
 
   const SubMenuLinks = styled.div`

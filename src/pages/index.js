@@ -19,15 +19,13 @@ const HomePage = ({ data, pageContext, location }) => {
     transition: color 400ms ease-in-out, background-color 400ms ease-in-out;
   `
 
-  /* this uses the props to className overrided functionality of Emotion */
+  /* this uses the "props to className" override functionality of Emotion */
   const StyledLink = styled(props => <Link {...props} />)`
     color: var(--color-primary-dark);
     text-decoration: none;
     border-bottom: 2px solid transparent;
     transition: color 400ms ease-in-out, background-color 400ms ease-in-out;
-  `
-  const today = new Date()
-  const builtString = `Last Built:  ${ today.getFullYear()}/${ today.getUTCMonth() + 1 }/${ today.getUTCDate() } ` 
+   `
   
   return (
     <Layout location={location}>
@@ -46,7 +44,7 @@ const HomePage = ({ data, pageContext, location }) => {
       })}
       <br />
       <Bio />
-      {builtString}
+      Last Built: {data.currentBuildDate.currentDate}
     </Layout>
   )
 }
@@ -73,6 +71,9 @@ export const pageQuery = graphql`
           description
         }
       }
+    }
+    currentBuildDate{
+      currentDate
     }
   }
 `
