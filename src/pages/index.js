@@ -44,6 +44,7 @@ const HomePage = ({ data, pageContext, location }) => {
       })}
       <br />
       <Bio />
+      <br />
       Last Built: {data.currentBuildDate.currentDate}
     </Layout>
   )

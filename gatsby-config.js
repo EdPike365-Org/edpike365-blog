@@ -249,7 +249,16 @@ module.exports = {
     },
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-emotion`,
-    `gatsby-plugin-build-date`,
+    {
+      resolve: `gatsby-plugin-build-date`,
+      options: {
+        // See Date.prototype.toLocaleString for locales and options
+        locale: "ko-KR",
+        formattingOptions: {
+
+        }
+      },
+    },
     `gatsby-plugin-gatsby-cloud`,
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
