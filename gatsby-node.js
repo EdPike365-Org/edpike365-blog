@@ -8,7 +8,6 @@ const strBlogStatusesToShow = process.env.BLOG_STATUSES_TO_SHOW_LIST
 // Change the comma seperated list to an array
 const arBlogStatusesToShow = strBlogStatusesToShow.split(",")
 // To write out string '["abc", "xyz"]', call JSON.stringify(arBlogStatusesToShow)
-console.info(" gatsby-node.js arBlogStatusesToShow = " + arBlogStatusesToShow)
 console.info(
   " gatsby-node.js arBlogStatusesToShow JSON = " +
     JSON.stringify(arBlogStatusesToShow)

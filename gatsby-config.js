@@ -33,7 +33,6 @@ module.exports = {
       options: {
         config: {
           minifyBrowserFunction: false,
-          staticOutputFolder: "/static/styles",
           styleConfigs: [
             {
               key: "normalize",
@@ -41,7 +40,6 @@ module.exports = {
               alwaysEnabled: true,
               componentType: "STYLE",
               crossorigin: "false",
-              media: "(max-width: 600px)",
               pathToCSSFile: "./src/styles/normalize2.css",
               staticFileNameOverride: "normalize22.css",
             },
@@ -49,13 +47,10 @@ module.exports = {
               key: "core",
               displayName: "Core Theme",
               alwaysEnabled: true,
-              uses: "",
               componentType: "STYLE",
               crossorigin: "false",
               pathToCSSFile: "./src/styles/coreTheme.css",
-              remoteHREF: "",
-              cacheRemoteHREF: false,
-              minify: false,
+              minify: true,
             },
             {
               key: "light",
@@ -64,8 +59,6 @@ module.exports = {
               uses: "default",
               componentType: "STYLE",
               pathToCSSFile: "./src/styles/lightTheme.css",
-              remoteHREF: "",
-              cacheRemoteHREF: false,
               minify: false,
             },
             {
@@ -75,20 +68,26 @@ module.exports = {
               uses: "dark",
               componentType: "STYLE",
               pathToCSSFile: "./src/styles/darkTheme.css",
-              remoteHREF: "",
-              cacheRemoteHREF: false,
               minify: false,
             },
             {
               key: "fire",
               displayName: "Fire Theme",
               alwaysEnabled: false,
-              uses: "",
               componentType: "STYLE",
               pathToCSSFile: "./src/styles/fireTheme.css",
               remoteHREF: "",
-              cacheRemoteHREF: false,
+              media: "(max-width: 900px)",
               minify: false,
+            },
+            {
+              key: "jetpack",
+              displayName: "Jet Pack",
+              componentType: "STYLE",
+              remoteHREF:
+                "https://hawkwood.com/wp-content/plugins/jetpack/css/jetpack.css?ver=9.8.1",
+              cacheRemoteCSS: true,
+              minify: true,
             },
           ],
         },
@@ -253,14 +252,16 @@ module.exports = {
       resolve: `gatsby-source-build-date`,
       options: {
         locales: "fr-FR",
-        options: { 
-          hour: "numeric", minute: "numeric", second: "numeric",
+        options: {
+          hour: "numeric",
+          minute: "numeric",
+          second: "numeric",
           weekday: "long",
           day: "numeric",
           month: "long",
-          year: "numeric"
+          year: "numeric",
         },
-      }
+      },
     },
     `gatsby-plugin-gatsby-cloud`,
     // this (optional) plugin enables Progressive Web App + Offline functionality
