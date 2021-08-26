@@ -11,10 +11,11 @@ tags:
   - remark
   - MarkDown
 ---
+
 ### A Light Hearted Project For April Fools
 
-If you've tried adding Emoji to your Gatsby Markdown blog, you will see that it's very hit or miss. 
-Below is a quick guide to what works and what doesn't.
+If you've tried adding Emoji to your Gatsby Markdown blog, you will see that it's very hit or miss.
+Below is a quick guide to what works and what doesn't on April Fools Day, 2021.
 
 ![Emoji Kiss](emoji-kiss.webp)
 
@@ -31,7 +32,8 @@ You can use [Slack Codes](https://www.webfx.com/tools/emoji-cheat-sheet/):
 Yields: :wink: :kissing_closed_eyes: :cry: :sob: :laughing: :yum: :point_right: :eyes:
 
 #### Slack Emoticon Text Shortcuts
-This plugin docs poorly document these. My best guess is they cover a *subset* of the Slack emoticon list. !TODO: dig through the plugin code.
+
+This plugin docs poorly document these. My best guess is they cover a _subset_ of the Slack emoticon list. !TODO: dig through the plugin code.
 
 [Emoticons List](https://en.wikipedia.org/wiki/List_of_emoticons)
 ![](slack-emoticon-codes.jpg)
@@ -60,13 +62,14 @@ This plugin docs poorly document these. My best guess is they cover a *subset* o
 </table>
 
 #### Troll Face
-Some [Troll Face Emoticons](https://emoticoncentral.com/category/troll)  work too:  
-( ͡❛ ͜ʖ ͡❛)   
+
+Some [Troll Face Emoticons](https://emoticoncentral.com/category/troll) work too:  
+( ͡❛ ͜ʖ ͡❛)  
 ༼ ºل͟º ༽  
 ( ͡°Ɛ ͡°)  
-( ͡ ͜ʖ ͡ )   
-ლ(ಠ益ಠლ)   
-ლ (ಠ_ಠ ლ)   
-༼ノ◕ヮ◕ ༽ノ︵┻━┻   
+( ͡ ͜ʖ ͡ )  
+ლ(ಠ 益 ಠლ)  
+ლ (ಠ_ಠ ლ)  
+༼ノ ◕ ヮ ◕ ༽ノ︵┻━┻
 
 See the [reference page](https://emoticoncentral.com/category/troll) for more!
