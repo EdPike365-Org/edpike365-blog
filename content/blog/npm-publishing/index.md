@@ -1,6 +1,6 @@
 ---
 title: "NPM Package Dev Workflow"
-date: "2021-08-23:12:03.284Z"
+date: "2021-08-23T22:12:03.284Z"
 status: published
 author: EdPike365
 tags:

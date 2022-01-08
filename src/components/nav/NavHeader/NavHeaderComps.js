@@ -3,13 +3,14 @@ import styled from "@emotion/styled"
 import { HamButton } from "./HamburgerButton"
 import { LogoIconDiv } from "./Logo"
 import { LogoTextSpan } from "./LogoText"
+import { SettingsButton } from "./SettingsIconButton"
 import { UserButton } from "./UserIconButton"
 
 // THIS IS WHERE THE MESSY MEDIA QUERY STUFF LIVES
 // Default to smallest supported size of width 280 (Galaxy Fold)
 // We modify visibilty and size of all components in the Header
 // or here in major subcomponents (vs letting them set themselves)
-// NOTE: dimensions are in px units because we need precision in the header (and nav)
+// NOTE: dimensions are in px units because we need precision in the header (and nav sidebar)
 export const LogoLink = styled(Link)`
   display: flex;
   align-items: center;
@@ -23,9 +24,19 @@ export const ButtonDivRight = styled.div`
   align-items: center;
   justify-content: center;
 
-  /* Turn off the DarkMode toggle on the header (not every instance of DarkMode toggle!) */
+  /* Hide the DarkMode toggle on the header (not every instance of DarkMode toggle!) */
   & > .dark-mode-toggle {
     display: none;
+  }
+
+  & > ${SettingsButton} {
+    display: none;
+  }
+
+  @media only screen and (min-width: 320px) {
+    & > ${SettingsButton} {
+      display: inline-flex;
+    }
   }
 
   /* ---------------- Larger Phones ---------------- */
@@ -38,6 +49,10 @@ export const ButtonDivRight = styled.div`
   /*-------------------- Tablet  --------------------*/
   @media only screen and (min-width: 700px) {
     & > .dark-mode-toggle {
+      width: 42px;
+      height: 42px;
+    }
+    & > ${SettingsButton} {
       width: 42px;
       height: 42px;
     }
@@ -58,14 +73,14 @@ export const Header = styled.header`
   overflow: hidden;
 
   display: flex;
-  justify-content: space-between; /* this will flush logodiv to left if the nav button is hidden */
+  justify-content: space-between; /* this will flush logodiv to left if the nav hamburger button is hidden */
   align-items: center; /* align vertical center */
 
   background-color: var(--color-background-paper);
 
   box-shadow: var(--shape-box-shadow);
   z-index: 999;
-  transition: color 400ms ease-in-out, background-color 400ms ease-in-out; 
+  transition: color 400ms ease-in-out, background-color 400ms ease-in-out;
 
   /*---- Normal Phones: Show Logo --------- */
   @media only screen and (min-width: 320px) {
@@ -74,7 +89,6 @@ export const Header = styled.header`
 
   /* ---------------- Larger Phones ---------------- */
   @media only screen and (min-width: 540px) {
-
   }
 
   /*-------------------- Tablet  --------------------*/
@@ -115,9 +129,9 @@ export const LogoDiv = styled.div`
       height: 42px;
       width: 42px;
     }
-    & > ${LogoTextSpan}{
+    & > ${LogoTextSpan} {
       font-size: 32px;
-      letter-spacing: .12em;
+      letter-spacing: 0.12em;
     }
   }
 
@@ -128,18 +142,18 @@ export const LogoDiv = styled.div`
       height: 48px;
       width: 48px;
     }
-    & > ${LogoTextSpan}{
+    & > ${LogoTextSpan} {
       font-size: 36px;
-      letter-spacing: .1em;
+      letter-spacing: 0.1em;
     }
   }
 
   /* ---------------- Larger Phones ---------------- */
   @media only screen and (min-width: 540px) {
-    & > ${LogoTextSpan}{
+    & > ${LogoTextSpan} {
       font-size: 36px;
-      margin-left: .15em;
-      letter-spacing: .15em;
+      margin-left: 0.15em;
+      letter-spacing: 0.15em;
     }
   }
 
@@ -152,10 +166,10 @@ export const LogoDiv = styled.div`
       height: 58px;
       width: 58px;
     }
-    & > ${LogoTextSpan}{
+    & > ${LogoTextSpan} {
       font-size: 48px;
-      margin-left: .2em;
-      letter-spacing: .2em;
+      margin-left: 0.2em;
+      letter-spacing: 0.2em;
     }
   }
 
@@ -166,13 +180,12 @@ export const LogoDiv = styled.div`
       transform: translateX(30vw);
     }
     1% {
-
-     -ms-transform: translateX(30vw); /* IE 9 */
-     -webkit-transform: translateX(30vw); /* Chrome, Safari, Opera */
-     transform: translateX(30vw);
-   }
+      -ms-transform: translateX(30vw); /* IE 9 */
+      -webkit-transform: translateX(30vw); /* Chrome, Safari, Opera */
+      transform: translateX(30vw);
+    }
     100% {
-      transform: translateX(.1vw);
+      transform: translateX(0.1vw);
     }
   }
 
@@ -183,23 +196,21 @@ export const LogoDiv = styled.div`
       transform: translateX(30vw);
     }
     1% {
-     -ms-transform: translateX(30vw) rotate(0deg); 
-     -webkit-transform: translateX(30vw) rotate(0deg); 
-     transform: translateX(30vw) rotate(0deg);
-   }
+      -ms-transform: translateX(30vw) rotate(0deg);
+      -webkit-transform: translateX(30vw) rotate(0deg);
+      transform: translateX(30vw) rotate(0deg);
+    }
     100% {
-      -ms-transform: translateX(.1vw) rotate(360deg); 
-      -webkit-transform: translateX(.1vw) rotate(360deg); 
-      transform: translateX(.1vw) rotate(360deg);
+      -ms-transform: translateX(0.1vw) rotate(360deg);
+      -webkit-transform: translateX(0.1vw) rotate(360deg);
+      transform: translateX(0.1vw) rotate(360deg);
     }
   }
 
   /*-------------------- Large Desktop  --------------------*/
   @media only screen and (min-width: 1366px) {
-    
     ${props =>
-      props.runLogoAnim ? "animation: FLIP-LOGO-LEFT 1s ease-out;" : ""
-    }
+      props.runLogoAnim ? "animation: FLIP-LOGO-LEFT 1s ease-out;" : ""}
 
     & > ${LogoIconDiv} {
       width: var(--header-height-tablet);
@@ -207,12 +218,11 @@ export const LogoDiv = styled.div`
       padding-left: 10px;
     }
 
-    & > ${LogoTextSpan}{
+    & > ${LogoTextSpan} {
       font-size: 48px;
-      margin-left: .1em;
-      letter-spacing: .25em;
+      margin-left: 0.1em;
+      letter-spacing: 0.25em;
     }
-  
   }
 `
 /*

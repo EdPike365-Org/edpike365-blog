@@ -6,7 +6,6 @@ require("dotenv").config({
 // Gatsby CLI location, etc: npm list -g --depth 0
 // webpack.config.js is in C:\Users\EdPike365\code\edpike365-blog\node_modules\gatsby\dist\utils
 // How to modify gatsby webpack: https://gist.github.com/m-allanson/8fc8943f621a6e5460fb9aa65d2451a9
-// If you want to customize html.js template: https://www.gatsbyjs.com/docs/custom-html/
 /*
   flags: {
     DEV_SSR: true
@@ -79,15 +78,6 @@ module.exports = {
               minify: false,
             },
             {
-              key: "jetpack",
-              displayName: "Jet Pack",
-              componentType: "STYLE",
-              remoteHREF:
-                "https://hawkwood.com/wp-content/plugins/jetpack/css/jetpack.css?ver=9.8.1",
-              cacheRemoteCSS: true,
-              minify: true,
-            },
-            {
               key: "burger",
               displayName: "Burger King",
               componentType: "LINK",
@@ -126,6 +116,7 @@ module.exports = {
             resolve: `gatsby-remark-images`,
             options: {
               maxWidth: 740,
+              showCaptions: [`title`],
             },
           },
           `gatsby-remark-graphviz`,

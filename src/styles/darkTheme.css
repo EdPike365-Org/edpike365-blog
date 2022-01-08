@@ -1,6 +1,6 @@
 /*! darkTheme.css */
 :root {
- /* color-scheme is new tag that sets scroll bar colors, only works for dark */
+  /* color-scheme is new tag that sets scroll bar colors, only works for dark */
   --color-scheme: dark;
 
   --color-primary-light: #91a0ec;
@@ -23,8 +23,11 @@
   --scrollbarTrackBG: var(--color-grey-900);
   --scrollbarThumbBG: #6570a7;
   --scrollbarThumbBorder: #7986cb;
-  scrollbar-gutter: stable;
-
+  /* https://css-tricks.com/almanac/properties/s/scrollbar-gutter/ 
+   -having this here adds an empty gutter to the right of the scrollbar 
+   -leaving as documentation
+  */
+  /* scrollbar-gutter: stable; */
 
   /* these are affects applied, mainly alpha channel, to objects based on actions */
   --palette-action-active: #fff;
@@ -57,4 +60,3 @@ tbody tr:nth-of-type(odd) {
     #212058 83%
   );
 }
-

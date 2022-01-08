@@ -4,11 +4,12 @@ import { NavSubMenu } from "./NavBarSubMenu"
 import { NavContext } from "../../../contexts/NavContext"
 
 const NavBar = () => {
-
-  //TODO review this code
+  // This NavBar uses read-only state from NavContext.
+  // The state is set with the hamburger button in the NavHeader component.
+  // Each NavSubMenu has to have a unique UUID to keep track of its open/closed state.
   const { showNavState } = useContext(NavContext)
   const [showNav] = showNavState
-  
+
   // The line breaks at bottom are there to handle too short scroll bars on short screens
   return (
     <Nav showNav={showNav}>
@@ -54,17 +55,14 @@ const NavBar = () => {
           </NavLI>
           <NavLI>
             <NavLink to={"/frontend/"} itemProp="url">
-              Gatsby
-            </NavLink>
-          </NavLI>
-          <NavLI>
-            <NavLink to={"/frontend/"} itemProp="url">
-              SEO
+              Gatsby, NPM Plugins
             </NavLink>
           </NavLI>
         </NavSubMenu>
-        <SubUL>
-          BACK END
+        <NavSubMenu
+          title={"BACK END"}
+          uuid={"eb7371e2-ea28-4eee-85fd-79d1f7a5155b"}
+        >
           <NavLI>
             <NavLink to={"/backend/"} itemProp="url">
               REST, GraphQL
@@ -90,11 +88,8 @@ const NavBar = () => {
               SQL, RDMS
             </NavLink>
           </NavLI>
-        </SubUL>
-        <NavSubMenu
-          title={"DEVOPS"}
-          uuid={"b2cea402-c66f-11eb-b8bc"}
-        >
+        </NavSubMenu>
+        <NavSubMenu title={"DEVOPS"} uuid={"b2cea402-c66f-11eb-b8bc"}>
           <NavLI>
             <NavLink to={"/devops/"} itemProp="url">
               Jenkins, GitHub Actions
@@ -106,16 +101,16 @@ const NavBar = () => {
             </NavLink>
           </NavLI>
           <NavLI>
-          <NavLink to={"/devops/"} itemProp="url">
+            <NavLink to={"/devops/"} itemProp="url">
               AppDynamics
             </NavLink>
           </NavLI>
         </NavSubMenu>
       </NavUL>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
+      <br />
+      <br />
+      <br />
+      <br />
     </Nav>
   )
 }

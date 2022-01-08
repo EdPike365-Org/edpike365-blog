@@ -1,7 +1,7 @@
 ---
 title: "Fixing WSL 2 Ubuntu Localhost Problems"
-date: "2021-08-25:12:03.284Z"
-status: publish
+date: "2021-08-25T22:12:03.284Z"
+status: published
 author: EdPike365
 tags:
   - WSL
@@ -33,5 +33,14 @@ I did not use WSL v1, but people report that it was dependable. In WSL 2, it is 
 ## If Those Don't Work
 
 - Make sure you can access the site from within Ubuntu. Type `curl localhost:1234` and you should get something back. If not, your service is not working.
+- See what ports are being listened to by Linux: `sudo lsof -i -P -n | grep LISTEN`
+- See which ports are open
 - Try to telnet to it from PS in Windows.
 - Maybe you have a firewall problem. If you disable Windows Firewall, and it fixes the problem, NOW you **definitely** have a firewall problem.
+
+### Quarkus Specific
+
+- Magic config line (this worked for me):
+  > Add `quarkus.http.host=0.0.0.0` to `src\main\resources\application.properties` and restart quarkus (no magic command line args required.) Before, running `sudo lsof -i -P -n | grep LISTEN` showed java listening on `TCP 127.0.0.1:8080`. After, it shows it listening to `TCP *:8080`
+- Magic command arg (this did not work):
+  `./mvnw compile quarkus:dev -DdebugHost=0.0.0.0`

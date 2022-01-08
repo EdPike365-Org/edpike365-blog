@@ -20,15 +20,18 @@ const Settings = () => {
       <Seo title="Settings" />
       <h2>Settings</h2>I put the link to this page up high in the nav to make it
       more likely that you'll come here to see my stuff.
-      <Section title="Style">
+      <Section title="Style Settings">
         <hr />
+        NOTE!!!! Fire Theme is has a max-width setting as a demostration. If you
+        don't see a change, change to a lower browser width. (ctrl + mouse
+        scroll) <br />
+        <FlexDiv>
+          Dark Mode Toggle: <DarkModeToggle />
+        </FlexDiv>
         Style Selector: <StyleSelector />
         <hr />
         <PrefersDarkMode />
         <hr />
-        <FlexDiv>
-          Dark Mode Toggle: <DarkModeToggle />
-        </FlexDiv>
         <StylesSummary />
       </Section>
     </Layout>

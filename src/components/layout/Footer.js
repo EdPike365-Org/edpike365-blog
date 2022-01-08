@@ -1,6 +1,7 @@
 import React from "react"
 import styled from "@emotion/styled"
 
+//DEPRECATED
 const FootDiv = styled.footer`
   background-color: var(--color-background-paper);
   box-shadow: var(--shape-box-shadow);

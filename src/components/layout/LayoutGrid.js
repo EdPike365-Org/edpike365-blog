@@ -20,7 +20,6 @@ const GlobalGridDiv = styled.div`
     "nav"
     "main";
 
-
   /*-------------------- Tablet  --------------------*/
   /* Header is going to get taller */
   /* TODO: add icon only left nav */
@@ -33,10 +32,10 @@ const GlobalGridDiv = styled.div`
   }
 
   /*-------------------- LapTop  --------------------*/
-  /* Show nav, open on left, hide hamburger */
+  /* Show nav open on left, hide hamburger */
   @media only screen and (min-width: 1366px) {
     grid-template-columns: auto 1fr;
-    grid-template-rows:  auto 1fr;
+    grid-template-rows: auto 1fr;
     grid-template-areas:
       "header header"
       "nav main";
@@ -44,7 +43,7 @@ const GlobalGridDiv = styled.div`
 `
 
 const LayoutGrid = ({ children }) => {
-  return <GlobalGridDiv >{children}</GlobalGridDiv>
+  return <GlobalGridDiv>{children}</GlobalGridDiv>
 }
 
 export default LayoutGrid

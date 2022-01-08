@@ -129,6 +129,18 @@ exports.onCreatePage = ({ page, actions }) => {
       },
     })
   }
+
+  /* 
+  Since this section will have dynamic content that shouldn’t be rendered statically, 
+  you need to exclude it from the build. This indicates that /account is a client-only route.
+  page.matchPath is a special key that's used for matching pages only on the client.
+    */
+  if (page.path.match(/^\/account/)) {
+    page.matchPath = "/account/*"
+
+    // Update the page.
+    createPage(page)
+  }
 }
 
 exports.createSchemaCustomization = ({ actions }) => {
