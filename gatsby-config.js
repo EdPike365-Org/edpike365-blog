@@ -236,10 +236,11 @@ module.exports = {
         name: `EdPike365 Blog and Portfolio`,
         short_name: `EdPike365`,
         start_url: `/`,
-        background_color: `#ffffff`,
-        theme_color: `#6772ac`,
-        display: `minimal-ui`,
+        background_color: `#000000`,
+        theme_color: `#000000`,
+        display: `fullscreen`,
         icon: `src/images/logo.svg`, // This path is relative to the root of the site.
+        theme_color_in_head: false, // This will avoid adding theme-color meta tag.
       },
     },
     `gatsby-plugin-react-helmet`,
