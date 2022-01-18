@@ -1,7 +1,7 @@
 ---
 title: "Fixing WSL 2 Ubuntu Localhost Problems"
 date: "2021-08-25T22:12:03.284Z"
-status: published
+status: draft
 author: EdPike365
 tags:
   - WSL

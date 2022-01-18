@@ -10,7 +10,9 @@ tags:
   - MarkDown
 ---
 
-I've combined every page from the original Gatsby Markdown demo [mini site](https://using-remark.gatsbyjs.org/?__hstc=247646936.594c7150d69ca018c6dac822d8ef1a73.1611340662237.1617462079360.1617466517732.129&__hssc=247646936.1.1617466517732&__hsfp=4183638795). Why put them all together in this gigantic page? I want to see if there are any CSS or MD processing conflicts. Also, it's nice to be able to scroll through a single demo instead of jumping back and forth.
+I've combined every page from the original Gatsby V3 Markdown demo [mini site](https://using-remark.gatsbyjs.org/?__hstc=247646936.594c7150d69ca018c6dac822d8ef1a73.1611340662237.1617462079360.1617466517732.129&__hssc=247646936.1.1617466517732&__hsfp=4183638795). Why put them all together in this gigantic page? I want to see if there are any CSS or MD processing conflicts. Also, it's nice to be able to scroll through a single demo instead of jumping back and forth.
+
+NOTE: Something in this page causes an extra scroll bar to appear on the right side.
 
 ![Gatsby and MarkDown](gatsby_and_markdown.jpg "Gatsby and Markdown")
 
@@ -25,7 +27,7 @@ I've combined every page from the original Gatsby Markdown demo [mini site](http
   - [Custom Components](#custom-components)
   - [Graphviz](#graphviz)
 
-I tried to stay true to the original demo content so we can compare apples to apples. I added some notes and additional examples where I thought they were sorely needed. You'll see !TODO marking where I need to do some more work. 
+I tried to stay true to the original demo content so we can compare apples to apples. I added some notes and additional examples where I thought they were sorely needed. You'll see !TODO marking where I need to do some more work.
 
 If you run Lighthouse on this it won't do well for several reasons. As of posting, this blog site is not optimized for SEO, links, etc. But mainly the page is huge and apparently the large SVG files are causing some trouble.
 
@@ -36,6 +38,7 @@ The content from each original demo page is seperated by a <span style="color:#b
 > EdPike365: Original mini site [on github](https://github.com/gatsbyjs/gatsby/tree/master/examples/using-remark)
 
 <a name="hello"></a>
+
 <div style="background-color:#bbbe74; padding: 1px 10px 10px 10px;">
 <h2>Hello World: The remark Kitchen Sink:</h2>
 Links: <a href="https://using-remark.gatsbyjs.org/hello-world-kitchen-sink/" target="_blank" >page</a>, <a href="https://raw.githubusercontent.com/gatsbyjs/gatsby/master/examples/using-remark/src/pages/2016-04-15---hello-world-kitchen-sink/index.md" target="_blank"> source </a>
@@ -165,7 +168,7 @@ In this example, leading and trailing spaces are shown with dots: ⋅
 3.  Actual numbers don't matter, just that it's a number
     - sub 1 (EdPike365: This was a "1.", but it did not indent properly until I used "-")
     - sub 2 (EdPike365: added, does not work with "1.", becomes a "2.")
-        - sub sub,(added by EdPike365)
+      - sub sub,(added by EdPike365)
 4.  And another item.
 
 You can have properly indented paragraphs within list items. Notice the blank
@@ -313,9 +316,11 @@ extension feature. The footnote syntax looks like this:
 ```markdown
 This line has a footnote [^1]. Scroll to page bottom or click the link to see it.
 ```
+
 ```markdown
 This line has another footnote [^2]. Scroll to page bottom or click the link to see it.
 ```
+
 That renders like this:
 
 This line has a footnote [^1]. Scroll to page bottom or click the link to see it.
@@ -340,6 +345,7 @@ Quote break.
 > > > Block 3
 
 ```
+
 The above code yields:
 
 > Blockquotes are very handy in email to emulate reply text. This line is part
@@ -351,15 +357,17 @@ Quote break.
 > boy let's keep writing to make sure this is long enough to actually wrap for
 > everyone. Oh, you can _put_ **Markdown** into a blockquote.
 
-> EdPike365: I'm adding nested blockquotes 3 layers deep, seperated by 1 space each. 
+> EdPike365: I'm adding nested blockquotes 3 layers deep, seperated by 1 space each.
 
 > Block 1
+>
 > > Block 2
+> >
 > > > Block 3
 
 > EdPike365: The nested blocks should work like [CommonMark](https://commonmark.org/help/tutorial/05-blockquotes.html#:~:text=To%20create%20a%20blockquote%2C%20start,can%20also%20contain%20other%20formatting.&text=To%20keep%20the%20quote%20together,quote%20must%20contain%20the%20%3E%20character.). The generated HTML is correct so it must be a CSS problem.
-![Nested Block Quotes](nested block quotes.png)
-!TODO: modify CSS to add space between indents and trailing indents below content.
+> ![Nested Block Quotes](nested block quotes.png)
+> !TODO: modify CSS to add space between indents and trailing indents below content.
 
 <a name="html"></a>
 
@@ -455,6 +463,7 @@ paragraph_.
 [7]: https://github.com/wooorm/retext-smartypants
 
 <a name="responsive-image"></a>
+
 <div style="background-color:#bbbe74; padding: 1px 10px 10px 10px;">
 <h2>Responsive Image and IFrames:</h2>
 Links: <a href="https://using-remark.gatsbyjs.org/responsive-images-and-iframes/" target="_blank">page</a>, <a href="https://raw.githubusercontent.com/gatsbyjs/gatsby/master/examples/using-remark/src/pages/2017-01-02---responsive-images-and-iframes/index.md" target="_blank"> source </a>
@@ -496,7 +505,7 @@ Let's see some more photos by
 
 ![](max-boettinger-288448.jpg)
 
-### What about retina images? 
+### What about retina images?
 
 Absolutely, these are supported too! Gatsby takes care to retain images' pixel
 density.
@@ -518,9 +527,9 @@ And here's an awesome SVG tiger:
 
 > EdPike365: !TODO figure out how to resize the svg
 
-![awesome tiger](awesome_tiger.svg) 
+![awesome tiger](awesome_tiger.svg)
 
-## iFrames and video embeds 
+## iFrames and video embeds
 
 Let's add a YouTube video to show off responsive iFrames real quick:
 
@@ -551,13 +560,13 @@ Let's try with a PDF, that you should be able to preview and/or download by
 clicking this link:
 [Creative Commons Informational Flyer.pdf](Creativecommons-informational-flyer-eng.pdf)
 
-## Intercepting Local Links 
+## Intercepting Local Links
 
 [gatsby-plugin-catch-links][222] intercepts local links from Markdown and other
 non-react pages and does a client-side `pushState` to avoid the browser having
 to refresh the page.
 
-Let's try linking to the 
+Let's try linking to the
 "[Emoji](../gatsby-remark-emoji/)"
 article using a relative path.
 
@@ -634,6 +643,7 @@ print s
 No language indicated, so no syntax highlighting.
 But let's throw in a <b>tag</b>.
 ```
+
 > EdPike365: I added the "diff" example. Note that the - and + have to be left justified.
 
 ```diff
@@ -651,17 +661,19 @@ const App = () => {
 differs a bit from PrismJS's own. You can find out everything about it in the
 [corresponding README][1].
 
-> EdPike365: You must implement special CSS code to get Highlighting and Line Numbering to work.   
+> EdPike365: You must implement special CSS code to get Highlighting and Line Numbering to work.  
 > Hightlighting: I'm currently using a styles.css file in the root folder. I added this block:
+
 ```css
 /* used by gatsby-remark-prismjs, colors for Okaidia theme */
 .gatsby-highlight-code-line {
-    background-color: #474643;
-    display: block;
-    margin-right: -1em;
-    margin-left: -1em;padding-right: 1em;
-    padding-left: 0.75em;
-    border-left: 0.25em solid #569c3b;
+  background-color: #474643;
+  display: block;
+  margin-right: -1em;
+  margin-left: -1em;
+  padding-right: 1em;
+  padding-left: 0.75em;
+  border-left: 0.25em solid #569c3b;
 }
 ```
 
@@ -671,10 +683,13 @@ differs a bit from PrismJS's own. You can find out everything about it in the
 /* If using PrismJS line numbering, add this. */
 .gatsby-highlight pre[class*="language-"].line-numbers {
   padding-left: 2.8em;
-  padding-top: var(--spacing-0); /* I had to add this to mine because otherwise the line numbers column was ignoring the padding-top of the code block to the right and was nearly 1 line above it. */
+  padding-top: var(
+    --spacing-0
+  ); /* I had to add this to mine because otherwise the line numbers column was ignoring the padding-top of the code block to the right and was nearly 1 line above it. */
 }
 ```
-> EdPike365: Below here, the code is not rendering (which is what we want), and I can't tell how :-(. It is indented by 2 tabs or 4 spaces, but I can't reproduce it. 
+
+> EdPike365: Below here, the code is not rendering (which is what we want), and I can't tell how :-(. It is indented by 2 tabs or 4 spaces, but I can't reproduce it.
 
     ```javascript{1-2,22}{numberLines: true}
     // In your gatsby-config.js
@@ -705,7 +720,7 @@ differs a bit from PrismJS's own. You can find out everything about it in the
     ]
     ```
 
-Yields: 
+Yields:
 
 ```javascript{1-2,22}{numberLines: true}
 // In your gatsby-config.js
@@ -757,13 +772,13 @@ Let's do something crazy and add a list with another code example:
   …and a paragraph! In my younger and more vulnerable years my father gave me
   some advice that I’ve been turning over in my mind ever since.
 
-  -  A nested numbered list
-  -  “Whenever you feel like criticizing any one,” he told me, “just remember
-      that all the people in this world haven’t had the advantages that you’ve
-      had.”
+  - A nested numbered list
+  - “Whenever you feel like criticizing any one,” he told me, “just remember
+    that all the people in this world haven’t had the advantages that you’ve
+    had.”
 
 - Roger that, now back to topic: _Highlighted code blocks work here, too_:
-  
+
   (This code gives the highlight command for lines 10 and 13.)
   <pre>
     ```css{10,13}
@@ -888,7 +903,6 @@ If you'd prefer to write your code blocks directly within your Markdown, take a 
 [3333]: http://prismjs.com/
 [4444]: /code-and-syntax-highlighting/
 
-
 <br>
 <a name="rendering-math-equations"></a>
 <div style="background-color:#bbbe74; padding: 1px 10px 10px 10px;">
@@ -897,7 +911,7 @@ Links: <a href="https://using-remark.gatsbyjs.org/katex/" target="_blank">page</
 </div>
 <br>
 
-> EdPike365: Gatsby did not document this well. KaTeX is a fast, easy-to-use JavaScript library for TeX math rendering on the web. It *should* render anything from the popular [LaTeX](https://www.math.ubc.ca/~pwalls/math-python/jupyter/latex/) scientific notation library.
+> EdPike365: Gatsby did not document this well. KaTeX is a fast, easy-to-use JavaScript library for TeX math rendering on the web. It _should_ render anything from the popular [LaTeX](https://www.math.ubc.ca/~pwalls/math-python/jupyter/latex/) scientific notation library.
 
 [gatsby-remark-katex][15] adds math equation support to gatsby using
 [remark-math][25] and [katex][35].
@@ -944,8 +958,8 @@ $$
 
 ### Advanced Examples:
 
-
 #### Fractions, Super and Subscripts
+
 ```
 Lift($L$) can be determined by Lift Coefficient ($C_L$) like the following equation.
 
@@ -964,7 +978,7 @@ $$
 
 #### Sum Sigma with Ranges
 
-``` 
+```
 \\ "\sum" is Sigma
 $$
 \sum_{i=1}^n a_i
@@ -974,24 +988,27 @@ $$
 $$
 \sum_{i=1}^n a_i
 $$
----
-####  Integral and Function Symbol
 
-` $\int_a^b f(x) = F(b) - F(a)$ `   
+---
+
+#### Integral and Function Symbol
+
+`$\int_a^b f(x) = F(b) - F(a)$`
 
 yields:  
-  $\int_a^b f(x) = F(b) - F(a)$
+ $\int_a^b f(x) = F(b) - F(a)$
 
 ---
+
 #### Limit with Approaches Subscript
 
-` $$f'(a) = \lim_{x \to a} \frac{f(x) - f(a)}{x-a}$$ ` 
+`$$f'(a) = \lim_{x \to a} \frac{f(x) - f(a)}{x-a}$$`
 
 yields:
- 
- $$
- f'(a) = \lim_{x \to a} \frac{f(x) - f(a)}{x-a}
- $$
+
+$$
+f'(a) = \lim_{x \to a} \frac{f(x) - f(a)}{x-a}
+$$
 
 [15]: https://www.gatsbyjs.com/plugins/gatsby-remark-katex/
 [25]: https://github.com/Rokt33r/remark-math
@@ -1053,7 +1070,7 @@ Links: <a href="https://using-remark.gatsbyjs.org/graphviz/" target="_blank">pag
 </div>
 <br>
 
-> EdPike365: *** It is very important that you follow the linked install directions above ***. The plugin must be added above the PrismJS plugin in your gatsby-config.js.
+> EdPike365: **_ It is very important that you follow the linked install directions above _**. The plugin must be added above the PrismJS plugin in your gatsby-config.js.
 
 ## Rendering dot code blocks
 
@@ -1312,6 +1329,7 @@ You can overwrite the `style` attribute if you don't like that behaviour:
       subgraph cluster_legend {
         ...
     ```
+
 > EdPike365: The custom CSS does NOT work in the original demo either. !TODO
 
 There:
@@ -1447,10 +1465,11 @@ digraph graphname {
   buildHtml -> htmlFiles;
 }
 ```
+
 > EdPike365: Well thats it. When I have spare time I'll try to fix the !TODO's that you saw. This will mostly mean doing PR's on those plugins. If you work on any of the !TODO's in this article, make sure to share.
 
 ---
 
-> EdPike365: Any Footnotes in *any* of the code above will appear below here.
+> EdPike365: Any Footnotes in _any_ of the code above will appear below here.
 
 ---

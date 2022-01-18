@@ -12,7 +12,7 @@ tags:
   - BioDevOps
 ---
 
-[Readings](#readings), [Companies/Orgs](#orgs), [People](#people), [Languages](#languages), [Acronym Watch](#acronym-watch), [Training/Classes](#training), [Future Research](#future)
+[Events](#events), [Readings](#readings), [Companies/Orgs](#orgs), [People](#people), [Languages](#languages), [Acronym Watch](#acronym-watch), [Training/Classes](#training), [Future Research](#future)
 
 ---
 
@@ -24,19 +24,23 @@ This week I was mostly exploring SynBio DevOps for a [blog post](/synbio-devops)
 
 <p align="center">Image Courtesy of Synthace</p>
 
+### Events
+
+- [Ginkgo Ferment 2021](https://www.ginkgoferment.com/) Videos just got posted. Website says it was in Oct. Was it a COVID event time warp? Its in person.
+
+  Video 1 [Ginkgo Ferment 2021: Developing the Next Wave of Products with Synthetic Biology](https://www.youtube.com/watch?v=c-9tc4NfK3k). Announced [Jake Wintermute](https://wintermute.bio/) as developer evangelist. I followed him in Twitter a while back and thought it was a cool handle, but its his _actual_ name. And he really does live in Paris, France.
+
 ### Reading Corner <a name="readings"></a>
 
 - Books
 
   - "[Deep Learning with Python](https://www.manning.com/books/deep-learning-with-python-second-edition?gclid=Cj0KCQiAw9qOBhC-ARIsAG-rdn46abAzsF3bC_3pVQtSgwAFq4kVQ8ajeIlsgFy9_LLQZsZ5yRYDvxEaAkOgEALw_wcB)", Francois Chollet, Second Edition
 
-  - "The Code Breaker: Jennifer Doudna, Gene Editing, and the Future of the Human Race"
-    I read [this](https://www.amazon.com/Code-Breaker-Jennifer-Doudna-Editing/dp/1982115858). Now I have the twins reading it. Also available as [audio book](https://www.amazon.com/Code-Breaker-Jennifer-Doudna-Editing/dp/B08GP2J186/ref=tmm_aud_swatch_0?_encoding=UTF8&qid=&sr=).
+  - "[The Code Breaker: Jennifer Doudna, Gene Editing, and the Future of the Human Race](https://www.amazon.com/Code-Breaker-Jennifer-Doudna-Editing/dp/1982115858)". I read it and now I have the twins reading it. Also available as [audio book](https://www.amazon.com/Code-Breaker-Jennifer-Doudna-Editing/dp/B08GP2J186/ref=tmm_aud_swatch_0?_encoding=UTF8&qid=&sr=).
 
-- Articles
-  I read a lot of articles while writing some blog posts. Here are the key ones.
+- Articles: I read a lot of articles while writing some blog posts. Here are the key ones.
 
-  - (https://www.ncbi.nlm.nih.gov/books/NBK535871/) I read this while writing my SynBio Devops blog post. I wish I'd seen it earlier because it would have saved me a lot of work. I intend to go back and write a blog post to summarize its contents.
+  - [Biodefense in the Age of Synthetic Biology](https://www.ncbi.nlm.nih.gov/books/NBK535871/) I read this while writing my SynBio Devops blog post. I wish I'd seen it earlier because it would have saved me a lot of work. I intend to go back and write a blog post to summarize its contents.
   - [How Bio is Disrupting Industries and Eating the World: A Historical Perspective](https://strangehelix.com/?p=f3523c96b99d)
   - [Biology is Eating the World: A Manifesto](https://a16z.com/2019/10/28/biology-eating-world-a16z-manifesto/): a16z (Andreessen Horowitz). "drug discovery and development will move from a bespoke to an iterative process"
   - [How Biotech Startup Funding Will Change in the Next 10 Years](https://www.ycombinator.com/library/4L-how-biotech-startup-funding-will-change-in-the-next-10-years), 2019
@@ -104,3 +108,6 @@ Things I ran across and thought "Oh yeah, I need to look into that sometime, but
 - Craig Venter Institue
 - ETH Zurich. Caulobacter ethensis 2.0
 - Jared Friedman, YC (Y Combinator)
+- Ginkgo Ferment Partner Presenters
+  - Arcea
+  - Genomatica

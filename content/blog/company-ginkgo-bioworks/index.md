@@ -1,5 +1,5 @@
 ---
-title: "Ginkgo Bioworks Devops"
+title: "Ginkgo Bioworks' Technology"
 date: "2021-12-27T22:12:03.284Z"
 status: published
 author: EdPike365
@@ -13,34 +13,67 @@ tags:
 
 ![Ginkgo Bioworks: The Organsim Company](ginkgo_logo.png)
 
-## Learning From Ginkgo Bioworks
+## Learning From Ginkgo Bioworks' Technologies
 
-[Ginkgo](https://www.ginkgobioworks.com/) is among the top companies doing what I want to do: mixing synthetic biology, lab automation, genomics and software/devops. I hope to get a job with them or one of their partners someday. This is mostly for my use but I thought I'd share.
+[Job Descriptions](#jobs), [DevOps](#devops), [References with Summaries](#refs)
+
+## Company Overiew
+
+[Ginkgo](https://www.ginkgobioworks.com/) is among the top companies doing what I want to do: mixing synthetic biology, lab automation, genomics, ML and software/devops. I hope to get a job with them or one of their partners someday.
 
 This post is a loosely organized collections of factoids I've captured from various places and I'll update it as I find out more.
 
 I think Ginkgo is well on it's way to spinning up a "cloud wet labs" product the same way that Amazon created AWS: its not what they set out to do but it is going to be a big deal. I'm following other "cloud wet lab" plays like [Synthace](https://www.synthace.com/) and [Emerald Cloud Lab](https://www.emeraldcloudlab.com/).
 
-At the beginning of 2022, my analysis is that the current business plan focuses on:
+At the beginning of 2022, my analysis is that their current business plan focuses on:
 
 1. Developing Prototypes for fees, royalties and equity stakes. Product ideas that employees come up with are "incubated" out into additional business partners.
-2. Developing an internal knowledge base (aka a moat), similar to how 23 and Me works, or Tesla's FSD AI, works. They often refer to it as their "Codebase", but I think its a bit more than that.
+2. Developing an internal "knowledge base", similar to how 23 and Me works, or Tesla's FSD AI, works. They call it the "Codebase", but its a bit more than that.
 
-   - They design each contract with a third party to allow Ginkgo to keep a copy of what they learn in the process. I don't know how this will play out for future copyright issues. Ginkgo will have SynBio data at a scale vastly greater than any competitor. Data is the key to training ML, so Ginkgo's will be superior, and continue to be superior, to any competitors without a smililar deal. It should give them a lead similar to Tesla's FSD, for similar reasons. The only competitor at this point would be [Twist Bioscience](https://www.twistbioscience.com/), because every Ginkgo project uses Twist.
+   - They design each contract with a third party to allow Ginkgo to keep a copy of what they learn in the process. I don't know how this will play out for future copyright issues. This video has their lawyer Claire Laporte [talking about their situation](https://youtu.be/ZtVytYuSt44?t=792).
 
-3. Cloud Bio Services: Ginkgo is having to exponentially scale up automated Lab equipment and IT infrastructure. I predict that at some point, to amortize their physical investments, they will create a 3rd business: explicit, AWS like, cloud bio lab services for use by customers that Ginkgo is not partnering with. Mergers may be involved to build the full offering. Twist is a good candidate.
+   - Ginkgo's codebase will pay compound interest. It will have sequence data, etc, at a scale vastly greater than any competitor. Data is the key to training ML, so Ginkgo's ML should be superior, and continue to be superior, to any competitors without a similar deal. It should give them a lead similar to Tesla's FSD, for similar reasons. The only competitor at this point would be [Twist Bioscience](https://www.twistbioscience.com/), because every Ginkgo project uses Twist.
 
-#### Ginkgo DevOps Current Focus
+> I think of Ginkgo's Codebase deal as "the library of Alexandria" because that library required every ship docking in Alexandria to allow the library to copy any documents onboard.
 
-- Building network and IOT resources to support exponentially increasing physical infrastucture.
-- Automating provisioning IT resources for internal projects and researchers.
+3. Self Serve Cloud Bio Services: Ginkgo is having to exponentially scale up automated Lab equipment and IT infrastructure for their foundry(s). I predict that at some point, to amortize their physical investments, they will create a 3rd business: explicit, AWS like, cloud bio lab services for use by anyone, not just their business partners. Mergers may be involved to build the full offering.
+
+4. Bio Security: It's an interesting field with growth potential but it doesnt fit into their core business. It should be spun off to yet another "Ginkgobated" company. (I made up that term as well: Ginkgo Incubated)
+
+## Gingkgo Technologies
+
+### Technologies From Job Descriptions <a name="jobs"></a>
+
+- General Stack: Python, SQL, DNA, Postgres, Snowflake, Airflow, AWS DMS, Spark on EMR
+- Data Engineer:
+  - Data Pipeline: Airflow, Luigi, etc
+  - Big Data tools: Snowflake, Hive, Spark
+  - AWS cloud: EC2, EMR, RDS, Redshift, S3
+  - Python, Java, Scala, etc
+  - Linux
+- Syn Bio Engineer: Python, NGS
+- Computational Protein Engineer: Python, Rosetta, Schrodinger, molecular simulations (MOE), deep learning
+- Computational Biologist: Python/R, bash, bioinformatics tools (samtools/bwa), snakemake/nextflow, SQL, GraphQL, AWS/Google Cloud distributed computing, Docker, git
+- IT: IAM, AD/LDAP, GPO?, Okta SSO, Centrify?, AWS in general
+- Apps:
+  - AWS, Docker, Django, REST, GraphQL, React, MySQL, Postgres, Elastic Search, Airflow
+  - Python, Javascript, CI/CD, AWS
+- DevOps: see below
+
+### Ginkgo DevOps <a name="devops"></a>
+
+DevOps tech is my main focus, so I broke it out in more detail. The DevOps group at Ginkgo is focused on the following:
+
+- Building network and IOT resources to support exponentially increasing physical infrastucture, mainly for NGSs.
+- Automating the provisioning of internal IT resources for each project and it's researchers.
 - Automating peering/integrating with project partners.
+- Pumping water out of the basement.
 
 #### Devops Resource Provisioning Cases
 
 - Ginkgo's core infrastructure: data center, networking.
-- Per Foundry infrastructure as they create more Foundries (think AWS Zones)(predicted but they may already have)
-- Per External Partner: io security (APIs, network peering), extended CMR
+- Per Foundry infrastructure as they create more Foundries (think AWS Zones)(I'm predicting here but they may already have this)
+- Per External Partner: io security (APIs, network peering), user credentials/federation
 - Per Project resources. I suspect there is a "sub project" domain as well.
   - per involved partner
   - per researcher/programmer
@@ -50,13 +83,13 @@ At the beginning of 2022, my analysis is that the current business plan focuses 
   - IT, DevOps
   - Other staff: admins, etc
 
-### Tech Stack
+#### DevOps Tech Stack
 
-I was able to document some things from the references found at the end of this article. TODO: look at help wanted job descriptions.
+I was able to document some things from the references found in the references at the end of this article. If you are looking for technologies per "job role", e.g. "Data Engineer", they are in another blog post [SynBio Company Tech Stacks](/synbio-company-tech-stacks)
 
-- Public Website: UI
-- Extranet: Auth, UI, API's
-- Intranet
+- Public Website
+- Extranet: Auth, APIs
+- Intranet: APIs, Zero Trust Auth?
 - Sequencing
   - NGS: [TMO](https://www.thermofisher.com/onelambda/us/en/featured-products/alltype-fastplex.html?filter=%7B%7D) or [Agilent](https://www.agilent.com/en/product/automated-electrophoresis/nucleic-acid-analysis?gclid=CjwKCAiA5t-OBhByEiwAhR-hm4Txf0IiAv6Xx9V_EM2vvWyWQRkMxg8KNQWNL0pwHOlwxHEuF73hGBoCCUYQAvD_BwE&gclsrc=aw.ds)
   - [VAST](https://vastdata.com/) Storage Technology
@@ -95,9 +128,14 @@ I was able to document some things from the references found at the end of this 
 - Data:
   - AWS RDS
   - AWS Elasticache for Redis
-  - AWS ElasticSearch
-- File mgt and storage
+  - AWS Open-Search (managed ElasticSearch)
+- File mgt and object storage
+
+  - AWS EBS
+  - AWS EFS
+  - AWS FSX
   - AWS S3
+
 - User Directory, Auth:
   - AWS Organizations
   - AWS Cloud Directory
@@ -110,14 +148,21 @@ I was able to document some things from the references found at the end of this 
 - DevOps
   - AWS Config
   - AWS CloudFormation (some interest in TerraForm)
+  - AWS Control Tower (I assume)
   - Ansible
   - Jenkins
   - AWS CloudWatch
 - GSuite
 
-## Reference Videos and Articles
+## Reference Videos and Articles <a name="refs"><a>
 
-### Ref 1: "How Ginkgo BioWorks uses AWS at Scale"
+1. [How Ginkgo Bioworks uses AWS at Scale](#ref1)
+2. [Shephard HPC on AWS Event](#ref2)
+3. [Ginkgo Bioworks, Biology by Design: Applying Gigabases of DNA to Bioengineering](#ref3)
+4. [Meet Ginkgo Bioworks, 2010](#ref4)
+5. [Ginkgo’s Platform: An Introduction to Codebase and IP Strategy (Ginkgo Bioworks Investor Day 2021)](#ref5)
+
+### Ref 1: "How Ginkgo BioWorks uses AWS at Scale" <a name="ref1"></a>
 
 I watched an AWS re:Invent 2019 presentation about [how Ginkgo BioWorks uses AWS at scale]("https://www.youtube.com/watch?v=arDI64ja6KA").
 
@@ -312,7 +357,7 @@ Ginkgo Sequencing Pipeline
 
 ---
 
-## Ref 2: Shephard HPC on AWS Event
+## Ref 2: Shephard HPC on AWS Event <a name="ref2"></a>
 
 From Nov 2020 video [HPC on AWS Event -Ginkgo Bioworks Automating the Creation of Batch Processing Workflows in AWS](https://www.youtube.com/watch?v=oXzNs_QfUX8) by Jacob Mevorach, DevOps Eng 2.
 
@@ -388,7 +433,7 @@ Shephard CloudFormation Schema to Create Scalable Batch Processing Jobs
 
 Will be open sourced soon/now?
 
-## Ref 3: Ginkgo Bioworks, Biology by Design: Applying Gigabases of DNA to Bioengineering
+## Ref 3: Ginkgo Bioworks, Biology by Design: Applying Gigabases of DNA to Bioengineering <a name="ref3"></a>
 
 [Video](https://www.youtube.com/watch?v=LVb2UBryDVM) May 2019. Patrick Boyle, PhD, "Head of Codebase"
 
@@ -434,6 +479,45 @@ Gene Synthesis. By-hand cloning of DNA is going extinct, like Sanger did.
 - Also collecting "bio systems data"
 - Train ML tools, look at many diff "substrates" and diff enzyme types.
 
-## Ref 4: Meet Ginkgo Bioworks, 2010
+## Ref 4: Meet Ginkgo Bioworks (2010) <a name="ref4"></a>
 
 [Humor! Smoking! Neckties!](https://www.youtube.com/watch?v=q7fpwmQWCkA)
+
+<a name="ref5"></a>
+
+## Ref 5: [Ginkgo's Platform: An Introduction to Codebase and IP Strategy (Ginkgo Bioworks Investor Day 2021)](https://www.youtube.com/watch?v=ZtVytYuSt44) July, 2021
+
+### "Codebase" DevOps Stuff: Patrick Boyle, Head of Codebase
+
+- Codebase is a knowledge base of "biological code" libraries and modules. Also "an annotated parts library".
+- Leverage millions of years of evolution embodied in code.
+- 1 trillion cells, 1 trillion bacteria
+- Sequencing 50 ml soil (a shot glass), 30 gbps, 30 billion bits
+- "Foundry is a way to do scalable experiments"
+- 10 million strain tests so far
+- Codebase make finding new things like Enzymatic pathways easier because you don't have to start from 0.
+- Since all life share a common root, code can be very similar.
+- DB with 3.5 Billion sequences from public
+- 400 million additional proprietery ones.
+- Engineers leveraging 3.5 Billion years of evolution
+- 2 types of customers
+  - Cell Programmers: with expertise, narrow focus. Ginkgo gives them access to CodeBase so they can find homologs.
+  - Product Companies: formulating, new materials, also leverage Code Base
+- How to package Codebase for access?
+  - SDKs (software development kit). Docs. Higher order representations. Called "CDK" at Ginkgo.
+  - Foundry Tools
+  - Dutch DNA (a company) filementous fungi CDK (Cell Development Kit). Additional Ref: (["Gingko adds fungal expression platform through Dutch DNA buy"](https://bioprocessintl.com/bioprocess-insider/gingko-adds-fungal-expression-platform-through-dutch-dna-buy/). Its done and called the "Fungal CDK"
+
+### IP Strategy Lawyer Stuff
+
+- Ginkgo is a giant idea/IP factory.
+- How to scale patenting?
+- "Patent" vs "Trade Secret"
+  - Patent more expensive, so using more "Trade Secrets"
+  - "Patent Family": a seed, 1 disclosure, get patents worldwide. 200 issued. More pending. Many "provisionals"
+  - "Starter Patents"
+  - Protein Engineers regularly come up for 1,000's of possible sequence candidates to solve a problem.
+  - So many shots on goals, score a lot of goals.
+  - 1 patent for a whole "hit set" of possible solutions, even if only 1 is used. Could be 50-100.
+  - Ginkgo's copy of the solution means that even if the partner company fails and the solution can be used somehwere else. Normally patent would be locked up in bankruptcy. Good for humanity.
+  - Ginkgo refuses to give exclusive rights to solutions!!!! Yay!

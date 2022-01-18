@@ -1,5 +1,5 @@
 import React, { useContext } from "react"
-import { Nav, NavUL, SubUL, NavLI, NavLink } from "./NavBarComps"
+import { Nav, NavUL, NavLI, NavLink } from "./NavBarComps"
 import { NavSubMenu } from "./NavBarSubMenu"
 import { NavContext } from "../../../contexts/NavContext"
 
@@ -17,11 +17,6 @@ const NavBar = () => {
         <NavLI>
           <NavLink to={"/"} itemProp="url">
             Home
-          </NavLink>
-        </NavLI>
-        <NavLI>
-          <NavLink to={"/settings/"} itemProp="url">
-            Settings
           </NavLink>
         </NavLI>
         <NavLI>
@@ -50,12 +45,17 @@ const NavBar = () => {
           </NavLI>
           <NavLI>
             <NavLink to={"/frontend/"} itemProp="url">
-              React, Emotion
+              UI Frameworks
+            </NavLink>
+          </NavLI>
+          <NavLI>
+            <NavLink to={"/backend/"} itemProp="url">
+              Client Auth
             </NavLink>
           </NavLI>
           <NavLI>
             <NavLink to={"/frontend/"} itemProp="url">
-              Gatsby, NPM Plugins
+              Testing
             </NavLink>
           </NavLI>
         </NavSubMenu>
@@ -65,47 +65,74 @@ const NavBar = () => {
         >
           <NavLI>
             <NavLink to={"/backend/"} itemProp="url">
-              REST, GraphQL
+              Web App Servers
             </NavLink>
           </NavLI>
           <NavLI>
             <NavLink to={"/backend/"} itemProp="url">
-              Login and Auth
+              APIs
             </NavLink>
           </NavLI>
           <NavLI>
             <NavLink to={"/backend/"} itemProp="url">
-              Java, JUnit, Selenium
+              Databases
             </NavLink>
           </NavLI>
           <NavLI>
             <NavLink to={"/backend/"} itemProp="url">
-              CRUD Forms
-            </NavLink>
-          </NavLI>
-          <NavLI>
-            <NavLink to={"/backend/"} itemProp="url">
-              SQL, RDMS
+              Auth Service
             </NavLink>
           </NavLI>
         </NavSubMenu>
         <NavSubMenu title={"DEVOPS"} uuid={"b2cea402-c66f-11eb-b8bc"}>
           <NavLI>
             <NavLink to={"/devops/"} itemProp="url">
-              Jenkins, GitHub Actions
+              CI/CD Pipeline
             </NavLink>
           </NavLI>
           <NavLI>
             <NavLink to={"/devops/"} itemProp="url">
-              Maven, Gradle, WebPack
+              Containers
+            </NavLink>
+          </NavLI>
+          <NavLI>
+            <NavLink to={"/backend/"} itemProp="url">
+              Msg. Buses
             </NavLink>
           </NavLI>
           <NavLI>
             <NavLink to={"/devops/"} itemProp="url">
-              AppDynamics
+              Monitoring
+            </NavLink>
+          </NavLI>
+          <NavLI>
+            <NavLink to={"/devops/"} itemProp="url">
+              Infr. as Code
             </NavLink>
           </NavLI>
         </NavSubMenu>
+        <NavSubMenu title={"X-CUTTING"} uuid={"b2cea402-c66f-8008-b8bc"}>
+          <NavLI>
+            <NavLink to={"/devops/"} itemProp="url">
+              Principles
+            </NavLink>
+          </NavLI>
+          <NavLI>
+            <NavLink to={"/backend/"} itemProp="url">
+              Version Control
+            </NavLink>
+          </NavLI>
+          <NavLI>
+            <NavLink to={"/devops/"} itemProp="url">
+              EaC
+            </NavLink>
+          </NavLI>
+        </NavSubMenu>
+        <NavLI>
+          <NavLink to={"/settings/"} itemProp="url">
+            Settings
+          </NavLink>
+        </NavLI>
       </NavUL>
       <br />
       <br />

@@ -16,7 +16,7 @@ module.exports = {
     title: `EdPike365`,
     author: {
       name: `EdPike365`,
-      summary: `: Full stack developer, tech educator, science enthusiast.`,
+      summary: `: Full Stack, DevOps, Tech Educator, Science Enthusiast.`,
     },
     description: `Portfolio and blog about programming, Gatsby, technology, science.`,
     siteUrl: `https://www.edpike365.com/`,
@@ -233,11 +233,11 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `EdPike365 Portfolio and Blog`,
-        short_name: `EdPike365 Blog`,
+        name: `EdPike365 Blog and Portfolio`,
+        short_name: `EdPike365`,
         start_url: `/`,
         background_color: `#ffffff`,
-        theme_color: `#663399`,
+        theme_color: `#6772ac`,
         display: `minimal-ui`,
         icon: `src/images/logo.svg`, // This path is relative to the root of the site.
       },

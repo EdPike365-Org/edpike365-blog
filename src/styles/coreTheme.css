@@ -119,11 +119,12 @@
   /* material ui explorer https://material-ui.com/customization/default-theme/?expand-path=$.typography */
   /* https://material.io/develop/web/guides/typography */
 
-  --old-font-family-default: "Segoe UI",
-    "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
-    "Segoe UI Symbol";
-  --font-family-default: "Helvetica Neue World", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  --font-family-dek: "Helvetica Neue World", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --old-font-family-default: "Segoe UI", "Helvetica Neue", Arial, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  --font-family-default: "Helvetica Neue World", "Helvetica Neue", Helvetica,
+    Arial, sans-serif;
+  --font-family-dek: "Helvetica Neue World", "Helvetica Neue", Helvetica, Arial,
+    sans-serif;
   --font-family-accent: "Source Code Pro", Monaco, monospace;
   --font-family-body: Lora, Georgia, serif;
 
@@ -250,11 +251,10 @@
 }
 ::-webkit-scrollbar-thumb {
   height: 2rem;
-  background-color: var(--scrollbarThumbBG) ;
+  background-color: var(--scrollbarThumbBG);
   border-radius: 6px;
   border: 3px solid var(--scrollbarThumbBorder);
 }
-
 
 /* HTML elements, most settings should be inside the components but refer to root vars */
 
@@ -265,7 +265,6 @@
 }
 
 html {
-
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   transition: color 400ms ease-in-out, background-color 400ms ease-in-out;
@@ -275,7 +274,7 @@ html {
 /* media queries */
 /* "mobile first" defaults */
 /* tablet-ish */
-@media only screen and (min-width: 640px ) {
+@media only screen and (min-width: 640px) {
   body {
     font-size: 1rem;
   }
@@ -297,7 +296,7 @@ body {
 
   background-color: var(--color-background-body);
   /* dont confuse with color-primary-text, which is associated with branding */
-  color: var(--color-text-primary); 
+  color: var(--color-text-primary);
 
   word-wrap: break-word;
   font-kerning: normal;
@@ -309,10 +308,20 @@ hr {
   border: 0;
 }
 
-h1, h2, h3, h4, h5, h6, p, figure, blockquote, dl, dd {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+figure,
+blockquote,
+dl,
+dd {
   margin-top: 0em;
   margin-right: 0em;
-  margin-bottom: .5em;
+  margin-bottom: 0.5em;
   margin-left: 0em;
 }
 
@@ -424,11 +433,10 @@ h6 {
   margin-bottom: 0px;
 }
 
-
 blockquote {
   color: var(--color-text-primary);
   margin: var(--margin-right-left);
-  padding: 0.25rem 1rem 1rem .5rem;
+  padding: 0.25rem 1rem 1rem 0.5rem;
   border-left: 0.25rem solid var(--color-primary-light);
   font-size: 1rem;
   font-style: italic;
@@ -451,7 +459,6 @@ table {
   border-collapse: collapse;
   border-spacing: 0.25rem;
   box-shadow: var(--shape-box-shadow);
-
 }
 
 tbody tr:nth-of-type(odd) {
@@ -459,7 +466,7 @@ tbody tr:nth-of-type(odd) {
 }
 
 tr:hover {
-  background: var(--palette-action-hover);  
+  background: var(--palette-action-hover);
 }
 
 table thead tr th {

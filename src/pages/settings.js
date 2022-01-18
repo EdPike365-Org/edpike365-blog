@@ -19,7 +19,12 @@ const Settings = () => {
     <Layout>
       <Seo title="Settings" />
       <h2>Settings</h2>I put the link to this page up high in the nav to make it
-      more likely that you'll come here to see my stuff.
+      more likely that you'll come here to see my stuff. The widgets on this
+      page are part of a library that I wrote called{" "}
+      <a href="https://www.gatsbyjs.com/plugins/gatsby-head-style-boss/">
+        gatsby-head-style-boss
+      </a>
+      .
       <Section title="Style Settings">
         <hr />
         NOTE!!!! Fire Theme is has a max-width setting as a demostration. If you

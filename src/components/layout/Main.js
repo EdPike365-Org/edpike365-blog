@@ -9,6 +9,8 @@ export const StyledMain = styled.main`
   height: 100%;
   min-height: 100vh;
 
+  scroll-margin-top: 500px;
+
   overflow: auto;
 
   background-color: var(--color-background-default);
