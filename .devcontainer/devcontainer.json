@@ -1,0 +1,46 @@
+// For format details, see https://aka.ms/devcontainer.json.
+// For config options, see the README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.209.6/containers/javascript-node
+
+/* ERRORs running npm -v, gatsby -v, etc:
+This is a problem with VSCode MS "javascript debugger" extension ("js-debug" also works)
+It tries to auto connect to npm, gatsby, etc., when you run them
+The problem is that is cant find ms-vscode.js-debug/bootloader.js:
+	Error: Cannot find module '/root/.vscode-server/data/User/workspaceStorage/12c3b02c766f6d06a8cb3951a82d098e/ms-vscode.js-debug/bootloader.js'
+To clear the problem, turn Auto Attach to Disabled for a moment. Then turn it to "With Flag".
+This makes the file get added.
+Do this by clicking on the "Auto Attach" text at bottom of VSCode window 
+or by F1 -> "Toggle Auto Attach"
+REF: https://github.com/microsoft/vscode-js-debug/issues/374
+*/
+{
+  "name": "Gatsby",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+
+  // Set *default* container specific settings.json values on container create.
+  "settings": {
+    //"debug.node.autoAttach": "disabled"
+  },
+
+  // Add the IDs of extensions you want installed when the container is created.
+  "extensions": [
+    "dbaeumer.vscode-eslint",
+    "ms-vscode.js-debug",
+    "ms-vscode.js-debug-companion",
+    "github.copilot",
+    "graphql.vscode-graphql",
+    "ecmel.vscode-html-css",
+    "davidanson.vscode-markdownlint",
+    "christian-kohler.npm-intellisense",
+    "esbenp.prettier-vscode"
+  ],
+
+  "mounts": [
+    "source=${localWorkspaceFolderBasename}-node_modules,target=${containerWorkspaceFolder}/node_modules,type=volume"
+  ]
+
+  // Use 'forwardPorts' to make a list of ports inside the container available locally.
+  // "forwardPorts": [],
+}

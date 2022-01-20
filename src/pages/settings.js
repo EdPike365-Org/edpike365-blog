@@ -32,7 +32,8 @@ const Settings = () => {
         scroll) <br />
         <FlexDiv>
           Dark Mode Toggle: <DarkModeToggle />
-        </FlexDiv>
+        </FlexDiv>{" "}
+        <br />
         Style Selector: <StyleSelector />
         <hr />
         <PrefersDarkMode />
