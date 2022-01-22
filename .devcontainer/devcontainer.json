@@ -1,26 +1,29 @@
-// For format details, see https://aka.ms/devcontainer.json.
-// For config options, see the README at:
+// - For format details, see https://aka.ms/devcontainer.json.
+// - For config options, see the README at:
 // https://github.com/microsoft/vscode-dev-containers/tree/v0.209.6/containers/javascript-node
+// - The core of this .devcontainer code came from https://github.com/njbmartin/gatsby-starter-dev-container/tree/master/.devcontainer
 
-/* ERRORs running npm -v, gatsby -v, etc:
-This is a problem with VSCode MS "javascript debugger" extension ("js-debug" also works)
-It tries to auto connect to npm, gatsby, etc., when you run them
-The problem is that is cant find ms-vscode.js-debug/bootloader.js:
+/* 
+ERRORs:
+1. vscode extension "js-debug" will try to "auto attach" when running npm, gatsby.
+This is a problem with Microsoft's "javascript debugger" extension (aka "js-debug")
+The bug does not happen when using node commands.
+The problem is that it cant find ms-vscode.js-debug/bootloader.js:
 	Error: Cannot find module '/root/.vscode-server/data/User/workspaceStorage/12c3b02c766f6d06a8cb3951a82d098e/ms-vscode.js-debug/bootloader.js'
-- To prevent the problem in the first place, we try to set Auto Attach to "disabled" in the settings section below.
-- To clear the problem, turn Auto Attach to Disabled for a moment. Then turn it to "With Flag" or whatever.
+- To prevent the problem in the first place, we try to set Auto Attach to "disabled" in the settings section below. Then, when you enable it for some reason, the missing js will be installed.
+- If your VSCode loads with "Auto Attach" other than disabled, you will get the ERROR when you run npm or gatsby.
+  - To clear the problem, turn Auto Attach to Disabled for a moment. Then turn it to "With Flag" or whatever.
     This makes the file get added.
-    Do this by clicking on the "Auto Attach" text at bottom of VSCode window 
+    Do this by clicking on the "Auto Attach" text at bottom of VSCode window (status bar)
     or by F1 -> "Toggle Auto Attach"
 REF: https://github.com/microsoft/vscode-js-debug/issues/374
 */
 {
-  "name": "Gatsby",
+  "name": "Gatsby 3",
   "build": {
     "dockerfile": "Dockerfile"
   },
 
-  // Set *default* container specific settings.json values on container create.
   // These appear in .vscode/settings.json
   "settings": {
     "debug.javascript.autoAttachFilter": "disabled"
