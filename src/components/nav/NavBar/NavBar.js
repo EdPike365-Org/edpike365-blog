@@ -20,7 +20,7 @@ const NavBar = () => {
           </NavLink>
         </NavLI>
         <NavLI>
-          <NavLink to={"/about/"} itemProp="url">
+          <NavLink to={"/edpike365-about/"} itemProp="url">
             About
           </NavLink>
         </NavLI>
@@ -39,22 +39,32 @@ const NavBar = () => {
           uuid={"b2cea402-c66f-11eb-b8bc-0242ac130003"}
         >
           <NavLI>
-            <NavLink to={"/frontend/"} itemProp="url">
+            <NavLink to={"/edpike365-front-end/#core"} itemProp="url">
               HTML, CSS, JS
             </NavLink>
           </NavLI>
           <NavLI>
-            <NavLink to={"/frontend/"} itemProp="url">
+            <NavLink to={"/edpike365-front-end/#design"} itemProp="url">
+              Design
+            </NavLink>
+          </NavLI>
+          <NavLI>
+            <NavLink to={"/edpike365-front-end/#uiframeworks"} itemProp="url">
               UI Frameworks
             </NavLink>
           </NavLI>
           <NavLI>
-            <NavLink to={"/backend/"} itemProp="url">
+            <NavLink to={"/edpike365-front-end/#auth"} itemProp="url">
               Client Auth
             </NavLink>
           </NavLI>
           <NavLI>
-            <NavLink to={"/frontend/"} itemProp="url">
+            <NavLink to={"/edpike365-front-end/#build"} itemProp="url">
+              Build Tools
+            </NavLink>
+          </NavLI>
+          <NavLI>
+            <NavLink to={"/edpike365-front-end/#testing"} itemProp="url">
               Testing
             </NavLink>
           </NavLI>
@@ -64,67 +74,109 @@ const NavBar = () => {
           uuid={"eb7371e2-ea28-4eee-85fd-79d1f7a5155b"}
         >
           <NavLI>
-            <NavLink to={"/backend/"} itemProp="url">
-              Web App Servers
+            <NavLink to={"/edpike365-back-end/#web"} itemProp="url">
+              Web Servers
             </NavLink>
           </NavLI>
           <NavLI>
-            <NavLink to={"/backend/"} itemProp="url">
+            <NavLink to={"/edpike365-back-end/#appservers"} itemProp="url">
+              App Servers
+            </NavLink>
+          </NavLI>
+          <NavLI>
+            <NavLink to={"/edpike365-back-end/#apis"} itemProp="url">
               APIs
             </NavLink>
           </NavLI>
           <NavLI>
-            <NavLink to={"/backend/"} itemProp="url">
+            <NavLink to={"/edpike365-back-end/#dbs"} itemProp="url">
               Databases
             </NavLink>
           </NavLI>
           <NavLI>
-            <NavLink to={"/backend/"} itemProp="url">
+            <NavLink to={"/edpike365-back-end/#auth"} itemProp="url">
               Auth Service
             </NavLink>
           </NavLI>
         </NavSubMenu>
         <NavSubMenu title={"DEVOPS"} uuid={"b2cea402-c66f-11eb-b8bc"}>
           <NavLI>
-            <NavLink to={"/devops/"} itemProp="url">
-              CI/CD Pipeline
+            <NavLink to={"/edpike365-devops/"} itemProp="url">
+              The Spice
             </NavLink>
           </NavLI>
           <NavLI>
-            <NavLink to={"/devops/"} itemProp="url">
-              Containers
+            <NavLink to={"/edpike365-devops/#plan"} itemProp="url">
+              Plan
             </NavLink>
           </NavLI>
           <NavLI>
-            <NavLink to={"/backend/"} itemProp="url">
-              Msg. Buses
+            <NavLink to={"/edpike365-devops/#vc"} itemProp="url">
+              Version Ctrl
             </NavLink>
           </NavLI>
           <NavLI>
-            <NavLink to={"/devops/"} itemProp="url">
-              Monitoring
+            <NavLink to={"/edpike365-devops/#build"} itemProp="url">
+              Build
             </NavLink>
           </NavLI>
           <NavLI>
-            <NavLink to={"/devops/"} itemProp="url">
-              Infr. as Code
+            <NavLink to={"/edpike365-devops/#cicd"} itemProp="url">
+              CI/CD
+            </NavLink>
+          </NavLI>
+          <NavLI>
+            <NavLink to={"/edpike365-devops/#ops"} itemProp="url">
+              Operate
+            </NavLink>
+          </NavLI>
+          <NavLI>
+            <NavLink to={"/edpike365-devops/#feedback"} itemProp="url">
+              Feedback
             </NavLink>
           </NavLI>
         </NavSubMenu>
-        <NavSubMenu title={"X-CUTTING"} uuid={"b2cea402-c66f-8008-b8bc"}>
+        <NavSubMenu title={"SYSOPS"} uuid={"b2cea402-c66f-8008-b8bc"}>
           <NavLI>
-            <NavLink to={"/devops/"} itemProp="url">
-              Principles
+            <NavLink to={"/edpike365-sysops/#vs"} itemProp="url">
+              SysOps vs SRE
             </NavLink>
           </NavLI>
           <NavLI>
-            <NavLink to={"/backend/"} itemProp="url">
-              Version Control
+            <NavLink to={"/edpike365-sysops/#sysops"} itemProp="url">
+              SysOps
             </NavLink>
           </NavLI>
           <NavLI>
-            <NavLink to={"/devops/"} itemProp="url">
-              EaC
+            <NavLink to={"/edpike365-sysops/#sre"} itemProp="url">
+              SRE
+            </NavLink>
+          </NavLI>
+          <NavLI>
+            <NavLink to={"/edpike365-sysops/#iac"} itemProp="url">
+              IaC, EaC
+            </NavLink>
+          </NavLI>
+          <NavLI>
+            <NavLink to={"/edpike365-sysops/#infrastructure"} itemProp="url">
+              Infrastructure
+            </NavLink>
+          </NavLI>
+        </NavSubMenu>
+        <NavSubMenu title={"CONTAINERS"} uuid={"b2cea402-c66f-8128-b8bc"}>
+          <NavLI>
+            <NavLink to={"/edpike365-containers/#oci"} itemProp="url">
+              OCI, Docker
+            </NavLink>
+          </NavLI>
+          <NavLI>
+            <NavLink to={"/edpike365-containers/#kubernetes"} itemProp="url">
+              Kubernetes
+            </NavLink>
+          </NavLI>
+          <NavLI>
+            <NavLink to={"/edpike365-containers/#hosting"} itemProp="url">
+              Hosting
             </NavLink>
           </NavLI>
         </NavSubMenu>

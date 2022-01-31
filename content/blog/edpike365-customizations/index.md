@@ -12,11 +12,12 @@ tags:
 
 - [EdPike365 Jira](https://edpike365.atlassian.net/jira/software/projects/ECDT/boards/1) if you want "view" access, let me know, and I'll upgrade to a plan that lets me do that.
 - Source
-  - [EdPike365 GitHub](https://github.com/EdPike365/edpike365-blog)
+  - [EdPike365.com (GitHub)](https://github.com/EdPike365/edpike365-blog) This site.
   - [Gatsby Head Style Boss](https://www.npmjs.com/package/gatsby-head-style-boss) NPM module.
   - [Gatsby Source Build Date](https://www.npmjs.com/package/gatsby-source-build-date) NPM module.
+  - [Gatsby Dev Container (Docker Hub)](https://hub.docker.com/r/edpike365/gatsbyjs-devcontainer) VSCode Devcontainer for Gatsby.
 
-I made mostly intranet and extranet web apps for most of my career. When I decided to create this _public facing_ portfolio and blog site, I did some research to see what was near future best practices.
+I made mostly intranet and extranet web apps for most of my career. When I decided to create this _public facing_ portfolio and blog site, I did some research to see what was near future best practice.
 
 I used [Gatsby](https://www.gatsbyjs.com/) after doing some research in late 2020. I valued SSG most because of the fast load time and Gatsby leads in this. I almost chose [Next.js](https://nextjs.org/), but at the time it did not have a [responsive image object](https://www.gatsbyjs.com/plugins/gatsby-plugin-image/) and its SSG was weaker than Gatsby's. Within a couple of months of starting EdPike365, Next.js caught up.
 
@@ -24,9 +25,11 @@ After Vercel, the maker of Next.js, hired [Svelte's](https://svelte.dev/) creato
 
 [edpike365.com](http://edpike365.com) started with Kyle Mathews' simple [Gatsby Starter Blog](https://www.gatsbyjs.com/starters/gatsbyjs/gatsby-starter-blog).
 
-My two Gatsby Plugins (below) are available on NPM and github.
+## Customizations in Reverse Order
 
-Customizations in Reverse Order:
+### - VSCode Devcontainer For Gatsby
+
+- I tried upgrading from Gatsby V3 to V4. Everything blew up and my local dev env was tainted. I decided it was time for a devcontainer but found very few references and only one that sorta worked. Gatsby is SSG, so a devcontainer is a little more complicated than say, a React site. None had an image on Docker Hub to speed up download, so I added that. I forked the one that sorta worked and enhanced it.
 
 ### - MD Blog Publishing Workflow
 
@@ -36,7 +39,7 @@ Customizations in Reverse Order:
 
 ### - Created Gatsby Plugin for "Site Last Built Date"
 
-- I wrote a Gatsby plugin, [Gatsby Source Build Date](https://www.npmjs.com/package/gatsby-source-build-date), to add a build date to the bottom of the home page. An existing popular plugin relied on yet another NPM module and I'm not a fan of that. I forked it and replaced it with Node's newer, built in, calendar API. It supports full i18n of language and date formats, including Korean, etc. I also wanted to learn how to publish an NPM package.
+- I wrote a Gatsby plugin, [Gatsby Source Build Date](https://www.npmjs.com/package/gatsby-source-build-date), to add a build date to the bottom of the home page. An existing popular plugin relied on yet another NPM module and I'm not a fan of that. I forked it and replaced it with Node's newer, built in, calendar API. It supports full i18n of language and date formats, including Korean, etc. I also wanted more practice publishing NPM packages.
 
 ### - Created Gatsby Plugin for Managing Dark Mode, etc
 
@@ -67,15 +70,15 @@ Customizations in Reverse Order:
 
 ### - Other CSS Customizations
 
-- Wrote a custom widget for my left navbar.
+- Wrote a custom collapsable widget for my left navbar.
 - Tried to implement [A11Y](https://www.a11yproject.com/) (Accesibility) standards.
-- Implemented CSS Grid and Flexbox.
+- Implemented responsive CSS Grid and Flexbox for master site layout.
 - I added custom scroll bars using only CSS. Its an immature standard and took some time, but I like them a lot (see the ones in my "Tron" dark mode).
 - I implemented [CSS variables](https://www.joshwcomeau.com/css/css-variables-for-react-devs/) to support dynamic themeing.
 - I roughly immitated Google's [Materialize](https://material.io/design/material-theming/implementing-your-theme.html) variable naming convention and [color contrast](https://material.io/develop/web/theming/color) usability standards.
 - I used the [Typography](https://medium.com/swlh/everything-you-need-to-know-about-designing-for-web-typography-69cec6ca8230) font size progression algorith.
 - TODO: Add a footer that is attached to the bottom of all content, but not sticky.
-- TODO: I'm still getting duplicate scroll bar issues with some MD blog entries. My hunch is its Graphviz (flow diagrams) or KaTex (math notation) content, which they both have exclusively in common. (my [STEM MD](/gatsby-remark-stem/) and [Gatsby Remark Test](/gatsby-remark-test/) blog entries).
+- TODO: I'm still getting duplicate scroll bar issues with _some_ MD blog entries. My hunch is its Graphviz (flow diagrams) or KaTex (math notation) content, which they both have exclusively in common. (my [STEM MD](/gatsby-remark-stem/) and [Gatsby Remark Test](/gatsby-remark-test/) blog entries).
 
 ### - CSS Animation, Transitions and Transforms
 
@@ -83,12 +86,12 @@ Customizations in Reverse Order:
 - Mouse over my icon to see it spin indefinitely using CSS animations.
 - Resize my home page and see the logo us spinning animation to move from center to left justification.
 - TODO: add mouseover icon glow
-- TODO: nav bar slide out animation
+- TODO: left nav bar slide out animation
 
 ### - Gatsby Critique
 
 - Mostly good. Friendly team.
-- Can't access Gatsby GraphQL or cache api from SSR. They need to make lofting resources from the node phase to the SSR phase easier.
+- Can't access Gatsby V3 GraphQL or cache api from SSR. They need to make lofting resources from the node phase to the SSR phase easier.
 - Can't access FS (file system) in SSR without ugly warnings.
 - Convoluted WebPack config (necessary evil but could be made more modular, at least better documented how to customize it using the provided hooks)
 - Gatsby V3 documentation build flow diagrams uses GraphViz and does not render.
@@ -97,8 +100,8 @@ Customizations in Reverse Order:
 
 I'm transitioning these to [Jira](https://edpike365.atlassian.net/jira/software/projects/ECDT/boards/1).
 
-- Anchor URLs do not work unless from same MD page they are on.
-- Using an anchor crushes the top nav grid div and you can't scroll back up to very top, only to top of content grid div, without reloading the page.
+- Anchor URLs do not work unless from same MD page they are on. (Reach Router)
+- Using an anchor crushes the top nav grid div and you can't scroll back up to very top, only to top of content grid div, without reloading the page. (Reach Router)
 - Add a short-form "Journal Notes" style blog using Contentful headless CMS
 - Convert blog to MDX
 - Blog/Journal Categories tags for filters. Tag managment interface.
@@ -108,4 +111,4 @@ I'm transitioning these to [Jira](https://edpike365.atlassian.net/jira/software/
 - A CRUDS form set, probably for a little "groups" app, hitting a graph DB.
 - Protected area with federated auth (Okta or Auth0)
 - Demo sub sites using combos of (Svelte, Angular 2) and (SvelteKit, NextJS, Hugo)
-- TypeScript and automated testing. I believe in CI/CD but as an experienced Java developer its hard to spend so much time implementing TS when WASM is just over the horizon, which will let us use strongly typed languages.
+- TypeScript and automated testing.
