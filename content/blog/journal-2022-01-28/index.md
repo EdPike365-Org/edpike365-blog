@@ -66,6 +66,7 @@ Sharpening the saw. Clarifying strategic and near term goals. Migrating Gatsby f
 
 ### Articles <a name="articles"></a>
 
+- [Could Rust be the Future of JavaScript Infrastructure?](https://thenewstack.io/the-case-for-rust-as-the-future-of-javascript-infrastructure)
 - [Kong Cast: Simplifying Authentication for Microservices Security | Jeff Taylor | Okta](https://www.youtube.com/watch?v=2qpRJxvuAVY&t=916s): TLDR API gateway instead of authing each microservice. Kong Connect.
 - [StatsD: What Is It and How To Monitor It](https://www.metricfire.com/blog/statsd-what-is-it-and-how-to-monitor-it/)
 - [Htmx: HTML Approach to Interactivity in a JavaScript World](https://thenewstack.io/htmx-html-approach-to-interactivity-in-a-javascript-world/)
@@ -106,6 +107,7 @@ Sharpening the saw. Clarifying strategic and near term goals. Migrating Gatsby f
     - GitHub Codespaces
 - [Cont. Delivery Foundation: Keynote Session: Developer Experience & Productivity: Level up Your Engineering Effectiveness](https://www.youtube.com/watch?v=FgkhYhRopfs)
 - [Google AlphaCode vs GitHub CoPilot](https://medium.com/@Sabrina-Carpenter/google-in-god-mode-want-to-put-programmers-out-of-work-dd488e6ebca)
+- [Medieval City Map Generator](https://watabou.github.io/city-generator/?size=15&seed=930879764&greens=0&farms=1&citadel=1&urban_castle=0&plaza=1&temple=1&walls=1&shantytown=0&coast=1&river=0&gates=-1&sea=0)
 
 ### Books <a name="books"></a>
 
