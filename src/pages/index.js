@@ -25,15 +25,15 @@ const HomePage = ({ data, pageContext, location }) => {
     text-decoration: none;
     border-bottom: 2px solid transparent;
     transition: color 400ms ease-in-out, background-color 400ms ease-in-out;
-   `
-  
+  `
+
   return (
     <Layout location={location}>
       <Seo title="Home" />
       <P>
-        Welcome to my Portfolio. It's just a blog for now, but big changes are
-        coming! It's based on Gatsby v3 Starter Blog and I'll be documenting how
-        I customize it.
+        v3 max Welcome to my Portfolio. It's just a blog for now, but big
+        changes are coming! It's based on Gatsby v3 Starter Blog and I'll be
+        documenting how I customize it.
       </P>
       {numPostsToShow} Most Recent Posts ({" "}
       <StyledLink to="/bloglist/">See all {totalCount}</StyledLink> )
@@ -73,7 +73,7 @@ export const pageQuery = graphql`
         }
       }
     }
-    currentBuildDate{
+    currentBuildDate {
       currentDate
     }
   }

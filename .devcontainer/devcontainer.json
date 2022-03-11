@@ -10,7 +10,8 @@ This is a problem with Microsoft's "javascript debugger" extension (aka "js-debu
 The bug does not happen when using node commands.
 The problem is that it cant find ms-vscode.js-debug/bootloader.js:
 	Error: Cannot find module '/root/.vscode-server/data/User/workspaceStorage/12c3b02c766f6d06a8cb3951a82d098e/ms-vscode.js-debug/bootloader.js'
-- To prevent the problem in the first place, we try to set Auto Attach to "disabled" in the settings section below. Then, when you enable it for some reason, the missing js will be installed.
+- To prevent the problem in the first place, we try to set Auto Attach to "disabled" in the settings section below. 
+- Later, if you enable it for some reason, the missing js will be installed.
 - If your VSCode loads with "Auto Attach" other than disabled, you will get the ERROR when you run npm or gatsby.
   - To clear the problem, turn Auto Attach to Disabled for a moment. Then turn it to "With Flag" or whatever.
     This makes the file get added.
@@ -19,7 +20,8 @@ The problem is that it cant find ms-vscode.js-debug/bootloader.js:
 REF: https://github.com/microsoft/vscode-js-debug/issues/374
 */
 {
-  "name": "Gatsby 3",
+  "name": "Gatsby v3 Max",
+
   "build": {
     "dockerfile": "Dockerfile"
   },
@@ -43,7 +45,12 @@ REF: https://github.com/microsoft/vscode-js-debug/issues/374
   ],
 
   "mounts": [
-    "source=${localWorkspaceFolderBasename}-node_modules,target=${containerWorkspaceFolder}/node_modules,type=volume"
+    // Locally cache project node_modules (won't be in project folder)
+    "source=${localWorkspaceFolderBasename}-node_modules,target=${containerWorkspaceFolder}/node_modules,type=volume",
+    // Locally cache ~/.vscode-server/extensions
+    "source=${localWorkspaceFolderBasename}-extensions,target=/root/.vscode-server/extensions,type=volume",
+    // Locally cache ~/.vscode-server-insiders/extensions (VS Code Insiders)
+    "source=${localWorkspaceFolderBasename}-insiders-extensions,target=/root/.vscode-server-insiders/extensions,type=volume"
   ]
 
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
