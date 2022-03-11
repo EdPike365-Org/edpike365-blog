@@ -7,6 +7,8 @@
 </p>
 This blog started with [Gatsby's basic blog starter](https://github.com/gatsbyjs/gatsby-starter-blog).
 
+v3
+
 ## 🚀 Quick start
 
 1.  **Create a Gatsby site.**
