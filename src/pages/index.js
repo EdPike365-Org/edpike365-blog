@@ -45,8 +45,6 @@ const HomePage = ({ data, pageContext, location }) => {
       <br />
       <Bio />
       <br />
-      Built with Gatsby v3
-      <br />
       Last Built: {data.currentBuildDate.currentDate}
       <br />
       Built with Gatsby v4
