@@ -20,7 +20,7 @@ The problem is that it cant find ms-vscode.js-debug/bootloader.js:
 REF: https://github.com/microsoft/vscode-js-debug/issues/374
 */
 {
-  "name": "Gatsby v3 Max",
+  "name": "Gatsby v4",
 
   "build": {
     "dockerfile": "Dockerfile"

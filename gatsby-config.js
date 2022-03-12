@@ -106,10 +106,9 @@ module.exports = {
       resolve: `gatsby-transformer-remark`,
       options: {
         gfm: true,
-        commonmark: true,
         footnotes: true,
-        pedantic: true,
-        // blocks: ["h2"], Blocks option value can be provided here as an array.
+        // uses gray-matter for front matter, so you can use options from there as well
+        // at https://github.com/jonschlinkert/gray-matter#options
         excerpt_separator: `<!-- end -->`,
         plugins: [
           {
@@ -225,6 +224,7 @@ module.exports = {
                 }
               }
             `,
+            title: "EdPike365 RSS Feed",
             output: "/rss.xml",
           },
         ],
