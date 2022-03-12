@@ -31,10 +31,10 @@ const HomePage = ({ data, pageContext, location }) => {
     <Layout location={location}>
       <Seo title="Home" />
       <P>
-        v3 max Welcome to my Portfolio. It's just a blog for now, but big
-        changes are coming! It's based on Gatsby v3 Starter Blog and I'll be
-        documenting how I customize it.
+        Welcome to my Portfolio. It started with the Gatsby v3 Starter Blog and
+        was upgraded to v4.
       </P>
+      <P>See my "journal" blogs to see additional customizations.</P>
       {numPostsToShow} Most Recent Posts ({" "}
       <StyledLink to="/bloglist/">See all {totalCount}</StyledLink> )
       <hr />
@@ -46,6 +46,8 @@ const HomePage = ({ data, pageContext, location }) => {
       <Bio />
       <br />
       Last Built: {data.currentBuildDate.currentDate}
+      <br />
+      Built with Gatsby v4
     </Layout>
   )
 }
