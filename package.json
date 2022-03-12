@@ -13,10 +13,7 @@
   },
   "license": "0BSD",
   "main": "n/a",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/gatsbyjs/gatsby-starter-blog.git"
-  },
+  "repository": "github:edpike365/edpike365-blog",
   "scripts": {
     "build": "gatsby build",
     "develop": "gatsby develop",
