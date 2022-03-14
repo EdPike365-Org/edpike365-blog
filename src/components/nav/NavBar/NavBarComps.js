@@ -8,12 +8,11 @@ import { NavContext } from "../../../contexts/NavContext"
 /* 
 Nav is the outermost container.
 It is hidden in smaller screens and controlled by the hamburger button.
+Nav is always open/visible on larger screens.
 TODO: It should **slide** open and closed but currently does not.
 -Open anim: this should be working but is not. 
 -Closing anim: In Gatsby prod, the whole page is reloaded when a link is clicked, 
  so we'd have to add a delay before the click is registered by the Gatsby Link.
-
-Nav is always open/visible on larger screens.
 */
 
 // Mobile First Design: Default size is for old small phones, width < 320px
@@ -21,23 +20,17 @@ Nav is always open/visible on larger screens.
 export const Nav = styled.nav`
   grid-area: nav;
 
-  ${props => (props.showNav ? "display: flex;" : "display:none;")}
   flex-direction: column;
 
   overflow: auto;
 
-  /*bottom: 100%;  by using 0% vs height 100%, we get no vert scroll bar */
-  width: 100%;
-  min-height: 100vh;
-
-  font-weight: 600;
   transition: color 400ms ease-in-out, background-color 400ms ease-in-out;
   background-color: var(--color-background-paper);
 
-  /* TODO make drop shadow below nav work */
+  /* TODO make drop shadow to the right of nav bar work */
   /*box-shadow: var(--shape-box-shadow);*/
 
-  /* used below for slide in slide out animation */
+  /* used further below for slide in slide out animation */
   @keyframes OPEN-RIGHT-100 {
     0% {
     }
@@ -54,35 +47,34 @@ export const Nav = styled.nav`
   /* ${props =>
     props.showNav
       ? "animation: OPEN-RIGHT-100 5s ease-out;"
-      : "transform: scaleX(0);"} */
+      : "transform: scaleX(0);"} 
+  */
 
-  /*-------------------- Decent Phone Size  --------------------*/
-  /* Smaller than this and no logo icon was shown, just logo text. */
+  /* ---- DEFAULT (tiny): Small Narrow Phones (280 x 653) ---- */
+  /* When nav is shown, is full width and SHOULD BE full height */
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  font-weight: 600;
+  ${props => (props.showNav ? "display: flex; height: 100%;" : "display:none;")}
+
+  /* ---- Normal Phones (320 x ) ---- */
   @media only screen and (min-width: 320px) {
     font-size: 1.5rem;
     font-weight: 700;
   }
 
-  /*-------------------- Tablet Size --------------------*/
+  /* ---- Tablet (700 x ) ---- */
   /* Still hiding nav and showing hamburger button, but fonts are bigger */
   /* Also, the top navheader is taller so navbar has to start lower down */
   @media only screen and (min-width: 700px) {
     width: 300px;
     min-width: 200px;
-    height: auto;
-    min-height: 100vh;
-
-    font-size: 1.5rem;
-    font-weight: 700;
   }
 
-  /*-------------------- LapTop Size  --------------------*/
+  /* ---- LapTop (1366 x ) ---- */
   /* show the nav bar fixed open on the left */
   @media only screen and (min-width: 1366px) {
-    width: 300px;
-    min-width: 300px;
-    height: auto;
-    min-height: 100vh;
     display: flex;
 
     /* if the nav div is hidden (showNav is false) in tablet/mobile mode, 

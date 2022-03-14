@@ -7,7 +7,8 @@ import Layout from "../components/layout/Layout"
 import Seo from "../components/SEO"
 import BlogPostSummary from "../components/BlogPostSummary"
 
-// location is auto passed in, but only for pages in "pages" and "templates", not "components"
+// Gatsby auto passes in location object,
+// but only for pages in "pages" and "templates", not "components"
 const HomePage = ({ data, pageContext, location }) => {
   const numPostsToShow = pageContext.limit
   const posts = data.allMarkdownRemark.nodes
@@ -46,8 +47,6 @@ const HomePage = ({ data, pageContext, location }) => {
       <Bio />
       <br />
       Last Built: {data.currentBuildDate.currentDate}
-      <br />
-      Built with Gatsby v4
     </Layout>
   )
 }

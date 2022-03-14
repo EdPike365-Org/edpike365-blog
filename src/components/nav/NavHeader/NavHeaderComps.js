@@ -6,11 +6,14 @@ import { LogoTextSpan } from "./LogoText"
 import { SettingsButton } from "./SettingsIconButton"
 import { UserButton } from "./UserIconButton"
 
-// THIS IS WHERE THE MESSY MEDIA QUERY STUFF LIVES
+// TODO: Make icons use max dimensions from parent containers
+// so I can remove the dimensions from the icons.
+
+// THIS IS WHERE THE MESSY MEDIA QUERY STUFF FOR THE HEADER LIVES
 // Default to smallest supported size of width 280 (Galaxy Fold)
 // We modify visibilty and size of all components in the Header
 // or here in major subcomponents (vs letting them set themselves)
-// NOTE: dimensions are in px units because we need precision in the header (and nav sidebar)
+// NOTE: dimensions are in px units because we need precision in the header
 export const LogoLink = styled(Link)`
   display: flex;
   align-items: center;
@@ -24,7 +27,10 @@ export const ButtonDivRight = styled.div`
   align-items: center;
   justify-content: center;
 
-  /* Hide the DarkMode toggle on the header (not every instance of DarkMode toggle!) */
+  /* ---- DEFAULT (tiny): Small Narrow Phones (280 x 653) ---- */
+  /* Header's DarkMode Toggle and SettingsButton are hidden */
+
+  /* We are doing it as a child so not every instance of DarkMode toggle disappears */
   & > .dark-mode-toggle {
     display: none;
   }
@@ -33,20 +39,24 @@ export const ButtonDivRight = styled.div`
     display: none;
   }
 
+  /* ---- Normal Phones: Show Logo (320 x ) ---- */
+  /* Display SettingsButton */
   @media only screen and (min-width: 320px) {
     & > ${SettingsButton} {
       display: inline-flex;
     }
   }
 
-  /* ---------------- Larger Phones ---------------- */
+  /* ---- Larger Phones (540 x ) ---- */
+  /* Display DarkMode toggle */
   @media only screen and (min-width: 540px) {
     & > .dark-mode-toggle {
       display: inline-flex;
     }
   }
 
-  /*-------------------- Tablet  --------------------*/
+  /* ---- Tablet (700 x ) ---- */
+  /* Make buttons 42px square */
   @media only screen and (min-width: 700px) {
     & > .dark-mode-toggle {
       width: 42px;
@@ -68,75 +78,63 @@ export const Header = styled.header`
 
   box-sizing: border-box;
   width: 100%;
-  height: var(--header-height-tiny);
+
   padding: 0rem;
   overflow: hidden;
 
   display: flex;
-  justify-content: space-between; /* this will flush logodiv to left if the nav hamburger button is hidden */
-  align-items: center; /* align vertical center */
+
+  /* Flush logodiv to left if the nav hamburger button is hidden */
+  justify-content: space-between;
+
+  /* Align buttons vertically centered */
+  align-items: center;
 
   background-color: var(--color-background-paper);
-
-  box-shadow: var(--shape-box-shadow);
-  z-index: 999;
   transition: color 400ms ease-in-out, background-color 400ms ease-in-out;
 
-  /*---- Normal Phones: Show Logo --------- */
-  @media only screen and (min-width: 320px) {
-    height: var(--header-height-mobile);
-  }
+  box-shadow: var(--shape-box-shadow);
 
-  /* ---------------- Larger Phones ---------------- */
-  @media only screen and (min-width: 540px) {
-  }
-
-  /*-------------------- Tablet  --------------------*/
+  /* ---- Tablet (700 x ) ---- */
+  /* Ham button gets bigger (other buttons handled by ButtonDivRight) */
   @media only screen and (min-width: 700px) {
-    height: var(--header-height-tablet);
     & > ${HamButton} {
       width: 42px;
       height: 42px;
     }
   }
 
-  /*-------------------- LapTop  --------------------*/
+  /* ---- LapTop (1366 x ) ---- */
+  /* Navbar permanently shows. Hamburger disappears. */
   @media only screen and (min-width: 1366px) {
     & > ${HamButton} {
       display: none;
     }
-    /* TODO: Show the major nav links, like in Vice.com */
+    /* TODO: Show more major nav links, like in Vice.com */
   }
 `
 
 export const LogoDiv = styled.div`
+  /* Height controled by Header */
+  height: 100%;
+
   padding: 0rem;
   margins: 0rem;
   display: flex;
   align-items: center;
   justify-content: center;
 
-  /* In tiny default mode, no Logo Icon visible */
+  /* ---- DEFAULT (tiny): Small Narrow Phones (280 x 653) ---- */
+  /* No Logo Icon visible */
   & > ${LogoIconDiv} {
     display: none;
   }
 
-  /*---- Normal Phones: Show Logo --------- */
+  /* ---- Normal Phones: Show Logo (320 x ) ---- */
+  /* Display the LogoIcon */
   @media only screen and (min-width: 320px) {
-    height: var(--header-height-mobile);
-    & > ${LogoIconDiv} {
-      display: inline;
-      height: 42px;
-      width: 42px;
-    }
-    & > ${LogoTextSpan} {
-      font-size: 32px;
-      letter-spacing: 0.12em;
-    }
-  }
+    /* height: var(--header-height-mobile); */
 
-  @media only screen and (min-width: 360px) {
-    height: var(--header-height-mobile);
     & > ${LogoIconDiv} {
       display: inline;
       height: 48px;
@@ -148,8 +146,14 @@ export const LogoDiv = styled.div`
     }
   }
 
-  /* ---------------- Larger Phones ---------------- */
+  /* ---- Larger Phones (540 x ) ---- */
+  /* The logo text can spread out some more, more letter spacing */
   @media only screen and (min-width: 540px) {
+    & > ${LogoIconDiv} {
+      display: inline;
+      height: 48px;
+      width: 48px;
+    }
     & > ${LogoTextSpan} {
       font-size: 36px;
       margin-left: 0.15em;
@@ -157,9 +161,10 @@ export const LogoDiv = styled.div`
     }
   }
 
-  /*-------------------- Tablet  --------------------*/
+  /* ---- Tablet (700 x ) ---- */
+  /* Tablet header height : 64px */
   @media only screen and (min-width: 700px) {
-    height: var(--header-height-tablet);
+    /* height: var(--header-height-tablet); */
 
     & > ${LogoIconDiv} {
       display: inline;
@@ -173,6 +178,7 @@ export const LogoDiv = styled.div`
     }
   }
 
+  /* Key frames defined here because used below in Large Desktop */
   @keyframes SLIDE-LOGO-LEFT {
     0% {
       -ms-transform: translateX(30vw); /* IE 9 */
@@ -207,7 +213,7 @@ export const LogoDiv = styled.div`
     }
   }
 
-  /*-------------------- Large Desktop  --------------------*/
+  /* ---- LapTop (1366 x ) ---- */
   @media only screen and (min-width: 1366px) {
     ${props =>
       props.runLogoAnim ? "animation: FLIP-LOGO-LEFT 1s ease-out;" : ""}
