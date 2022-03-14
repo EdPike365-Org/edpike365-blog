@@ -186,6 +186,8 @@ const NavBar = () => {
           </NavLink>
         </NavLI>
       </NavUL>
+      <br />
+      <br />
     </Nav>
   )
 }

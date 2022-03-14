@@ -69,6 +69,13 @@ module.exports = {
               minify: false,
             },
             {
+              key: "burger",
+              displayName: "Burger King",
+              componentType: "LINK",
+              remoteHREF: "https://www.edpike365.com/test/burger.css",
+              cacheRemoteCSS: false,
+            },
+            {
               key: "fire",
               displayName: "Fire Theme",
               alwaysEnabled: false,
@@ -76,13 +83,6 @@ module.exports = {
               pathToCSSFile: "./src/styles/fireTheme.css",
               media: "(max-width: 900px)",
               minify: false,
-            },
-            {
-              key: "burger",
-              displayName: "Burger King",
-              componentType: "LINK",
-              remoteHREF: "https://www.edpike365.com/test/burger.css",
-              cacheRemoteCSS: false,
             },
           ],
         },
