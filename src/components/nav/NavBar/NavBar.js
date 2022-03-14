@@ -188,8 +188,6 @@ const NavBar = () => {
       </NavUL>
       <br />
       <br />
-      <br />
-      <br />
     </Nav>
   )
 }
