@@ -5,14 +5,13 @@ status: published
 author: EdPike365
 tags:
   - edpike365
-  - Go
   - DevOps
+  - "Full Stack"
+  - SRO
   - SynBio
-  - STEM
-  - BioDevOps
 ---
 
-[Articles](#articles), [Events](#events), [Companies/Orgs](#orgs), [People](#people), [Training/Classes](#training), [Definitions](#definitions), [Future Research](#future)
+[Log](#log-lifo) | [Articles](#articles) | [Books](#books) | [Events](#events) | [Companies/Orgs](#companies-orgs) | [People](#people) | [Training/Classes](#training) | [Definitions](#definitions-acronyms) | [Future Research](#future-research)
 
 ---
 
@@ -24,7 +23,9 @@ This week I'm mostly playing with Docker, [DevContainers](https://code.visualstu
 
 <p align="center">VSCode Dev Containers</p>
 
-### Articles <a name="articles"></a>
+### Log (LIFO)
+
+### Articles
 
 - [Go Does Not Need a Java Style GC](https://medium.com/@jessicalexicus/the-pandemic-gaslighting-has-gotten-worse-than-ever-315a4a4d12af?source=email-c999ac52760d-1642761518281-digest.reader--315a4a4d12af----1-58------------------c03083ab_09fc_4941_bd6a_7147087503c7-16-16b93b49_14a9_4d51_98f9_12f12b6ebfb7)
 
@@ -46,27 +47,31 @@ This week I'm mostly playing with Docker, [DevContainers](https://code.visualstu
 
 - [The State of WebAssembly – 2021 and 2022](https://platform.uno/blog/the-state-of-webassembly-2021-and-2022/)
 
-### Companies/Orgs <a name="orgs"></a>
+### Books
+
+### Events
+
+### Companies, Orgs
 
 - [Scrum Alliance](https://www.scrumalliance.org/)
 
 - [DevOps Institue](https://www.devopsinstitute.com/)
 
-### People <a name="people"></a>
+### People
 
 - [Joe Justice](https://www.scrumalliance.org/community/profile/jjustice): [Agile At Tesla](https://www.theagilewire.com/post/agile-at-tesla-with-joe-justice)
 
-### Training <a name="training"></a>
+### Training
 
 - [AWS MODERNIZATION WORKSHOP WITH HASHICORP TERRAFORM CLOUD](https://hashicorp-terraform.awsworkshop.io/) I got a free offer to do this course on awsworkshop.io and started doing it.
 
-### Definitions/Acronyms <a name="definitions"></a>
+### Definitions, Acronyms
 
 - [12 Factor App](https://12factor.net/)
 - [Open Telemetry](https://opentelemetry.io/)
 - [DesignOps](https://www.outsystems.com/blog/posts/designops-what-is-why-you-need-it/)
 
-### Future Research <a name="future"></a>
+### Future Research
 
 Things I ran across and thought "Oh yeah, I need to look into that sometime, but not now."
 

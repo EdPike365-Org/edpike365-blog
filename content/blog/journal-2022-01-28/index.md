@@ -1,5 +1,5 @@
 ---
-title: "Journal: Template 2022-02-13"
+title: "Journal: 2022-02-13"
 date: "2022-02-13T22:12:03.284Z"
 status: draft
 author: EdPike365
@@ -12,7 +12,7 @@ tags:
   - BioDevOps
 ---
 
-[Log](#log) | [Articles](#articles) | [Books](#books), [Events](#events), [Companies/Orgs](#orgs), [People](#people), [Training/Classes](#training), [Definitions](#definitions), [Future Research](#future)
+[Log](#log-lifo) | [Articles](#articles) | [Books](#books) | [Events](#events) | [Companies/Orgs](#companies-orgs) | [People](#people) | [Training/Classes](#training) | [Definitions](#definitions-acronyms) | [Future Research](#future-research)
 
 ---
 
@@ -20,7 +20,7 @@ tags:
 
 Sharpening the saw. Clarifying strategic and near term goals. Migrating Gatsby from 3 to 4. Migrating projects from Windows to WSL2 Linux and devcontainers. Looking for Docker Desktop replacement that works with devcontainers. Rounding up old rogue side projects and triaging, delete, public or private repos.
 
-#### Log <a name="log"></a> (LIFO)
+#### Log (LIFO)
 
 - 2022-02-12: Narrowing down my next steps
 
@@ -64,7 +64,7 @@ Sharpening the saw. Clarifying strategic and near term goals. Migrating Gatsby f
   - Google really improved their password manager with Android/Chrome integration, so I finished migrating away from my previous password manager. Google already notified me that a major financial firm that I use leaked my password!
   - VSCode released more improvements for, among other things: remote dev, remote containers, browser and PWA based dev and Python plugin.
 
-### Articles <a name="articles"></a>
+### Articles
 
 - [Could Rust be the Future of JavaScript Infrastructure?](https://thenewstack.io/the-case-for-rust-as-the-future-of-javascript-infrastructure)
 - [Kong Cast: Simplifying Authentication for Microservices Security | Jeff Taylor | Okta](https://www.youtube.com/watch?v=2qpRJxvuAVY&t=916s): TLDR API gateway instead of authing each microservice. Kong Connect.
@@ -109,11 +109,11 @@ Sharpening the saw. Clarifying strategic and near term goals. Migrating Gatsby f
 - [Google AlphaCode vs GitHub CoPilot](https://medium.com/@Sabrina-Carpenter/google-in-god-mode-want-to-put-programmers-out-of-work-dd488e6ebca)
 - [Medieval City Map Generator](https://watabou.github.io/city-generator/?size=15&seed=930879764&greens=0&farms=1&citadel=1&urban_castle=0&plaza=1&temple=1&walls=1&shantytown=0&coast=1&river=0&gates=-1&sea=0)
 
-### Books <a name="books"></a>
+### Books
 
 - To Read: Get Your Hands Dirty on Clean Architecture: A Hands-on Guide to Creating Clean Web Applications with Code Examples in Java
 
-### Events <a name="events"></a>
+### Events
 
 - [SKILup Day: Site Reliability Engineering](https://www.skilupdays.io/Sre-22?login=ML) DevOps Institute. Viktor Farcic, Developer Advocate, Upbound, is gonna be there.
 - [Contiuous Delivery Foundation: 2021 Annual Report](https://cd.foundation/annual-report-2021/?utm_campaign=CDF%20Email%20Blasts&utm_medium=email&_hsmi=202934582&_hsenc=p2ANqtz-_jQJiw7rxTNvoW-cANK5gtlV0UzWfOEukmJ9mvRAoe5iPehcIfT6mTbNYjpCG9ajCoMEZIBOY6TnUSyXKjzLO8i9lWZw&utm_content=202934582&utm_source=hs_email)
@@ -137,18 +137,18 @@ Sharpening the saw. Clarifying strategic and near term goals. Migrating Gatsby f
       - Invites gaming
       - Soaks up energy
 
-### Companies/Orgs <a name="orgs"></a>
+### Companies, Orgs
 
 - Cloud Bees
 - [Continuous Delivery Foundation](https://cd.foundation/): Created by Linux Foundation in 2019. Home for Jenkins, Jenkins X, Spinnaker, Tekton. Linux Foundatio is also the parent of CNCF.
 
-### People <a name="people"></a>
+### People
 
-### Training <a name="training"></a>
+### Training
 
 - Cloud Bees Jenkins Cert
 
-### Definitions/Acronyms <a name="definitions"></a>
+### Definitions, Acronyms
 
 - [Open Application Model (OAM)](https://oam.dev/) "Focused on application rather than container or orchestrator, brings modular, extensible, and portable design for modeling application deployment with higher level yet consistent API."
 - gRED: Genentech Research and Early Dev
@@ -163,7 +163,7 @@ Sharpening the saw. Clarifying strategic and near term goals. Migrating Gatsby f
   - Digital Pathalogy
   - Complex Flow Cytometry
 
-### Future Research <a name="future"></a>
+### Future Research
 
 Things I ran across and thought "Oh yeah, I need to look into that sometime, but not now."
 

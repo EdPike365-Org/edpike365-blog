@@ -5,9 +5,20 @@
     <img alt="Gatsby" src="https://www.gatsbyjs.com/Gatsby-Monogram.svg" width="60" />
   </a>
 </p>
+
 This blog started with [Gatsby's basic blog starter](https://github.com/gatsbyjs/gatsby-starter-blog).
 
-## Folders
+A little Mermaid example. Flowcharts and other diagrams in MD.
+
+```mermaid
+  graph TD;
+      A-->B;
+      A-->C;
+      B-->D;
+      C-->D;
+```
+
+## Vanilla Gatsby Folders
 
 1. **`/node_modules`**: This directory contains all of the modules of code that your project depends on (npm packages) are automatically installed.
 

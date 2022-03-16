@@ -10,7 +10,7 @@ tags:
   - Kubernetes
 ---
 
-[OCI/Docker](#oci) | [Kubernetes Orchestration](#kubernetes) | [Hosting](#hosting)
+[OCI/Docker](#oci) | [Kubernetes Orchestration](#kubernetes) | [Hosting](#hosting-providers)
 
 > Servers should be cattle, not pets.
 
@@ -169,7 +169,7 @@ tags:
     - Docker CE, CLI (they are open source)
     - [Install in WSL 2](https://itspyworld.blogspot.com/2021/11/install-minikube-in-wsl-2-with-kubectl.html)
 
-### Hosting Providers <a name="hosting"></a>
+### Hosting Providers
 
 - Cloud
   - AWS

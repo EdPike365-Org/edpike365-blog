@@ -12,7 +12,7 @@ tags:
   - BioDevOps
 ---
 
-[Articles](#articles), [Books](#books), [Events](#events), [Companies/Orgs](#orgs), [People](#people), [Training/Classes](#training), [Definitions](#definitions), [Future Research](#future)
+[Log](#log-lifo) | [Articles](#articles) | [Books](#books) | [Events](#events) | [Companies/Orgs](#companies-orgs) | [People](#people) | [Training/Classes](#training) | [Definitions](#definitions-acronyms) | [Future Research](#future-research)
 
 ---
 
@@ -24,7 +24,9 @@ This week I was mostly exploring SynBio DevOps for a [blog post](/synbio-devops)
 
 <p align="center">Image Courtesy of Synthace</p>
 
-### Articles <a name="articles"></a>
+### Log (LIFO)
+
+### Articles
 
 I read a lot of articles while writing some blog posts. Here are the key ones.
 
@@ -43,19 +45,19 @@ I read a lot of articles while writing some blog posts. Here are the key ones.
   - For STEM education: studying an engineering language that can be used to work in the future.
   - For data science: communicating with engineers in the same language.
 
-### Books <a name="books"></a>
+### Books
 
 - "[Deep Learning with Python](https://www.manning.com/books/deep-learning-with-python-second-edition?gclid=Cj0KCQiAw9qOBhC-ARIsAG-rdn46abAzsF3bC_3pVQtSgwAFq4kVQ8ajeIlsgFy9_LLQZsZ5yRYDvxEaAkOgEALw_wcB)", Francois Chollet, Second Edition
 
 - "[The Code Breaker: Jennifer Doudna, Gene Editing, and the Future of the Human Race](https://www.amazon.com/Code-Breaker-Jennifer-Doudna-Editing/dp/1982115858)". I read it and now I have the twins reading it. Also available as [audio book](https://www.amazon.com/Code-Breaker-Jennifer-Doudna-Editing/dp/B08GP2J186/ref=tmm_aud_swatch_0?_encoding=UTF8&qid=&sr=).
 
-### Events <a name="events"></a>
+### Events
 
 - [Ginkgo Ferment 2021](https://www.ginkgoferment.com/) Videos just got posted. Website says it was in Oct. Was it a COVID event time warp? Its in person.
 
   Video 1 [Ginkgo Ferment 2021: Developing the Next Wave of Products with Synthetic Biology](https://www.youtube.com/watch?v=c-9tc4NfK3k). Announced [Jake Wintermute](https://wintermute.bio/) as developer evangelist. I followed him in Twitter a while back and thought it was a cool handle, but its his _actual_ name. And he really does live in Paris, France.
 
-### Companies/Orgs <a name="orgs"></a>
+### Companies, Orgs
 
 - [GEN: Genetic Engineering and Biotechnology News](https://www.genengnews.com/) I signed up for a free newsletter.
 - [ChemPartner](https://www.chempartner.com/): Life Science CRO/CDMO. China.
@@ -65,11 +67,11 @@ I read a lot of articles while writing some blog posts. Here are the key ones.
 - [Atomwise](https://www.atomwise.com/): "developed a machine learning-based discovery engine that combines the power of convolutional neural networks with massive chemical libraries to discover new small molecule medicines."
   - IT: Terraform/Ansible. Python. Docker. AWS.
 
-### People <a name="people"></a>
+### People
 
 - None specifically. [Jennifer Doudna](https://en.wikipedia.org/wiki/Jennifer_Doudna), [Tom Knight](<https://en.wikipedia.org/wiki/Tom_Knight_(scientist)>), and [Eric Lander](https://en.wikipedia.org/wiki/Eric_Lander) are always on my mind.
 
-### Training/Classes <a name="training"></a>
+### Training
 
 - Synthace: Design of Experiments Masterclass For Biology
 
@@ -84,7 +86,7 @@ I read a lot of articles while writing some blog posts. Here are the key ones.
   - Lectures on YouTube: New 2021 Edition!
     - [1. Intro](https://www.youtube.com/watch?v=5tvmMX8r_OM)
 
-### Definitions/Acronyms <a name="definitions"></a>
+### Definitions, Acronyms
 
 These Acronyms are _all_ courtesy of ChemPartner.com
 
@@ -98,7 +100,7 @@ These Acronyms are _all_ courtesy of ChemPartner.com
 - DMPK/Tox
 - cGMP
 
-### Future Research <a name="future"></a>
+### Future Research
 
 Things I ran across and thought "Oh yeah, I need to look into that sometime, but not now."
 

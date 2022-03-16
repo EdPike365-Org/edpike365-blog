@@ -12,7 +12,7 @@ tags:
 
 ---
 
-### Me <a name="me"></a>
+### Me
 
 - Links: [GitHub](https://github.com/EdPike365) | [LinkedIn]() | [Medium](https://edpike365.medium.com/) | [Twitter](https://twitter.com/EdPike365) | [Certs and Classes](/professional-certs-classes)
 
@@ -55,7 +55,7 @@ tags:
 
     I sponsored computer gaming clubs and robotics teams.
 
-### My Goals in 2022 <a name="goals2022"></a>
+### My Goals in 2022
 
 #### Strategic
 
