@@ -109,7 +109,7 @@ module.exports = {
         footnotes: true,
         // uses gray-matter for front matter, so you can use options from there as well
         // at https://github.com/jonschlinkert/gray-matter#options
-        excerpt_separator: `<!-- end -->`,
+        excerpt_separator: `<!-- excerpt-end -->`,
         plugins: [
           {
             resolve: `gatsby-remark-images`,
@@ -180,8 +180,24 @@ module.exports = {
         ],
       },
     },
-    `gatsby-plugin-sharp`,
-    `gatsby-transformer-sharp`,
+    {
+      resolve: `gatsby-plugin-sharp`,
+      options: {
+        defaults: {
+          formats: [`auto`, `webp`],
+          placeholder: `dominantColor`,
+          quality: 50,
+          breakpoints: [750, 1080, 1366, 1920],
+          backgroundColor: `transparent`,
+          tracedSVGOptions: {},
+          blurredOptions: {},
+          jpgOptions: {},
+          pngOptions: {},
+          webpOptions: {},
+          avifOptions: {},
+        },
+      },
+    },
     {
       resolve: `gatsby-plugin-catch-links`,
       options: {

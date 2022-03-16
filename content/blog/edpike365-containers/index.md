@@ -10,11 +10,11 @@ tags:
   - Kubernetes
 ---
 
-[OCI/Docker](#oci) | [Kubernetes Orchestration](#kubernetes) | [Hosting](#hosting-providers)
+[OCI/Docker](#oci-docker) | [Kubernetes Orchestration](#kubernetes-container-orchestration) | [Hosting](#hosting-providers)
 
 > Servers should be cattle, not pets.
 
-### OCI/Docker <a name="oci"></a>
+### OCI, Docker
 
 - OCI ([Open Container Initiative](https://opencontainers.org/))
 
@@ -46,7 +46,7 @@ tags:
   - Artifactory Docker Reg: Local repo option.
   - AWS Container Registry
 
-### Kubernetes Container Orchestration <a name="kubernetes"></a>
+### Kubernetes Container Orchestration
 
 - Docker Compose: smaller apps
 - K8s (Kubernetes)

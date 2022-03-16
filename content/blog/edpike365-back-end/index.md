@@ -10,8 +10,9 @@ tags:
   - Databases
 ---
 
-<a name="web"></a>
-[Web Servers](#web) | [App Servers](#appservers) | [APIs](#apis) | [Databases](#dbs) [Auth Services](#auth)
+[Web Servers](#web-servers) | [App Servers](#app-servers) | [APIs](#apis) | [Databases](#databases) [Auth Services](#auth-services)
+
+<!-- excerpt-end -->
 
 ### Web Servers
 
@@ -20,7 +21,7 @@ tags:
 - [HAProxy](http://www.haproxy.org/)
 - [AWS Elastic Load Balancing](https://aws.amazon.com/elasticloadbalancing/)
 
-### App Servers <a name="appservers"></a>
+### App Servers
 
 - [Tomcat](https://tomcat.apache.org/)
 - [Flask](https://flask.palletsprojects.com/en/2.0.x/) Python. No asynch.
@@ -29,7 +30,7 @@ tags:
 - [WordPress](https://wordpress.com/) PHP
 - [Laravel](https://laravel.com/) PHP
 
-### APIs <a name="apis"></a>
+### APIs
 
 - [Swagger]() API definition
 - OpenAPI
@@ -50,7 +51,7 @@ tags:
 - Service Mesh
   - [Istio](https://istio.io/)
 
-### Databases <a name="dbs"></a>
+### Databases
 
 - NoSQL
 
@@ -83,7 +84,7 @@ tags:
   - [AWS Redshift](https://aws.amazon.com/redshift/?p=ft&c=db&z=3)
   - [GCP BigQuery](https://cloud.google.com/bigquery)
 
-### Auth Services <a name="auth"></a>
+### Auth Services
 
 - [Okta](https://www.okta.com/)
 - [Auth0](https://auth0.com/) Bought by Okta.
