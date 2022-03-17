@@ -1,4 +1,5 @@
 import React, { useContext } from "react"
+import { useScrollRestoration } from "gatsby"
 import { Nav, NavUL, NavLI, NavLink } from "./NavBarComps"
 import { NavSubMenu } from "./NavBarSubMenu"
 import { NavContext } from "../../../contexts/NavContext"
@@ -10,9 +11,11 @@ const NavBar = () => {
   const { showNavState } = useContext(NavContext)
   const [showNav] = showNavState
 
+  const navScrollRestoration = useScrollRestoration(`nav-scroll-restoration`)
+
   // The line breaks at bottom are there to handle too short scroll bars on short screens
   return (
-    <Nav showNav={showNav}>
+    <Nav showNav={showNav} {...navScrollRestoration}>
       <NavUL>
         <NavLI>
           <NavLink to={"/"} itemProp="url">
