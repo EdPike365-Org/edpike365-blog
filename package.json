@@ -53,6 +53,7 @@
     "gatsby-remark-prismjs": "^6.9.0",
     "gatsby-remark-responsive-iframe": "^5.9.0",
     "gatsby-remark-smartypants": "^5.9.0",
+    "gatsby-remark-table-of-contents": "^2.0.0",
     "gatsby-source-build-date": "^1.0.0",
     "gatsby-source-filesystem": "^4.9.1",
     "gatsby-transformer-remark": "^5.9.1",

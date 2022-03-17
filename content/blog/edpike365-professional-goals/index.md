@@ -16,17 +16,18 @@ tags:
 
 Its a bit rambly and meant for my, and my children's, consumption. I'm sharing it here for those who stumble across it.
 
-[Languages/Libraries/Frameworks](#libs), [Demo Projects](#projects), [Learn From Companies](#companies), [Certs/Classes](#training)
+[Strategic Goals](#strategic-goals) |
+[Languages/Libraries/Frameworks](#languages-libraries-frameworks) | [Demo Projects](#demos-projects), [Learn From Companies](#learn-from-existing-companiesorgs) | [Certs/Classes](#certs-and-classes) | [Other](#other)
 
 ### Strategic Goals
 
-1. Become a SynBio DevOps Specialist
+##### 1. Become a SynBio DevOps Specialist
 
-I believe that Synthetic Biology can solve many major problems from climate change to starvation, pollution, disease and aging. What could be more exciting and meaningful work?
+- I believe that Synthetic Biology can solve many major problems from climate change to starvation, pollution, disease and aging. What could be more exciting and meaningful work?
 
-The core sciences and technologies for a SynBio revolution are in place, and getting rapidly better. Now the world needs to execute, with speed, at scale. Rapid advances depends on automation, hence SynBio DevOps.
+- The core sciences and technologies for a SynBio revolution are in place, and getting rapidly better. Now the world needs to execute, with speed, at scale. Rapid advances depends on automation, hence SynBio DevOps.
 
-2. Prepare For Cloud Bio Labs
+##### 2. Prepare For Cloud Bio Labs
 
 - Cloud Bio Labs: Like AWS, but for Bio.
 - LabOps (working title), inspired by DevOps CI/CD, will replace manual lab processes which are historically based on prose instructions and unwritten institutional knowledge. LabOps replaces it with version controlled code executed by software and robots. It will do for experiments what Juypter notebooks did for data science: add reproducibility and the ability to rapidly iterate. An epidemic of unreproducibility has been making the news in recent years and this is the cure. Version control also lets multiple people work on the same code project.
@@ -35,13 +36,13 @@ The core sciences and technologies for a SynBio revolution are in place, and get
 - Self serve API's, SDK's and Console web apps are needed just like for digital clouds.
 - Command, control, and monitoring for lab robots, sensors (IOT)
 
-3. Prepare for Digital Cloud Arbitrage
+##### 3. Prepare for Digital Cloud Arbitrage
 
 - Minimize the digital component of expenses by automatically moving work between cloud vendors. **Digital cloud will become a commodity much sooner than bio clouds will.**
 - Breaking vendor lock requires using open standards.
   - Migrate all digital infrastructure to open standards like Kubernetes, various Apache libs
 
-### Languages, Libraries, Frameworks <a name="libs"></a>
+### Languages, Libraries, Frameworks
 
 - Python: I need to bulk up my Python. I used it in classes that I took and on one production project, but I need more. Django.
 
@@ -61,7 +62,7 @@ The core sciences and technologies for a SynBio revolution are in place, and get
 
 - Scala, Quarkus, Typescript, TS testing
 
-### Demos and Projects <a name="projects"></a>
+### Demos and Projects
 
 Projects to get a job:
 
@@ -110,13 +111,13 @@ Projects to support long term strategy:
 
 - Jupyter: set up and version control
 
-### Learn From Existing Companies/Orgs <a name="companies"></a>
+### Learn From Existing Companies/Orgs
 
 - SynBio Companies: I made a list of companies that I'm following, and their tech stacks in [this blog entry](/synbio-company-tech-stacks).
 - Digital Cloud Companies: I will continue to watch AWS, GCP and Azure.
 - Orgs: [CNCF](https://www.cncf.io/) (cloud native computing foundation)
 
-### Certs and Classes <a name="training"></a>
+### Certs and Classes
 
 If I were starting out again, I'd get a Masters in a biology field, add a big dose of software engineering, and enter a startup ASAP. I've guided my twin 18 year olds to do just that.
 

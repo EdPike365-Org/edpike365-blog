@@ -13,13 +13,16 @@ tags:
 
 ![Ginkgo Bioworks: The Organsim Company](ginkgo_logo.png)
 
-## Learning From Ginkgo Bioworks' Technologies
+##### Learning From Ginkgo Bioworks' Technologies
 
-[Job Descriptions](#jobs), [DevOps](#devops), [References with Summaries](#refs)
+```toc
+# This code block gets replaced with the TOC, override defaults from gatsby-config.js
+tight: true
+```
 
 ## Company Overiew
 
-[Ginkgo](https://www.ginkgobioworks.com/) is among the top companies doing what I want to do: mixing synthetic biology, lab automation, genomics, ML and software/devops. I hope to get a job with them or one of their partners someday.
+[Ginkgo Bioworks](https://www.ginkgobioworks.com/) is among the top companies doing what I want to do: mixing synthetic biology, lab automation, genomics, ML and software/devops. I hope to get a job with them or one of their partners someday.
 
 This post is a loosely organized collections of factoids I've captured from various places and I'll update it as I find out more.
 
@@ -40,9 +43,9 @@ At the beginning of 2022, my analysis is that their current business plan focuse
 
 4. Bio Security: It's an interesting field with growth potential but it doesnt fit into their core business. It should be spun off to yet another "Ginkgobated" company. (I made up that term as well: Ginkgo Incubated)
 
-## Gingkgo Technologies
+## Ginkgo Technologies
 
-### Technologies From Job Descriptions <a name="jobs"></a>
+### Technologies From Job Descriptions
 
 - General Stack: Python, SQL, DNA, Postgres, Snowflake, Airflow, AWS DMS, Spark on EMR
 - Data Engineer:
@@ -60,7 +63,7 @@ At the beginning of 2022, my analysis is that their current business plan focuse
   - Python, Javascript, CI/CD, AWS
 - DevOps: see below
 
-### Ginkgo DevOps <a name="devops"></a>
+### Ginkgo DevOps
 
 DevOps tech is my main focus, so I broke it out in more detail. The DevOps group at Ginkgo is focused on the following:
 
@@ -154,15 +157,7 @@ I was able to document some things from the references found in the references a
   - AWS CloudWatch
 - GSuite
 
-## Reference Videos and Articles <a name="refs"><a>
-
-1. [How Ginkgo Bioworks uses AWS at Scale](#ref1)
-2. [Shephard HPC on AWS Event](#ref2)
-3. [Ginkgo Bioworks, Biology by Design: Applying Gigabases of DNA to Bioengineering](#ref3)
-4. [Meet Ginkgo Bioworks, 2010](#ref4)
-5. [Ginkgo’s Platform: An Introduction to Codebase and IP Strategy (Ginkgo Bioworks Investor Day 2021)](#ref5)
-
-### Ref 1: "How Ginkgo BioWorks uses AWS at Scale" <a name="ref1"></a>
+## Ref 1: "How Ginkgo BioWorks uses AWS at Scale"
 
 I watched an AWS re:Invent 2019 presentation about [how Ginkgo BioWorks uses AWS at scale]("https://www.youtube.com/watch?v=arDI64ja6KA").
 
@@ -269,7 +264,7 @@ So reduces Twist bill from 200k to 50k.
 
 DevOps crew experienced in AWS, HIPPA and GXP. Linux Admins.
 
-### Extreme Automation
+#### Extreme Automation
 
 1. Automate Everything
 2. If go to console to fix, must open Jira ticket to go fix the automation script
@@ -289,7 +284,7 @@ Jenkins job automatically creates the following per newly onboarded software dev
 - AWS ALB
 - AWS Transit Gateway access (big fan, no more VPC Peering, which was n squared)
 
-### Multi-account Architecture
+#### Multi-account Architecture
 
 ![Multi Account Architecture](ginkgo_multiaccount_arch.png)
 
@@ -326,7 +321,7 @@ Ginkgo Sequencing Pipeline
 - [NGS](https://www.thermofisher.com/us/en/home/life-science/sequencing/next-generation-sequencing.html?cid=csd_ngs_sbu_r01_co_cp1445_pjt7410_csd00000_0se_gaw_nt_awa_ngsappresbrd&s_kwcid=AL!3652!3!514453027374!e!!g!!next%20generation%20genome%20sequencing&ef_id=CjwKCAiAzrWOBhBjEiwAq85QZ4TVOmfVShps1L9MzpSjWjcpfNL8SEE7Zhgx9jkz2xcGQ-7zSO0BoxoChK4QAvD_BwE:G:s&s_kwcid=AL!3652!3!514453027374!e!!g!!next%20generation%20genome%20sequencing!12742007647!127690085264) to S3 Pipeline
 - [AWS Batch](https://aws.amazon.com/batch/) (no EKS (Elastic Kubernetes Service))
 
-### Ginkgo's Favorite AWS Services
+#### Ginkgo's Favorite AWS Services
 
 - CloudFormation
 - Direct Connect (Ginkgo does some EC2 zone arbitrage)
@@ -357,7 +352,7 @@ Ginkgo Sequencing Pipeline
 
 ---
 
-## Ref 2: Shephard HPC on AWS Event <a name="ref2"></a>
+## Ref 2: Shephard HPC on AWS Event
 
 From Nov 2020 video [HPC on AWS Event -Ginkgo Bioworks Automating the Creation of Batch Processing Workflows in AWS](https://www.youtube.com/watch?v=oXzNs_QfUX8) by Jacob Mevorach, DevOps Eng 2.
 
@@ -433,7 +428,7 @@ Shephard CloudFormation Schema to Create Scalable Batch Processing Jobs
 
 Will be open sourced soon/now?
 
-## Ref 3: Ginkgo Bioworks, Biology by Design: Applying Gigabases of DNA to Bioengineering <a name="ref3"></a>
+## Ref 3: Ginkgo Bioworks, Biology by Design: Applying Gigabases of DNA to Bioengineering
 
 [Video](https://www.youtube.com/watch?v=LVb2UBryDVM) May 2019. Patrick Boyle, PhD, "Head of Codebase"
 
@@ -479,11 +474,9 @@ Gene Synthesis. By-hand cloning of DNA is going extinct, like Sanger did.
 - Also collecting "bio systems data"
 - Train ML tools, look at many diff "substrates" and diff enzyme types.
 
-## Ref 4: Meet Ginkgo Bioworks (2010) <a name="ref4"></a>
+## Ref 4: Meet Ginkgo Bioworks (2010)
 
 [Humor! Smoking! Neckties!](https://www.youtube.com/watch?v=q7fpwmQWCkA)
-
-<a name="ref5"></a>
 
 ## Ref 5: [Ginkgo's Platform: An Introduction to Codebase and IP Strategy (Ginkgo Bioworks Investor Day 2021)](https://www.youtube.com/watch?v=ZtVytYuSt44) July, 2021
 
@@ -506,7 +499,7 @@ Gene Synthesis. By-hand cloning of DNA is going extinct, like Sanger did.
 - How to package Codebase for access?
   - SDKs (software development kit). Docs. Higher order representations. Called "CDK" at Ginkgo.
   - Foundry Tools
-  - Dutch DNA (a company) filementous fungi CDK (Cell Development Kit). Additional Ref: (["Gingko adds fungal expression platform through Dutch DNA buy"](https://bioprocessintl.com/bioprocess-insider/gingko-adds-fungal-expression-platform-through-dutch-dna-buy/). Its done and called the "Fungal CDK"
+  - Dutch DNA (a company) filementous fungi CDK (Cell Development Kit). Additional Ref: (["Ginkgo adds fungal expression platform through Dutch DNA buy"](https://bioprocessintl.com/bioprocess-insider/gingko-adds-fungal-expression-platform-through-dutch-dna-buy/). Its done and called the "Fungal CDK"
 
 ### IP Strategy Lawyer Stuff
 

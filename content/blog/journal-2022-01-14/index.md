@@ -6,12 +6,12 @@ author: EdPike365
 tags:
   - edpike365
   - DevOps
+  - "Full Stack"
+  - SRO
   - SynBio
-  - STEM
-  - BioDevOps
 ---
 
-[Articles](#articles), [Events](#events), [Companies/Orgs](#orgs), [People](#people), [Definitions](#definitions), [Future Research](#future)
+[Log](#log-lifo) | [Articles](#articles) | [Books](#books) | [Events](#events) | [Companies/Orgs](#companies-orgs) | [People](#people) | [Training/Classes](#training) | [Definitions](#definitions-acronyms) | [Future Research](#future-research)
 
 ---
 
@@ -23,7 +23,9 @@ Keeping up with my news feeds. Reaching out to DevOps community. Discovered [Pul
 
 <p align="center">Image Courtesy of Pulumi</p>
 
-### Articles <a name="articles"></a>
+### Log (LIFO)
+
+### Articles
 
 - Ginkgo Video : [An Introduction to Codebase and IP Strategy (Ginkgo Bioworks Investor Day 2021)](https://www.youtube.com/watch?v=ZtVytYuSt44)
 
@@ -41,13 +43,15 @@ Keeping up with my news feeds. Reaching out to DevOps community. Discovered [Pul
 
 - [Turning Infrastructure Into Software Through Cloud Engineering](https://www.digitalocean.com/community/tech_talks/turning-infrastructure-into-software-through-cloud-engineering/?utm_medium=email&utm_source=IaaN&utm_campaign=01132022&mkt_tok=MTEzLURUTi0yNjYAAAGB8wf0OeTAen_azjVboAk3Nf3HVENlKiGmK8yT2wgDByE4rOA4WQleV3zk7OhjDu9tO0GnzgTYBFresPHNYInbOItvQUmfzF3Re73Sfy96yw) Digital Ocean, Matt Stratton ([Pulumi](https://www.pulumi.com])). _Infrastructure as Code should be Infrastructure as Software_, because we want real languages and power, not just declarative.
 
-### Events <a name="events"></a>
+### Books
+
+### Events
 
 - [J.P. Morgan HealthCare conference](https://www.jpmorgan.com/solutions/cib/insights/health-care-conference)
 
 - [Rosalind Franklin Society Presents: Labs, Leaders, Critical Connections](https://webinars.liebertpub.com/e/rfslabsleaderscriticalconnections2021?aff=950&utm_medium=newsletter&utm_source=GEN+News+Highlights+of+the+Week&utm_content=01&utm_campaign=GEN+News+Highlights+of+the+Week_20220108#about)
 
-### Companies/Orgs <a name="orgs"></a>
+### Companies, Orgs
 
 - [GenomeWeb](https://www.genomeweb.com/): I signed up for their free newsletter.
 
@@ -61,7 +65,7 @@ Keeping up with my news feeds. Reaching out to DevOps community. Discovered [Pul
 
 - [Pulumi Cloud Engineering](https://www.pulumi.com/)
 
-### People <a name="people"></a>
+### People
 
 - [Michael Levin](https://as.tufts.edu/biology/people/faculty/michael-levin): Tufts. Xenobots. Program cells at anatomical, not genetic, level. Cell Cybernetics. Morphogenisis. Bacteria biofilms. Bacterial intelligence.
   Dirctor, Allen Discovery Center at Tufts University
@@ -70,13 +74,15 @@ Keeping up with my news feeds. Reaching out to DevOps community. Discovered [Pul
 
 - [Naveen Rao](https://www.linkedin.com/in/naveen-rao-bba5b01/), [Nervana Systems](https://www.linkedin.com/company/nervanasys/about/): [2021 podcast](https://www.youtube.com/watch?v=Qh-mn-VXeP4). Neuro ASIC chips.
 
-### Definitions/Acronyms <a name="definitions"></a>
+### Training
+
+### Definitions, Acronyms
 
 - DAGS: Directed Acyclic Graphs
 - CRDMO: Contract Research, Development and Manufacturing Organization
 - CTDMO: Contract Testing, Development and Manufacturing Organization
 
-### Future Research <a name="future"></a>
+### Future Research
 
 - AAV Characterization: hint Mass Photometry
 - cryoTEM

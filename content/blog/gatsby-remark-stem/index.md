@@ -10,18 +10,22 @@ tags:
   - MarkDown
   - PrismJS
 ---
+
 This page demonstrates Gatsby MarkDown plugins useful for STEM (Science, Technology, Engineering, Math) bloggers using MD files. It does not cover MDX format pages.
 
 Some of these topics were covered in another post: [Gatsby Remark Test](). This post adds more plugins and focuses more narrowly on STEM tooling. It will grow as I find more plugins.
 
 Generally Useful
+
 - Diagrams with [GraphViz](https://graphviz.org/)
 - Footnotes and References
 
 For Math
+
 - Tex/LaTeX Math Formulas with KaTeX
 
 For Software Engineers
+
 - Embedding
   - CodePen
   - CodeSandbox
@@ -30,16 +34,16 @@ For Software Engineers
 - Advanced PrismJS
 
 ## Gatsy-Remark-Embedder
+
 [plugin](https://www.gatsbyjs.com/plugins/gatsby-remark-embedder/), [source](https://github.com/MichaelDeBoey/gatsby-remark-embedder)
 
 Lets you embed many different sites. We are only interested in ones that support coding for now.
 
 ## https://www.gatsbyjs.com/plugins/gatsby-remark-embed-gist/
 
-Each plugin demo is seperated by a <span style="color:#bbbe74;">colored title div</span> like the one just below. I've added useful links: 
-- plugin page, github page, other things
+Each plugin demo is seperated by a <span style="color:#bbbe74;">colored title div</span> like the one just below. I've added useful links:
 
-<a name="tables"></a>
+- plugin page, github page, other things
 
 ## Tables
 
@@ -83,8 +87,6 @@ can also use inline Markdown.
 | _Still_  | `renders` | **nicely** |
 | 1        | 2         | 3          |
 
-<a name="footnotes"></a>
-
 ## Footnotes
 
 Footnotes are also not a core feature of markdown, but they're a common
@@ -93,15 +95,15 @@ extension feature. The footnote syntax looks like this:
 ```markdown
 This line has a footnote [^1]. Scroll to page bottom or click the link to see it.
 ```
+
 ```markdown
 This line has another footnote [^2]. Scroll to page bottom or click the link to see it.
 ```
+
 That renders like this:
 
 This line has a footnote [^1]. Scroll to page bottom or click the link to see it.
 This line has a second footnote [^2]. Scroll to page bottom or click the link to see it.
-
-<a name="blockquotes"></a>
 
 ## Blockquotes
 
@@ -130,14 +132,14 @@ Quote break.
 > boy let's keep writing to make sure this is long enough to actually wrap for
 > everyone. Oh, you can _put_ **Markdown** into a blockquote.
 
-> EdPike365: I'm adding nested blockquotes 3 layers deep, seperated by 1 space each. It should work like [CommonMark](https://commonmark.org/help/tutorial/05-blockquotes.html#:~:text=To%20create%20a%20blockquote%2C%20start,can%20also%20contain%20other%20formatting.&text=To%20keep%20the%20quote%20together,quote%20must%20contain%20the%20%3E%20character.) 
-!TODO: modify CSS to add space between indents and trailing indents below content.
+> EdPike365: I'm adding nested blockquotes 3 layers deep, seperated by 1 space each. It should work like [CommonMark](https://commonmark.org/help/tutorial/05-blockquotes.html#:~:text=To%20create%20a%20blockquote%2C%20start,can%20also%20contain%20other%20formatting.&text=To%20keep%20the%20quote%20together,quote%20must%20contain%20the%20%3E%20character.)
+> !TODO: modify CSS to add space between indents and trailing indents below content.
 
 > Block 1
+>
 > > Block 2
+> >
 > > > Block 3
-
-<a name="html"></a>
 
 ## Inline HTML
 
@@ -160,8 +162,6 @@ You can also use raw HTML in your Markdown, and it'll mostly work pretty well.
   <dt>Markdown in HTML</dt>
   <dd>Does *not* work **very** well. Use HTML <em>tags</em>.</dd>
 </dl>
-
-<a name="hr"></a>
 
 ## Horizontal Rule
 
@@ -194,8 +194,6 @@ Asterisks
 ---
 
 Underscores
-
-<a name="lines"></a>
 
 ## Line Breaks
 
@@ -271,7 +269,7 @@ Let's see some more photos by
 
 ![](max-boettinger-288448.jpg)
 
-### What about retina images? 
+### What about retina images?
 
 Absolutely, these are supported too! Gatsby takes care to retain images' pixel
 density.
@@ -293,9 +291,9 @@ And here's an awesome SVG tiger:
 
 > EdPike365: !TODO figure out how to resize the svg
 
-![awesome tiger](awesome_tiger.svg) 
+![awesome tiger](awesome_tiger.svg)
 
-## iFrames and video embeds 
+## iFrames and video embeds
 
 Let's add a YouTube video to show off responsive iFrames real quick:
 
@@ -325,13 +323,13 @@ Let's try with a PDF, that you should be able to preview and/or download by
 clicking this link:
 [Creative Commons Informational Flyer.pdf](Creativecommons-informational-flyer-eng.pdf)
 
-## Intercepting Local Links 
+## Intercepting Local Links
 
 [gatsby-plugin-catch-links][222] intercepts local links from Markdown and other
 non-react pages and does a client-side `pushState` to avoid the browser having
 to refresh the page.
 
-Let's try linking to the 
+Let's try linking to the
 "[Hello World Blog Enty](../hello-world/)"
 article using a relative path.
 
@@ -407,6 +405,7 @@ print s
 No language indicated, so no syntax highlighting.
 But let's throw in a <b>tag</b>.
 ```
+
 > EdPike365: I added the "diff" example. Note that the - and + have to be left justified.
 
 ```diff
@@ -417,6 +416,7 @@ const App = () => {
 ```
 
 ## File Title
+
 > EdPike365: I added this feature to the demo.
 
 You have to install `gatsby-remark-file-title` [link](https://www.gatsbyjs.com/plugins/gatsby-remark-code-titles/). I added it just above the "gatsby-remark-prism" plugin.
@@ -430,6 +430,7 @@ alert(s)
 
 The title text cannot be combined with line highlighting or line numbering.
 You can work around this by pasting:
+
 ```html
 <div class="gatsby-code-title">added with a div above</div>
 <!-- leave a blank line between that and the actual prism code block -->
@@ -444,14 +445,15 @@ alert(s)
 ```
 
 ## Code Copy Button
-> EdPike365: I added this feature to the demo. 
+
+> EdPike365: I added this feature to the demo.
 
 <div style="color: white; background: red;">&nbsp; Warning!! If you implement this, Line numbering stops working.</div>
 
-This uses [gatsby-remark-code-buttons](https://www.gatsbyjs.com/plugins/gatsby-remark-code-buttons/). 
+This uses [gatsby-remark-code-buttons](https://www.gatsbyjs.com/plugins/gatsby-remark-code-buttons/).
 I was able to simplify the CSS instructions by just adding this CSS code above the Prism highlight and linenumbering code. When I discovered that line numbering stopped working, I tried the CSS below the Prism CSS, but the problem persisted.
 
-In the end I removed the plugin because it broke line numbering. Also, when you look in the code you see that the copy button copies all the code from the code block *ahead of time, during SSR*. So any code is duplicated and shipped over the internet. For a developer's blog, that could add up. I will look for a better solution. In the meantime, I got it working and took a screen shot. Then I removed it.
+In the end I removed the plugin because it broke line numbering. Also, when you look in the code you see that the copy button copies all the code from the code block _ahead of time, during SSR_. So any code is duplicated and shipped over the internet. For a developer's blog, that could add up. I will look for a better solution. In the meantime, I got it working and took a screen shot. Then I removed it.
 
 <div align="center">Copy Button showing, Line Numbers Not Showing</div>
 
@@ -467,17 +469,19 @@ In the end I removed the plugin because it broke line numbering. Also, when you 
 differs a bit from PrismJS's own. You can find out everything about it in the
 [corresponding README][1].
 
-> EdPike365: You must implement special CSS code to get Highlighting and Line Numbering to work. 
+> EdPike365: You must implement special CSS code to get Highlighting and Line Numbering to work.
 > Hightlighting: I'm currently using a styles.css file in the root folder. I added this block:
+
 ```css
 /* used by gatsby-remark-prismjs, colors for Okaidia theme */
 .gatsby-highlight-code-line {
-    background-color: #474643;
-    display: block;
-    margin-right: -1em;
-    margin-left: -1em;padding-right: 1em;
-    padding-left: 0.75em;
-    border-left: 0.25em solid #569c3b;
+  background-color: #474643;
+  display: block;
+  margin-right: -1em;
+  margin-left: -1em;
+  padding-right: 1em;
+  padding-left: 0.75em;
+  border-left: 0.25em solid #569c3b;
 }
 ```
 
@@ -487,10 +491,13 @@ differs a bit from PrismJS's own. You can find out everything about it in the
 /* If using PrismJS line numbering, add this. */
 .gatsby-highlight pre[class*="language-"].line-numbers {
   padding-left: 2.8em;
-  padding-top: var(--spacing-0); /* I had to add this to mine because otherwise the line numbers column was ignoring the padding-top of the code block to the right and was nearly 1 line above it. */
+  padding-top: var(
+    --spacing-0
+  ); /* I had to add this to mine because otherwise the line numbers column was ignoring the padding-top of the code block to the right and was nearly 1 line above it. */
 }
 ```
-> EdPike365: Below here, the code is not rendering and I can't tell how. It is indented by 2 tabs or 4 spaces, but I can't reproduce it. 
+
+> EdPike365: Below here, the code is not rendering and I can't tell how. It is indented by 2 tabs or 4 spaces, but I can't reproduce it.
 
     ```javascript{1-2,22}{numberLines: true}
     // In your gatsby-config.js
@@ -571,13 +578,13 @@ Let's do something crazy and add a list with another code example:
   …and a paragraph! In my younger and more vulnerable years my father gave me
   some advice that I’ve been turning over in my mind ever since.
 
-  -  A nested numbered list
-  -  “Whenever you feel like criticizing any one,” he told me, “just remember
-      that all the people in this world haven’t had the advantages that you’ve
-      had.”
+  - A nested numbered list
+  - “Whenever you feel like criticizing any one,” he told me, “just remember
+    that all the people in this world haven’t had the advantages that you’ve
+    had.”
 
 - Roger that, now back to topic: _Highlighted code blocks work here, too_:
-  
+
   (This code is give the highlight command for lines 10 and 13.)
   <pre>
     ```css{10,13}
@@ -701,7 +708,6 @@ If you'd prefer to write your code blocks directly within your Markdown, take a 
 [3333]: http://prismjs.com/
 [4444]: /code-and-syntax-highlighting/
 
-
 <br>
 <div style="background-color:#bbbe74; padding: 1px 10px 10px 10px;">
 <h2>Rendering math equations with KaTeX:</h2>
@@ -709,7 +715,7 @@ Links: <a href="https://using-remark.gatsbyjs.org/katex/" target="_blank">page</
 </div>
 <br>
 
-> EdPike365: Gatsby did not document this well. KaTeX is a fast, easy-to-use JavaScript library for TeX math rendering on the web. It *should* render anything from the popular [LaTeX](https://www.math.ubc.ca/~pwalls/math-python/jupyter/latex/) scientific notation library.
+> EdPike365: Gatsby did not document this well. KaTeX is a fast, easy-to-use JavaScript library for TeX math rendering on the web. It _should_ render anything from the popular [LaTeX](https://www.math.ubc.ca/~pwalls/math-python/jupyter/latex/) scientific notation library.
 
 [gatsby-remark-katex][15] adds math equation support to gatsby using
 [remark-math][25] and [katex][35].
@@ -770,7 +776,7 @@ $$
 L = \frac{1}{2} \rho v^2 S C_L
 $$
 
-``` 
+```
 \\ "\sum" is Sigma
 $$
 \sum_{i=1}^n a_i
@@ -781,13 +787,13 @@ $$
 \sum_{i=1}^n a_i
 $$
 
-` $\int_a^b f(x) = F(b) - F(a)$ ` yields $\int_a^b f(x) = F(b) - F(a)$
+`$\int_a^b f(x) = F(b) - F(a)$` yields $\int_a^b f(x) = F(b) - F(a)$
 
-` $$f'(a) = \lim_{x \to a} \frac{f(x) - f(a)}{x-a}$$ ` yields:
- 
- $$
- f'(a) = \lim_{x \to a} \frac{f(x) - f(a)}{x-a}
- $$
+`$$f'(a) = \lim_{x \to a} \frac{f(x) - f(a)}{x-a}$$` yields:
+
+$$
+f'(a) = \lim_{x \to a} \frac{f(x) - f(a)}{x-a}
+$$
 
 [15]: https://www.gatsbyjs.com/plugins/gatsby-remark-katex/
 [25]: https://github.com/Rokt33r/remark-math
@@ -839,7 +845,6 @@ Links: <a href="https://using-remark.gatsbyjs.org/custom-components/" target="_b
 
 > EdPike365: I'm leaving this out because I think the functionality has been superceded by MDX.
 
-
 <br>
 <div style="background-color:#bbbe74; padding: 1px 10px 10px 10px;">
 <h2>Graphviz</h2>
@@ -847,7 +852,7 @@ Links: <a href="https://using-remark.gatsbyjs.org/graphviz/" target="_blank">pag
 </div>
 <br>
 
-> EdPike365: *It is very important that you follow the linked install directions*. The plugin must be above PrismJS plugin in your gatsby-config.js.
+> EdPike365: _It is very important that you follow the linked install directions_. The plugin must be above PrismJS plugin in your gatsby-config.js.
 
 ## Rendering dot code blocks
 
@@ -1106,6 +1111,7 @@ You can overwrite the `style` attribute if you don't like that behaviour:
       subgraph cluster_legend {
         ...
     ```
+
 > EdPike365: The custom CSS does NOT work in the original demo either. !TODO
 
 There:
@@ -1251,9 +1257,8 @@ I used [gatsby-remark-emoji](https://www.gatsbyjs.com/plugins/gatsby-remark-emoj
 
 Contrary to the plugin's docs, it supports more than the [JS functions on JoyPixels](https://demos.joypixels.com/latest/index.html#js), I tried "shortnameToImage", and it worked but they were not scaled correctly so I switched back.
 
-
-
 ## Gatsy-Remark-Embedder
+
 [plugin](https://www.gatsbyjs.com/plugins/gatsby-remark-embedder/), [source](https://github.com/MichaelDeBoey/gatsby-remark-embedder)
 
 Lets you embed many different sites. We are only interested in ones that support coding for now.
@@ -1261,17 +1266,15 @@ CodePen
 CodeSandbox
 Testing Playground
 
-
-
 ## https://www.gatsbyjs.com/plugins/gatsby-remark-embed-gist/
 
-
 ## Remark-External-Links Plugin
+
 [plugin](https://www.gatsbyjs.com/plugins/gatsby-remark-external-links/)
 I added it to help the Lighthouse "Best Practices" score, which was 93.
 
 ---
 
-> EdPike365: Any Footnotes in *any* of the code above will appear below here.
+> EdPike365: Any Footnotes in _any_ of the code above will appear below here.
 
 ---

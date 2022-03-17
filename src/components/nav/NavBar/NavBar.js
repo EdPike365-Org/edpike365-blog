@@ -39,32 +39,37 @@ const NavBar = () => {
           uuid={"b2cea402-c66f-11eb-b8bc-0242ac130003"}
         >
           <NavLI>
-            <NavLink to={"/edpike365-front-end/#core"} itemProp="url">
+            <NavLink to={"/edpike365-front-end#html-css-js"} itemProp="url">
               HTML, CSS, JS
             </NavLink>
           </NavLI>
           <NavLI>
-            <NavLink to={"/edpike365-front-end/#design"} itemProp="url">
+            <NavLink to={"/edpike365-front-end#design"} itemProp="url">
               Design
             </NavLink>
           </NavLI>
           <NavLI>
-            <NavLink to={"/edpike365-front-end/#uiframeworks"} itemProp="url">
+            <NavLink to={"/edpike365-front-end#ui-frameworks"} itemProp="url">
               UI Frameworks
             </NavLink>
           </NavLI>
           <NavLI>
-            <NavLink to={"/edpike365-front-end/#auth"} itemProp="url">
+            <NavLink
+              to={
+                "/edpike365-front-end#client-side-authentication-authorization"
+              }
+              itemProp="url"
+            >
               Client Auth
             </NavLink>
           </NavLI>
           <NavLI>
-            <NavLink to={"/edpike365-front-end/#build"} itemProp="url">
+            <NavLink to={"/edpike365-front-end#build-tools"} itemProp="url">
               Build Tools
             </NavLink>
           </NavLI>
           <NavLI>
-            <NavLink to={"/edpike365-front-end/#testing"} itemProp="url">
+            <NavLink to={"/edpike365-front-end#testing"} itemProp="url">
               Testing
             </NavLink>
           </NavLI>
@@ -74,27 +79,27 @@ const NavBar = () => {
           uuid={"eb7371e2-ea28-4eee-85fd-79d1f7a5155b"}
         >
           <NavLI>
-            <NavLink to={"/edpike365-back-end/#web"} itemProp="url">
+            <NavLink to={"/edpike365-back-end#web-servers"} itemProp="url">
               Web Servers
             </NavLink>
           </NavLI>
           <NavLI>
-            <NavLink to={"/edpike365-back-end/#appservers"} itemProp="url">
+            <NavLink to={"/edpike365-back-end#app-servers"} itemProp="url">
               App Servers
             </NavLink>
           </NavLI>
           <NavLI>
-            <NavLink to={"/edpike365-back-end/#apis"} itemProp="url">
+            <NavLink to={"/edpike365-back-end#apis"} itemProp="url">
               APIs
             </NavLink>
           </NavLI>
           <NavLI>
-            <NavLink to={"/edpike365-back-end/#dbs"} itemProp="url">
+            <NavLink to={"/edpike365-back-end#databases"} itemProp="url">
               Databases
             </NavLink>
           </NavLI>
           <NavLI>
-            <NavLink to={"/edpike365-back-end/#auth"} itemProp="url">
+            <NavLink to={"/edpike365-back-end#auth-services"} itemProp="url">
               Auth Service
             </NavLink>
           </NavLI>
@@ -106,76 +111,88 @@ const NavBar = () => {
             </NavLink>
           </NavLI>
           <NavLI>
-            <NavLink to={"/edpike365-devops/#plan"} itemProp="url">
+            <NavLink to={"/edpike365-devops#designplan"} itemProp="url">
               Plan
             </NavLink>
           </NavLI>
           <NavLI>
-            <NavLink to={"/edpike365-devops/#vc"} itemProp="url">
+            <NavLink to={"/edpike365-devops#version-control"} itemProp="url">
               Version Ctrl
             </NavLink>
           </NavLI>
           <NavLI>
-            <NavLink to={"/edpike365-devops/#build"} itemProp="url">
+            <NavLink
+              to={"/edpike365-devops#build-test-coverage"}
+              itemProp="url"
+            >
               Build
             </NavLink>
           </NavLI>
           <NavLI>
-            <NavLink to={"/edpike365-devops/#cicd"} itemProp="url">
+            <NavLink to={"/edpike365-devops#cicd-tools"} itemProp="url">
               CI/CD
             </NavLink>
           </NavLI>
           <NavLI>
-            <NavLink to={"/edpike365-devops/#ops"} itemProp="url">
-              Operate
+            <NavLink to={"/edpike365-devops#operations"} itemProp="url">
+              Operations
             </NavLink>
           </NavLI>
           <NavLI>
-            <NavLink to={"/edpike365-devops/#feedback"} itemProp="url">
-              Feedback
+            <NavLink to={"/edpike365-devops#monitor"} itemProp="url">
+              Monitor
             </NavLink>
           </NavLI>
         </NavSubMenu>
         <NavSubMenu title={"SYSOPS"} uuid={"b2cea402-c66f-8008-b8bc"}>
           <NavLI>
-            <NavLink to={"/edpike365-sysops/#vs"} itemProp="url">
+            <NavLink to={"/edpike365-sysops#sysops-vs-sre"} itemProp="url">
               SysOps vs SRE
             </NavLink>
           </NavLI>
           <NavLI>
-            <NavLink to={"/edpike365-sysops/#sysops"} itemProp="url">
+            <NavLink to={"/edpike365-sysops#sysops"} itemProp="url">
               SysOps
             </NavLink>
           </NavLI>
           <NavLI>
-            <NavLink to={"/edpike365-sysops/#sre"} itemProp="url">
+            <NavLink
+              to={"/edpike365-sysops#sre-site-reliability-engineering"}
+              itemProp="url"
+            >
               SRE
             </NavLink>
           </NavLI>
           <NavLI>
-            <NavLink to={"/edpike365-sysops/#iac"} itemProp="url">
+            <NavLink to={"/edpike365-sysops#iac-eac"} itemProp="url">
               IaC, EaC
             </NavLink>
           </NavLI>
           <NavLI>
-            <NavLink to={"/edpike365-sysops/#infrastructure"} itemProp="url">
+            <NavLink to={"/edpike365-sysops#infrastructure"} itemProp="url">
               Infrastructure
             </NavLink>
           </NavLI>
         </NavSubMenu>
         <NavSubMenu title={"CONTAINERS"} uuid={"b2cea402-c66f-8128-b8bc"}>
           <NavLI>
-            <NavLink to={"/edpike365-containers/#oci"} itemProp="url">
+            <NavLink to={"/edpike365-containers#oci-docker"} itemProp="url">
               OCI, Docker
             </NavLink>
           </NavLI>
           <NavLI>
-            <NavLink to={"/edpike365-containers/#kubernetes"} itemProp="url">
+            <NavLink
+              to={"/edpike365-containers#kubernetes-container-orchestration"}
+              itemProp="url"
+            >
               Kubernetes
             </NavLink>
           </NavLI>
           <NavLI>
-            <NavLink to={"/edpike365-containers/#hosting"} itemProp="url">
+            <NavLink
+              to={"/edpike365-containers#hosting-providers"}
+              itemProp="url"
+            >
               Hosting
             </NavLink>
           </NavLI>

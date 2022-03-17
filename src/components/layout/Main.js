@@ -20,16 +20,16 @@ export const StyledMain = styled.main`
     and a little scroll bar will appear under teh navbar no matter how
     big the navbar gets.
   */
-  padding: 0px 0.25rem 0px 0.25rem;
+  padding: 0px 30px 0px 30px;
 
   /* ---- Normal Phones (320 x ) ---- */
   @media only screen and (min-width: 320px) {
-    padding: 0.5rem;
+    padding: 0px 30px 0px 30px;
   }
 
   /* ---- Larger Phones (540 x ) ---- */
   @media only screen and (min-width: 540px) {
-    padding: 1rem;
+    padding: 0px 30px 0px 30px;
   }
 `
 const Main = ({ children }) => {

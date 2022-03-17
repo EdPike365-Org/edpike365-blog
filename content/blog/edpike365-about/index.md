@@ -1,18 +1,18 @@
 ---
 title: "About"
 date: "2021-12-27T22:12:03.284Z"
-status: draft
+status: published
 author: EdPike365
 tags:
   - edpike365
   - goals
 ---
 
-[Me](#me) | [My Goals in 2022](#goals2022) | [Goals in 2023](#goals2023) | [This Site](#site)
+[Me](#me) | [My Goals in 2022](#my-goals-in-2022) | [Goals in 2023](#my-goals-in-2023) | [This Site](#this-site)
 
----
+<!-- excerpt-end -->
 
-### Me <a name="me"></a>
+### Me
 
 - Links: [GitHub](https://github.com/EdPike365) | [LinkedIn]() | [Medium](https://edpike365.medium.com/) | [Twitter](https://twitter.com/EdPike365) | [Certs and Classes](/professional-certs-classes)
 
@@ -55,7 +55,7 @@ tags:
 
     I sponsored computer gaming clubs and robotics teams.
 
-### My Goals in 2022 <a name="goals2022"></a>
+### My Goals in 2022
 
 #### Strategic
 
@@ -155,7 +155,7 @@ Containers
 - Know how to deploy Kubernetes, including serverless function containers, to [GKE](https://cloud.google.com/kubernetes-engine), [AWS EKS](https://aws.amazon.com/eks/), [Azure AKS](https://azure.microsoft.com/en-us/services/kubernetes-service/#overview).
 - Self Service API: [CrossPlane](https://crossplane.io/)
 
-### My Goals in 2023 <a name="goals2023"></a>
+### My Goals in 2023
 
 - Offer HA Multi Cluster architecture
   - Beyond Dev, Staging and Prod clusters
@@ -178,9 +178,9 @@ Containers
 - Explore Rust
 - Get more Cloud Vendor certs
 
-### This Site's Technology <a name="site"></a>
+### This Site
 
-I wrote this site in [Gatsby](https://www.gatsbyjs.com/). I
+I wrote EdPike365.com in [Gatsby](https://www.gatsbyjs.com/). I
 wanted to learn a lot about React, JAM Stack, GraphQL CSS in JS, and NPM
 publishing. At the time, it was a better offer than NextJS.
 

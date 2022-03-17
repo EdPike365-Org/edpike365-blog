@@ -452,6 +452,30 @@ blockquote > ol {
   list-style-position: inside;
 }
 
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+figure {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 75%;
+}
+figure img {
+  vertical-align: top;
+  margin: 0px;
+  padding: 0px;
+  width: 100%;
+}
+figure figcaption {
+  background-color: var(--color-background-paper);
+  text-align: center;
+}
+
 table {
   width: 100%;
   margin-bottom: 2rem;

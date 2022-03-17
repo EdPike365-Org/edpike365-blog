@@ -7,12 +7,15 @@ tags:
   - DevOps
 ---
 
-[SysOps vs SRE](#vs) | [Sysops](#sysops) | [SRE](#sre) | [IaC, EaC](#iac) | [Infrastructure](#infrastructure)
+```toc
+exclude: "Just thinkin about devops stuff", "table of contents"
+to-heading: 5
+```
+
+### SYSOPS vs SRE
 
 - SysOps practices and tooling overlap with DevOps.
 - SRE (Site Reliability Engineering) is a subset of SysOps.
-
-### SYSOPS vs SRE <a name="vs"></a>
 
 #### SysOps Overview
 
@@ -53,7 +56,7 @@ tags:
 
 - [Principles of Chaos Engineering](https://principlesofchaos.org/)
 
-### SysOps <a name="sysops"></a>
+### SysOps
 
 - Monitoring
 
@@ -84,7 +87,7 @@ tags:
   - Slack
   - [AWS SNS](https://aws.amazon.com/sns/?whats-new-cards.sort-by=item.additionalFields.postDateTime&whats-new-cards.sort-order=desc)
 
-### SRE (Site Reliability Engineering) <a name="sre"></a>
+### SRE (Site Reliability Engineering)
 
 - Continuous Automated Testing
 
@@ -115,7 +118,7 @@ tags:
 - Network Security
   - [Kerberos](https://web.mit.edu/kerberos/)
 
-### IaC, EaC <a name="iac"></a>
+### IaC, EaC
 
 - [Infrastructure as Code (IaC)](https://en.wikipedia.org/wiki/Infrastructure_as_code)
 - [Everything as Code (EaC)](https://www.itprotoday.com/development-techniques-and-management/everything-code-what-it-and-why-its-gaining-traction)
@@ -152,7 +155,7 @@ tags:
   - [Puppet](https://puppet.com/) Legacy
   - [AWS Systems Manager](https://aws.amazon.com/systems-manager/)
 
-### Infrastructure <a name="infrastructure"></a>
+### Infrastructure
 
 - DNS
 - Load Balancers

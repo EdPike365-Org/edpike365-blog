@@ -1,37 +1,38 @@
 ---
-title: "Journal: Template 2022-01-21"
+title: "Journal: Ending 2022-01-21"
 date: "2022-01-21T22:12:03.284Z"
 status: draft
 author: EdPike365
 tags:
   - edpike365
-  - Go
   - DevOps
+  - "Full Stack"
+  - SRO
   - SynBio
-  - STEM
-  - BioDevOps
 ---
 
-[Articles](#articles), [Books](#books), [Events](#events), [Companies/Orgs](#orgs), [People](#people), [Training/Classes](#training), [Definitions](#definitions), [Future Research](#future)
+[Log](#log-lifo) | [Articles](#articles) | [Books](#books) | [Events](#events) | [Companies/Orgs](#companies-orgs) | [People](#people) | [Training/Classes](#training) | [Definitions](#definitions-acronyms) | [Future Research](#future-research)
 
 ---
 
-#### Summary
+### Summary
 
-### Articles <a name="articles"></a>
+### Log (LIFO)
 
-### Books <a name="books"></a>
+### Articles
 
-### Events <a name="events"></a>
+### Books
 
-### Companies/Orgs <a name="orgs"></a>
+### Events
 
-### People <a name="people"></a>
+### Companies, Orgs
 
-### Training <a name="training"></a>
+### People
 
-### Definitions/Acronyms <a name="definitions"></a>
+### Training
 
-### Future Research <a name="future"></a>
+### Definitions, Acronyms
+
+### Future Research
 
 Things I ran across and thought "Oh yeah, I need to look into that sometime, but not now."

@@ -12,7 +12,7 @@ tags:
 
 ## Useful Terms, Concepts, People, Classes, etc
 
-[Biology](#biology), [SynBio](#synbio), [Acronyms](#acronyms), [Orgs](#orgs), [People](#people), [Training/Classes](#training)
+[Biology](#biology), [SynBio](#synthetic-biology), [Acronyms](#acronyms), [Orgs](#orgs-and-incubators), [People](#people), [Training/Classes](#training-and-programs)
 
 I found that I was defining a lot of terms repeatedly in my Blog entries. As a programmer, I was feeling the [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself) heaves, so I decided to abstract them to here. Many of these were collected from my weekly journal.
 
@@ -22,7 +22,7 @@ Its a bit rambly and meant for my and my kids consumption. I'm sharing it here f
 
 <p align="center">"BioTriangle" Image Courtesy of Eric Lander's class: Intro To Bio</p>
 
-### Biology <a name="biology"></a>
+### Biology
 
 - The Central Dogma
 - Genomics
@@ -43,7 +43,7 @@ Its a bit rambly and meant for my and my kids consumption. I'm sharing it here f
 - Genetic Engineering
 - Stoichometric vs Catalytic Therapeutic
 
-### Synthetic Biology <a name="synbio"></a>
+### Synthetic Biology
 
 - [Synthetic Biology](https://www.ncbi.nlm.nih.gov/books/NBK535871/) An enhanced version of Genetic Engineering, with more emphasis on agile, iterative Design-Build-Test cycles pioneered by the software industry, encoded in DevOps culture. Also [SynBio](https://www.ncbi.nlm.nih.gov/books/NBK535871/figure/fig_2-1/?report=objectonly).
 
@@ -56,21 +56,21 @@ Its a bit rambly and meant for my and my kids consumption. I'm sharing it here f
 
 - "In Silico". I use this to mean virtual or digital, no actual silicon chips directly involved, unless noted otherwise. I will typically use "[Lab on a Chip](https://www.rsc.org/journals-books-databases/about-journals/lab-on-a-chip/)" when I mean actual silicon is involved.
 
-### Acronyms <a name="acronyms"></a>
+### Acronyms
 
 - CRISPR
   - CRISPR/CAS 9
   - CRISPR/CAS 7/11
 - NGS ([Next Generation Sequencing](https://www.thermofisher.com/onelambda/us/en/featured-products/alltype-fastplex.html?filter=%7B%7D)): they are delicate and produce tons of data
 
-### Orgs/Incubators <a name="orgs"></a>
+### Orgs and Incubators
 
 - [Broad Institue](https://www.broadinstitute.org/) Boston. Eric Lander.
 - [Innovative Genomics Institute](https://innovativegenomics.org/) Berkeley. Jennifer Doudna.
 - [Imperial College Synthetic Biology Hub](https://www.imperial.ac.uk/synthetic-biology). Hub includes:
   - [Synbicite](http://www.synbicite.com/), [London DNA Foundry](URL IS BAD).
 
-### People <a name="people"></a>
+### People
 
 - [Jennifer Doudna](https://en.wikipedia.org/wiki/Jennifer_Doudna): Berkeley, CRISPR
 - [George Church](<https://en.wikipedia.org/wiki/George_Church_(geneticist)>): Harvard and MIT
@@ -78,7 +78,7 @@ Its a bit rambly and meant for my and my kids consumption. I'm sharing it here f
 - [Eric Lander](https://en.wikipedia.org/wiki/Eric_Lander): MIT, Broad Institute, Human Genome Project
 - Michael Levin: Tufts. Xenobots. Program cells at anatomical, not genetic, level. Cell Cybernetics. Morphogenisis.
 
-### Online Classes and Programs <a name="training"></a>
+### Training and Programs
 
 These are courses and programs for non-students. They are offered via EdX, Coursera, MITx, etc.
 

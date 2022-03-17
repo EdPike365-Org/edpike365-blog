@@ -1,7 +1,7 @@
 ---
-title: "My Certs and Classes"
-date: "2021-12-27T22:12:03.284Z"
-status: draft
+title: "Certs and Classes"
+date: "2022-03-16T22:12:03.284Z"
+status: published
 author: EdPike365
 tags:
   - edpike365
@@ -13,15 +13,21 @@ tags:
 
 ![Galaxy Brain](ai2.webp)
 
-### If I knew then what I know now...
+<div style="text-align:center;" > If I knew then what I know now...</div>
+
+---
+
+[Certifications](#certifications) | [Certified Classes](#certified-classes)
 
 If I were starting out again, I'd get a Masters in a biology field, add a big dose of software engineering, and enter a startup ASAP. I've guided my twin 18 year olds to do just that.
+
+<!-- excerpt-end -->
 
 I've already got the software engineering part, so I'm coming from the opposite direction. I don't have time for a biology degree. The best realistic thing I can do is take online courses as time permits.
 
 I hope that someday soon, cloud bio labs and virtual lab simulators will remove the need for in person labs, opening the field up to people around the world. Working in physical labs will be as alien as hosting a webserver on a computer in your closet. There is already progress in that area.
 
-### Certifications <a name="certs"></a>
+### Certifications
 
 I've never been a snob towards certifications, though clearly they do NOT proove that you have ready skills. However, earning a cert takes an investment of time and money and definitely proves interest and commitment.
 
@@ -39,7 +45,7 @@ A cert shows that I've at least scouted out the full offerings of the cert topic
 <div style="width:300px; text-align: center;">
   <a href="https://www.youtube.com/watch?v=JEB7O1K1ZXI">
     <img alt="Man got certs, touched sky, now knows his whole world is a spaceship."  src="./Fabrini_old_man.jpg" >
-    <span style="display:block; font-size:.75rem;">"For the World Is Hollow and I Have Touched the Sky": Star Trek Episode</span>
+    <span style="display:block; font-size:.75rem;" class="caption">"For the World Is Hollow and I Have Touched the Sky": Star Trek Episode</span>
   </a>
   <span style="display:block; font-size:.75rem;">He got a cert, touched the sky, now knows his whole world is a spaceship.</span>
 </div>
@@ -76,9 +82,9 @@ I earned all three AWS Associate certs because my near term goal is AWS DevOps P
   </div>
 </section>
 
-### Certified Classes from EdX and Coursera, etc <a name="classes"></a>
+### Certified Classes
 
-Generally, in late 2019 and early 2020, I explored getting into SynBio via ML. I realized that to be good at it I'd need to take a lot more math and then risk still not getting a job. Instead, I plotted a course that would leverage what I already know: DevOps.
+Generally, in late 2019 and early 2020, I explored getting into SynBio via ML. I realized that to be good at it I'd need to take a lot more math and then risk still not getting a job. Instead, I plotted a course that would leverage what I already know: Full Stack and DevOps.
 
 These courses were not wasted; they put me in a much better position to support biologists, ML and data scientists.
 
@@ -105,10 +111,7 @@ These classes included certificates. Earning the certificate involves more rigou
 
 ![Dead Chthulhu Lies Dreaming](cthulhu-lies-dreaming.jpg)
 
-<div style="text-align: center;">In Sunken R'lyeh Dead Cthulhu Lies Dreaming of US Health Insurance</div>
+<div style="text-align: center;" class="caption">In Sunken R'lyeh Dead Cthulhu Lies Dreaming of USA's Health Insurance Industry</div>
 
-<br/>
-<br/>
-<br/>
 <br/>
 <br/>
