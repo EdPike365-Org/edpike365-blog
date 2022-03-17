@@ -7,8 +7,7 @@ tags:
   - "front end"
 ---
 
-<a name="core"></a>
-[HTML, CSS, JS](#core) | [Design](#design) | [UI Frameworks](#uiframeworks) | [Auth](#auth) | [Build Tools](#build) | [Testing](#testing)
+[HTML, CSS, JS](#html-css-js) | [Design](#design) | [UI Frameworks](#ui-frameworks) | [Auth](#client-side-authentication-authorization) | [Build Tools](#build-tools) | [Testing](#testing)
 
 ### HTML, CSS, JS
 
@@ -22,7 +21,7 @@ tags:
 
   - [Wasm](https://webassembly.org/): Web browsers need a strongly typed alternative to JS. Typescript is just a clever bridge but someday we'll complile strongly typed languages to JS/WASM and be done with it.
 
-### Design <a name="design"></a>
+### Design
 
 - I have a minor in Architecture. I appreciate good design. However, the fundamental _physical_ reality is that web apps run over a network and usually operate on a mobile device.
   - [Ecological Design](https://torquemag.io/2019/09/eco-friendly-website-design/): Animation, even mouseovers, uses energy. Light color themes use more battery than dark mode themes. Designers must recognize this. It not only affects user engagement and retention, _at scale_ it is an ecological issue.
@@ -30,7 +29,7 @@ tags:
   - Don't make scrolling alter the size of web elements, or play animation, instead of scrolling. I'm looking at you [Google Store](https://store.google.com/us/product/pixelbook_go?hl=en-US).
 - [Lighthouse](https://developers.google.com/web/tools/lighthouse/): Build a good LightHouse score into your CI/CD pipeline.
 
-### UI Frameworks <a name="uiframeworks"></a>
+### UI Frameworks
 
 - [React](https://reactjs.org/): I'm not a huge fan of JSX and shadow DOM. _BUT_ its the leading SPA tech by a long shot so I've learned it.
 
@@ -73,13 +72,13 @@ tags:
   - [CSS Tricks](https://css-tricks.com/) Incredibly useful site.
   - [Josh Comeau](https://www.joshwcomeau.com/) A real CSS guru.
 
-### Client Side Authentication/Authorization <a name="auth"></a>
+### Client Side Authentication, Authorization
 
 - [Okta Sign-In Widget](https://developer.okta.com/code/javascript/okta_sign-in_widget/)
 - [Auth0 Lock](https://auth0.com/docs/libraries/lock) Embedded in app, customizable.
 - [Amplify (AWS) SSO](https://docs.amplify.aws/lib/auth/social/q/platform/js/)
 
-### Build Tools <a name="build"></a>
+### Build Tools
 
 - [WebPack](https://webpack.js.org/)
 - [Parcel](https://parceljs.org/) Also supports Webassembly
@@ -89,7 +88,7 @@ tags:
 - [Packem](https://packem.github.io/) Written in Rust.
 - [Babel](https://babeljs.io/): ES transpiler
 
-### Testing <a name="testing"></a>
+### Testing
 
 - [Jest](https://jestjs.io/)
 - [Mocha.js](https://mochajs.org/): Test framework/suite. Modular.

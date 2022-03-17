@@ -14,9 +14,9 @@ tags:
 
 Gathered from following SynBio companies and from their help wanted ads.
 
-### Languages <a name="languages"></a>
+### Languages
 
-Trailing numbers are from job postings in Boston.
+Trailing numbers are from job postings in Boston around Jan 2022.
 
 - Python (6,966)
 - [R (936?)](https://www.r-project.org/)
@@ -28,7 +28,7 @@ Trailing numbers are from job postings in Boston.
 - JavaScript (3,620)
 - TypeScript (667)
 
-### Libraries <a name="libraries"></a>
+### Libraries
 
 - DevSecOps, BioScience and BioTech use Python a lot. Many apps are written in Python, including app servers. Many will need to be professionalized by software engineers. Trailing numbers indicated "job hits".
 

@@ -9,13 +9,16 @@ tags:
 
 ![DevOps Cycle](devops.jpg)
 
-##### Just Thinkin About DevOps Stuff
+##### Just Thinkin About DevOps Stuff (and Dune)
 
 <!-- excerpt-end -->
 
-> In this time, the most precious substance in the universe is the spice Melange. ... The spice is vital to space travel. The Spacing Guild and its navigators, who the spice has mutated over 4000 years, use the orange spice gas, which gives them the ability to fold space.
+> "In this time, the most precious substance in the universe is the spice (DevOps)... The spice is vital to (Agility). The (IT Dept) and its (engineers), who the spice has mutated over (10) years, use the spice (Code), which gives them the ability to fold (time)."
 
-**DevOps is THE SPICE of Successful Companies**
+```toc
+exclude: "Just thinkin about devops stuff", "table of contents"
+to-heading: 5
+```
 
 DevOps enables high speed evolution.
 
@@ -32,13 +35,6 @@ We can consider anybody doing anything with code as _software development_:
 - Mechanical engineering adding IOT code to a product
 - Industrial Engineers adding robots to the factory floor, or programming them
 - IT onboarding (or offboarding) an employee, or consultant
-
-## Table of Contents
-
-```toc
-exclude: "Just thinkin about devops stuff", "table of contents"
-to-heading: 5
-```
 
 ## The DevOps Cycle
 
@@ -122,7 +118,7 @@ to-heading: 5
 - VSCode is my default because it was conceptually built from the ground up to run in a web browser. They made a desktop version while they worked out the pure web kinks.
 - I'm trying to learn VIM because its available on all Linux distros (to my knowledge).
 
-### Build, CI/CD
+### Build, Test Coverage
 
 - [Hamcrest](http://hamcrest.org/): Matchers that can be combined to create flexible expressions of intent. Was just Java, now available for most languages.
 
@@ -182,9 +178,9 @@ to-heading: 5
   - Accessibility
     - [LightHouse](https://developers.google.com/web/tools/lighthouse/) Build time score generation with Lighthouse CLI for Node. Consider as "code quality" tool.
 
-### CI/CD
+### CI/CD Tools
 
-- CI Build Tools: Leverages local build scripting and runtime testing tools, adds integration, optional deployment and delivery
+- Leverages local build scripting and runtime testing tools, adds integration, optional deployment and delivery
 
   - [Jenkins](https://www.jenkins.io/)
   - [GitHub Actions](https://github.com/features/actions)
@@ -217,7 +213,7 @@ to-heading: 5
 
 #### Continuous Feedback
 
-Tickets feed back into [Plan](#plan)
+Tickets feed back into [Plan](#designplan)
 
 - Tickets
   - [zendesk](https://www.zendesk.com/)

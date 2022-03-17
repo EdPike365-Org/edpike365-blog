@@ -23,7 +23,7 @@ NOTE: Something in this page causes an extra scroll bar to appear on the right s
   - [Code and Syntax Highlighting with PrismJS](#code-and-syntax)
   - [Embed file contents within PrismJS blocks](#embed-file-contents)
   - [Rendering math equations with KaTeX](#rendering-math-equations)
-  - [Using Exceprts](#using-excerpts)
+  - [Using Excerpts](#using-excerpts)
   - [Custom Components](#custom-components)
   - [Graphviz](#graphviz)
 
@@ -37,9 +37,7 @@ The content from each original demo page is seperated by a <span style="color:#b
 
 > EdPike365: Original mini site [on github](https://github.com/gatsbyjs/gatsby/tree/master/examples/using-remark)
 
-<a name="hello"></a>
-
-<div style="background-color:#bbbe74; padding: 1px 10px 10px 10px;">
+<div id="hello" style="background-color:#bbbe74; padding: 1px 10px 10px 10px;">
 <h2>Hello World: The remark Kitchen Sink:</h2>
 Links: <a href="https://using-remark.gatsbyjs.org/hello-world-kitchen-sink/" target="_blank" >page</a>, <a href="https://raw.githubusercontent.com/gatsbyjs/gatsby/master/examples/using-remark/src/pages/2016-04-15---hello-world-kitchen-sink/index.md" target="_blank"> source </a>
 </div>
@@ -74,10 +72,8 @@ the
 
 [Headers](#headers) [Emphasis](#emphasis) [Lists](#lists) [Links](#links)
 [Images](#images) [Tables](#tables) [Footnotes](#footnotes)
-[Blockquotes](#blockquotes) [Inline HTML](#html) [Horizontal Rule](#hr)
-[Line Breaks](#lines)
-
-<a name="headers"></a>
+[Blockquotes](#blockquotes) [Inline HTML](#inline-html) [Horizontal Rule](#horizontal-rule)
+[Line Breaks](#line-breaks)
 
 ## Headers
 
@@ -116,8 +112,6 @@ Alternatively, for H1 and H2, an underline-ish style:
 
 ## Alt-H2
 
-<a name="emphasis"></a>
-
 ## Emphasis
 
 ```no-highlight
@@ -137,8 +131,6 @@ Strong emphasis, aka bold, with **asterisks** or **underscores**.
 Combined emphasis with **asterisks and _underscores_**.
 
 Strikethrough uses two tildes. ~~Scratch this.~~
-
-<a name="lists"></a>
 
 ## Lists
 
@@ -184,8 +176,6 @@ spaces.\
 * Or minuses
 
 - Or pluses
-
-<a name="links"></a>
 
 ## Links
 
@@ -237,8 +227,6 @@ Some text to show that the reference links can follow later.
 [1]: http://slashdot.org
 [link text itself]: http://www.reddit.com
 
-<a name="images"></a>
-
 ## Images
 
 ```no-highlight
@@ -261,8 +249,6 @@ Inline-style:
 Reference-style: ![alt text][logo]
 
 [logo]: https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/The_Great_Gatsby_cover_1925.jpg/640px-The_Great_Gatsby_cover_1925.jpg "Logo Title Text 2"
-
-<a name="tables"></a>
 
 ## Tables
 
@@ -306,8 +292,6 @@ can also use inline Markdown.
 | _Still_  | `renders` | **nicely** |
 | 1        | 2         | 3          |
 
-<a name="footnotes"></a>
-
 ## Footnotes
 
 Footnotes are also not a core feature of markdown, but they're a common
@@ -325,8 +309,6 @@ That renders like this:
 
 This line has a footnote [^1]. Scroll to page bottom or click the link to see it.
 This line has a second footnote [^2]. Scroll to page bottom or click the link to see it.
-
-<a name="blockquotes"></a>
 
 ## Blockquotes
 
@@ -369,8 +351,6 @@ Quote break.
 > ![Nested Block Quotes](nested block quotes.png)
 > !TODO: modify CSS to add space between indents and trailing indents below content.
 
-<a name="html"></a>
-
 ## Inline HTML
 
 You can also use raw HTML in your Markdown, and it'll mostly work pretty well.
@@ -392,8 +372,6 @@ You can also use raw HTML in your Markdown, and it'll mostly work pretty well.
   <dt>Markdown in HTML</dt>
   <dd>Does *not* work **very** well. Use HTML <em>tags</em>.</dd>
 </dl>
-
-<a name="hr"></a>
 
 ## Horizontal Rule
 
@@ -426,8 +404,6 @@ Asterisks
 ---
 
 Underscores
-
-<a name="lines"></a>
 
 ## Line Breaks
 
@@ -462,9 +438,7 @@ paragraph_.
 [6]: https://www.gatsbyjs.com/plugins/gatsby-remark-smartypants/
 [7]: https://github.com/wooorm/retext-smartypants
 
-<a name="responsive-image"></a>
-
-<div style="background-color:#bbbe74; padding: 1px 10px 10px 10px;">
+<div id="responsive-image" style="background-color:#bbbe74; padding: 1px 10px 10px 10px;">
 <h2>Responsive Image and IFrames:</h2>
 Links: <a href="https://using-remark.gatsbyjs.org/responsive-images-and-iframes/" target="_blank">page</a>, <a href="https://raw.githubusercontent.com/gatsbyjs/gatsby/master/examples/using-remark/src/pages/2017-01-02---responsive-images-and-iframes/index.md" target="_blank"> source </a>
 </div>
@@ -542,8 +516,7 @@ Let's add a YouTube video to show off responsive iFrames real quick:
 [55]: https://www.gatsbyjs.com/plugins/gatsby-plugin-sharp/
 
 <br>
-<a name="copying-linked-files-a"></a>
-<div style="background-color:#bbbe74; padding: 1px 10px 10px 10px;">
+<div id="copying-linked-files-a" style="background-color:#bbbe74; padding: 1px 10px 10px 10px;">
 <h2>Copying Linked Files and Intercepting Local Links:</h2>
 Links: <a href="https://using-remark.gatsbyjs.org/copy-linked-files-intercepting-local-links/" target="_blank">page</a>, <a href="https://raw.githubusercontent.com/gatsbyjs/gatsby/master/examples/using-remark/src/pages/2017-03-21---copy-linked-files-intercepting-local-links/index.md" target="_blank"> source </a>
 </div>
@@ -578,8 +551,7 @@ And this [link will be excluded](/excluded-link), based on the plugin config.
 [222]: https://www.gatsbyjs.com/plugins/gatsby-plugin-catch-links/
 
 <br>
-<a name="code-and-syntax"></a>
-<div style="background-color:#bbbe74; padding: 1px 10px 10px 10px;">
+<div id="code-and-syntax" style="background-color:#bbbe74; padding: 1px 10px 10px 10px;">
 <h2>Code and Syntax Highlighting with PrismJS:</h2>
 Links: <a href="https://using-remark.gatsbyjs.org/code-and-syntax-highlighting/" target="_blank">page</a>, <a href="https://github.com/gatsbyjs/gatsby/blob/master/examples/using-remark/src/pages/2017-04-04---code-and-syntax-highlighting/index.md" target="_blank"> source </a>
 </div>
@@ -831,8 +803,7 @@ Let's do something crazy and add a list with another code example:
 [3]: http://prismjs.com/#languages-list
 
 <br>
-<a name="embed-file-contents"></a>
-<div style="background-color:#bbbe74; padding: 1px 10px 10px 10px;">
+<div id="embed-file-contents" style="background-color:#bbbe74; padding: 1px 10px 10px 10px;">
 <h2>Embed file contents within PrismJS blocks:</h2>
 Links: <a href="https://using-remark.gatsbyjs.org/embed-snippets/" target="_blank">page</a>, <a href="https://raw.githubusercontent.com/gatsbyjs/gatsby/master/examples/using-remark/src/pages/2017-04-05---embed-snippets/index.md" target="_blank"> source </a>
 </div>
@@ -904,8 +875,7 @@ If you'd prefer to write your code blocks directly within your Markdown, take a 
 [4444]: /code-and-syntax-highlighting/
 
 <br>
-<a name="rendering-math-equations"></a>
-<div style="background-color:#bbbe74; padding: 1px 10px 10px 10px;">
+<div id="rendering-math-equations" style="background-color:#bbbe74; padding: 1px 10px 10px 10px;">
 <h2>Rendering math equations with KaTeX:</h2>
 Links: <a href="https://using-remark.gatsbyjs.org/katex/" target="_blank">page</a>, <a href="https://raw.githubusercontent.com/gatsbyjs/gatsby/master/examples/using-remark/src/pages/2017-08-07---katex/index.md" target="_blank"> source </a>, <a href="https://katex.org/">KaTeX</a>
 </div>
@@ -1016,8 +986,7 @@ $$
 [45]: https://github.com/gatsbyjs/gatsby/blob/master/examples/using-remark/src/templates/template-blog-post.js
 
 <br>
-<a name="using-excerpts"></a>
-<div style="background-color:#bbbe74; padding: 1px 10px 10px 10px;">
+<div id="using-excerpts" style="background-color:#bbbe74; padding: 1px 10px 10px 10px;">
 <h2>Using Excerpts:</h2>
 Links: <a href="https://using-remark.gatsbyjs.org/excerpts/" target="_blank">page</a>, <a href="https://raw.githubusercontent.com/gatsbyjs/gatsby/master/examples/using-remark/src/pages/2017-11-14---excerpts/index.md" target="_blank"> source </a>
 </div>
@@ -1053,8 +1022,7 @@ Any file that does not have the given `excerpt_separator` will fall back to the 
 You can see the results [here](https://using-remark.gatsbyjs.org/excerpt-example)
 
 <br>
-<a name="custom-components"></a>
-<div style="background-color:#bbbe74; padding: 1px 10px 10px 10px;">
+<div id="custom-components" style="background-color:#bbbe74; padding: 1px 10px 10px 10px;">
 <h2>Custom Components:</h2>
 Links: <a href="https://using-remark.gatsbyjs.org/custom-components/" target="_blank">page</a>, <a href="https://raw.githubusercontent.com/gatsbyjs/gatsby/master/examples/using-remark/src/pages/2018-01-27---custom-components/index.md" target="_blank"> source </a>
 </div>
@@ -1063,8 +1031,7 @@ Links: <a href="https://using-remark.gatsbyjs.org/custom-components/" target="_b
 > EdPike365: I'm leaving this out because its a little confusing and I think the functionality has been superceded by MDX. IE, if you need custom components, you should really consider using MDX instead of MD.
 
 <br>
-<a name="graphviz"></a>
-<div style="background-color:#bbbe74; padding: 1px 10px 10px 10px;">
+<div id="graphviz" style="background-color:#bbbe74; padding: 1px 10px 10px 10px;">
 <h2>Graphviz</h2>
 Links: <a href="https://using-remark.gatsbyjs.org/graphviz/" target="_blank">page</a>, <a href="https://github.com/gatsbyjs/gatsby/tree/master/examples/using-remark/src/pages/2019-02-06---graphviz" target="_blank"> source </a>, <a href="https://www.gatsbyjs.com/plugins/gatsby-remark-graphviz/" target="_blank">gatsby-remark-graphviz install</a>
 </div>
