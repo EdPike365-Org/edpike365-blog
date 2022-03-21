@@ -6,11 +6,7 @@ require("dotenv").config({
 // Gatsby CLI location, etc: npm list -g --depth 0
 // webpack.config.js is in C:\Users\EdPike365\code\edpike365-blog\node_modules\gatsby\dist\utils
 // How to modify gatsby webpack: https://gist.github.com/m-allanson/8fc8943f621a6e5460fb9aa65d2451a9
-/*
-  flags: {
-    DEV_SSR: true
-  },
-*/
+
 module.exports = {
   siteMetadata: {
     title: `EdPike365`,
@@ -91,8 +87,15 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
+        path: `${__dirname}/content/site`,
+        name: `site-content-files`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
         path: `${__dirname}/content/blog`,
-        name: `blog`,
+        name: `blog-content-files`,
       },
     },
     {
@@ -295,7 +298,6 @@ module.exports = {
       },
     },
     `gatsby-plugin-gatsby-cloud`,
-    //`gatsby-plugin-anchor-links`,
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,

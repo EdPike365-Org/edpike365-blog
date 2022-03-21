@@ -56,7 +56,10 @@ export default HomePage
 export const pageQuery = graphql`
   query HomePageQuery($allowedBlogStatuses: [String], $limit: Int) {
     allMarkdownRemark(
-      filter: { frontmatter: { status: { in: $allowedBlogStatuses } } }
+      filter: {
+        fileAbsolutePath: { regex: "/content/blog/" }
+        frontmatter: { status: { in: $allowedBlogStatuses } }
+      }
       sort: { fields: [frontmatter___date], order: DESC }
       limit: $limit
     ) {
