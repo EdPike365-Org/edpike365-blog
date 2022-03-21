@@ -14,16 +14,12 @@ const FootDiv = styled.footer`
 
 export default function Footer() {
   const today = new Date()
-  const [cmonth, cday, cyear] = [
-    today.getMonth(),
-    today.getDate(),
-    today.getFullYear(),
-  ]
+  const [cyear] = [today.getFullYear()]
 
   return (
     <FootDiv>
       <span>
-        © {cmonth}/{cday}/{cyear}, Edward Pike
+        © {cyear}, Edward Pike
         <br />
         Built with <a href="https://www.gatsbyjs.com">Gatsby v4</a> in{" "}
         {`${process.env.NODE_ENV}`} mode.
