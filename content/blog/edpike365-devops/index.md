@@ -9,14 +9,14 @@ tags:
 
 ![DevOps Cycle](devops.jpg)
 
-##### Just Thinkin About DevOps Stuff (and Dune)
+<h5>Just Thinkin About DevOps Stuff (and Dune)</h5>
 
 <!-- excerpt-end -->
 
 > "In this time, the most precious substance in the universe is the spice (DevOps)... The spice is vital to (Agility). The (IT Dept) and its (engineers), who the spice has mutated over (10) years, use the spice (Code), which gives them the ability to fold (time)."
 
 ```toc
-exclude: "Just thinkin about devops stuff", "table of contents"
+from-heading: 2
 to-heading: 5
 ```
 
