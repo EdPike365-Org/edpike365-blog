@@ -5,10 +5,11 @@ status: published
 author: EdPike365
 tags:
   - DevOps
+  - SysOps
+  - SRE
 ---
 
 ```toc
-exclude: "Just thinkin about devops stuff", "table of contents"
 to-heading: 5
 ```
 

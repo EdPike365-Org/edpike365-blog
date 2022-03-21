@@ -90,13 +90,7 @@ export const Nav = styled.nav`
     /* transition: color 400ms ease-in-out, background-color 400ms ease-in-out; */
   }
 `
-/* most left justified, top level nav link */
-export const NavUL = styled.ul`
-  color: var(--color-primary-main);
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-`
+
 /* top level category: should only head a list of NavLI children */
 /* SubUL is always static, the expandable NavBarSubMenu looks the same but the button has its own css */
 export const SubUL = styled.ul`

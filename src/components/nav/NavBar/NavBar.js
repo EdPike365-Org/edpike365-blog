@@ -1,6 +1,6 @@
 import React, { useContext } from "react"
-import { useScrollRestoration } from "gatsby"
-import { Nav, NavUL, NavLI, NavLink } from "./NavBarComps"
+import { Nav, NavLI, NavLink } from "./NavBarComps"
+import { NavUL } from "./NavUL"
 import { NavSubMenu } from "./NavBarSubMenu"
 import { NavContext } from "../../../contexts/NavContext"
 
@@ -11,12 +11,10 @@ const NavBar = () => {
   const { showNavState } = useContext(NavContext)
   const [showNav] = showNavState
 
-  const navScrollRestoration = useScrollRestoration(`nav-scroll-restoration`)
-
   // The line breaks at bottom are there to handle too short scroll bars on short screens
   return (
-    <Nav showNav={showNav} {...navScrollRestoration}>
-      <NavUL>
+    <Nav id="mainNav" showNav={showNav}>
+      <NavUL id="mainNavUL">
         <NavLI>
           <NavLink to={"/"} itemProp="url">
             Home
@@ -37,10 +35,7 @@ const NavBar = () => {
             Contact
           </NavLink>
         </NavLI>
-        <NavSubMenu
-          title={"FRONT END"}
-          uuid={"b2cea402-c66f-11eb-b8bc-0242ac130003"}
-        >
+        <NavSubMenu title={"FRONT END"} uuid={"NavSubMenu-FRONT-END"}>
           <NavLI>
             <NavLink to={"/edpike365-front-end#html-css-js"} itemProp="url">
               HTML, CSS, JS
@@ -77,10 +72,7 @@ const NavBar = () => {
             </NavLink>
           </NavLI>
         </NavSubMenu>
-        <NavSubMenu
-          title={"BACK END"}
-          uuid={"eb7371e2-ea28-4eee-85fd-79d1f7a5155b"}
-        >
+        <NavSubMenu title={"BACK END"} uuid={"NavSubMenu-BACK-END"}>
           <NavLI>
             <NavLink to={"/edpike365-back-end#web-servers"} itemProp="url">
               Web Servers
@@ -107,7 +99,7 @@ const NavBar = () => {
             </NavLink>
           </NavLI>
         </NavSubMenu>
-        <NavSubMenu title={"DEVOPS"} uuid={"b2cea402-c66f-11eb-b8bc"}>
+        <NavSubMenu title={"DEVOPS"} uuid={"NavSubMenu-DEVOPS"}>
           <NavLI>
             <NavLink to={"/edpike365-devops/"} itemProp="url">
               The Spice
@@ -147,7 +139,7 @@ const NavBar = () => {
             </NavLink>
           </NavLI>
         </NavSubMenu>
-        <NavSubMenu title={"SYSOPS"} uuid={"b2cea402-c66f-8008-b8bc"}>
+        <NavSubMenu title={"SYSOPS"} uuid={"NavSubMenu-SYSOPS"}>
           <NavLI>
             <NavLink to={"/edpike365-sysops#sysops-vs-sre"} itemProp="url">
               SysOps vs SRE
@@ -177,7 +169,7 @@ const NavBar = () => {
             </NavLink>
           </NavLI>
         </NavSubMenu>
-        <NavSubMenu title={"CONTAINERS"} uuid={"b2cea402-c66f-8128-b8bc"}>
+        <NavSubMenu title={"CONTAINERS"} uuid={"NavSubMenu-CONTAINERS"}>
           <NavLI>
             <NavLink to={"/edpike365-containers#oci-docker"} itemProp="url">
               OCI, Docker
@@ -206,7 +198,6 @@ const NavBar = () => {
           </NavLink>
         </NavLI>
       </NavUL>
-      <br />
       <br />
     </Nav>
   )
