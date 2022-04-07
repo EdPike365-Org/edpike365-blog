@@ -1,10 +1,11 @@
-import React from "react"
-import styled from "@emotion/styled"
+import React, { useRef } from "react"
+import { css } from "@emotion/react"
 import Footer from "./Footer"
+import ScrollToTopButton from "../nav/ScrollToTopButton"
 
-// TODO: add a footer with copyright, etc. links
+// This is the main content area
 
-export const StyledMain = styled.main`
+const mainCSS = css`
   grid-area: main;
 
   overflow: auto;
@@ -16,29 +17,52 @@ export const StyledMain = styled.main`
   width: 100%;
   min-width: 275px;
   /* 
+    TODO: I dont think this is needed anymore  
     If you have top or bottom padding, the navbar will resrve space for it 
     and a little scroll bar will appear under teh navbar no matter how
     big the navbar gets.
   */
-  padding: 0px 30px 0px 30px;
+  padding: 0px 10px 5px 10px;
 
   /* ---- Normal Phones (320 x ) ---- */
   @media only screen and (min-width: 320px) {
-    padding: 0px 30px 0px 30px;
+    padding: 0px 15px 10px 15px;
   }
 
   /* ---- Larger Phones (540 x ) ---- */
   @media only screen and (min-width: 540px) {
-    padding: 0px 30px 0px 30px;
+    padding: 0px 20px 10px 20px;
+  }
+
+  /* ---- Tablet (700 x ) ---- */
+  /* 
+    Header link icons only appear on mouseover
+    and mouseover only happens with desktop sizes
+    which means we need a little more padding on the left to accomodate it
+  */
+  @media only screen and (min-width: 700px) {
+    padding: 0px 25px 10px 25px;
+  }
+
+  @media only screen and (min-width: 1024px) {
+    padding: 0px 25px 10px 25px;
+  }
+
+  /* ---- LapTop (1366 x ) ---- */
+  /* Left nav will always be open (handled by nav component) */
+  @media only screen and (min-width: 1366px) {
   }
 `
+
 const Main = ({ children }) => {
+  const mainRef = useRef(null)
+
   return (
-    <StyledMain>
+    <main ref={mainRef} css={mainCSS}>
       {children}
-      <br />
       <Footer />
-    </StyledMain>
+      <ScrollToTopButton targetRef={mainRef} />
+    </main>
   )
 }
 

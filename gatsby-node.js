@@ -99,7 +99,7 @@ const createSitePages = async (
   reporter,
   createPage
 ) => {
-  const template = path.resolve(`./src/templates/blog-post.js`)
+  const template = path.resolve(`./src/templates/site-page.js`)
 
   // limit them to those with frontmatter "status" in the list of allowed statuses
   const results = await graphql(

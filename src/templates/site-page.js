@@ -1,16 +1,13 @@
 import * as React from "react"
-import { Link, graphql } from "gatsby"
+import { graphql } from "gatsby"
 import { getSrc } from "gatsby-plugin-image"
-import styled from "@emotion/styled"
+import { css } from "@emotion/react"
 import "./styles.css"
 
-import Bio from "../components/Bio"
 import Layout from "../components/layout/Layout"
 import Seo from "../components/SEO"
 
-require(`katex/dist/katex.min.css`)
-
-const BlogHeader = styled.header`
+const headerCSS = css`
   & > h1 {
     margin-top: 0rem;
     margin-bottom: 0.5rem;
@@ -26,7 +23,6 @@ const BlogPostTemplate = ({ data, location }) => {
   const title = post.frontmatter.title || post.fields.slug
   const postDate = post.frontmatter.date
 
-  const { previous, next } = data
   const { ogimage } = post.frontmatter
   // const ogImagePath = ogimage && ogimage.childImageSharp.fixed.src
   const ogImagePath = ogimage && getSrc(ogimage)
@@ -44,45 +40,17 @@ const BlogPostTemplate = ({ data, location }) => {
         itemScope
         itemType="http://schema.org/Article"
       >
-        <BlogHeader>
+        <header css={headerCSS}>
           <h1 itemProp="headline">{title}</h1>
           <span className="overline">{postDate}</span>
-        </BlogHeader>
+        </header>
         <section
           dangerouslySetInnerHTML={{ __html: post.html }}
           itemProp="articleBody"
         />
         <hr />
-        <footer>
-          <Bio />
-        </footer>
+        <footer />
       </article>
-      <nav className="blog-post-nav">
-        <ul
-          style={{
-            display: `flex`,
-            flexWrap: `wrap`,
-            justifyContent: `space-between`,
-            listStyle: `none`,
-            padding: 0,
-          }}
-        >
-          <li>
-            {previous && (
-              <Link to={"/blog" + previous.fields.slug} rel="prev">
-                ← {previous.frontmatter.title}
-              </Link>
-            )}
-          </li>
-          <li>
-            {next && (
-              <Link to={"/blog" + next.fields.slug} rel="next">
-                {next.frontmatter.title} →
-              </Link>
-            )}
-          </li>
-        </ul>
-      </nav>
     </Layout>
   )
 }
@@ -90,11 +58,7 @@ const BlogPostTemplate = ({ data, location }) => {
 export default BlogPostTemplate
 
 export const pageQuery = graphql`
-  query BlogPostBySlug(
-    $id: String!
-    $previousPostId: String
-    $nextPostId: String
-  ) {
+  query SitePageBySlug($id: String!) {
     site {
       siteMetadata {
         title
@@ -108,22 +72,6 @@ export const pageQuery = graphql`
         title
         date(formatString: "MMMM DD, YYYY")
         description
-      }
-    }
-    previous: markdownRemark(id: { eq: $previousPostId }) {
-      fields {
-        slug
-      }
-      frontmatter {
-        title
-      }
-    }
-    next: markdownRemark(id: { eq: $nextPostId }) {
-      fields {
-        slug
-      }
-      frontmatter {
-        title
       }
     }
   }

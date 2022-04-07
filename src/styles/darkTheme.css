@@ -8,6 +8,11 @@
   --color-primary-dark: #6570a7;
   --color-primary-text: #fff;
 
+  --color-info-light: #91a0ec;
+  --color-info-main: #7986cb;
+  --color-info-dark: #6570a7;
+  --color-info-text: #fff;
+
   --color-text-primary: rgba(255, 255, 255, 0.7); /* use on default bg */
   --color-text-secondary: rgba(255, 255, 255, 0.9); /* use on paper bg */
   --color-text-disabled: rgba(255, 255, 255, 0.05);
