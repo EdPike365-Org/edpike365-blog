@@ -1,9 +1,9 @@
 import React from "react"
 import { navigate } from "gatsby"
-import styled from "@emotion/styled"
-import SliderIcon from "../../../icons/SliderIcon"
+import { css } from "@emotion/react"
+import SliderIcon from "../../../../icons/SliderIcon"
 
-export const SettingsButton = styled.button`
+const buttonCSS = css`
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -20,16 +20,21 @@ export const SettingsButton = styled.button`
   transition: color 400ms ease-in-out, background-color 400ms ease-in-out;
 `
 //Note: if button has no dimensions, or no text, icons wont render
-const SettingsIconButton = () => {
+const SettingsButton = () => {
   const handleClick = () => {
     navigate("/settings/")
   }
 
   return (
-    <SettingsButton aria-label={"Navigation"} onClick={handleClick}>
+    <button
+      id="settingsButton"
+      css={buttonCSS}
+      aria-label={"Navigation"}
+      onClick={handleClick}
+    >
       <SliderIcon />
-    </SettingsButton>
+    </button>
   )
 }
 
-export default SettingsIconButton
+export default SettingsButton

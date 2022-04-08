@@ -2,7 +2,6 @@ import React from "react"
 import styled from "@emotion/styled"
 import { Link } from "gatsby"
 
-// Note: this defaults to 280px wide.
 const SummaryContainer = styled.div`
   padding: 0.5rem;
   margin: 0.25rem;
@@ -21,7 +20,7 @@ const SummaryContainer = styled.div`
   }
 `
 
-// & is a placeholder for the generated class name
+// The "&"s are Emotions placeholders for the complie time class name
 const Header = styled.h3`
   margin-top: 0px;
   margin-bottom: 0px;
@@ -45,7 +44,7 @@ const BlogPostSummary = ({ post }) => {
 
   // article: https://medium.com/reactbrasil/using-structured-data-to-improve-your-seo-score-688875adfd7b
   /* renaming LINK to LinK with PascalCase to avoid lint warning :-( */
-  /* this uses the props to className overrided functionality of Emotion */
+  /* this uses the "props to className" overrided functionality of Emotion */
   const LinK = styled(props => <Link {...props} />)`
     color: var(--color-text-secondary);
     text-decoration: none;

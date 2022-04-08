@@ -1,5 +1,4 @@
 import React from "react"
-import styled from "@emotion/styled"
 import { keyframes, css } from "@emotion/react"
 import LogoIcon from "../../../icons/LogoIcon"
 
@@ -22,8 +21,8 @@ const SpinInfinite = css`
   animation: ${SpinAnim} 2s infinite 0s;
 `
 
-export const LogoIconDiv = styled.div`
-  box-sizing: border-box;  
+export const logoIconDivCSS = css`
+  box-sizing: border-box;
 
   vertical-align: middle;
 
@@ -49,12 +48,12 @@ export const LogoIconDiv = styled.div`
 //-webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */
 //    transform: rotate(180deg);
 
-const Logo = () => {
+const LogoIconDiv = () => {
   return (
-    <LogoIconDiv>
+    <div id="logoIconDiv" css={logoIconDivCSS}>
       <LogoIcon />
-    </LogoIconDiv>
+    </div>
   )
 }
 
-export default Logo
+export default LogoIconDiv

@@ -1,7 +1,7 @@
 import React from "react"
-import styled from "@emotion/styled"
+import { css } from "@emotion/react"
 
-const StyledSection = styled.section`
+const sectionCSS = css`
   color: var(--color-text-secondary);
   background-color: var(--color-background-paper);
   transition: color 400ms ease-in-out, background-color 400ms ease-in-out;
@@ -11,19 +11,12 @@ const StyledSection = styled.section`
   border: var(--shape-border);
   box-shadow: var(--shape-box-shadow);
 `
-const Title = styled.h3`
-
-`
-
-const Section = ({ title , children}) => {
-
-    return (
-      <StyledSection>
-        <Title itemProp="headline">
-           {title}
-        </Title>
-        { children }
-      </StyledSection>
+const Section = ({ title, children }) => {
+  return (
+    <section css={sectionCSS}>
+      <h3 itemProp="headline">{title}</h3>
+      {children}
+    </section>
   )
 }
 
