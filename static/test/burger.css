@@ -1,22 +1,39 @@
 /*! burger.css */
 :root {
-
   --color-theme-name: "Burger";
 
   --color-primary-light: tan;
-  --color-primary-main: rgb(233, 135, 50);
-  --color-primary-dark: rgb(121, 35, 14); /* logo */
+  --color-primary-main: rgb(121, 35, 14);
+  --color-primary-dark: rgb(233, 135, 50); /* logo */
   --color-primary-text: #fff;
 
+  --color-info-light: tan;
+  --color-info-main: rgb(233, 135, 50);
+  --color-info-dark: rgb(121, 35, 14);
+  --color-info-text: #fff;
+
   --color-text-primary: rgba(80, 35, 20, 0.7); /* use on default bg */
-  --color-text-secondary: rgba(80, 35, 20, 0.9); /* use on paper bg, also is icon color */
+  --color-text-secondary: rgba(
+    80,
+    35,
+    20,
+    0.9
+  ); /* use on paper bg, also is icon color */
   --color-text-disabled: rgba(255, 255, 255, 0.05);
   --color-text-hint: rgba(255, 255, 255, 0.5);
 
   --color-divider: rgba(255, 255, 255, 0.12);
 
-  --color-background-default: rgb(180, 162, 134); /* aka color-background, the far background */
-  --color-background-paper: rgb(245, 235, 220); /* aka color-surface, as in components */
+  --color-background-default: rgb(
+    180,
+    162,
+    134
+  ); /* aka color-background, the far background */
+  --color-background-paper: rgb(
+    245,
+    235,
+    220
+  ); /* aka color-surface, as in components */
   --color-foreground: rgb(121, 35, 14); /* flyouts, popups */
 
   /* these are affects applied, mainly alpha channel, to objects based on actions */
@@ -45,7 +62,7 @@ tbody tr:nth-of-type(odd) {
   }
   /* the up and down scroll buttons */
   ::-webkit-scrollbar-button {
-  display: none;
+    display: none;
   }
   ::-webkit-scrollbar-track {
     border: 3px solid var(--color-primary-main);
