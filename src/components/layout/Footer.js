@@ -1,33 +1,53 @@
 import React from "react"
-import styled from "@emotion/styled"
+import { css } from "@emotion/react"
 
-const FootDiv = styled.footer`
+const footerCSS = css`
+  display: flex;
+
   margin: auto;
   background-color: var(--color-background-paper);
   color: var(--color-text-secondary);
 
   text-align: center;
   font-size: 0.75rem;
-  padding: 1rem 0.5rem;
+  padding: 0 0;
   z-index: 999;
+
+  /* ---- Larger Phones (540 x ) ---- */
+  @media only screen and (min-width: 540px) {
+    height: 70px;
+  }
+
+  /* ---- Tablet (700 x ) ---- */
+  @media only screen and (min-width: 700px) {
+    height: 70px;
+  }
+`
+
+// We need to resrve space for the floating back to top button
+// TODO set the BackToTop button locations in the CSS file for universal reference
+const spacerDivCSS = css`
+  width: 75px;
+`
+
+const spanCSS = css`
+  margin: auto;
 `
 
 export default function Footer() {
   const today = new Date()
-  const [cmonth, cday, cyear] = [
-    today.getMonth(),
-    today.getDate(),
-    today.getFullYear(),
-  ]
+  const [cyear] = [today.getFullYear()]
 
   return (
-    <FootDiv>
-      <span>
-        © {cmonth}/{cday}/{cyear}, Edward Pike
+    <footer css={footerCSS}>
+      <div css={spacerDivCSS}></div>
+      <span css={spanCSS}>
+        © {cyear}, Edward Pike
         <br />
         Built with <a href="https://www.gatsbyjs.com">Gatsby v4</a> in{" "}
         {`${process.env.NODE_ENV}`} mode.
       </span>
-    </FootDiv>
+      <div css={spacerDivCSS}></div>
+    </footer>
   )
 }

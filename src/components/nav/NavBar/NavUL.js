@@ -19,11 +19,15 @@ export const NavUL = props => {
 
   useLayoutEffect(() => {
     let scrollPosition = window.sessionStorage.getItem(
-      SESSION_STORAGE_SCROLLTOP_KEY,
-      thisRef.current.scrollTop
+      SESSION_STORAGE_SCROLLTOP_KEY
     )
 
-    if (thisRef.current) {
+    if (scrollPosition === null) {
+      console.log("scrollPosition from storage was null")
+    }
+
+    // TODO why would thisRef.current be null? SSR?
+    if (thisRef.current && scrollPosition) {
       thisRef.current.scrollTop = scrollPosition
       console.log("!!! scrolled to ", scrollPosition)
     } else {

@@ -1,84 +1,27 @@
 const path = require(`path`)
 const { createFilePath, loadNodeContent } = require(`gatsby-source-filesystem`)
-
+const {
+  getBlogStatusesToShow,
+  createBlogPages,
+} = require(`./gatsby-node-blogposts`)
 // We do not need to require dotenv because it was already done in gatsby-config.js
-// We use this to create blog pages but also the list of blog summaries
-// CLEAN CODE: 1 operation per line, aids debugging
-const strBlogStatusesToShow = process.env.BLOG_STATUSES_TO_SHOW_LIST
-// Change the comma seperated list to an array
-const arBlogStatusesToShow = strBlogStatusesToShow.split(",")
-// To write out string '["abc", "xyz"]', call JSON.stringify(arBlogStatusesToShow)
-console.info(
-  " gatsby-node.js arBlogStatusesToShow JSON = " +
-    JSON.stringify(arBlogStatusesToShow)
+
+const arBlogStatusesToShow = getBlogStatusesToShow(
+  process.env.BLOG_STATUSES_TO_SHOW_LIST
 )
 
 exports.createPages = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions
 
-  // Define a template for blog post
-  const blogPost = path.resolve(`./src/templates/blog-post.js`)
-
-  // Get all markdown blog posts sorted by date
-  const blogPostResults = await graphql(
-    `
-      {
-        allMarkdownRemark(
-          sort: { fields: [frontmatter___date], order: ASC }
-          filter: {frontmatter: {status: {in: ` +
-      JSON.stringify(arBlogStatusesToShow) +
-      ` }}}
-          limit: 1000
-        ) {
-          nodes {
-            id
-            fields {
-              slug
-            }
-          }
-        }
-      }
-    `
-  )
-
-  if (blogPostResults.errors) {
-    reporter.panicOnBuild(
-      `There was an error loading your blog posts`,
-      blogPostResults.errors
-    )
-    return
-  }
-
-  const posts = blogPostResults.data.allMarkdownRemark.nodes
-
-  // Create blog posts pages
-  // But only if there's at least one markdown file found at "content/blog" (defined in gatsby-config.js)
-  // `context` is available in the template as a prop and as a variable in GraphQL
-
-  console.info("gatsby-node.js: got num blog posts = " + posts.length)
-  if (posts.length > 0) {
-    posts.forEach((post, index) => {
-      const previousPostId = index === 0 ? null : posts[index - 1].id
-      const nextPostId = index === posts.length - 1 ? null : posts[index + 1].id
-
-      createPage({
-        path: post.fields.slug,
-        component: blogPost,
-        context: {
-          id: post.id,
-          previousPostId,
-          nextPostId,
-        },
-      })
-    })
-  }
+  createSitePages(arBlogStatusesToShow, graphql, reporter, createPage)
+  createBlogPages(arBlogStatusesToShow, graphql, reporter, createPage)
 }
 
-// Seems to be adding the slug field to the graphql node
+// Create filepaths to each markdown file (blog posts, etc.)
+// as each is added to a node in Redux, add the filepath to the node as a field
 exports.onCreateNode = ({ node, actions, getNode }) => {
   const { createNodeField } = actions
 
-  // this is for rss feed
   if (node.internal.type === `MarkdownRemark`) {
     const value = createFilePath({ node, getNode })
 
@@ -87,48 +30,13 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
       node,
       value,
     })
-  } else if (node.extension === `css`) {
-    // if its a css file, we are going to access the content
-    // but to get it you have to call loadNodeContent and then shove results into the content field
-    // special thanks to https://stackoverflow.com/questions/59555277/how-to-access-text-contents-of-file-returned-by-a-file-or-allfiles-graphql-q
-    /*
-    console.info("Found css file: " + node.dir + " " + node.name)
-    const x = loadNodeContent(node)
-      .then(function (result) {
-        //console.log(""+result);
-        node.internal.content = result
-      })
-      .catch(function (error) {
-        console.error(error)
-        node.internal.content = error
-      })
-      */
   }
 }
 
-// limit which blog posts appear on home page or bloglist page
 exports.onCreatePage = ({ page, actions }) => {
   const { createPage, deletePage } = actions
-  if (page.path == "/bloglist/") {
-    deletePage(page)
-    createPage({
-      ...page,
-      context: {
-        ...page.context,
-        allowedBlogStatuses: arBlogStatusesToShow,
-      },
-    })
-  } else if (page.path == "/") {
-    deletePage(page)
-    createPage({
-      ...page,
-      context: {
-        ...page.context,
-        allowedBlogStatuses: arBlogStatusesToShow,
-        limit: 3,
-      },
-    })
-  }
+
+  filterBlogListingPages(page, deletePage, createPage, arBlogStatusesToShow)
 
   /* 
   Since this section will have dynamic content that shouldn’t be rendered statically, 
@@ -183,4 +91,96 @@ exports.createSchemaCustomization = ({ actions }) => {
       slug: String
     }
   `)
+}
+
+const createSitePages = async (
+  arBlogStatusesToShow,
+  graphql,
+  reporter,
+  createPage
+) => {
+  const template = path.resolve(`./src/templates/site-page.js`)
+
+  // limit them to those with frontmatter "status" in the list of allowed statuses
+  const results = await graphql(
+    `
+      {
+        allMarkdownRemark(
+          filter: 
+            {
+              fileAbsolutePath: {regex: "/content/site/"},
+              frontmatter: {status: {in: ` +
+      JSON.stringify(arBlogStatusesToShow) +
+      ` }}
+            }
+     
+          limit: 1000
+        ) {
+          nodes {
+            id
+            fields {
+              slug
+            }
+          }
+        }
+      }
+    `
+  )
+
+  if (results.errors) {
+    reporter.panicOnBuild(
+      `There was an error loading your site MD pages`,
+      results.errors
+    )
+    return
+  }
+
+  const nodes = results.data.allMarkdownRemark.nodes
+  if (nodes.length > 0) {
+    nodes.forEach(node => {
+      // `context` is available in the template as a prop and as a variable in GraphQL
+      createPage({
+        path: node.fields.slug,
+        component: template,
+        context: {
+          id: node.id,
+        },
+      })
+    })
+  }
+}
+
+const filterBlogListingPages = (
+  page,
+  deletePage,
+  createPage,
+  arBlogStatusesToShow
+) => {
+  if (page.path == "/bloglist/") {
+    // limit which blog posts appear on the bloglist page
+    // If they are not in allowed statuses, the pages will not exist
+    // but the bloglist page will still create summaries and links to them
+    deletePage(page)
+    createPage({
+      ...page,
+      context: {
+        ...page.context,
+        allowedBlogStatuses: arBlogStatusesToShow,
+      },
+    })
+  } else if (page.path == "/") {
+    // limit the number and statuses of blog posts
+    // that appear on the home page (most recent, typically 3)
+    // If they are not in allowed statuses, the pages will not exist
+    // but the home page will still create summaries and links to them
+    deletePage(page)
+    createPage({
+      ...page,
+      context: {
+        ...page.context,
+        allowedBlogStatuses: arBlogStatusesToShow,
+        limit: 3,
+      },
+    })
+  }
 }

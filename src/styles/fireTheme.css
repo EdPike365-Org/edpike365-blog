@@ -1,12 +1,16 @@
 /*! fireTheme.css */
 :root {
-
   --color-theme-name: "Fire";
 
   --color-primary-light: yellow;
   --color-primary-main: orange;
   --color-primary-dark: red;
   --color-primary-text: #fff;
+
+  --color-info-light: yellow;
+  --color-info-main: orange;
+  --color-info-dark: red;
+  --color-info-text: #fff;
 
   --color-text-primary: rgba(255, 255, 255, 0.7); /* use on default bg */
   --color-text-secondary: rgba(255, 255, 255, 0.9); /* use on paper bg */
@@ -36,12 +40,8 @@
   --palette-action-focus: rgba(255, 255, 255, 0.12);
   --palette-action-focus-opacity: 0.12;
   --palette-action-activated-opacity: 0.24;
-
 }
 
 tbody tr:nth-of-type(odd) {
   background: #c97c083d;
 }
-
-
-

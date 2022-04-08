@@ -101,7 +101,7 @@ const NavBar = () => {
         </NavSubMenu>
         <NavSubMenu title={"DEVOPS"} uuid={"NavSubMenu-DEVOPS"}>
           <NavLI>
-            <NavLink to={"/edpike365-devops/"} itemProp="url">
+            <NavLink to={"/edpike365-devops/#top"} itemProp="url">
               The Spice
             </NavLink>
           </NavLI>

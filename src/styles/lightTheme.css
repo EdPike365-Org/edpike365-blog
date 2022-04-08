@@ -1,4 +1,9 @@
 /*! lightTheme.css */
 :root {
   --color-theme-name: "Light";
+
+  --color-info-light: #7986cb;
+  --color-info-main: #6772ac;
+  --color-info-dark: #474f77;
+  --color-info-text: #fff;
 }
