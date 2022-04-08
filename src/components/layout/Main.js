@@ -26,7 +26,7 @@ const mainCSS = css`
 
   /* ---- Normal Phones (320 x ) ---- */
   @media only screen and (min-width: 320px) {
-    padding: 0px 20px 10px 15px;
+    padding: 0px 20px 10px 20px;
   }
 
   /* ---- Larger Phones (540 x ) ---- */
