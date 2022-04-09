@@ -1,19 +1,18 @@
 import React, { useContext } from "react"
-import styled from "@emotion/styled"
+import { css } from "@emotion/react"
 import HamburgerIcon from "../../../../icons/HamburgerIcon"
 import XIconRegular from "../../../../icons/XIconRegular"
 import { NavContext } from "../../../../contexts/NavContext"
 
-export const HamButton = styled.button`
+const buttonCSS = css`
   display: inline-flex;
   align-items: center;
   justify-content: center;
 
   padding: 5px;
-  margin: 5px 5px;
-  /* need to pad to the widest icon to prevent resize */
-  width: 30px;
-  height: 30px;
+  margin: 0px 0px 0px 5px;
+  height: 100%;
+  aspect-ratio: 1 / 1;
 
   border: none;
   letter-spacing: 0px;
@@ -26,9 +25,14 @@ const HamburgerButton = () => {
   const { showNavState } = useContext(NavContext)
   const [showNav, toggleShowNav] = showNavState
   return (
-    <HamButton onClick={toggleShowNav} aria-label={"Navigation"}>
+    <button
+      id="hamburgerButton"
+      css={buttonCSS}
+      onClick={toggleShowNav}
+      aria-label={"Navigation"}
+    >
       {showNav ? <XIconRegular /> : <HamburgerIcon />}
-    </HamButton>
+    </button>
   )
 }
 

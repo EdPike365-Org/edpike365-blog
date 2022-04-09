@@ -2,16 +2,22 @@ import React from "react"
 import { navigate } from "gatsby"
 import { css } from "@emotion/react"
 import SliderIcon from "../../../../icons/SliderIcon"
+/*
+display: inline-flex;
+align-items: stretch;
+justify-content: center;
+aspect-ratio: 1 / 1;
+*/
 
 const buttonCSS = css`
   display: inline-flex;
-  align-items: center;
+  align-items: stretch;
   justify-content: center;
 
   padding: 5px;
-  margin: 5px 5px;
-  width: 30px;
-  height: 30px;
+  margin: 0px 3px 0px 0px;
+
+  height: 100%;
 
   border: none;
   letter-spacing: 0px;

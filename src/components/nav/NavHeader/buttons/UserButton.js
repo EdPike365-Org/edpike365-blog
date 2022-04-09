@@ -9,9 +9,9 @@ const buttonCSS = css`
   justify-content: center;
 
   padding: 5px;
-  margin: 5px 5px;
-  width: 30px;
-  height: 30px;
+  margin: 0px 5px 0px 0px;
+  height: 100%;
+  aspect-ratio: 1 / 1;
 
   border: none;
   letter-spacing: 0px;
