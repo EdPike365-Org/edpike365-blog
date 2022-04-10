@@ -2,13 +2,17 @@ import * as React from "react"
 import PropTypes from "prop-types"
 import { Helmet } from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
-// og image should be 1,200 x 630 px
-// twitter size min 120 x 120, recommended 600 x 600 (also pinterest), max 1,200 x 1,200 (also facebook and instagram)
-import defaultOpenGraphImage from '/src/images/profile-pic.png'
 
-// Renaming to SeO to remove PasCal case lint warnings until I can figure out how to edit Gatsby's lint settings
-const Seo = ({ description, lang, meta, title, image}) => {
-  
+/* og image should be 1,200 x 630 px
+   twitter size min 120 x 120, 
+  recommended 600 x 600 (also pinterest), max 1,200 x 1,200 
+  (also facebook and instagram)
+*/
+import defaultOpenGraphImage from "/src/images/profile-pic.png"
+
+// Renaming to Seo to remove PasCal case lint warnings
+// until I can figure out how to edit Gatsby's lint settings
+const Seo = ({ description, lang, meta, title, image }) => {
   const { site } = useStaticQuery(
     graphql`
       query SEOQuery {
@@ -28,7 +32,8 @@ const Seo = ({ description, lang, meta, title, image}) => {
 
   const metaDescription = description || site.siteMetadata.description
   const defaultTitle = site.siteMetadata?.title
-  const ogImageUrl = site.siteMetadata.siteUrl + ( image || defaultOpenGraphImage )
+  const ogImageUrl =
+    site.siteMetadata.siteUrl + (image || defaultOpenGraphImage)
 
   return (
     <Helmet
@@ -59,7 +64,7 @@ const Seo = ({ description, lang, meta, title, image}) => {
           content: `website`,
         },
         {
-           property: `og:image`,
+          property: `og:image`,
           content: ogImageUrl,
         },
         {

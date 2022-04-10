@@ -18,7 +18,8 @@ export const NavContextProvider = element => {
   // The Logo tumbling animation runs when the screen size grows wide enough
   // It tumbles from center to the become left justified.
   // It does not tumble back to center when the screen width shrinks.
-  // TODO I forgot why I did that.
+  // TODO: I was going to make it tumble back to center when the screen shrinks,
+  // but I forget why it did not work
   const [runLogoAnim, setRunLogoAnim] = useState(false)
 
   // We need a media query to check if the screen is small enough to run logo animation.
@@ -33,7 +34,7 @@ export const NavContextProvider = element => {
       setRunLogoAnim(true)
       // This will run the animation on infinite loop.
       // So after enough time for it to run once, we set it false.
-      // TODO cludgy. Can we use CSS animation setting to make it run only once?
+      // TODO: cludgy. Can we use CSS animation setting to make it run only once?
       // since we are using this much js already, we could control it explicitly instead.
       setTimeout(() => {
         setRunLogoAnim(false)

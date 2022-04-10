@@ -17,7 +17,7 @@ const mainCSS = css`
   width: 100%;
   min-width: 275px;
   /* 
-    TODO: I dont think this is needed anymore  
+    TODO: I dont think this below here is needed anymore:
     If you have top or bottom padding, the navbar will resrve space for it 
     and a little scroll bar will appear under teh navbar no matter how
     big the navbar gets.
@@ -26,7 +26,7 @@ const mainCSS = css`
 
   /* ---- Normal Phones (320 x ) ---- */
   @media only screen and (min-width: 320px) {
-    padding: 0px 15px 10px 15px;
+    padding: 0px 20px 10px 20px;
   }
 
   /* ---- Larger Phones (540 x ) ---- */
