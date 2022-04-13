@@ -1,8 +1,8 @@
 import React from "react"
 import { css } from "@emotion/react"
 import DarkModeToggle from "gatsby-head-style-boss/components/DarkModeToggle"
-import SettingsButton from "./buttons/SettingsButton"
-import UserButton from "./buttons/UserButton"
+import SettingsButton from "./SettingsButton"
+import UserButton from "./UserButton"
 
 const divCSS = css`
   display: flex;

@@ -4,7 +4,7 @@ import HamburgerIcon from "../../../../icons/HamburgerIcon"
 import XIconRegular from "../../../../icons/XIconRegular"
 import { NavContext } from "../../../../contexts/NavContext"
 
-const buttonCSS = css`
+const hamburgerButtonCSS = css`
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -27,7 +27,7 @@ const HamburgerButton = () => {
   return (
     <button
       id="hamburgerButton"
-      css={buttonCSS}
+      css={hamburgerButtonCSS}
       onClick={toggleShowNav}
       aria-label={"Navigation"}
     >

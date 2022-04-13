@@ -9,7 +9,7 @@ justify-content: center;
 aspect-ratio: 1 / 1;
 */
 
-const buttonCSS = css`
+const settingsButtonCSS = css`
   display: inline-flex;
   align-items: stretch;
   justify-content: center;
@@ -34,7 +34,7 @@ const SettingsButton = () => {
   return (
     <button
       id="settingsButton"
-      css={buttonCSS}
+      css={settingsButtonCSS}
       aria-label={"Navigation"}
       onClick={handleClick}
     >

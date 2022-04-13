@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react"
 import { css } from "@emotion/react"
-import { FaArrowCircleUp } from "@react-icons/all-files/fa/FaArrowCircleUp"
 import { buttonDivCSS, upIconCSS } from "./styles"
 
-export const ScrollToTopButton = ({ targetRef }) => {
+export const ScrollToTopButton = ({ targetRef, children }) => {
   const [visible, setVisible] = useState(false)
 
   const scrollOptions = {
@@ -14,6 +13,15 @@ export const ScrollToTopButton = ({ targetRef }) => {
 
   const scrollToTop = () => {
     targetRef.current.scroll(scrollOptions)
+  }
+
+  const handleKeyDown = e => {
+    const eCode = e.code
+    switch (eCode) {
+      case "Enter":
+        scrollToTop()
+        break
+    }
   }
 
   useEffect(() => {
@@ -37,19 +45,26 @@ export const ScrollToTopButton = ({ targetRef }) => {
     }
   }, [targetRef])
 
-  // defining this css here because it refers to visible variable
   const toggleVisibleCSS = css`
     ${{ display: visible ? "inline" : "none" }};
   `
 
+  // using a div because button cursor change hitbox is extended on bottom
+  // also, I want to show how to satisfy a11y linter
   return (
-    <div css={[buttonDivCSS, upIconCSS, toggleVisibleCSS]}>
-      <FaArrowCircleUp onClick={scrollToTop} />
+    <div
+      css={[buttonDivCSS, upIconCSS, toggleVisibleCSS]}
+      onClick={scrollToTop}
+      onKeyDown={handleKeyDown}
+      role="button"
+      tabIndex="0"
+    >
+      {children}
     </div>
   )
 }
 
-// one way to do css composition, but its ugly
+// one way to do css composition with Emotion, but its ugly
 // preserving because it might come in handy later
 // TODO delete when I move it to a blog post
 /*

@@ -3,7 +3,7 @@ import { navigate } from "gatsby"
 import { css } from "@emotion/react"
 import UserIcon from "../../../../icons/UserIcon"
 
-const buttonCSS = css`
+const userButtonCSS = css`
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -28,7 +28,7 @@ const UserButton = () => {
   return (
     <button
       id="userButton"
-      css={buttonCSS}
+      css={userButtonCSS}
       aria-label={"Navigation"}
       onClick={handleClick}
     >

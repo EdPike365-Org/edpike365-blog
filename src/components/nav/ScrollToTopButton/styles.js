@@ -1,36 +1,50 @@
 import { css, keyframes } from "@emotion/react"
 
-// we position from right because I *think* that it
-// better handles the scroll bar offset
+// TODO button causes cursor to change even in area just below button
+// but same is not true when using div, which behaves as expected
+
+// NOTE min width guidelines touchable buttons is between 42 and 48px
+// good article https://ishadeed.com/article/styling-the-good-old-button/
 export const buttonDivCSS = css`
-  width: 40px;
-  height: 40px;
-
   position: fixed;
-  right: 30px;
-  bottom: 20px;
+  z-index: 998;
 
-  font-size: 3rem;
-  z-index: 9999;
+  margin: 0px;
+  padding: 0px;
+
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+  min-height: 48px;
+
+  & svg {
+    height: 100%;
+    width: 100%;
+  }
+
   cursor: pointer;
   color: var(--color-info-main);
+  background-color: transparent;
+  background-repeat: no-repeat;
+
+  /* ---- DEFAULT (tiny): Small Narrow Phones (280 x 653) ---- */
+  right: 25px;
+  bottom: 9px;
 
   /* ---- Normal Phones (320 x ) ---- */
   @media only screen and (min-width: 320px) {
-    right: 40px;
-    bottom: 25px;
+    right: 35px;
+    bottom: 13px;
   }
 
   /* ---- Larger Phones (540 x ) ---- */
   @media only screen and (min-width: 540px) {
     right: 60px;
-    bottom: 35px;
+    bottom: 20px;
   }
 
   /* ---- Tablet (700 x ) ---- */
   @media only screen and (min-width: 700px) {
-    right: 60px;
-    bottom: 35px;
   }
 
   @media only screen and (min-width: 1024px) {
@@ -52,6 +66,6 @@ const bouncing = keyframes`
 `
 
 export const upIconCSS = css`
-  margin-top: 10px;
+  margin-top: 0px;
   animation: ${bouncing} 0.5s alternate ease infinite;
 `

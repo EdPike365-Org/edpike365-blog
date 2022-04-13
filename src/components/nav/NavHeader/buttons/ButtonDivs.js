@@ -13,29 +13,26 @@ const buttonDivBaseCSS = css`
 
   /* ---- DEFAULT (tiny): Small Narrow Phones (280 x 653) ---- */
   /* this height also controls the height/width of the buttons */
-  height: 28px;
+  /* TODO get height and media query values from main CSS variables */
+  height: 30px;
 
   /* ---- Normal Phones: Show Logo (320 x ) ---- */
   @media only screen and (min-width: 320px) {
+    height: 36px;
   }
 
   /* ---- Larger Phones (540 x ) ---- */
   @media only screen and (min-width: 540px) {
-    height: 36px;
+    height: 42px;
   }
 
   /* ---- Tablet (700 x ) ---- */
   @media only screen and (min-width: 700px) {
-    height: 42px;
+    height: 48px;
   }
 `
 
 const buttonDivLeftCSS = css`
-  /* ---- Tablet (700 x ) ---- */
-  /* Ham button gets bigger (other buttons handled by ButtonDivRight) */
-  @media only screen and (min-width: 700px) {
-  }
-
   /* ---- LapTop (1366 x ) ---- */
   /* Navbar permanently shows. Hamburger disappears. */
   @media only screen and (min-width: 1366px) {
@@ -59,7 +56,7 @@ const buttonDivRightCSS = css`
   justify-content: right;
 
   /* ---- DEFAULT (tiny): Small Narrow Phones (280 x 653) ---- */
-  /* Header's DarkMode Toggle and SettingsButton are hidden */
+  /* DarkMode Toggle and SettingsButton are hidden */
 
   & > .dark-mode-toggle {
     display: inline-flex;
@@ -83,8 +80,12 @@ const buttonDivRightCSS = css`
   }
 
   /* ---- Normal Phones: Show Logo (320 x ) ---- */
-  /* Display SettingsButton */
   @media only screen and (min-width: 320px) {
+  }
+
+  /* ---- Bigger Normal Phones: Show Logo (361 x ) ---- */
+  /* Display SettingsButton */
+  @media only screen and (min-width: 361px) {
     & > #settingsButton {
       display: inline-flex;
     }
