@@ -1,8 +1,9 @@
 import React from "react"
 import { keyframes, css } from "@emotion/react"
-import LogoIcon from "../../../icons/LogoIcon"
+import LogoIcon from "../../../../icons/LogoIcon"
+import { Link } from "gatsby"
 
-const SpinAnim = keyframes`
+const SpinAnimation = keyframes`
   0% {
 
   }
@@ -12,13 +13,13 @@ const SpinAnim = keyframes`
     transform: rotateY(359deg) rotate(359deg);
   }
 `
-const SpinInfinite = css`
+const InfiniteSpin = css`
   transition-property: none;
   -webkit-animation-timing-function: linear;
   -moz-animation-timing-function: linear;
   -o-animation-timing-function: linear;
   animation-timing-function: linear;
-  animation: ${SpinAnim} 2s infinite 0s;
+  animation: ${SpinAnimation} 2s infinite 0s;
 `
 
 export const logoIconDivCSS = css`
@@ -36,22 +37,49 @@ export const logoIconDivCSS = css`
   width: 42px;
   height: 42px;
 
+  /* Make color transitions smooth */
   & > svg {
     transition: fill 400ms ease-in-out, stroke 400ms ease-in-out;
   }
 
   &:hover {
-    ${SpinInfinite}
+    ${InfiniteSpin}
+  }
+
+  /* ---- DEFAULT (tiny): Small Narrow Phones (280 x 653) ---- */
+  /* No Logo Icon visible */
+  display: none;
+
+  /* ---- Normal Phones: Show Logo (320 x ) ---- */
+  /* Display the LogoIcon */
+  @media only screen and (min-width: 320px) {
+    display: inline;
+    height: 48px;
+    width: 48px;
+  }
+
+  /* ---- Larger Phones (540 x ) ---- */
+  @media only screen and (min-width: 540px) {
+  }
+
+  /* ---- Tablet (700 x ) ---- */
+  /* Tablet header height : 64px */
+  @media only screen and (min-width: 700px) {
+    height: 58px;
+    width: 58px;
+  }
+
+  /* ---- LapTop (1366 x ) ---- */
+  @media only screen and (min-width: 1366px) {
   }
 `
-//-ms-transform: rotate(180deg); /* IE 9 */
-//-webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */
-//    transform: rotate(180deg);
 
 const LogoIconDiv = () => {
   return (
     <div id="logoIconDiv" css={logoIconDivCSS}>
-      <LogoIcon />
+      <Link to="/">
+        <LogoIcon />
+      </Link>
     </div>
   )
 }

@@ -1,13 +1,9 @@
 import React from "react"
 import { css } from "@emotion/react"
-import LogoLink from "./LogoLink"
+import LogoDiv from "./LogoDiv"
 import { ButtonDivRight, ButtonDivLeft } from "./buttons/ButtonDivs"
 
-// THIS IS WHERE THE MESSY MEDIA QUERY STUFF FOR THE HEADER LIVES
-// Default to smallest supported size of width 280 (Galaxy Fold)
-// We modify visibilty and size of all components in the Header
-// or here in major subcomponents (vs letting them set themselves)
-// NOTE: dimensions are in px units because we need precision in the header
+// NOTE: dimensions are in px units, not rem, because we need precision in the header
 
 const headerCSS = css`
   grid-area: header;
@@ -37,7 +33,7 @@ const Header = ({ children }) => {
   return (
     <header id="mainHeader" css={headerCSS}>
       <ButtonDivLeft />
-      <LogoLink />
+      <LogoDiv />
       <ButtonDivRight />
     </header>
   )

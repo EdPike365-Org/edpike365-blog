@@ -1,6 +1,8 @@
 import React, { useContext } from "react"
-import { Nav, NavLI, NavLink } from "./NavBarComps"
+import { Nav } from "./Nav"
+import { NavLink } from "./NavLink"
 import { NavUL } from "./NavUL"
+import { NavLI } from "./NavBarComps"
 import { NavSubMenu } from "./NavBarSubMenu"
 import { NavContext } from "../../../contexts/NavContext"
 
@@ -198,7 +200,6 @@ const NavBar = () => {
           </NavLink>
         </NavLI>
       </NavUL>
-      <br />
     </Nav>
   )
 }

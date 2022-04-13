@@ -2,12 +2,6 @@ import React from "react"
 import { navigate } from "gatsby"
 import { css } from "@emotion/react"
 import SliderIcon from "../../../../icons/SliderIcon"
-/*
-display: inline-flex;
-align-items: stretch;
-justify-content: center;
-aspect-ratio: 1 / 1;
-*/
 
 const settingsButtonCSS = css`
   display: inline-flex;

@@ -21,6 +21,9 @@ export const ScrollToTopButton = ({ targetRef, children }) => {
       case "Enter":
         scrollToTop()
         break
+
+      default:
+      //do nothing
     }
   }
 
@@ -49,8 +52,8 @@ export const ScrollToTopButton = ({ targetRef, children }) => {
     ${{ display: visible ? "inline" : "none" }};
   `
 
-  // using a div because button cursor change hitbox is extended on bottom
-  // also, I want to show how to satisfy a11y linter
+  // using a div because button's cursor change hitbox is extended on bottom
+  // dont know why. Also, I want to show how to satisfy a11y linter.
   return (
     <div
       css={[buttonDivCSS, upIconCSS, toggleVisibleCSS]}
