@@ -8,8 +8,3 @@ export const SubUL = styled.ul`
   padding: 0.5rem 1rem;
   transition: color 400ms ease-in-out, background-color 400ms ease-in-out;
 `
-
-/* NavLI are used by the SubUL and the button expandable component */
-export const NavLI = styled.li`
-  padding: 0.5rem 0.5rem 0.5rem 1rem;
-`

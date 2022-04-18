@@ -27,16 +27,6 @@ export const logoIconDivCSS = css`
 
   vertical-align: middle;
 
-  /* 
-  At smallest size, which is our default, Icon is invisible.
-  Let the parent component set visibility and dimension change
-  because we may have another instance of this widget on the site.
-  */
-  padding: 5px;
-  margin: 0px;
-  width: 42px;
-  height: 42px;
-
   /* Make color transitions smooth */
   & > svg {
     transition: fill 400ms ease-in-out, stroke 400ms ease-in-out;
@@ -54,8 +44,10 @@ export const logoIconDivCSS = css`
   /* Display the LogoIcon */
   @media only screen and (min-width: 320px) {
     display: inline;
-    height: 48px;
-    width: 48px;
+    padding: 1px;
+    margin: 0px;
+    height: 100%;
+    aspect-ratio: 1 / 1;
   }
 
   /* ---- Larger Phones (540 x ) ---- */

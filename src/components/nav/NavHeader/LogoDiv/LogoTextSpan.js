@@ -4,6 +4,12 @@ import { useStaticQuery, graphql } from "gatsby"
 
 // Works with smallest screen width 280. Let parents manipulate as needed.
 const logoTextSpanCSS = css`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  line-height: 100%;
+
   color: var(--color-primary-main);
   transition: color 400ms ease-in-out;
 
@@ -11,26 +17,23 @@ const logoTextSpanCSS = css`
   font-weight: 700;
 
   /* Height controled by Header */
-  height: 100%;
+  /* height: 100%; */
 
   color: var(--color-primary-main);
   text-decoration: none;
 
   padding: 0rem;
   margins: 0rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 
   /* ---- DEFAULT (tiny): Small Narrow Phones (280 x 653) ---- */
-  font-size: 25px;
-  letter-spacing: 0.25em;
+  font-size: 34px;
+  letter-spacing: 0.04em;
 
-  /* ---- Normal Phones: Show Logo (320 x ) ---- */
-  @media only screen and (min-width: 320px) {
+  /* ---- Normal Phones: Show Logo  ---- */
+  @media only screen and (min-width: 360px) {
     /* height: var(--header-height-mobile); */
     font-size: 36px;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.08em;
   }
 
   /* ---- Larger Phones (540 x ) ---- */
@@ -38,7 +41,7 @@ const logoTextSpanCSS = css`
   @media only screen and (min-width: 540px) {
     font-size: 36px;
     margin-left: 0.15em;
-    letter-spacing: 0.15em;
+    letter-spacing: 0.2em;
   }
 
   /* ---- Tablet (700 x ) ---- */

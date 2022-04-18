@@ -1,38 +1,41 @@
 import React from "react"
 import { css } from "@emotion/react"
 import HamburgerButton from "./HamburgerButton"
-import DarkModeToggle from "gatsby-head-style-boss/components/DarkModeToggle"
+import DarkModeButton from "./DarkModeButton"
 import SettingsButton from "./SettingsButton"
 import UserButton from "./UserButton"
 
 const buttonDivBaseCSS = css`
+  box-sizing: border-box;
+
   display: flex;
   align-items: center;
-  justify-content: left;
   flex-direction: row;
 
   /* ---- DEFAULT (tiny): Small Narrow Phones (280 x 653) ---- */
   /* this height also controls the height/width of the buttons */
   /* TODO get height and media query values from main CSS variables */
-  height: 30px;
+  height: 100%;
 
   /* ---- Normal Phones: Show Logo (320 x ) ---- */
   @media only screen and (min-width: 320px) {
-    height: 36px;
+    height: 100%;
   }
 
   /* ---- Larger Phones (540 x ) ---- */
   @media only screen and (min-width: 540px) {
-    height: 42px;
+    height: 100%;
   }
 
   /* ---- Tablet (700 x ) ---- */
   @media only screen and (min-width: 700px) {
-    height: 48px;
+    height: 100%;
   }
 `
 
 const buttonDivLeftCSS = css`
+  justify-content: left;
+
   /* ---- LapTop (1366 x ) ---- */
   /* Navbar permanently shows. Hamburger disappears. */
   @media only screen and (min-width: 1366px) {
@@ -58,20 +61,8 @@ const buttonDivRightCSS = css`
   /* ---- DEFAULT (tiny): Small Narrow Phones (280 x 653) ---- */
   /* DarkMode Toggle and SettingsButton are hidden */
 
-  & > .dark-mode-toggle {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-
-    padding: 5px;
-    margin: 3px;
-    height: 100%;
-    width: 100%;
-    aspect-ratio: 1 / 1;
-  }
-
   /* We are doing it as a child so not every instance of DarkMode toggle disappears */
-  & > .dark-mode-toggle {
+  & > #darkModeButton {
     display: none;
   }
 
@@ -79,13 +70,7 @@ const buttonDivRightCSS = css`
     display: none;
   }
 
-  /* ---- Normal Phones: Show Logo (320 x ) ---- */
-  @media only screen and (min-width: 320px) {
-  }
-
-  /* ---- Bigger Normal Phones: Show Logo (361 x ) ---- */
-  /* Display SettingsButton */
-  @media only screen and (min-width: 361px) {
+  @media only screen and (min-width: 411px) {
     & > #settingsButton {
       display: inline-flex;
     }
@@ -94,7 +79,7 @@ const buttonDivRightCSS = css`
   /* ---- Larger Phones (540 x ) ---- */
   /* Display DarkMode toggle */
   @media only screen and (min-width: 540px) {
-    & > .dark-mode-toggle {
+    & > #darkModeButton {
       display: inline-flex;
     }
   }
@@ -103,7 +88,7 @@ const buttonDivRightCSS = css`
 export const ButtonDivRight = () => {
   return (
     <div css={[buttonDivBaseCSS, buttonDivRightCSS]}>
-      <DarkModeToggle />
+      <DarkModeButton />
       <SettingsButton />
       <UserButton />
     </div>

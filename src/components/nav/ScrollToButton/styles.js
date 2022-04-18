@@ -4,7 +4,7 @@ import { css, keyframes } from "@emotion/react"
 // good article https://ishadeed.com/article/styling-the-good-old-button/
 export const buttonDivCSS = css`
   position: fixed;
-  z-index: 980;
+  z-index: 999;
 
   margin: 0px;
   padding: 0px;
@@ -21,22 +21,23 @@ export const buttonDivCSS = css`
 
   cursor: pointer;
   color: var(--color-info-main);
+  color: red;
   background-color: transparent;
   background-repeat: no-repeat;
 
   /* ---- DEFAULT (tiny): Small Narrow Phones (280 x 653) ---- */
-  right: 25px;
+  left: 25px;
   bottom: 9px;
 
   /* ---- Normal Phones (320 x ) ---- */
   @media only screen and (min-width: 320px) {
-    right: 35px;
+    left: 35px;
     bottom: 13px;
   }
 
   /* ---- Larger Phones (540 x ) ---- */
   @media only screen and (min-width: 540px) {
-    right: 60px;
+    left: 60px;
     bottom: 20px;
   }
 
@@ -56,7 +57,9 @@ export const buttonDivCSS = css`
   /* Button has to adjust to the left or float beyond app width */
   /* REMINDER: css vars do not work in media queries */
   @media only screen and (min-width: 1600px) {
-    right: calc(60px + (100vw - 1600px) / 2);
+    /* left: calc(60px + (100vw - 1600px) / 2); */
+    right: 120px;
+    bottom: 50px;
   }
 `
 

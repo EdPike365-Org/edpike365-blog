@@ -1,5 +1,4 @@
 import React from "react"
-import styled from "@emotion/styled"
 import { keyframes, css } from "@emotion/react"
 
 /* 
@@ -24,6 +23,7 @@ const slideRightKeyframes = keyframes`
     The code below is for navbar slide in, slide out animation
     Not currently working 
 */
+/*eslint-disable */
 const slideRightAnimation = showNav => css`
   transform-origin: left;
   transition: width 800ms ease-in-out;
@@ -34,10 +34,11 @@ const slideRightAnimation = showNav => css`
 
   animation: ${slideRightKeyframes} 1s ease-out;
 `
+/*eslint-enable */
 
 // Mobile First Design: Default size is for old small phones, width < 320px
 // If it works there, it works anywhere.
-export const Nav = styled.nav`
+const navCSS = props => css`
   grid-area: nav;
 
   flex-direction: column;
@@ -45,7 +46,7 @@ export const Nav = styled.nav`
   overflow: auto;
 
   /* This covers the scrollToTop button, etc */
-  z-index: 999;
+  z-index: 990;
 
   transition: color 400ms ease-in-out, background-color 400ms ease-in-out;
   background-color: var(--color-background-paper);
@@ -54,17 +55,19 @@ export const Nav = styled.nav`
   /*box-shadow: var(--shape-box-shadow);*/
 
   /* ---- DEFAULT (tiny): Small Narrow Phones (280 x 653) ---- */
-  /* When nav is shown, is full width and SHOULD BE full height */
+  /* When nav is shown, is full width and SHOULD BE full height (minus NavHeader) */
   width: 100%;
   height: 100%;
-  min-height: 100%;
+  /* the var(--header-height-x) has to agree with the media query settings in GridLayout */
+  min-height: calc(100vh - var(--header-height-tiny));
   font-weight: 600;
-  ${props => (props.showNav ? "display: flex; height: 100%;" : "display:none;")}
+  ${props.showNav ? "display: flex; height: 100%;" : "display:none;"}
 
   /* ---- Normal Phones (320 x ) ---- */
   @media only screen and (min-width: 320px) {
     font-size: 1.5rem;
     font-weight: 700;
+    min-height: calc(100vh - var(--header-height-mobile));
   }
 
   /* ---- Tablet (700 x ) ---- */
@@ -73,6 +76,7 @@ export const Nav = styled.nav`
   @media only screen and (min-width: 700px) {
     width: 300px;
     min-width: 200px;
+    min-height: calc(100vh - var(--header-height-tablet));
   }
 
   /* ---- LapTop (1366 x ) ---- */
@@ -92,3 +96,7 @@ export const Nav = styled.nav`
     /* transition: color 400ms ease-in-out, background-color 400ms ease-in-out; */
   }
 `
+
+export const Nav = props => {
+  return <nav css={navCSS(props)}>{props.children}</nav>
+}

@@ -3,15 +3,15 @@ import { css } from "@emotion/react"
 import { buttonDivCSS, upIconCSS } from "./styles"
 
 const scrollOptions = {
-  top: 0,
+  top: 200,
   left: 0,
   behavior: "smooth",
 }
 
-export const ScrollToTopButton = ({ targetRef, children }) => {
+export const ScrollToButton = ({ targetRef, children }) => {
   const [visible, setVisible] = useState(false)
 
-  const scrollToTop = () => {
+  const scrollTheTarget = () => {
     targetRef.current.scroll(scrollOptions)
   }
 
@@ -19,7 +19,7 @@ export const ScrollToTopButton = ({ targetRef, children }) => {
     const eCode = e.code
     switch (eCode) {
       case "Enter":
-        scrollToTop(targetRef)
+        scrollTheTarget()
         break
 
       default:
@@ -35,9 +35,9 @@ export const ScrollToTopButton = ({ targetRef, children }) => {
     // and we dont want to re-render the component every time its called
     const toggleVisible = () => {
       const scrolled = targetComp.scrollTop
-      if (scrolled > 300) {
+      if (scrolled > 50) {
         setVisible(true)
-      } else if (scrolled <= 300) {
+      } else {
         setVisible(false)
       }
     }
@@ -50,6 +50,7 @@ export const ScrollToTopButton = ({ targetRef, children }) => {
 
   const toggleVisibleCSS = css`
     ${{ display: visible ? "inline" : "none" }};
+    //display: visible;
   `
 
   // using a div because button's cursor change hitbox is extended on bottom
@@ -57,7 +58,7 @@ export const ScrollToTopButton = ({ targetRef, children }) => {
   return (
     <div
       css={[buttonDivCSS, upIconCSS, toggleVisibleCSS]}
-      onClick={scrollToTop}
+      onClick={scrollTheTarget}
       onKeyDown={handleKeyDown}
       role="button"
       tabIndex="0"

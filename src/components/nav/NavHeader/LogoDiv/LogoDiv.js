@@ -46,17 +46,21 @@ const slideLogoLeftKeyframes = keyframes`
 /*eslint-enable */
 
 const logoDivCSS = runLogoAnim => css`
-  /* Height controled by Header */
+  box-sizing: border-box;
+
+  /* Height controled by NavHeader */
   height: 100%;
+  padding: 0px 0px;
+  margins: 0px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   color: var(--color-primary-main);
   text-decoration: none;
 
-  padding: 0rem;
-  margins: 0rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background-color: green;
 
   /* ---- LapTop (1366 x ) ---- */
   @media only screen and (min-width: 1366px) {

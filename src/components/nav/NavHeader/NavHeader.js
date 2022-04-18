@@ -9,21 +9,26 @@ const headerCSS = css`
   grid-area: header;
 
   box-sizing: border-box;
-  width: 100%;
 
-  padding: 0rem;
+  width: 100%;
+  height: 100%;
+
+  padding: 1px;
+  margin: 0px;
   overflow: hidden;
 
   display: flex;
+  align-items: center;
 
   /* Flush logodiv to left if the nav hamburger button is hidden */
   justify-content: space-between;
-  align-items: center;
 
   background-color: var(--color-background-paper);
   transition: color 400ms ease-in-out, background-color 400ms ease-in-out;
 
   box-shadow: var(--shape-box-shadow);
+
+  background-color: red;
 `
 
 const Header = ({ children }) => {

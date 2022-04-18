@@ -11,10 +11,12 @@
 
   /* screen width breakpoints, material ui standard */
   /* NOTE: using vars in the media selector widths does not work */
-  /* smaller than this: no logo icon */
-  --media-width-xs: 320px; /* smallest smart phone is 320 wide, galaxy fold is 280, logoicon, 2 icons, xsmall logo */
-  --media-width-sm: 360px; /* iphone 6/7/8 = 375, pixel 2 is 411 wide, 2 icons */
-  --media-width-sm2: 540px; /* surface duo = 540, room for 4 icons */
+  --media-width-xxs: 280px; /* Galaxy Fold is 280, no logo icon, 2 buttons */
+  --media-width-xs: 320px; /* which phones? logo icon, 2 icons */
+  --media-width-sm: 360px; /* iPhone SE 6/7/8 = 375, Galaxy s8, still 2 icons */
+  --media-width-sm0: 390px; /* iPhone 12 Pro = 390, Pixel 5 = 393 */
+  --media-width-sm1: 411px; /* Pixel 2, Galaxy A51/71, Galaxy S20, iPhone XR = 414 */
+  --media-width-sm2: 540px; /* Surface Duo = 540, room for 4 icons */
   --media-width-tablet: 700px; /* iPad 1 = 768, pixel 5 landscape = 851*/
   --media-width-md: 960px;
   --media-width-laptop: 1366px; /* HD Laptop 768p, iPad Pro 12 Landscape = max 1366 */
@@ -22,8 +24,12 @@
   --media-width-xl: 1600px; /* Vice max width */
   --media-width-xxl: 1920px; /* 1080p display, Full HD */
 
+  /* if you change this, update the scrollToTop button media query */
+  --app-max-width: 1600px;
+
   /* heights are based on screen width, sm = media-width-sm */
-  --header-height-tiny: 32px;
+  /* min height is based on recommended min height of button of 44px */
+  --header-height-tiny: 44px;
   --header-height-mobile: 48px;
   --header-height-tablet: 64px;
 
