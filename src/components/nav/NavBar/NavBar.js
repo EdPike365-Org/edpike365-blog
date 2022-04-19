@@ -1,8 +1,8 @@
 import React, { useContext } from "react"
 import { Nav } from "./Nav"
-import NavLink from "./NavLink"
 import { NavUL } from "./NavUL"
 import { NavLI } from "./NavLI"
+import NavLink from "./NavLink"
 import { NavSubMenu } from "./NavSubMenu/NavSubMenu"
 import { NavContext } from "../../../contexts/NavContext"
 
@@ -13,7 +13,7 @@ const NavBar = () => {
   const { showNavState } = useContext(NavContext)
   const [showNav] = showNavState
 
-  // The line breaks at bottom are there to handle too short scroll bars on short screens
+  // Each NavSubMenu has to have a unique UUID to keep track of its open/closed state.
   return (
     <Nav id="mainNav" showNav={showNav}>
       <NavUL>

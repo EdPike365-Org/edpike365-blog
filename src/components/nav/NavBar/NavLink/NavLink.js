@@ -15,7 +15,7 @@ import * as styles from "./styles.module.css"
 // https://github.com/brohlson/gatsby-plugin-anchor-links
 export const NavLink = props => {
   //showNavState is a state nested in the NavContext context
-  // TODO rename showNavState to showNavBarState
+  // TODO rename showNavState to navBarOpenState
   const { showNavState } = useContext(NavContext)
   const toggleShowNav = showNavState[1] //[0] is the state, [1] is the setter
 

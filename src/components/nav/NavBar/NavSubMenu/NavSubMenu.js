@@ -1,6 +1,5 @@
 import React, { useState, useLayoutEffect, useContext } from "react"
 import { Link } from "gatsby"
-import { NavULAPI } from "../NavUL"
 import {
   navSubMenuUL,
   subMenuActionsDiv,
@@ -26,10 +25,9 @@ export const NavSubMenu = ({
   navTarget,
   uuid,
   children,
-  defaultOpen = "true",
+  defaultOpen = "false",
 }) => {
   const [isOpen, setIsOpen] = useState(false)
-  const navAPI = useContext(NavULAPI)
 
   // if isOpen is stored in sessionStorage, use that
   useLayoutEffect(() => {
@@ -40,11 +38,8 @@ export const NavSubMenu = ({
 
   const toggleOpen = () => {
     setIsOpen(!isOpen)
-    // isOpen is not updated yet so still use !
+    // store the state
     sessionStorage.setItem(uuid, !isOpen)
-    if (navAPI) {
-      navAPI.updateStoredScrollTop()
-    }
   }
 
   return (
