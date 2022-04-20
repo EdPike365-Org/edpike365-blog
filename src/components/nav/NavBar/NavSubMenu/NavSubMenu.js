@@ -1,5 +1,6 @@
-import React, { useState, useLayoutEffect } from "react"
+import React, { useState, useLayoutEffect, useContext } from "react"
 import { Link } from "gatsby"
+import { NavContext } from "../../../../contexts/NavContext"
 import {
   navSubMenuUL,
   subMenuActionsDiv,
@@ -29,6 +30,8 @@ export const NavSubMenu = ({
     on first visit. The navUL will never respond to scroll calls.
   */
   const [isOpen, setIsOpen] = useState(true)
+  const { showNavState } = useContext(NavContext)
+  const toggleShowNav = showNavState[1] //[0] is the state, [1] is the setter
 
   // if isOpen state is stored in sessionStorage, use that
   useLayoutEffect(() => {
@@ -47,6 +50,7 @@ export const NavSubMenu = ({
     <ul css={navSubMenuUL}>
       <div css={subMenuActionsDiv}>
         <Link
+          onClick={toggleShowNav}
           css={navLink}
           activeStyle={activeLinkStyle}
           partiallyActive={true}

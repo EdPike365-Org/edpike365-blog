@@ -12,8 +12,11 @@ export const NavContext = createContext({
 export const NavContextProvider = element => {
   // State 1: showNav. Controls the left side navbar visibility.
   let initialShowNavState = false
-  if (window.innerWidth > WINDOW_WIDTH_THRESHOLD) {
-    initialShowNavState = true
+
+  if (!isSSR()) {
+    if (window.innerWidth > WINDOW_WIDTH_THRESHOLD) {
+      initialShowNavState = true
+    }
   }
 
   const [showNav, setShowNav] = useState(initialShowNavState)
