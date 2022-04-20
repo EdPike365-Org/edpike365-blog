@@ -50,7 +50,7 @@ const logoDivCSS = runLogoAnim => css`
 
   /* Height controled by NavHeader */
   height: 100%;
-  padding: 0px 0px;
+  padding: 1px 0px;
   margins: 0px;
 
   display: flex;
@@ -59,8 +59,6 @@ const logoDivCSS = runLogoAnim => css`
 
   color: var(--color-primary-main);
   text-decoration: none;
-
-  background-color: green;
 
   /* ---- LapTop (1366 x ) ---- */
   @media only screen and (min-width: 1366px) {

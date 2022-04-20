@@ -5,6 +5,7 @@ import commonButtonCSS from "./buttonCSS"
 import SliderIcon from "../../../../icons/SliderIcon"
 
 const settingsButtonCSS = css``
+
 //Note: if button has no dimensions, or no text, icons wont render
 const SettingsButton = () => {
   const handleClick = () => {

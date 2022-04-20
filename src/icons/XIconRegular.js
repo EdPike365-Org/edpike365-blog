@@ -4,6 +4,7 @@ import { css } from "@emotion/react"
 const XIconRegular = props => {
   return (
     <svg
+      id="XIconRegular"
       css={css`
         fill: var(--color-text-secondary);
         stroke: var(--color-text-secondary);

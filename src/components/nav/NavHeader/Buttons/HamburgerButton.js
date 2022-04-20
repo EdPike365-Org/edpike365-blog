@@ -5,7 +5,17 @@ import commonButtonCSS from "./buttonCSS"
 import HamburgerIcon from "../../../../icons/HamburgerIcon"
 import XIconRegular from "../../../../icons/XIconRegular"
 
-const hamburgerButtonCSS = css``
+const hamburgerButtonCSS = css`
+  padding: 0px;
+  & > #HamburgerIcon {
+    height: 100%;
+    padding: 10px;
+  }
+  & > #XIconRegular {
+    height: 100%;
+    width: 100%;
+  }
+`
 
 //Note: if button has no dimensions, or no text, icons wont render
 const HamburgerButton = () => {

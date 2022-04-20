@@ -17,7 +17,7 @@ const logoTextSpanCSS = css`
   font-weight: 700;
 
   /* Height controled by Header */
-  /* height: 100%; */
+  height: 100%;
 
   color: var(--color-primary-main);
   text-decoration: none;
@@ -40,7 +40,7 @@ const logoTextSpanCSS = css`
   /* The logo text can spread out some more, more letter spacing */
   @media only screen and (min-width: 540px) {
     font-size: 36px;
-    margin-left: 0.15em;
+    /* margin-left: 0.15em; */
     letter-spacing: 0.2em;
   }
 
@@ -49,14 +49,14 @@ const logoTextSpanCSS = css`
   @media only screen and (min-width: 700px) {
     /* height: var(--header-height-tablet); */
     font-size: 48px;
-    margin-left: 0.2em;
+    /* margin-left: 0.2em; */
     letter-spacing: 0.2em;
   }
 
   /* ---- LapTop (1366 x ) ---- */
   @media only screen and (min-width: 1366px) {
     font-size: 48px;
-    margin-left: 0.1em;
+    /* margin-left: 0.1em; */
     letter-spacing: 0.25em;
   }
 `

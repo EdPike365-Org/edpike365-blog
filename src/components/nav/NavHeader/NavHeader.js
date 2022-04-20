@@ -1,7 +1,8 @@
 import React from "react"
 import { css } from "@emotion/react"
 import LogoDiv from "./LogoDiv"
-import { ButtonDivRight, ButtonDivLeft } from "./buttons/ButtonDivs"
+import { ButtonDivLeft } from "./ButtonDivs/ButtonDivLeft"
+import { ButtonDivRight } from "./ButtonDivs/ButtonDivRight"
 
 // NOTE: dimensions are in px units, not rem, because we need precision in the header
 
@@ -13,7 +14,7 @@ const headerCSS = css`
   width: 100%;
   height: 100%;
 
-  padding: 1px;
+  padding: 2px;
   margin: 0px;
   overflow: hidden;
 
@@ -27,11 +28,9 @@ const headerCSS = css`
   transition: color 400ms ease-in-out, background-color 400ms ease-in-out;
 
   box-shadow: var(--shape-box-shadow);
-
-  background-color: red;
 `
 
-const Header = ({ children }) => {
+const Header = () => {
   //TODO add search icon next to hamburger
   //TODO add settings icon next to darkmode toggle
 

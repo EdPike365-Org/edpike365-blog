@@ -2,12 +2,13 @@ import { css } from "@emotion/react"
 
 /* shared by nav buttons, can be extended in the button component */
 const commonButtonCSS = css`
+  box-sizing: border-box;
   display: inline-flex;
   align-items: center;
   justify-content: center;
 
   padding: 10px;
-  margin: 0px 0px 0px 0px;
+  margin: 0px 1px 0px 1px;
   height: 100%;
   aspect-ratio: 1 / 1;
 

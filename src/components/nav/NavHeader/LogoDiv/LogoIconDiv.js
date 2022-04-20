@@ -1,7 +1,7 @@
 import React from "react"
 import { keyframes, css } from "@emotion/react"
+import LogoIconLink from "./LogoIconLink"
 import LogoIcon from "../../../../icons/LogoIcon"
-import { Link } from "gatsby"
 
 const SpinAnimation = keyframes`
   0% {
@@ -43,11 +43,12 @@ export const logoIconDivCSS = css`
   /* ---- Normal Phones: Show Logo (320 x ) ---- */
   /* Display the LogoIcon */
   @media only screen and (min-width: 320px) {
+    box-sizing: border-box;
     display: inline;
-    padding: 1px;
+    align-items: center;
+    padding: 0px 1px 0px 1px;
     margin: 0px;
     height: 100%;
-    aspect-ratio: 1 / 1;
   }
 
   /* ---- Larger Phones (540 x ) ---- */
@@ -57,7 +58,7 @@ export const logoIconDivCSS = css`
   /* ---- Tablet (700 x ) ---- */
   /* Tablet header height : 64px */
   @media only screen and (min-width: 700px) {
-    height: 58px;
+    /* height: 58px; */
     width: 58px;
   }
 
@@ -68,11 +69,11 @@ export const logoIconDivCSS = css`
 
 const LogoIconDiv = () => {
   return (
-    <div id="logoIconDiv" css={logoIconDivCSS}>
-      <Link to="/">
+    <LogoIconLink>
+      <div id="logoIconDiv" css={logoIconDivCSS}>
         <LogoIcon />
-      </Link>
-    </div>
+      </div>
+    </LogoIconLink>
   )
 }
 

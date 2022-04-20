@@ -28,6 +28,7 @@ export const subMenuActionsDiv = css`
   flex-direction: row;
   border: none;
   background-color: var(--color-background-paper);
+  transition: color 400ms ease-in-out, background-color 400ms ease-in-out;
   width: 100%;
   padding: 0px;
   margin: 0px;
