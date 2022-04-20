@@ -21,6 +21,7 @@ export const NavContextProvider = element => {
   const toggleShowNav = () => {
     // Link widget calls toggleShowNav() when the user clicks on a link.
     // Ignore it if window is wide, because the navbar is always visible.
+    console.log(window.innerWidth)
     if (window.innerWidth < WINDOW_WIDTH_THRESHOLD) {
       setShowNav(!showNav)
     }

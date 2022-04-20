@@ -24,22 +24,18 @@ export const NavUL = props => {
   const showNav = showNavState[0]
 
   useLayoutEffect(() => {
-    // If nav is closed, don't do anything
+    // If navBar is closed, don't do anything
     if (!showNav) {
       return
     }
 
     let scrollY = window.sessionStorage.getItem(SESSION_STORAGE_SCROLLTOP_KEY)
 
-    if (scrollY === null) {
-      console.log("scrollPosition from storage was null")
-    }
-
     if (thisRef.current && scrollY) {
       thisRef.current.scrollTop = scrollY
     }
 
-    // if the state of showNav changes, run this
+    // if the URL, or the state of showNav changes, run this
   }, [location.pathname, showNav])
 
   const scrollHandler = () => {
@@ -52,7 +48,12 @@ export const NavUL = props => {
   }
 
   return (
-    <ul css={navULStyle} ref={thisRef} onScroll={scrollHandler}>
+    <ul
+      id="NavBarNavUL"
+      css={navULStyle}
+      ref={thisRef}
+      onScroll={scrollHandler}
+    >
       {props.children}
     </ul>
   )
