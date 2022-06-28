@@ -1,7 +1,9 @@
 import React, { useContext } from "react"
-import { Nav, NavLI, NavLink } from "./NavBarComps"
+import { Nav } from "./Nav"
 import { NavUL } from "./NavUL"
-import { NavSubMenu } from "./NavBarSubMenu"
+import { NavLI } from "./NavLI"
+import NavLink from "./NavLink"
+import { NavSubMenu } from "./NavSubMenu/NavSubMenu"
 import { NavContext } from "../../../contexts/NavContext"
 
 const NavBar = () => {
@@ -11,12 +13,12 @@ const NavBar = () => {
   const { showNavState } = useContext(NavContext)
   const [showNav] = showNavState
 
-  // The line breaks at bottom are there to handle too short scroll bars on short screens
+  // Each NavSubMenu has to have a unique UUID to keep track of its open/closed state.
   return (
     <Nav id="mainNav" showNav={showNav}>
-      <NavUL id="mainNavUL">
+      <NavUL>
         <NavLI>
-          <NavLink to={"/"} itemProp="url">
+          <NavLink to={"/"} itemProp="url" partiallyActive={false}>
             Home
           </NavLink>
         </NavLI>
@@ -35,9 +37,17 @@ const NavBar = () => {
             Contact
           </NavLink>
         </NavLI>
-        <NavSubMenu title={"FRONT END"} uuid={"NavSubMenu-FRONT-END"}>
+        <NavSubMenu
+          title={"FRONT END"}
+          navTarget={"/edpike365-front-end"}
+          uuid={"NavSubMenu-FRONT-END"}
+        >
           <NavLI>
-            <NavLink to={"/edpike365-front-end#html-css-js"} itemProp="url">
+            <NavLink
+              to={"/edpike365-front-end#html-css-js"}
+              itemProp="url"
+              partiallyActive={true}
+            >
               HTML, CSS, JS
             </NavLink>
           </NavLI>
@@ -72,7 +82,11 @@ const NavBar = () => {
             </NavLink>
           </NavLI>
         </NavSubMenu>
-        <NavSubMenu title={"BACK END"} uuid={"NavSubMenu-BACK-END"}>
+        <NavSubMenu
+          title={"BACK END"}
+          navTarget={"/edpike365-back-end"}
+          uuid={"NavSubMenu-BACK-END"}
+        >
           <NavLI>
             <NavLink to={"/edpike365-back-end#web-servers"} itemProp="url">
               Web Servers
@@ -99,7 +113,11 @@ const NavBar = () => {
             </NavLink>
           </NavLI>
         </NavSubMenu>
-        <NavSubMenu title={"DEVOPS"} uuid={"NavSubMenu-DEVOPS"}>
+        <NavSubMenu
+          title={"DEVOPS"}
+          navTarget={"/edpike365-devops"}
+          uuid={"NavSubMenu-DEVOPS"}
+        >
           <NavLI>
             <NavLink to={"/edpike365-devops/#top"} itemProp="url">
               The Spice
@@ -139,7 +157,11 @@ const NavBar = () => {
             </NavLink>
           </NavLI>
         </NavSubMenu>
-        <NavSubMenu title={"SYSOPS"} uuid={"NavSubMenu-SYSOPS"}>
+        <NavSubMenu
+          title={"SYSOPS"}
+          navTarget={"/edpike365-sysops"}
+          uuid={"NavSubMenu-SYSOPS"}
+        >
           <NavLI>
             <NavLink to={"/edpike365-sysops#sysops-vs-sre"} itemProp="url">
               SysOps vs SRE
@@ -169,7 +191,11 @@ const NavBar = () => {
             </NavLink>
           </NavLI>
         </NavSubMenu>
-        <NavSubMenu title={"CONTAINERS"} uuid={"NavSubMenu-CONTAINERS"}>
+        <NavSubMenu
+          title={"CONTAINERS"}
+          navTarget={"/edpike365-containers"}
+          uuid={"NavSubMenu-CONTAINERS"}
+        >
           <NavLI>
             <NavLink to={"/edpike365-containers#oci-docker"} itemProp="url">
               OCI, Docker
@@ -198,7 +224,6 @@ const NavBar = () => {
           </NavLink>
         </NavLI>
       </NavUL>
-      <br />
     </Nav>
   )
 }

@@ -1,6 +1,8 @@
 import React, { createContext, useState, useEffect } from "react"
 import { isSSR } from "../utils/HelperFunctions"
 
+const WINDOW_WIDTH_THRESHOLD = 1366
+
 export const NavContext = createContext({
   showNav: false,
   toggleShowNav: () => {},
@@ -9,9 +11,22 @@ export const NavContext = createContext({
 // we have multiple states in one context
 export const NavContextProvider = element => {
   // State 1: showNav. Controls the left side navbar visibility.
-  const [showNav, setShowNav] = useState(false)
+  let initialShowNavState = false
+
+  if (!isSSR()) {
+    if (window.innerWidth > WINDOW_WIDTH_THRESHOLD) {
+      initialShowNavState = true
+    }
+  }
+
+  const [showNav, setShowNav] = useState(initialShowNavState)
+
   const toggleShowNav = () => {
-    setShowNav(!showNav)
+    // NavBar Link widget calls toggleShowNav() when the user clicks on a link.
+    // Ignore it if window is wide, because the navbar is always visible.
+    if (window.innerWidth < WINDOW_WIDTH_THRESHOLD) {
+      setShowNav(!showNav)
+    }
   }
 
   // State 2: runLogoAnimation
@@ -26,11 +41,14 @@ export const NavContextProvider = element => {
   let mediaQuery = null
   // we have to use the isSSR or it will fail during Gatsby server side render
   if (!isSSR()) {
-    mediaQuery = window.matchMedia("(min-width: 1366px)")
+    mediaQuery = window.matchMedia(
+      "(min-width: " + WINDOW_WIDTH_THRESHOLD + "px)"
+    )
   }
 
   const handleMediaQueryChange = () => {
     if (!isSSR() && mediaQuery.matches) {
+      setShowNav(true)
       setRunLogoAnim(true)
       // This will run the animation on infinite loop.
       // So after enough time for it to run once, we set it false.

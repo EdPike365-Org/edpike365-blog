@@ -7,6 +7,7 @@ const footerCSS = css`
   margin: auto;
   background-color: var(--color-background-paper);
   color: var(--color-text-secondary);
+  transition: color 400ms ease-in-out, background-color 400ms ease-in-out;
 
   text-align: center;
   font-size: 0.75rem;

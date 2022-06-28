@@ -1,6 +1,7 @@
-import React, { useLayoutEffect, useRef } from "react"
+import React, { useLayoutEffect, useRef, useContext } from "react"
 import { css } from "@emotion/react"
 import { useLocation } from "@gatsbyjs/reach-router"
+import { NavContext } from "../../../contexts/NavContext"
 
 const navULStyle = css`
   color: var(--color-primary-main);
@@ -10,30 +11,32 @@ const navULStyle = css`
   height: 100%;
   overflow: auto;
 `
-export const SESSION_STORAGE_SCROLLTOP_KEY = "NavULScroll"
+
+const SESSION_STORAGE_SCROLLTOP_KEY = "NavULScroll"
 
 export const NavUL = props => {
   // When the component loads, try to restore scrollTop
-  const location = useLocation()
   const thisRef = useRef(null)
+  const location = useLocation()
+
+  // When the navBar is open, restore scroll position
+  const { showNavState } = useContext(NavContext)
+  const showNav = showNavState[0]
 
   useLayoutEffect(() => {
-    let scrollPosition = window.sessionStorage.getItem(
-      SESSION_STORAGE_SCROLLTOP_KEY
-    )
-
-    if (scrollPosition === null) {
-      console.log("scrollPosition from storage was null")
+    // If navBar is closed, don't do anything
+    if (!showNav) {
+      return
     }
 
-    // TODO why would thisRef.current be null? SSR?
-    if (thisRef.current && scrollPosition) {
-      thisRef.current.scrollTop = scrollPosition
-      console.log("!!! scrolled to ", scrollPosition)
-    } else {
-      console.log("!!! thisRef.current was null, not scrolled to ")
+    let scrollY = window.sessionStorage.getItem(SESSION_STORAGE_SCROLLTOP_KEY)
+
+    if (thisRef.current && scrollY) {
+      thisRef.current.scrollTop = scrollY
     }
-  }, [location.pathname])
+
+    // if the URL, or the state of showNav changes, run this
+  }, [location.pathname, showNav])
 
   const scrollHandler = () => {
     if (thisRef.current) {
@@ -45,7 +48,12 @@ export const NavUL = props => {
   }
 
   return (
-    <ul css={navULStyle} ref={thisRef} onScroll={scrollHandler}>
+    <ul
+      id="NavBarNavUL"
+      css={navULStyle}
+      ref={thisRef}
+      onScroll={scrollHandler}
+    >
       {props.children}
     </ul>
   )

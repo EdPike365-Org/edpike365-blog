@@ -15,7 +15,7 @@ const GlobalGridDiv = styled.div`
   gap: 0px;
 
   /* ---- DEFAULT (tiny): Small Narrow Phones (280 x 653) ---- */
-  /* Tiny Header height: 32px */
+  /* Tiny Header height: 44px */
   /* No logo icon, just text */
   /* Put all in a single column, 3 rows. Nav is 0 height unless open. */
 
