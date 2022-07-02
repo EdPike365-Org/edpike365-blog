@@ -30,7 +30,7 @@
         "@react-icons/all-files": "^4.1.0",
         "dotenv": "^16.0.0",
         "eslint": "^8.11.0",
-        "gatsby": "4.6.2",
+        "gatsby": "^4.17.2",
         "gatsby-cli": "^4.0.0",
         "gatsby-head-style-boss": "^3.2.0",
         "gatsby-plugin-catch-links": "^4.9.0",
