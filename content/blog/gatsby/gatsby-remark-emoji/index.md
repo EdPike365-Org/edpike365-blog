@@ -71,5 +71,6 @@ Some [Troll Face Emoticons](https://emoticoncentral.com/category/troll) work too
 ლ(ಠ 益 ಠლ)  
 ლ (ಠ_ಠ ლ)  
 ༼ノ ◕ ヮ ◕ ༽ノ︵┻━┻
+( ͡°( ͡° ͜ʖ( ͡° ͜ʖ ͡°)ʖ ͡°) ͡°)
 
 See the [reference page](https://emoticoncentral.com/category/troll) for more!
