@@ -5,8 +5,12 @@ const {
   createBlogPages,
   addFiltersToBlogListingPages
 } = require(`./gatsby-node-blogposts`)
+const {
+  createSitePagesFromMDFiles
+} = require(`./gatsby-node-mdsitepages`)
 
 // We do not need to require/import dotenv because it was already done in gatsby-config.js
+// It loads .env.production or .env.development depending on the build mode
 const arBlogStatusesToShow = getBlogStatusesToShow(
   process.env.BLOG_STATUSES_TO_SHOW_LIST
 )
@@ -14,7 +18,8 @@ const arBlogStatusesToShow = getBlogStatusesToShow(
 exports.createPages = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions
 
-  createSitePages(arBlogStatusesToShow, graphql, reporter, createPage)
+  createSitePagesFromMDFiles(arBlogStatusesToShow, graphql, reporter, createPage)
+
   createBlogPages(arBlogStatusesToShow, graphql, reporter, createPage)
 }
 
@@ -95,7 +100,7 @@ exports.createSchemaCustomization = ({ actions }) => {
   `)
 }
 
-const createSitePagesFromMDFiles = async (
+const OLDcreateSitePagesFromMDFiles = async (
   arBlogStatusesToShow,
   graphql,
   reporter,

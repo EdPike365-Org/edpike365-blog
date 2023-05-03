@@ -14,7 +14,7 @@ tags:
 
 ### Me
 
-- Links: [GitHub](https://github.com/EdPike365) | [LinkedIn]() | [Medium](https://edpike365.medium.com/) | [Twitter](https://twitter.com/EdPike365) | [Certs and Classes](/professional-certs-classes)
+- Links: [GitHub](https://github.com/EdPike365) | [LinkedIn]() | [Medium](https://edpike365.medium.com/) | [Twitter](https://twitter.com/EdPike365) | [Certs and Classes](/edpike365-certs-classes)
 
 - Primary Skills:
 
