@@ -3,9 +3,14 @@ const { createFilePath, loadNodeContent } = require(`gatsby-source-filesystem`)
 const {
   getBlogStatusesToShow,
   createBlogPages,
+  addFiltersToBlogListingPages
 } = require(`./gatsby-node-blogposts`)
-// We do not need to require dotenv because it was already done in gatsby-config.js
+const {
+  createSitePagesFromMDFiles
+} = require(`./gatsby-node-mdsitepages`)
 
+// We do not need to require/import dotenv because it was already done in gatsby-config.js
+// It loads .env.production or .env.development depending on the build mode
 const arBlogStatusesToShow = getBlogStatusesToShow(
   process.env.BLOG_STATUSES_TO_SHOW_LIST
 )
@@ -13,15 +18,16 @@ const arBlogStatusesToShow = getBlogStatusesToShow(
 exports.createPages = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions
 
-  createSitePages(arBlogStatusesToShow, graphql, reporter, createPage)
+  createSitePagesFromMDFiles(arBlogStatusesToShow, graphql, reporter, createPage)
+
   createBlogPages(arBlogStatusesToShow, graphql, reporter, createPage)
 }
 
-// Create filepaths to each markdown file (blog posts, etc.)
-// as each is added to a node in Redux, add the filepath to the node as a field
 exports.onCreateNode = ({ node, actions, getNode }) => {
   const { createNodeField } = actions
 
+  // Create filepaths to each markdown file (blog posts, etc.)
+  // As each file is added to a node in Redux, add the filepath to the node as a field
   if (node.internal.type === `MarkdownRemark`) {
     const value = createFilePath({ node, getNode })
 
@@ -36,7 +42,8 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
 exports.onCreatePage = ({ page, actions }) => {
   const { createPage, deletePage } = actions
 
-  filterBlogListingPages(page, deletePage, createPage, arBlogStatusesToShow)
+  // Some pages have lists of blogs and need GraphQL filters injected
+  addFiltersToBlogListingPages(page, deletePage, createPage, arBlogStatusesToShow)
 
   /* 
   Since this section will have dynamic content that shouldn’t be rendered statically, 
@@ -93,7 +100,7 @@ exports.createSchemaCustomization = ({ actions }) => {
   `)
 }
 
-const createSitePages = async (
+const OLDcreateSitePagesFromMDFiles = async (
   arBlogStatusesToShow,
   graphql,
   reporter,
@@ -101,8 +108,10 @@ const createSitePages = async (
 ) => {
   const template = path.resolve(`./src/templates/site-page.js`)
 
-  // limit them to those with frontmatter "status" in the list of allowed statuses
-  const results = await graphql(
+  // Limit site pages created from MD.
+  // Limit by what folder the MD file is in,
+  // and to those with frontmatter "status" in the list of allowed statuses
+  const queryResults = await graphql(
     `
       {
         allMarkdownRemark(
@@ -127,15 +136,15 @@ const createSitePages = async (
     `
   )
 
-  if (results.errors) {
+  if (queryResults.errors) {
     reporter.panicOnBuild(
       `There was an error loading your site MD pages`,
-      results.errors
+      queryResults.errors
     )
     return
   }
 
-  const nodes = results.data.allMarkdownRemark.nodes
+  const nodes = queryResults.data.allMarkdownRemark.nodes
   if (nodes.length > 0) {
     nodes.forEach(node => {
       // `context` is available in the template as a prop and as a variable in GraphQL
@@ -146,41 +155,6 @@ const createSitePages = async (
           id: node.id,
         },
       })
-    })
-  }
-}
-
-const filterBlogListingPages = (
-  page,
-  deletePage,
-  createPage,
-  arBlogStatusesToShow
-) => {
-  if (page.path == "/bloglist/") {
-    // limit which blog posts appear on the bloglist page
-    // If they are not in allowed statuses, the pages will not exist
-    // but the bloglist page will still create summaries and links to them
-    deletePage(page)
-    createPage({
-      ...page,
-      context: {
-        ...page.context,
-        allowedBlogStatuses: arBlogStatusesToShow,
-      },
-    })
-  } else if (page.path == "/") {
-    // limit the number and statuses of blog posts
-    // that appear on the home page (most recent, typically 3)
-    // If they are not in allowed statuses, the pages will not exist
-    // but the home page will still create summaries and links to them
-    deletePage(page)
-    createPage({
-      ...page,
-      context: {
-        ...page.context,
-        allowedBlogStatuses: arBlogStatusesToShow,
-        limit: 3,
-      },
     })
   }
 }

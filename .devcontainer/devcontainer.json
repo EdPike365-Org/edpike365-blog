@@ -41,7 +41,9 @@ REF: https://github.com/microsoft/vscode-js-debug/issues/374
     "ecmel.vscode-html-css",
     "davidanson.vscode-markdownlint",
     "christian-kohler.npm-intellisense",
-    "esbenp.prettier-vscode"
+    "esbenp.prettier-vscode",
+    "eg2.vscode-npm-script",
+    "ms-azuretools.vscode-docker"
   ],
 
   "mounts": [

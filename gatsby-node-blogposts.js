@@ -1,5 +1,7 @@
 const path = require(`path`)
 
+//I moved these functions here to clean up gatsby-node.js
+
 exports.getBlogStatusesToShow = strBlogStatusesToShow => {
   // Change the comma seperated list to an array
   const arBlogStatusesToShow = strBlogStatusesToShow.split(",")
@@ -85,3 +87,42 @@ exports.createBlogPages = async (
     }
   })
 }
+
+exports.addFiltersToBlogListingPages = (
+  page,
+  deletePage,
+  createPage,
+  arBlogStatusesToShow
+) => {
+
+  // If a MD blogpost is not in allowed statuses, the pages page for the
+  // blogpost will not exist (filtered in createSitePages)
+  // HOWEVER, pages that *list* blogposts will still create summaries and links to them
+  // So we have to pass in some context variables that are used in the page query
+  // TODO: I need to somehow filter them at a higher level
+
+  if (page.path == "/bloglist/") {
+    // limit which blog posts appear on the "bloglist" page
+    deletePage(page)
+    createPage({
+      ...page,
+      context: {
+        ...page.context,
+        allowedBlogStatuses: arBlogStatusesToShow,
+      },
+    })
+  } else if (page.path == "/") {
+    // limit the number and statuses of blog posts
+    // that appear on the Home Page (typically 3)
+    deletePage(page)
+    createPage({
+      ...page,
+      context: {
+        ...page.context,
+        allowedBlogStatuses: arBlogStatusesToShow,
+        limit: 3,
+      },
+    })
+  }
+}
+

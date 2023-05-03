@@ -19,7 +19,7 @@ tags:
 
 - Trying to polish my Blog site. Keeping up with tech news.
 
-### Log (LIFO)
+### Log 
 
 - [TS, JS + Types, JSDoc, d.ts files, and "Types as Comments"](https://betterprogramming.pub/how-microsoft-wants-to-destroy-typescript-1f1a53b18de6)
 - [Git WorkTrees](https://git-scm.com/docs/git-worktree)
