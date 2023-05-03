@@ -24,19 +24,21 @@ That library, in turn, seems to be pulling some free emojis from [joypixels](htt
 
 Contrary to the plugin's docs on Gatsby, it supports many more "conversion styles" than the [JS functions on JoyPixels](https://demos.joypixels.com/latest/index.html#js). In the options, I tried "shortnameToImage", and it worked but the emoji were not scaled correctly, so I switched back.
 
-#### Slack Emoji Codes :
+#### Slack Emoji Codes:
 
 You can use [Slack Codes](https://www.webfx.com/tools/emoji-cheat-sheet/):
-![emoji codes](emoji codes.png "Classic Emoji Codes")
+ ![Emoji Codes](emoji-codes.png)
 
 Yields: :wink: :kissing_closed_eyes: :cry: :sob: :laughing: :yum: :point_right: :eyes:
+
+<br/>
 
 #### Slack Emoticon Text Shortcuts
 
 This plugin docs poorly document these. My best guess is they cover a _subset_ of the Slack emoticon list. !TODO: dig through the plugin code.
 
 [Emoticons List](https://en.wikipedia.org/wiki/List_of_emoticons)
-![](slack-emoticon-codes.jpg)
+![Slack Emoticon Codes](slack-emoticon-codes.jpg)
 
 <style>
   .emoji-table{
@@ -70,7 +72,7 @@ Some [Troll Face Emoticons](https://emoticoncentral.com/category/troll) work too
 ( ͡ ͜ʖ ͡ )  
 ლ(ಠ 益 ಠლ)  
 ლ (ಠ_ಠ ლ)  
-༼ノ ◕ ヮ ◕ ༽ノ︵┻━┻
+༼ノ ◕ ヮ ◕ ༽ノ︵┻━┻  
 ( ͡°( ͡° ͜ʖ( ͡° ͜ʖ ͡°)ʖ ͡°) ͡°)
 
 See the [reference page](https://emoticoncentral.com/category/troll) for more!

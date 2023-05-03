@@ -47,6 +47,8 @@ const HomePage = ({ data, pageContext, location }) => {
       <Bio />
       <br />
       Last Built: {data.currentBuildDate.currentDate}
+      <br/>
+      Date formatting provided by my custom NPM package <a href="https://www.npmjs.com/package/gatsby-source-build-date">gatsby-source-build-date</a>
     </Layout>
   )
 }
