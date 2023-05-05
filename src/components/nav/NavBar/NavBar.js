@@ -23,9 +23,14 @@ const NavBar = () => {
           </NavLink>
         </NavLI>
         <NavLI>
-          <NavLink to={"/edpike365-about/"} itemProp="url">
-            About
+          <NavLink to={"/edpike365-about-me/"} itemProp="url">
+            About Me
           </NavLink>
+        </NavLI>
+        <NavLI>          
+          <NavLink to={"/edpike365-about-site/"} itemProp="url">
+            About Site
+          </NavLink>          
         </NavLI>
         <NavLI>
           <NavLink to={"/bloglist/"} itemProp="url">

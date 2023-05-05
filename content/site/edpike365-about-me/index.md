@@ -1,5 +1,5 @@
 ---
-title: "About"
+title: "About Me"
 date: "2021-12-27T22:12:03.284Z"
 status: published
 author: EdPike365
@@ -8,13 +8,13 @@ tags:
   - goals
 ---
 
-[Me](#me) | [My Goals in 2022](#my-goals-in-2022) | [Goals in 2023](#my-goals-in-2023) | [This Site](#this-site)
+[Me](#me) | [My Goals in 2022](#my-goals-in-2022) | [Goals in 2023](#my-goals-in-2023)
 
 <!-- excerpt-end -->
 
 ### Me
 
-- Links: [GitHub](https://github.com/EdPike365) | [LinkedIn]() | [Medium](https://edpike365.medium.com/) | [Twitter](https://twitter.com/EdPike365) | [Certs and Classes](/edpike365-certs-classes)
+- Links: [GitHub](https://github.com/EdPike365) | [LinkedIn](https://www.linkedin.com/in/edpike/) | [Medium](https://edpike365.medium.com/) | [Twitter](https://twitter.com/EdPike365) | [Certs and Classes](/edpike365-certs-classes)
 
 - Primary Skills:
 

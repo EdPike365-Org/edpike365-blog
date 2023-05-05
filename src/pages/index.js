@@ -32,8 +32,10 @@ const HomePage = ({ data, pageContext, location }) => {
     <Layout location={location}>
       <Seo title="Home" />
       <P>
-        Welcome to my Portfolio. It started with the Gatsby v3 Starter Blog and
-        was upgraded to v4.
+        Welcome to my Portfolio! 
+        <li>The blog entries are a combination of journaling and typical bloggish articles.</li>
+        <li>Most of the static pages are outlines of what I know or want to know about.</li>
+        <li>The <StyledLink to="http://127.0.0.1:8000/settings/">settings page</StyledLink> is a demo of a custom NPM package that I wrote for managing styles.</li>  
       </P>
       <P>See my "journal" blogs to see additional customizations.</P>
       {numPostsToShow} Most Recent Posts ({" "}

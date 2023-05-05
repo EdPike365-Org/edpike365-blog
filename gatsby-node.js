@@ -1,4 +1,4 @@
-const { createFilePath, loadNodeContent } = require(`gatsby-source-filesystem`)
+const { createFilePath } = require(`gatsby-source-filesystem`)
 const {
   getBlogStatusesToShow,
   createBlogPages,
