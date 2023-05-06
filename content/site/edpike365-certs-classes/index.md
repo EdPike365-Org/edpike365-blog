@@ -11,13 +11,47 @@ tags:
   - Coursera
 ---
 
-![Galaxy Brain](ai2.webp)
+<!--- Why this HTML code block?
+1. gatsby markdown remark grabs the img tag and mangles it, makes it full page, so I am having to hide it inside a section and div.
+2. gatsby markdown remark also grabs tables and mangles them, so I am using sections and divs to control image size
+3. These badges are transparent png's, but gatsby sharper is creating blurring rasters as part of its resize. I need to find a fix for that.
+-->
+<section style="display:flex; flex-wrap: wrap; justify-content: center; align-content:center; background-color: var(--color-background-default);">
+  <div style="height: 150px; width:150px; margin: 12px; background-color: var(--color-background-default);">
+    <a href="https://www.credly.com/badges/da583886-8eed-4cdf-a781-edba4df1441f/public_url">
+    <img src="aws-certified-solutions-architect-associate.png" >
+    </a>
+  </div>
+  <div style="height: 150px; width:150px; margin: 10px;">
+    <a href="https://www.credly.com/badges/df083b22-7afd-477a-ba2a-e9f4147f6036/public_url">
+    <img src="aws-certified-developer-associate.png" >
+    </a>
+  </div>
+  <div style="height: 150px; width:150px; margin: 10px;">
+    <a href="https://www.credly.com/badges/31296217-f775-4fe5-8b93-91e470c11794/public_url">
+    <img src="aws-certified-sysops-administrator-associate.png">
+    </a>
+  </div>
+  <div style="height: 150px; width:150px; margin:10px;">
+    <a href="https://www.credly.com/badges/03dab080-d984-4ac6-ba78-81040e94204c/public_url">
+      <img src="aws-certified-cloud-practitioner.png">
+    </a>
+  </div>
+</section>
+
+|   |   |   |
+|---|---|---|
+|[![Terraform](./hashicorp-certified-terraform-associate-003.png )](https://www.credly.com/badges/7a8977dd-acf4-4a34-bb92-e23b069fd350/public_url) |   |   |
+| [![Prometheus](./pca-prometheus-certified-associate.png)](https://www.credly.com/badges/2f9ac3ca-c6e8-4c1f-845b-b3a15c283c45/public_url)   |   |   |
+|   |   |   |
 
 <div style="text-align:center;" > If I knew then what I know now...</div>
 
 ---
-
+[Credly Badges](https://www.credly.com/users/edward-pike.e09625c7)
 [Certifications](#certifications) | [Certified Classes](#certified-classes)
+
+
 
 If I were starting out again, I'd get a Masters in a biology field, add a big dose of software engineering, and enter a startup ASAP. I've guided my twin 18 year olds to do just that.
 
@@ -54,33 +88,7 @@ A cert shows that I've at least scouted out the full offerings of the cert topic
 
 I earned all three AWS Associate certs because my near term goal is AWS DevOps Profesional cert. I won't be working on the Pro cert until I've had more time in an AWS shop.
 
-<!--- Why this HTML code block?
-1. gatsby markdown remark grabs the img tag and mangles it, makes it full page, so I am having to hide it inside a section and div.
-2. gatsby markdown remark also grabs tables and mangles them, so I am using sections and divs to control image size
-3. These badges are transparent png's, but gatsby sharper is creating blurring rasters as part of its resize. I need to find a fix for that.
--->
-<section style="display:flex; flex-wrap: wrap; justify-content: center; align-content:center; background-color: var(--color-background-default);">
-  <div style="height: 150px; width:150px; margin: 12px; background-color: var(--color-background-default);">
-    <a href="https://www.credly.com/badges/da583886-8eed-4cdf-a781-edba4df1441f/public_url">
-    <img src="aws-certified-solutions-architect-associate.png" >
-    </a>
-  </div>
-  <div style="height: 150px; width:150px; margin: 10px;">
-    <a href="https://www.credly.com/badges/df083b22-7afd-477a-ba2a-e9f4147f6036/public_url">
-    <img src="aws-certified-developer-associate.png" >
-    </a>
-  </div>
-  <div style="height: 150px; width:150px; margin: 10px;">
-    <a href="https://www.credly.com/badges/31296217-f775-4fe5-8b93-91e470c11794/public_url">
-    <img src="aws-certified-sysops-administrator-associate.png">
-    </a>
-  </div>
-  <div style="height: 150px; width:150px; margin:10px;">
-    <a href="https://www.credly.com/badges/03dab080-d984-4ac6-ba78-81040e94204c/public_url">
-      <img src="aws-certified-cloud-practitioner.png">
-    </a>
-  </div>
-</section>
+
 
 ### Certified Classes
 

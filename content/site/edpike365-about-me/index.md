@@ -12,7 +12,7 @@ tags:
 
 <!-- excerpt-end -->
 
-### Me
+### Me Now
 
 - Links: [GitHub](https://github.com/EdPike365) | [LinkedIn](https://www.linkedin.com/in/edpike/) | [Medium](https://edpike365.medium.com/) | [Twitter](https://twitter.com/EdPike365) | [Certs and Classes](/edpike365-certs-classes)
 
@@ -177,11 +177,3 @@ Containers
   - NGS (Next Generation Sequencer) data pipelines (very large files).
 - Explore Rust
 - Get more Cloud Vendor certs
-
-### This Site
-
-I wrote EdPike365.com in [Gatsby](https://www.gatsbyjs.com/). I
-wanted to learn a lot about React, JAM Stack, GraphQL CSS in JS, and NPM
-publishing. At the time, it was a better offer than NextJS.
-
-I am documenting my work and what I learned in my [Site Customization Journal](/edpike365-customizations/).

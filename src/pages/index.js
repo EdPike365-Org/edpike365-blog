@@ -32,12 +32,13 @@ const HomePage = ({ data, pageContext, location }) => {
     <Layout location={location}>
       <Seo title="Home" />
       <P>
-        Welcome to my Portfolio! 
-        <li>The blog entries are a combination of journaling and typical bloggish articles.</li>
-        <li>Most of the static pages are outlines of what I know or want to know about.</li>
-        <li>The <StyledLink to="http://127.0.0.1:8000/settings/">settings page</StyledLink> is a demo of a custom NPM package that I wrote for managing styles.</li>  
+        Welcome to my personal site! 
+        <br/>
+        It is 3 things:
+        <li>A blog.</li>
+        <li>A portfolio.</li>
+        <li>A training set for AI me.</li>
       </P>
-      <P>See my "journal" blogs to see additional customizations.</P>
       {numPostsToShow} Most Recent Posts ({" "}
       <StyledLink to="/bloglist/">See all {totalCount}</StyledLink> )
       <hr />
