@@ -8,13 +8,131 @@ tags:
   - goals
 ---
 
-[Me](#me) | [My Goals in 2022](#my-goals-in-2022) | [Goals in 2023](#my-goals-in-2023)
+[Now](#me-now) | [Near Goals](#my-goals-in-2022) | [Far Goals](#my-goals-in-2023)
 
 <!-- excerpt-end -->
 
-### Me Now
+- Links: [Certs and Classes](/edpike365-certs-classes) | [GitHub](https://github.com/EdPike365) | [LinkedIn](https://www.linkedin.com/in/edpike/) | [Medium](https://edpike365.medium.com/) | [Twitter](https://twitter.com/EdPike365)
 
-- Links: [GitHub](https://github.com/EdPike365) | [LinkedIn](https://www.linkedin.com/in/edpike/) | [Medium](https://edpike365.medium.com/) | [Twitter](https://twitter.com/EdPike365) | [Certs and Classes](/edpike365-certs-classes)
+## Now
+
+The tech I'm focused on now.
+
+#### DevOps: Build, Test, Artifact
+
+- Jenkins with Docker and Kubernetes providers
+- GitHub Actions
+- DevSecOps
+  - BOM (Bill of Materials)? Sec scans
+  - Kubernetes Security
+
+#### Cloud Engineering, SRE, Ops
+
+- IAC: Terraform (Infrastructure), Ansible (Config)
+- AWS: I'm open to other public clouds but I chose AWS as the first one because its the biggest.
+- Kubernetes: I have ALL the certs. I can use it accross clouds and on prem.
+- Monitoring: Prometheus, OpenTelemetry, Grafana
+- Scripting: Python
+
+#### Full Stack: Web Apps for Platforms, Intranet, Infrastructure
+
+- FrontEnds: CRUD forms, HTML, JS, CSS, SSO
+- Backend Rest APIs:
+  
+  - Java Backend: Leveraging my previous experience and using the exciting new Java stack: Java 17+, Spring Boot vs Micronaut, GraalVM, Zuul? vs Spring Cloud Gateway, Reactive: Spring WebFlux vs Akka 
+
+## Near Future
+
+  - Python Backend: I'm looking for any excuse to use Python or 
+
+
+## Past (2000 - 2020)
+
+- Full Stack Web Apps Developer
+  - Rich (3 Tier) Web Apps (mostly intranet, extranet)
+  - REST APIs using Java 8, Tomcat, Jersey
+  - Complex, multipage CRUD workflows
+  - Wrote and refactored SQL queries, reports
+    - complex ERP schema integration (JDEdwards, Ellucian)
+    - Oracle stored procedures
+  - Intranet SSO with MS Active Directory
+  - Refactoring complex legacy servlets and JSPs to be REST APIs and HTML (AJAX, JQuery)
+  - Google Maps API integration
+  - MS CRM server integration for extranet B2B
+  - Build tooling with Gradle or Maven
+  - Automatic testing:
+    - server with JUnit
+    - client with Selenium
+
+- DevOps
+  - Evangelist: introduced VCS (git), build tool, automatic testing, IAC concept
+  - Scoped, secured funding for, and implemented App Monitoring (AppDynamics)
+  - Managed all VMWare VMs for Tomcat web servers
+  - Migrated from HTTPD to NGINX load balancers, reverse proxying
+  - Wrote custom JGit tooling for legacy (IBM Cognos) report editing workflow
+  - Wrote ETL process for syncing between ERP systems (StarRez to Ellucian)
+  - TroubleShooting pinch hitter, systems level bug hunter
+    - DNS MX records problems during parent corporate mail system integration
+    - MS SQL server transient events, hidden triggers, stored procedures, etc.
+    - MS Exchange SSO problems (Wireshark), org structure irregularities
+  - Migrated orphaned GOlang AWS bill review process to Java (Cloudability (bought by DataDog))
+
+- Communication
+  - Mentored other devs
+  - Tutorials and documentation for APIs (Java, Python)
+  - Documented DevOps processes
+  - Systems and Business analyst (situational)
+    - from end user interview to working from wireframes
+    - Refined legacy UI/UX based on user feedback, extreme forensics required
+  - MEd In Secondary Science and Engineering Education
+    - HS General Engineering, Robotics and Sofware Eng Teacher
+      - lessons, tutorials, lectures
+      - classroom mgt
+    - VEX Robotics team coach and sponsor
+  - Blogging ([Medium](https://edpike365.medium.com/), EdPike365.com)
+
+## Recently (2020-2023)
+
+- Modernized Fullstack Technologies
+  - JAMstack (Javascript Framework, APIs, MD)
+  - SPA (Single Page App)
+    - React
+      - Gatsby (includes GraphQL, node)
+      - Create React App
+      - CSS in JS (Emotion)
+  - Node
+    - Creating Packages, NPM
+    - Managing dependencies (complex upgrades)
+    - REST API ?
+  - GraphQL
+  - Swagger/OpenAPI
+  - Social SSO (Octa?)
+  - Mobile-first, responsive, A11y
+  - Chrome Lighthouse Performance
+  - Java 17, Spring Boot, GraalVM
+  - Python ?
+
+- Added SRE/Cloud Engineering skills
+  - Containers (Mostly Docker)
+  - Jenkins
+    - Docker and Jenkins providers
+  - AWS
+    - Certs
+      - Dev Assoc
+      - SysOps Assoc
+      - Assoc
+  - Kubernetes
+    - Certs
+      - CKS
+        - RBAC, OPA, ...
+      - CKA
+      - CKAD
+  - Terraform Assoc
+  - Ansible
+  - Prometheus
+  - Grafana
+  - Linux (previous only allowed Windows Servers)
+
 
 - Primary Skills:
 

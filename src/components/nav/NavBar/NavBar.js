@@ -23,25 +23,33 @@ const NavBar = () => {
           </NavLink>
         </NavLI>
         <NavLI>
-          <NavLink to={"/edpike365-about-me/"} itemProp="url">
-            About Me
-          </NavLink>
-        </NavLI>
-        <NavLI>          
-          <NavLink to={"/edpike365-about-site/"} itemProp="url">
-            About Site
-          </NavLink>          
-        </NavLI>
-        <NavLI>
           <NavLink to={"/bloglist/"} itemProp="url">
             Blog
           </NavLink>
         </NavLI>
         <NavLI>
-          <NavLink to={"/contact/"} itemProp="url">
-            Contact
+          <NavLink to={"/bloglist/"} itemProp="url">
+            Portfolio
+          </NavLink>
+        </NavLI>  
+        <NavSubMenu
+          title={"ABOUT"}
+          uuid={"NavSubMenu-ABOUT"}
+        >
+        <NavLI>
+          <NavLink to={"/edpike365-about-me/"} itemProp="url">
+            Me
           </NavLink>
         </NavLI>
+        <NavLI>          
+          <NavLink to={"/edpike365-about-site/"} itemProp="url">
+            Site
+          </NavLink>          
+        </NavLI>
+
+        </NavSubMenu>                      
+
+
         <NavSubMenu
           title={"FRONT END"}
           navTarget={"/edpike365-front-end"}
@@ -228,6 +236,11 @@ const NavBar = () => {
             Settings
           </NavLink>
         </NavLI>
+        <NavLI>
+          <NavLink to={"/contact/"} itemProp="url">
+            Contact
+          </NavLink>
+        </NavLI>        
       </NavUL>
     </Nav>
   )
