@@ -32,23 +32,36 @@ const NavBar = () => {
             Portfolio
           </NavLink>
         </NavLI>  
+        <NavLI>          
+          <NavLink to={"/edpike365-about-site/"} itemProp="url">
+            About Site
+          </NavLink>          
+        </NavLI>        
         <NavSubMenu
-          title={"ABOUT"}
+          title={"ABOUT ME"}
           uuid={"NavSubMenu-ABOUT"}
         >
         <NavLI>
-          <NavLink to={"/edpike365-about-me/"} itemProp="url">
-            Me
+          <NavLink to={"/edpike365-about-me-now/"} itemProp="url">
+            Now
           </NavLink>
         </NavLI>
-        <NavLI>          
-          <NavLink to={"/edpike365-about-site/"} itemProp="url">
-            Site
-          </NavLink>          
+        <NavLI>
+          <NavLink to={"/edpike365-about-me-near/"} itemProp="url">
+            Near Future
+          </NavLink>
         </NavLI>
-
+        <NavLI>
+          <NavLink to={"/edpike365-certs-classes/"} itemProp="url">
+            Certs and Classes
+          </NavLink>
+        </NavLI>        
+        <NavLI>
+          <NavLink to={"/edpike365-about-me-past/"} itemProp="url">
+            Past
+          </NavLink>
+        </NavLI>
         </NavSubMenu>                      
-
 
         <NavSubMenu
           title={"FRONT END"}
