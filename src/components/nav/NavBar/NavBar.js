@@ -28,7 +28,7 @@ const NavBar = () => {
           </NavLink>
         </NavLI>
         <NavLI>
-          <NavLink to={"/bloglist/"} itemProp="url">
+          <NavLink to={"/edpike365-portfolio/"} itemProp="url">
             Portfolio
           </NavLink>
         </NavLI>  

@@ -39,3 +39,4 @@ tags:
 - Advanced Python
 - GoLang apps and services
 - Svelte
+- Flutter and WASM
