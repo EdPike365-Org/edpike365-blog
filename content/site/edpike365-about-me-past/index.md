@@ -91,10 +91,19 @@ tags:
     - class, variable and function naming to support self documentation
     - "code smell" avoidance (too much code in one class, entanglement)
     - git workflows, at least daily merge
-    - DRY, YAGNI
+    - KIS: Keep it simple
+    - DRY: Don't repeat yourself (within reason)
+    - YAGNI: You aint gonna need it (prevent overengineering, be Agile)
+    - SOLID:
+      - Single Responsibility Principle: Each function should do only one thing. See also Cross-Cutting Concerns.
+      - Open/Closed: Reduce need for code modification. Composition over Inheritance, See also Duck Typing, Code to interfaces.
+      - Liskov Substitution Principle: they needed an L, but also basic inheritence. See also Duck Typing, Code to interfaces.
+      - Interface Segregation Principle: See also Duck Typing, Code to interfaces.
+      - Dependency Inversion Principle: See also Dependency Injection, Inversion of Control.
+    - Functional Programming: make code easier to test and comprehend. My practical low key version is reduce the amount of change that your code makes to things outside its scope, ideally zero, but that is often unachievable. Generally pass in all dependencies that will be acted on. See also IoC.
 
   - Technical Educator
 
     After the .com crash, I took a detour from software development into
     secondary school science and technology education. I enjoy educating and
-    mentoring, and it was a good schedule fit for raising five school age children. I earned a Masters of Education in secondary education, primarily physics and general science. I ended up using my software experience to instead teach HS software engineering, robotics and CAD.
+    mentoring, and it was a good schedule fit for raising five young school age children. I earned a Masters of Education in secondary education, primarily physics and general science. I ended up using my software experience to instead teach HS software engineering, robotics and CAD.

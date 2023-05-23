@@ -39,6 +39,7 @@ const NavBar = () => {
         </NavLI>        
         <NavSubMenu
           title={"ABOUT ME"}
+          navTarget={"/edpike365-about-me-now"}
           uuid={"NavSubMenu-ABOUT"}
         >
         <NavLI>
@@ -244,6 +245,16 @@ const NavBar = () => {
             </NavLink>
           </NavLI>
         </NavSubMenu>
+        <NavLI>
+          <NavLink to={"/edpike365-mlops/"} itemProp="url">
+            MLOps
+          </NavLink>
+        </NavLI> 
+        <NavLI>
+          <NavLink to={"/edpike365-dataops/"} itemProp="url">
+            DataOps
+          </NavLink>
+        </NavLI> 
         <NavLI>
           <NavLink to={"/settings/"} itemProp="url">
             Settings

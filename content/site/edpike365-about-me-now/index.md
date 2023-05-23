@@ -14,7 +14,7 @@ tags:
 
 ## Overall Mission
 
-- Improve IT spend efficiency using automation and data collection, enabling [FinOps](https://www.finops.org/introduction/what-is-finops/) tools.
+- Improve IT spend efficiency using automation and data collection, enabling [FinOps](https://www.finops.org/introduction/what-is-finops/) tools required to make decisions about cost vs. value, TCO, and ROI.
 - Ease movement of assets between cloud vendors, or on prem (Repatriation):
   - automate infrastructure asset management with vendor neutral tools (IaC)
   - create local/co-hosted cloud infrastructure
@@ -23,15 +23,15 @@ tags:
   - Carefully implement AI tools while protecting private internal data
 - Increase software dev velocity and quality:
   - Provide self serve, automated, sand-boxed, and transient resources for test and dev (Platform Engineering)
-  - Coordinate intercommunication with standards (OpenAPI, Message Bus)
+  - Coordinate interops with clear standards (OpenAPI, Message Bus)
   - Add automated test coverage and linting to build processes; gather and present status on dashboards
 - Spread the good news about DevOps.
 
 ## Tactics
 
-The tech I've focused on lately:
+I focused on the tech below to support my career goals. I have additional long term skills on the backburner: DevSecOps, MLOps, DataOps, IoT Edge Ops
 
-#### DevOps: Build, Test, Artifact
+#### DevOps
 
 - Jenkins with Docker and Kubernetes
 - GitHub Actions
@@ -42,15 +42,16 @@ The tech I've focused on lately:
   - AquaSec [Trivy](https://github.com/aquasecurity/trivy) (image scans)
   - Kubernetes Security:  AquaSec [kube-bench](https://github.com/aquasecurity/kube-bench) (CIS benchmarks), [AppArmor](https://gitlab.com/apparmor/apparmor/-/wikis/Documentation), [Falco](https://falco.org/docs/)(threat detection), Seccomp Syscalls (Restrict Syscalls)
 
-#### Cloud Engineering, SRE, Ops
+#### Ops, SRE, Cloud Engineering
 
 - IAC: Terraform (Infrastructure), Ansible (Config)
 - AWS: I'm open to other public clouds but I chose AWS as the first one because its the biggest.
 - Kubernetes: I have ALL the certs. I can use K8s accross clouds and on prem.
 - Monitoring: Prometheus, OpenTelemetry, Grafana
 
-#### Full Stack: Web Apps for Platforms, Intranet, Infrastructure
+#### Full Stack Web Apps
 
+- Web apps for all the *Ops, DevEx, SRE, etc.
 - FrontEnds:
   - Intranet/Extranet CRUD forms: Vanilla HTML, JS, CSS, JQuery, AJAX, SSO
   - Intranet/Extranet docs: Gatsby, with SSR and GraphQL, Emotion CSS
