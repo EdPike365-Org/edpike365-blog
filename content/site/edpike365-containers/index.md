@@ -246,3 +246,6 @@ No daemon, each container is self-sufficient. So no SPOF (single point of failur
       - Docker CE, CLI (they are open source)
       - [Install in WSL 2](https://itspyworld.blogspot.com/2021/11/install-minikube-in-wsl-2-with-kubectl.html)
     - [Rancher Desktop](https://rancherdesktop.io/)
+
+Storage:
+- Longhorn (Rancher Labs)
