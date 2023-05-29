@@ -1,13 +1,12 @@
 ---
-title: "Jenkins and SonarQube in Local Docker"
-date: "2023-05-23T22:12:03.284Z"
-status: draft
+title: "Jenkins Docker Cloud Agents with DinD"
+date: "2023-05-22T22:12:03.284Z"
+status: published
 author: EdPike365
 tags:
   - jenkins
   - sonarqube
   - docker
-  - pipeline
 ---
 
 Build a local devops stack using Jenkins, SonarQube, and Docker. Works on Windows WSL2.

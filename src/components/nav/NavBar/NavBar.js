@@ -245,11 +245,22 @@ const NavBar = () => {
             </NavLink>
           </NavLI>
         </NavSubMenu>
-        <NavLI>
+        <NavSubMenu
+          title={"AI, MLOps"}
+          navTarget={"/edpike365-mlops"}
+          uuid={"NavSubMenu-CONTAINERS"}
+        >
+          <NavLI>
+            <NavLink to={"/edpike365-ai/"} itemProp="url">
+              AI, ML
+            </NavLink>
+          </NavLI> 
+          <NavLI>
           <NavLink to={"/edpike365-mlops/"} itemProp="url">
-            MLOps
-          </NavLink>
-        </NavLI> 
+              MLOps
+            </NavLink>
+          </NavLI> 
+        </NavSubMenu>        
         <NavLI>
           <NavLink to={"/edpike365-dataops/"} itemProp="url">
             DataOps

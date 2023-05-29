@@ -14,15 +14,69 @@ tags:
 
 ## AI Overview
 
-MLOps is helped tremendously by knowing a fair bit about ML.
+Big surprise! MLOps is helped tremendously by knowing a fair bit about AI.
 
 - NLP
+
 - LLM
 - CNN
 - CV
 - Transfer Learning
-- ML
+AI
+  - ML
+    A subset of AI dedicated to taking data from the past and training algorithms to create models that can perform highly complex tasks without being explicitly programmed.
+    - Supervised (labeled): learn from past example to make future predictions
+      - Reinforcement Learning ???
+      Each iteration, weights are changed to minimize **error**
+      - Gradient Decent
+    - Unsupervised: raw data and look for correlations (grouping)
+      ![Supervised vs Unsupervised Learning](./super-vs-unsuper.png)
+
+    - Deep Learning
+      A subset of ML that uses artificial neural networks to process more complex patterns than traditional ML. Uses ANNs.
+      - ANN (Artificial Neural Networks)(aka NN)
+        - Multiple hidden layers (Input Layer - Hidden Layers - Output Layer)
+        - Can process labeled and unlabeled data.
+        - "Semi-Supervised Learning": small amount of labeled data, large amount of unlabeled.
+          - Labeled helps learn basics of task
+          - Unlabeled helps the NN generalize to new examples
+      - Generative AI
+        - Subset of Deep Learning.
+        - Uses ANNs so can process labled and unlabeled data.
+        - Uses Semi, supervised, unsupervised learning.
+        - Typically involves the Transformer architecture. Essentially, it’s a type of AI that can map long-range dependencies and patterns in large training sets, then use what it learns to produce new content, including text, imagery, audio, and synthetic data.
+        - Relies on large models, such as large language models (LLMs) that can classify and generate text, answer questions, and summarize documents
+      - LLM (Large Language Models)
+        - Subset of Deep Learning
+    - ML/Deep Learning Model Types
+      - Model types: Discriminative vs Generative
+      ![Discriminative and Generative Model Types](./discrim-vs-generative-model-types.png)
+      - Discriminative (aka Predictive) used to ***classify*** (is this a dog or a cat or something else)
+      - Generative (aka GenAI) used to ***generate*** (create a dog based on all the dog's you were trained on)
+        - Part of flow is to check with Discriminative model to see if the generated object passes classification check.
+        - Uses unstructured content to learn patterns in content.
+        - NOTE: "model" can also be called a "function" with a multidimensional tensor/matrix with adjustable weights/values.
+        ![Math version](./yfx.png)
+      - Classical Supervised and Unsupervised Learning
+      ![Classic](./classic.png)
+      - New Gen AI Supervised, Semi and Unsupervised Learning
+      ![New](./new.png)
+      - Gen Lang models
+        - PaLM
+        - LaMDA
+        - GPT
+
+  - AI Roles
+    - Data Scientist
+    - Data Engineer
+    - DataOps
+    - ML Engineer
+    - MLOps
+
+      
 - AGI
+
+
 - Training
   - Gradient Descent
   - Sigmoid Functions
@@ -125,3 +179,9 @@ Hugging Face
 ### Cloud Offerings
 
 ### Certs
+
+[Google Generative AI Training](https://cloud.google.com/blog/topics/training-certifications/new-google-cloud-generative-ai-training-resources)
+
+### Articles
+
+[Building Your Own DevSecOps Knowledge Base with OpenAI, LangChain, and LlamaIndex](https://betterprogramming.pub/building-your-own-devsecops-knowledge-base-with-openai-langchain-and-llamaindex-b28cda15abb7)

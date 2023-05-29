@@ -1,28 +1,41 @@
 ---
-title: "Jenkins and SonarQube in Local Docker"
-date: "2023-05-23T22:12:03.284Z"
-status: draft
+title: "Jenkins in Docker for Local CI/CD"
+date: "2023-05-21T22:12:03.284Z"
+status: published
 author: EdPike365
 tags:
   - jenkins
-  - sonarqube
   - docker
   - pipeline
+  - JCasC
+  - automation
 ---
 
-Build a local devops stack using Jenkins, SonarQube, and Docker. Works on Windows WSL2.
+## Build a local devops stack running Jenkins in Docker
+
+> Garaunteed to work in Windows WSL2 and probably in Linux and MacOS.
+
+This is part 1 of a series "CI/CD With Jenkins":
+
+- Part 1: Jenkins In Docker for Local CI/CD
+- Part 2: Jenkins Docker Agents with DindD Cloud
+- Part 3: Jenkins with SonarQube Docker Agent
+
+The stack we build in the series can be used as the base stack for Mannings Live Project: [CI/CD Pipeline for a Web Application Using Jenkins](https://www.manning.com/liveprojectseries/ci-cd-pipeline-ser)
+
+We start by creating a custom Jenkins docker container and run it in Docker. Then we add credentials to talk to GitHub, and then test the certificate with a simple pipeline to GitHub.
+
+### Why Jenkins in Docker?
 
 I try to keep my dev stack off of Windows. I only use Windows for gaming so I don't want the dev resources loading unless I need them. WSL works great for that. I also have Ubuntu desktop via dual boot, but it keeps failing for various reasons (NVIDIA drivers key among the reasons).
 
-> We are doing this step-by-step to increase learning. If this were for efficiency, we'd use some tools like Ansible and Docker Compose.
+Putting Jenkins in Docker also avoids getting tangled up in Java VM hell on your dev machine. If you install Jenkins from the ground up, you also have to install Java. Jenkins Images already have the correct version of Java installed for the Jenkins version in the image.
 
-This can be used as the base stack for Mannings Live Project: [CI/CD Pipeline for a Web Application Using Jenkins](https://www.manning.com/liveprojectseries/ci-cd-pipeline-ser)
-
-This entire project was done on Ubuntu 22 on WSL2 on Windows 11 Pro (i9-9900KF, 16 vCores, 64GB Ram).
+> We are doing this step-by-step to increase learning. If this were for efficiency, we'd use some IaC tools like Ansible.
 
 ## Install Git
 
-I installed git on Ubuntu in WSL, but it might work passed through.
+I installed git on Ubuntu in WSL2, but it might work passed through from Windows.
 
 ## Install Docker
 
@@ -30,61 +43,35 @@ I installed git on Ubuntu in WSL, but it might work passed through.
 - I installed Docker Demon directly on Ubuntu in WSL.
 - I think I used this blog to install Docker on WSL2 [Install Docker on WSL Without Docker Desktop](https://dev.to/bowmanjd/install-docker-on-windows-wsl-without-docker-desktop-34m9) (it was a while ago) when I set up Docker for use with VSCode devcontainers and it is available for this project with no additional work.
 
-## Add Docker-in-Docker Container
+## Create a bridge network and Mapped Drives
 
-- The core Jenkins.io instructions are [here](https://www.jenkins.io/doc/book/installing/docker/).  I've tweaked them a little below to smooth the way.
-- [Jenkins User Handbook](https://www.jenkins.io/doc/book/getting-started/)
-- In the [instructions](https://www.jenkins.io/doc/book/installing/docker/), follow "On macOs and Linux".
-
-- Useful blog about setting up Jenkins in Docker and how to use Docker agents [here](https://davelms.medium.com/run-jenkins-in-a-docker-container-part-1-docker-in-docker-7ca75262619d) to run jobs. Docker agents are not necessary for the Manning project.
-- I used this blog post, plus Jenkins docs, to make these instructions
-  - [Run Jenkins in a Docker container- part 1: Docker-in-Docker](https://davelms.medium.com/run-jenkins-in-a-docker-container-part-1-docker-in-docker-7ca75262619d)
-
-### Create a bridge network
-
-This is so all of our containers can talk to each other easily.
+This is so all of our containers can talk to each other easily. This will become useful in Part 2.
 
 `docker network create jenkins`
 
-### Create docker:dind (docker in docker) Container
-
-Jenkins needs to spin up docker containers as agents. Jenkins will be running in a docker container so you need an additional special docker container running as a sister to Jenkins. It gives Jenkins access to the Docker daemon running on the host (in my case Ubuntu on WSL2).
-
-```bash
-#!/bin/bash
-docker run --name jenkins-dind \
---detach --restart no \
---privileged \
---network jenkins --network-alias docker \
---env DOCKER_TLS_CERTDIR=/certs \
---volume jenkins-docker-certs:/certs/client \
---volume jenkins-data:/var/jenkins_home \
---publish 2376:2376 \
-docker:dind --storage-driver overlay2
-```
-
-This created 2 volumes to persist data between restarts:
-
-- `jenkins-docker-certs` For persisting and sharing certs so Jenkins can talk to DinD
-- `jenkins-data`
-
-Now DinD is listening on port 2376 and Jenkins can reach it on tcp://docker:2376.
-
 ## Add Custom Jenkins Docker Image
 
-Putting Jenkins in Docker avoids getting tangled up in Java VM hell.
+These instructions are built on top of some shoulders:
+
+- [How to Run Jenkins on Docker](https://www.youtube.com/watch?v=QNZNfvrFBMo), by CloudBeesTV.
 
 We are going to set up our stack with `--restart=no` so that the stack is only loaded when I `docker start` it.
 
 You will be creating a Dockerfile and some other files, so I recommend you create a dir. Mine is `~/dev/jenkins-docker`
 
-### Option 1: Customize Jenkins Docker Image
+Create your custom Jenkins Dockerfile in `~/dev/jenkins-docker`.
 
-Create this Dockerfile in `~/dev/jenkins-docker`. We are adding:
+There are 2 custom image options (read below).
+
+Both customizations will add:
 
 - keyring info to let Jenkins talk to the Docker image archive
-- docker-ce-cli
-- blueocean an docker-workflow Jenkins plugins
+- docker-ce-cli: docker container engine CLI
+- blueocean and docker-workflow Jenkins plugins
+
+### Option 1: Customize Jenkins Docker Image, Partial Automation
+
+This is the version you'll find in the Jenkins docs.
 
 ```Dockerfile
 # Dockerfile
@@ -102,12 +89,12 @@ USER jenkins
 RUN jenkins-plugin-cli --plugins "blueocean docker-workflow"
 ```
 
+#### Build Option 1 Image
+
+Build it from  `~/dev/jenkins-docker`:
+`docker build -t jenkins-blueocean-option1 .`
+
 #### Run the Option 1 custom Jenkins container
-
-In the default instructions, Jenkins container will be set to autorun on start. I explicitly set mine to manual start `--restart=no` (no is the default).
-
-I have to start it every Jenkins session:
-  ` docker start jenkins-blueocean `
 
 ```bash
 docker run --name jenkins-blueocean \
@@ -123,8 +110,15 @@ docker run --name jenkins-blueocean \
   myjenkins-blueocean:2.387.3-1
 ```
 
-- This created 2 persistent volumes for you that point at the same host location as the ones used by DindD container.
-- We'll create a script later to launch all the docker containers.
+- We set some args because we are experimetnting:
+  - --rm to remove the container after it is stopped
+  - --restart=no
+- This created 2 docker volumes to hold Jenkins config data between container sessions. We'll use the jenkins-docker-certs in Part 2: Jenkins Docker Agents with DindD Cloud.
+  If you dont want to keep the configurations after you are done experimenting, stop the container (which will auto remove itself).
+  
+  To safely remove the volumes we created here, run `docker volume ls` then `docker volume rm < volume name>`.
+  
+  To quickly and unsafely remove the volumes instead, run `docker volume rm $(docker volume ls -qf dangling=true)`. This works because the Jenkins Docker volumes are now orphaned. DONT DO THIS IF YOU HAVE SOME OTHER CONTAINER EXPERIMENTS IN PLAY.
 
 > Don't forget that you can access Jenkins via `docker exec -it jenkins-blueocean bash`
 
@@ -135,14 +129,17 @@ Log in to Jenkins at [http://localhost:8080](http://localhost:8080).
 
 ### Option 2: Further Automate Jenkins using Configuration As Code
 
-We are going to make our custom Jenkins container even better than Option 1 by using these articles:
+We are going to make our custom Jenkins container even better than Option 1 by using the JCasC plugin.
 
+These articles were helpful:
+
+- [The JCasC (Jenkins Configuration As Code) Plugin](https://plugins.jenkins.io/configuration-as-code/)
 - [Automating Jenkins Setup using Docker and Jenkins Configuration as Code](https://abrahamntd.medium.com/automating-jenkins-setup-using-docker-and-jenkins-configuration-as-code-897e6640af9d)
 - [How To Automate Jenkins Setup with Docker and Jenkins Configuration as Code](https://www.digitalocean.com/community/tutorials/how-to-automate-jenkins-setup-with-docker-and-jenkins-configuration-as-code)
 
-Later, we'll create a script to do all this and Jenkins will be ready to use with far less time up front or user error.
+Later, we'll create an IaC script to do all this and Jenkins will be ready to use with far less time up front or user error.
 
-#### Jenkins Config: Security
+#### Jenkins Config for Option 2
 
 - Create `jenkins-configuration.yaml` in `~/dev/jenkins-docker`.
 
@@ -164,16 +161,20 @@ jenkins:
         - "Overall/Read:authenticated"
 unclassified:
   location:
-    url: http://127.0.0.1:8080/
+    url: http://127.0.0.1:8080/jenkins/
 
 ```
 
-#### Plugin List
+> After Jenkins is up and running, see what properties are available, navigate to server_ip:8080/configuration-as-code/reference, and you’ll find a page of documentation that is customized to your particular Jenkins installation.
 
-We were already using the included java app `jenkins-plugin-cli` to add blueocean and docker-workflow. Now we are going to add all the plugins using the same app:
+#### Plugin List File for Option 2
+
+We were already using the included java app `jenkins-plugin-cli` to add blueocean and docker-workflow plugins in Option 1. Now we are going to add all the plugins using the same java app:
+
+> See Addendum 1: "How To Output A List of your Installed Jenkins Plugins" below to learn how to get a list of installed plugins in an existing Jenkins server. Its how I generated the plugins list below.
 
 - Create `plugins.txt` in `~/dev/jenkins-docker`.
-- Add all default plugins plus a few extra ones we need by copying and pasting the text below into the file.
+- This list below will add all default plugins, plus a few extra ones we need, by copying and pasting the text below into the file. Later in the series we will be creating a Docker "cloud" using DinD, and integrating a SonarQube server docker container.
 - The format is "shortname:version". If no version is specified, it will pull the latest version.
 
 ```Text
@@ -295,7 +296,7 @@ workflow-support
 ws-cleanup
 ```
 
-#### Custom Dockerfile
+#### Custom Option 2 Dockerfile
 
 The file below has the setupWizard disabled.
 
@@ -319,21 +320,18 @@ COPY plugins.txt /usr/share/jenkins/ref/plugins.txt
 RUN jenkins-plugin-cli --plugin-file /usr/share/jenkins/ref/plugins.txt
 ```
 
-#### Build and Run The Custom Image
+#### Build The Option 2 Custom Image
 
-Build it from  `~/dev/jenkins-docker`:
-`docker build -t jenkins-blueocean .`
+Build the image from within  `~/dev/jenkins-docker`. We add "my" to the front to clearly mark it as a custom image:
+`docker build -t myjenkins-blueocean-option2 .`
 
 #### Run the Option 2 custom Jenkins container
 
 - Option 2 requires that we pass in the ADMIN_ID and ADMIN_PASSWORD
-- In the default instructions, Jenkins container will be set to autorun on start.
-  I explicitly set mine to manual start `--restart=no` (no is the default).
-  I have to start it every Jenkins session:
-  ` docker start jenkins-blueocean `
+- Create a file names `docker_run.sh` and paste the below code into it.
 
 ```bash
-docker run --name jenkins-blueocean \
+docker run --name jenkins-blueocean-option2 \
   --detach --rm --restart=no \
   --network jenkins \
   --env DOCKER_HOST=tcp://docker:2376 \
@@ -344,199 +342,197 @@ docker run --name jenkins-blueocean \
   --env JENKINS_ADMIN_ID=admin --env JENKINS_ADMIN_PASSWORD=admin \
   --volume jenkins-data:/var/jenkins_home \
   --volume jenkins-docker-certs:/certs/client:ro \
-  myjenkins-blueocean:2.387.3-1
+  myjenkins-blueocean-option2
 ```
 
-Log in to Jenkins at [http://localhost:8080](http://localhost:8080). It should be ready to go!
+Type `bash ./docker_run.sh`
 
-### Configure Docker Cloud Agents
+Log in to Jenkins at [http://127.0.0.1:8080](http://127.0.0.1:8080). It should be ready to go!
 
-TODO: use the Jenkins API to set Docker Cloud up during the Jenkins custom Docker image step above.
+#### Caveats
 
+The warnings that are present on the home page are the same as those you would get if you set Jenkins up the manual way. One warning will be that the URL is empty, but thats because we used on `localhost` or `127.0.0.1` instead of a proper host name.
 
+#### If Jenkins Works
 
+Now that we've got it working, we will now make our custom Jenkins container persistant over restarts:
 
+- Get the container id with `docker ps`
+- Stop the container with `docker stop <container id>`
+- Remove the --rm from the `docker_run.sh` and the sh script again.
 
+### Restarts
 
-### Add Credentials for Jenkins-to-Git
+In the default instructions, the Jenkins container will be set to autorun on start. I explicitly set mine to manual start `--restart=no` (which is the default but we are being explicit).
 
-You only need to do this for a private repo.
+I have to start it every Jenkins session:
+
+` docker start jenkins-blueocean-option2 `
+
+If you want it to start everytime you reboot, change the code in `docker_run.sh` to `--restart=unless-stopped`, then follow the same instructions as for chaning `--rm`. See [Start containers automatically](https://docs.docker.com/config/containers/start-containers-automatically/).
+
+We'll create a master `start.sh` script later to launch the additional default/core docker containers (DinD and SonarQube).
+  
+## Integrate Jenkins With SCM
+
+### Add Credentials for Jenkins-to-GitHub
+
+You only need to do this for a private repo. We're going to use a "personal access token" because password auth was removed in 2021.
+
 Use [this video from CloudBeesTV](https://www.youtube.com/watch?v=HSA_mZoADSw) but add the credential through the "Manage Jenkins" interface, not via the Pipeline interface (because its cleaner and we have not set up our pipeline yet anyway).
-Don't forget to hit the "validate" button.
+
+
 
 ### Create a Test Pipeline
 
-Lets test that we can talk to our GitHub account.
+```Bash
 
-```Jenkinsfile
+git remote add <name> <url>
+git ls-remote <name>
+
+```
+
+Lets test that we can talk to our GitHub account. (generated with ChatGPT)
+
+```Groovy
+
 pipeline {
-  // this is the master agent to run this pipeline
-  agent any
-  options {
-    buildDiscarder(logRotator(numToKeepStr: '5'))
-  }
-  stages {
-    stage('Test GitHub Access') {
-      steps {
-            withCredentials([usernamePassword(credentialsId: 'git-credential', passwordVariable: 'key', usernameVariable: 'gitUser')]) {    
-                sh  """
-                    git remote
-                    """
+    agent any
+    
+    stages {
+
+        stage('Checkout') {
+            steps {
+                // Checkout the repository using Git
+                git 'https://github.com/edpike365/bmi-calculator.git'
             }
-      }
-      }
-  }
+        }
+        
+        stage('List Repositories') {
+            steps {
+                script {
+                    // Fetch the list of repositories
+                    def repositories = sh(script: 'git ls-remote --get-url', returnStdout: true).trim().split('\n')
+                    
+                    // Print the list of repositories
+                    echo "List of repositories:"
+                    repositories.each { repository ->
+                        echo repository
+                        
+                        // Fetch the branches for each repository
+                        def branches = sh(script: "git ls-remote --heads ${repository} | awk '{print \$2}' | sed 's/refs\\/heads\\///'", returnStdout: true).trim().split('\n')
+                        
+                        // Print the branches for the repository
+                        echo "Branches:"
+                        branches.each { branch ->
+                            echo "  - ${branch}"
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
+
 ```
 
-## Install SonarQube as Docker Container
+From Google GenAI:
 
-### Persistent install
+```Groovy
 
-- Do NOT follow the instructions on [Try Out SonarQube](https://docs.sonarqube.org/latest/try-out-sonarqube/). It will create a transient version and we need to persist access tokens, etc, across out DevOps sessions.
-- To create a persitent install, we follow directions [here](https://docs.sonarqube.org/latest/setup-and-upgrade/install-the-server/#installing-sonarqube-from-the-docker-image). I've reproduced the steps below to be more succinct.
-
-- Create volumes to prevent loss of info between sessions:
-
-```bash
-docker volume create --name sonarqube_data && \
-docker volume create --name sonarqube_logs && \
-docker volume create --name sonarqube_extensions
-```
-
-Assuming you use the default H2 DB, your first run is simply:
-
-```bash
-docker run --name sonarqube-server \
-  -d --rm \
-  --restart=no \
-  -p 9000:9000 \
-  -v sonarqube_extensions:/opt/sonarqube/extensions \
-  sonarqube:9.9.1-community
-```
-
-Reminder: I explicitly set `--restart=no` so it doesn't use resources when I'm not doing Jenkins stuff.
-
-I have to start it every session:
-
-` docker start sonarqube-server `
-
-First Login: user = admin, pwd = admin
-
-> The default embedded H2 database should be used for evaluation purposes only.
-> The embedded database will not scale, it will not support upgrading to newer versions of SonarQube, and there is no support for migrating your data out of it into a different database engine.
-> Setting up a production grade DB for SonarQube is beyond the scope of this tutorial.
-
-## Link Jenkins to your SonarQube
-
-This video was helpful: [CloudBees How to Integrate SonarQube With Jenkins](https://www.youtube.com/watch?v=KsTMy0920go). It uses a Java project to test it so I stopped there. We are going to use a Node web app project.
-
-### Add Plugins To Jenkins
-
-- Go to Manage Jenkins > Manage Plugins > Available
-- Type "sonar" in the search field.
-- Install Additonal Plugins:
-  - Docker
-  - Docker Pipeline
-  - SonarQube Scanner
-  - Sonar Quality Gates
-- Click restart (or not, I have not tested doing this without restart)
-- Verify plugins are in the "installed" list.
-
-### Add Credentials for Jenkins-to-SonarQube Communication
-
-We need to add credentials to Jenkins so it can communicate with SonarQube.
-
-#### Get A Token From SonarQube
-
-- Go to SonarQube > Administration Menu > Security > Users
-- Add token to the default "admin" user (for testing only, in prod we'd create a new app user)
-  - In the "Tokens" column, click "Update Tokens" icon
-  - Generate Tokens > "jenkins"
-  - Expires in: 1 year (or leave it default 30 days)
-  - Click Generate
-  - Copy it and protect your clipboard contents until next step
-
-#### Add SonarQube Token to Jenkins Credentials
-
-- In Jenkins, navigate to Dashboard > Manage Jenkins > Credentials > System > Global credentials (unrestricted)
-- Click "add credential"
-  - Kind: "secret text"
-  - Secret: Paste in the secret from SonarQube
-  - ID: jenkins-sonar
-  - Description: jenkins-sonar
-
-#### Configure A SonarQube Server
-
-- Go to Manage Jenkins > Configure System
-- Scroll down to SonarQube section.
-- Check Env Var Enable Injection of "SonarQube servers" config...
-- Add a server.
-  - Name: sonarqube-1
-  - Server URL: http://localhost:9000 or http://192.168.0.1:9000 (or whatever you installed it to be)
-  - Server auth token: select the token name "jenkins-sonar" that you created in Jenkins earlier
-
-## Test with a Simple Pipeline
-
-!FIX REDO get rid of java, use
-
-Paste this code in the General > Pipeline > Definition Script Box:
-
-```Jenkinsfile
 pipeline {
   agent any
-  options {
-    buildDiscarder(logRotator(numToKeepStr: '5'))
-  }
   stages {
-    stage('Scan') {
+    stage ('List Repos') {
       steps {
-        withSonarQubeEnv(installationName: 'sonarqube-1') { 
-          sh './mvnw clean org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.0.2155:sonar'
-        }
+        sh 'git ls-remote'
       }
     }
   }
+}
+
 ```
 
-## Fork The Course Repo
+## Addendums
 
-You do NOT have to download the repo. Jenkins will pull it down.
+### Addendum 1: How To Output A List of your Installed Jenkins Plugins
 
-## Option 1: Create Blue Ocean Pipeline for your Fork
+`install-plugins.sh` was removed and replaced with [Plugin Installation Manager Tool for Jenkins](https://github.com/jenkinsci/plugin-installation-manager-tool/#readme)
 
-If you are in the Manning course, take advantage of the built in link to Chapter 2, section 2.1.1 of the book "Pipeline as Code"
+We can specify a --plugin-file /path/to/file and also --plugins "space delimited list of plugins"
 
-- Go to localhost:8080/blue to get the modern Blue Ocean interface.
-- Click create new pipeline
-- Follow the wizard
-- Click on the link to generate a token on GitHub (you wont need to do this if you created a global github credentials earlier)
-  - Come back and paste it in.
-- Choose bmi-calculator
-- It will scan the repo looking for an existing Jenkinsfile
-  - Jenkins won't find one, so then click the "create pipeline" button that appears
-- ...
-- Add a Stage, name it "Hello World Stage"
-- Add a step or type "Print Message" and print "Hello World"
-- Save and Run, it will ask you which branch, choose Master (which should be the only one)
-- It will run for a while. I have 1Gb ethernet, and it took roughly 5 minutes. It is cloning the repo and parsing it.
-- It adds the new Jenkinsfile and commits it (IF it has credentials set up, which it won't)
-- Still in the Blue Ocean interface
-  - Click on the job to watch the pipeline logs
-  - After its run, you can click on the job and click on the Artifacts (upper right corner) > pipeline.log
-- Edit the Jenkinsfile to change the message from "hello world" to something else. This should trigger another build.
+The expected format for plugins in the .txt file or entered through the --plugins CLI option is artifact ID:version or artifact ID:url or artifact:version:url
+Script to display list of current plugins in jenkins/script interface
+def pluginList = new ArrayList(Jenkins.instance.pluginManager.plugins)
 
-Option 2: Create Job From Old Jenkins
+To run the script go to http://127.0.0.1:8080/script
+
+Run this code. The second version gets it in the format that we need for `plugins.txt`.
+
+```groovy
+pluginList.sort { it.getShortName() }.each{
+  plugin -> 
+    // println ("${plugin.getDisplayName()} (${plugin.getShortName()}): ${plugin.getVersion()}")
+    println ("${plugin.getShortName()}:${plugin.getVersion()}")
+}
+```
+
+The last line will be a comma delimited list of the plugins, repeated for some reason. I ignore that line when copying and pasting.
+
+### ADDENDUM 2: Script to Create Credentials
+
+THIS IS A WORK IN PROGRESS
+
+I'll be adding a way to programmatically generate a GitHub user token and use it to create a GitHub credential for Jenkins. It will be part of the overall "Local DevOps Stack" build script.
+
+- [How to manage Credentials via the REST API](https://docs.cloudbees.com/docs/cloudbees-ci-kb/latest/client-and-managed-masters/how-to-manage-credentials-via-the-rest-api) Is this a plugin and is it free? Its part of CloudBees CI apparently and it cost a fair bit, no free tier.
+
+#### Get GitHub Token
+
+#### Use It to Create Jenkins Credential
+
+Generated with ChatGPT
+
+```Python
+import requests
+import json
+
+jenkins_url = 'http://your-jenkins-server-url'
+username = 'your-username'
+api_token = 'your-api-token'
+
+# Authenticate with Jenkins
+auth = (username, api_token)
+
+# Define the credential data
+credential_data = {
+    "": "0",
+    "credentials": {
+        "scope": "GLOBAL",
+        "id": "my-credential-id",
+        "username": "my-username",
+        "password": "my-password",
+        "description": "My Credential Description",
+        "$class": "com.cloudbees.plugins.credentials.impl.UsernamePasswordCredentialsImpl"
+    }
+}
+
+# Convert credential data to JSON
+credential_json = json.dumps(credential_data)
+
+# Create the credential
+create_credential_url = f"{jenkins_url}/credentials/store/system/domain/_/createCredentials"
+response = requests.post(create_credential_url, data=credential_json, auth=auth, headers={'Content-Type': 'application/json'})
+
+if response.status_code == 200:
+    print("Credential created successfully.")
+else:
+    print(f"Failed to create credential. Status code: {response.status_code}, Error: {response.text}")
+```
 
 
+## OLD VERSION
 
-
-
-
-
-
-
-OLD VERSION
 Useful for Manning projects.
 4 Projects:
 
@@ -712,64 +708,6 @@ NOTE 2: Freestyle docker cloud jobs clean up their agent immediately IF THE BUIL
 
 ## Test Using Multi
 
+### Addendum 3: Physical Requirements
 
-###
-
-Put this in a anotehr MD file:
-`install-plugins.sh` was removed and replaced with [Plugin Installation Manager Tool for Jenkins](https://github.com/jenkinsci/plugin-installation-manager-tool/#readme)
-
-We can specify a --plugin-file /path/to/file and also --plugins "space delimited list of plugins"
-
-The expected format for plugins in the .txt file or entered through the --plugins CLI option is artifact ID:version or artifact ID:url or artifact:version:url
-Script to display list of current plugins in jenkins/script interface
-def pluginList = new ArrayList(Jenkins.instance.pluginManager.plugins)
-
-```groovy
-pluginList.sort { it.getShortName() }.each{
-  plugin -> 
-    // println ("${plugin.getDisplayName()} (${plugin.getShortName()}): ${plugin.getVersion()}")
-    println ("${plugin.getShortName()}:${plugin.getVersion()}")
-}
-```
-
-Or download it using `curl https://raw.githubusercontent.com/jenkinsci/jenkins/master/core/src/main/resources/jenkins/install/platform-plugins.json | jq -r -c '.[].plugins[] | select(.suggested==true) | .name' | sort`
-
-
-### Script to Create Credentials
-
-```Python
-import requests
-import json
-
-jenkins_url = 'http://your-jenkins-server-url'
-username = 'your-username'
-api_token = 'your-api-token'
-
-# Authenticate with Jenkins
-auth = (username, api_token)
-
-# Define the credential data
-credential_data = {
-    "": "0",
-    "credentials": {
-        "scope": "GLOBAL",
-        "id": "my-credential-id",
-        "username": "my-username",
-        "password": "my-password",
-        "description": "My Credential Description",
-        "$class": "com.cloudbees.plugins.credentials.impl.UsernamePasswordCredentialsImpl"
-    }
-}
-
-# Convert credential data to JSON
-credential_json = json.dumps(credential_data)
-
-# Create the credential
-create_credential_url = f"{jenkins_url}/credentials/store/system/domain/_/createCredentials"
-response = requests.post(create_credential_url, data=credential_json, auth=auth, headers={'Content-Type': 'application/json'})
-
-if response.status_code == 200:
-    print("Credential created successfully.")
-else:
-    print(f"Failed to create credential. Status code: {response.status_code}, Error: {response.text}")
-```
+In case you have performance problems, I developed this project on Ubuntu 22 on WSL2 on Windows 11 Pro (i9-9900KF, 16 vCores, 64GB Ram). Unfortunately that would hide those problems on my end; so let me know if its slow on your machine.

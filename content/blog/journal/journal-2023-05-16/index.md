@@ -1,6 +1,6 @@
 ---
-title: "Journal: Ending 2022-01-21"
-date: "2022-01-21T22:12:03.284Z"
+title: "Journal: Ending 2023-05-26"
+date: "2022-05-26T22:12:03.284Z"
 status: draft
 author: EdPike365
 tags:
@@ -14,9 +14,6 @@ tags:
 [Log](#log-lifo) | [Articles](#articles) | [Books](#books) | [Events](#events) | [Companies/Orgs](#companies-orgs) | [People](#people) | [Training/Classes](#training) | [Definitions](#definitions-acronyms) | [Future Research](#future-research)
 
 ---
-
-
-
 
 ## Things I Bought
 
@@ -34,6 +31,8 @@ I have a backburner project to do some CV (computer vision) and general ML on ed
 
 - 2 x [Raspberry Pi Camera Module 3](https://www.google.com/search?q=raspberry+pi+camera+v3+noir&rlz=1C1RXQR_enUS1024US1024&oq=raspberry+pi+camera+v3+noir&aqs=chrome..69i57j0i22i30l2j0i390i650l4.4996j0j4&sourceid=chrome&ie=UTF-8#fpstate=ive&vld=cid:36743c48,vid:1EIFfln3Kxs,st:0) Bought 1 wide angle, 1 wide angle NOIR (nice pun). I have not had time to check if these are good for feeding my Edge TPUs.
 
+- Google Dev Plus
+
 ## A Raft of Google Stuff from Google IO
 
 - [Multicloud Private DNS](https://www.youtube.com/playlist?list=PLIivdWyY5sqLSAMruve7x6-107DB9NR7c)
@@ -46,6 +45,36 @@ Advanced Networking Series, Google Cloud Tech
 - [Create world-scale augmented reality experiences in minutes with Google’s Geospatial Creator](https://developers.googleblog.com/2023/05/create-world-scale-augmented-reality-experiences-in-minutes-with-google-geospatial-creator.html)
 
  Geospatial Creator, a tool that helps anyone easily visualize, design, and publish world-anchored immersive content in minutes straight from platforms you already know and love — Unity or Adobe Aero.
+
+- [Free Generative AI Courses From Google](https://www.cloudskillsboost.google/journeys/118)
+  7 courses covering The Basics
+
+- Additional Google AI/ML training - varying learning credits required to complete on Google Cloud Skills Boost. Introductory level. Each has a course completion badge or skill badge.
+  - [How Google Does Machine Learning (1 day)](https://www.cloudskillsboost.google/course_templates/10?catalog_rank=%7B%22rank%22%3A8%2C%22num_filters%22%3A2%2C%22has_search%22%3Atrue%7D&search_id=23657976) Course and competion
+  - [MLOps: Getting Started (1 day)](https://www.cloudskillsboost.google/course_templates/158) Course and competion
+  - [Get started with TensorFlow on Google Cloud (8 hours)](https://www.cloudskillsboost.google/quests/249) Skill badge
+  - [Perform foundational ML, AI and data tasks in Google Cloud (7 hours)](https://www.cloudskillsboost.google/quests/117?catalog_rank=%7B%22rank%22%3A1%2C%22num_filters%22%3A0%2C%22has_search%22%3Atrue%7D&search_id=23720773) Skill badge
+  - [Language, Speech, Text, and Translation with Google Cloud APIs (5 hours)](https://www.cloudskillsboost.google/quests/179?catalog_rank=%7B%22rank%22%3A1%2C%22num_filters%22%3A0%2C%22has_search%22%3Atrue%7D&search_id=23748884) Course and competion badge
+
+- Intermediate/Multi-level
+  - [Machine Learning Engineer (Collection of 15 video courses and labs)](https://www.cloudskillsboost.google/paths/17) Learning Path
+  - [Build and Deploy Machine Learning Solutions on Vertex AI (1 day)](https://www.cloudskillsboost.google/quests/183?catalog_rank=%7B%22rank%22%3A10%2C%22num_filters%22%3A0%2C%22has_search%22%3Afalse%7D) Skill badge
+
+- Advanced
+  - [Google Cloud Professional ML Engineer Certification (varied time)](https://cloud.google.com/learn/certification/machine-learning-engineer) Training + certification exam
+  - [Machine Learning with TensorFlow in Vertex AI (90 minutes)](https://www.cloudskillsboost.google/catalog_lab/1309) Skill badge
+  - [Natural Language Processing in Google Cloud (1 day)](https://www.cloudskillsboost.google/course_templates/40?catalog_rank=%7B%22rank%22%3A1%2C%22num_filters%22%3A1%2C%22has_search%22%3Atrue%7D&search_id=23018466) Course with completion badge
+
+### SynBio IT
+
+- [Synbio Startups Tap Evolution, Prep Biomanufacturing Flows](https://www.genengnews.com/insights/synbio-startups-tap-evolution-prep-biomanufacturing-flows/?MailingID=%DEPLOYMENTID%&utm_medium=newsletter&utm_source=GEN+Daily+News+Highlights&utm_content=01&utm_campaign=GEN+Daily+News+Highlights_20230526&oly_enc_id=8775B4188445A5C)
+
+  > Adaptive laboratory evolution (ALE) has been shown to be effective at selecting microbes with desired traits. But the process takes a long time and can be laborious. Now, evolutionary startup companies are working to automate ALE. By applying machine learning, these companies are developing ALE into a more practical way to evolve microbes.
+
+- [Form (Bio) Follows Function: Software Platform Targets Synbio (Form Bio)](https://www.genengnews.com/gen-edge/form-bio-follows-function-software-platform-targets-synbio/?MailingID=%DEPLOYMENTID%&utm_medium=newsletter&utm_source=GEN+Daily+News+Highlights&utm_content=01&utm_campaign=GEN+Daily+News+Highlights_20230526&oly_enc_id=8775B4188445A5C)
+
+> “Whether that is biomanufacturing medicines, biomaterials, biofuels, recyclable plastics, or crude alternatives, the platform (Form Bio) could help advance all of that science and all of that innovation forward.”
+
 
 
 
@@ -75,6 +104,21 @@ Originally, Amazon Omics customers could only bring their own "private" workflow
 [Gencove, Element Biosciences Partner to Offer Low-Pass Whole-Genome Sequencing, Analysis](https://www.genomeweb.com/sequencing/gencove-element-biosciences-partner-offer-low-pass-whole-genome-sequencing-analysis?utm_source=TrendMD&utm_medium=TrendMD&utm_campaign=0&trendmd-shared=0#.ZDp1oJllB-E)
 
 [Gencove, Element Biosystems Partner to Offer Low-Pass Whole-Genome Sequencing, Analysis](https://www.genomeweb.com/sequencing/gencove-element-biosystems-partner-offer-low-pass-whole-genome-sequencing-analysis?utm_source=TrendMD&utm_medium=TrendMD&utm_campaign=0&trendmd-shared=0)
+
+### Articles
+
+- [74 Storeis about Observability](https://hackernoon.com/74-stories-to-learn-about-observability)
+
+- [A New Lab Is Brewing Microbes to Create Makeup and Medicines](https://www.wired.com/story/culture-biosciences-is-fermenting-microbes-for-meat-makeup-and-fuel/) Old but worth noting. I need to follow up with these guys and their customers from back then.
+
+  > Culture Biosciences can best be described as a virtual fermentation lab, a place where companies can send flash-frozen vials of yeast and bacteria to be raised and tested. Besides Geltor, Culture is brewing batches of microbes for a diverse set of synthetic biology startups including Pivot Bio (fertilizers), Modern Meadow (materials), and Synlogic (medicines).
+
+  - March 2023 [Culture Biosciences Focuses Technology and Service Platform on Biologics](https://www.globenewswire.com/news-release/2023/03/14/2626569/0/en/Culture-Biosciences-Focuses-Technology-and-Service-Platform-on-Biologics.html)
+
+- [Automating My Life with Python & ChatGPT: Coding My Own Virtual Voice Assistant](https://www.youtube.com/watch?v=zzW5z2r9Fh0)
+
+- [GPT4All is the Local ChatGPT for your documents…](https://artificialcorner.com/gpt4all-is-the-local-chatgpt-for-your-documents-and-it-is-free-df1016bc335)
+
 
 ### My Goals in 2022
 
