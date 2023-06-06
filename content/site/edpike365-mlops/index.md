@@ -10,7 +10,11 @@ tags:
   - Pipeline 
 ---
 
-## Under Construction, Watch Your Step
+### Under Construction, Watch Your Step
+
+# TODO clean up diff between these 2 pages
+
+![MLOps Cycle](./mlops_cycle.webp)
 
 ## AI Overview
 
@@ -143,6 +147,8 @@ GPT/LLM backed
 
 #### AutoML Frameworks
 
+![Auto Agent Tools Flow](./auto-agent-tools-flow.webp)
+
 - Semantic Kernel
 
 #### External Tools Access
@@ -173,8 +179,6 @@ Used by above
 
 OpenAI
 Hugging Face
-
-## ML Ops
 
 ### Cloud Offerings
 

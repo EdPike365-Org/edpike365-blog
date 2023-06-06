@@ -15,6 +15,63 @@ tags:
 
 ---
 
+[MIT: How AI-generated video is chaning film (The Frost)](https://www.technologyreview.com/2023/06/01/1073858/surreal-ai-generative-video-changing-film/?truid=c84c818a07377edb7a5220f7e0820e5e&utm_source=the_download&utm_medium=email&utm_campaign=the_download.unpaid.engagement&utm_term=Active%20Qualified&utm_content=06-02-2023&mc_cid=11e143350e&mc_eid=77b3f0fccb)
+
+## COMPUTEX 2023
+
+[Keynote NVIDIA Keynote](https://www.youtube.com/watch?v=fHwmLOYJU_w)
+
+- Grace Hopper Super Chip -> Grace Hopper Super Computer
+  - -> "8x Hopper Chip Pods" bound by NVLINK Switch -> 32 "8x Pods" connected by another NVLINK Switch =
+    - 1 GPU
+    - 256 Grace Hopper Superchips
+    - 1 ExaFLOPS Transformer Engine
+    - 144 TB GPU Memory (Low energy DRAM?)
+    - 150 miles of Fiber Optical
+    - 230 TB/sec NVLINK BW
+    - 2,122 60mm Fans :-(
+    - 40K lbs (4 elephants)
+    - about size of 24 humans standing shoulder to shoulder
+    - bluefield 3 smart nic
+
+- MGX: Open Modular Server Design for Accelerated Computing
+  - Increases power, cooling and network capacity over "general computing" server racks (chassis).
+  - Accelerated servers conserve a lot of space but need new rack standards
+
+- Spectrum-X AI Ethernet Platoform
+  - Bluefield 3 smart nics (from mellanox?) (NPU?)
+    - adaptive routing, no CPU use
+    - congestion control
+
+- NVIDIA AI Enterprise Foundations:
+  - Cloud based dev help from NVIDIA
+  - Auto deploy to NVIDIA cloud
+  - Enterprise-grade security and stability
+  - 4,000 software packages
+  - LTS and lifecycle mgt
+  - "Like RedHat for Linux"
+  - On all hyperscalers and Oracle cloud
+
+- NVIDIA Omniverse Cloud
+  - digital twins
+  - international real collab with real time ray trace rendering
+  - low latency service to web browser tab
+  - NVIDIA picasso
+  - generate fake physical errors to train MV
+
+- NVIDIA Metropolis Edge Deployment
+  - for factory floor
+  - inside mobile robots
+  - Isaac AMR (Autonomous Mobile Robot) reference build.
+    - train in virtual, then deploy in real world
+    - Nova Orin: full reference stack
+    - Isaac mission control
+    - pathing
+
+Every data center will be an AI data center
+
+    teledyne flir, trimble???
+
 ## Things I Bought
 
 I have a backburner project to do some CV (computer vision) and general ML on edge/SBC (Single Board Computer). I'll be blogging about adding CV/ML capabilities to RPis, add that and a NVIDIA Jetson Nano to a Kubernetes cluster. Later I'll get a Jetson Xavier.
@@ -26,12 +83,30 @@ I have a backburner project to do some CV (computer vision) and general ML on ed
 
   With the two Edge TPUs in this module, you can double the inferences per second (8 TOPS) in several ways, such as by running two models in parallel or pipelining one model across both Edge TPUs."
 
-- 1 x [USB Accelerator](https://coral.ai/products/accelerator)
+- 1 x [Coral USB ML Accelerator](https://coral.ai/products/accelerator)
   The on-board Edge TPU coprocessor is capable of performing 4 trillion operations (tera-operations) per second (TOPS), using 0.5 watts for each TOPS (2 TOPS per watt). For example, it can execute state-of-the-art mobile vision models such as MobileNet v2 at almost 400 FPS, in a power efficient manner.
 
 - 2 x [Raspberry Pi Camera Module 3](https://www.google.com/search?q=raspberry+pi+camera+v3+noir&rlz=1C1RXQR_enUS1024US1024&oq=raspberry+pi+camera+v3+noir&aqs=chrome..69i57j0i22i30l2j0i390i650l4.4996j0j4&sourceid=chrome&ie=UTF-8#fpstate=ive&vld=cid:36743c48,vid:1EIFfln3Kxs,st:0) Bought 1 wide angle, 1 wide angle NOIR (nice pun). I have not had time to check if these are good for feeding my Edge TPUs.
 
-- Google Dev Plus
+- [Google Cloud Inovators Plus](https://cloud.google.com/innovators/innovatorsplus?hl=en)
+
+## Things I Want to Buy
+
+- [Dev Board Micro](https://coral.ai/products/dev-board-micro)
+- [Dev Board Mini](https://coral.ai/products/dev-board-mini)
+- [Coral Dev Board 4GB](https://coral.ai/products/dev-board)
+- [PoE Add-on board for Dev Board Micro](https://coral.ai/products/poe-add-on)
+- [Dev Board Micro Case](https://coral.ai/products/dev-board-micro-case)
+- [Environmental Sensor Board](https://coral.ai/products/environmental)
+- [Seeed Studio XIAO ESP32S3 Sense - 2.4GHz Wi-Fi, BLE 5.0, OV2640 camera sensor, digital microphone](https://www.seeedstudio.com/XIAO-ESP32S3-Sense-p-5639.html?utm_source=mailchimp&utm_medium=edm&utm_campaign=bazaar_0601&ct=t()&mc_cid=9073725859&mc_eid=491ab956a1)
+- [24GHz mmWave Sensor - Human Static Presence Module Lite](https://www.seeedstudio.com/24GHz-mmWave-Sensor-Human-Static-Presence-Module-Lite-p-5524.html?utm_source=mailchimp&utm_medium=edm&utm_campaign=bazaar_0601&ct=t()&mc_cid=9073725859&mc_eid=491ab956a1)
+
+## Projects
+
+### ToDo
+
+- [TinyML Made Easy: KeyWord Spotting (KWS)](https://www.hackster.io/mjrobot/tinyml-made-easy-keyword-spotting-kws-5fa6e7?ct=t()&mc_cid=9073725859&mc_eid=491ab956a1)
+- A WhatsApp chat using ChatGPT, or summin.
 
 ## A Raft of Google Stuff from Google IO
 

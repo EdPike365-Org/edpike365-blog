@@ -11,9 +11,7 @@ tags:
   - automation
 ---
 
-## Build a local devops stack running Jenkins in Docker
-
-> Garaunteed to work in Windows WSL2 and probably in Linux and MacOS.
+#### Garaunteed to work in Windows WSL2, and probably in Linux and MacOS.
 
 This is part 1 of a series "CI/CD With Jenkins":
 
@@ -23,159 +21,80 @@ This is part 1 of a series "CI/CD With Jenkins":
 
 The stack we build in the series can be used as the base stack for Mannings Live Project: [CI/CD Pipeline for a Web Application Using Jenkins](https://www.manning.com/liveprojectseries/ci-cd-pipeline-ser)
 
-We start by creating a custom Jenkins docker container and run it in Docker. Then we add credentials to talk to GitHub, and then test the certificate with a simple pipeline to GitHub.
+Below, we will:
+
+- build a custom Jenkins docker image
+- run and test it for basic function
+- add credentials to talk to GitHub
+- test the certificate with a simple pipeline to GitHub
 
 ### Why Jenkins in Docker?
 
-I try to keep my dev stack off of Windows. I only use Windows for gaming so I don't want the dev resources loading unless I need them. WSL works great for that. I also have Ubuntu desktop via dual boot, but it keeps failing for various reasons (NVIDIA drivers key among the reasons).
+I try to keep my dev stack off of Windows. I only use Windows for gaming so I don't want the dev resources loading unless I need them. WSL works great for that. The WSL Ubuntu "VM" (sorta kinda), does not even load until I tell it to.
 
-Putting Jenkins in Docker also avoids getting tangled up in Java VM hell on your dev machine. If you install Jenkins from the ground up, you also have to install Java. Jenkins Images already have the correct version of Java installed for the Jenkins version in the image.
+I also have Ubuntu desktop via dual boot, but it keeps failing for various reasons, NVIDIA drivers key among them. So I use WSL and I'll show you how.
+
+Putting Jenkins in Docker also avoids getting tangled up in Java VM hell on your dev machine. If you install Jenkins from the ground up, you also have to install Java. Jenkins images already have the correct version of Java installed for the Jenkins version in the image.
+
+Running Jenkins as a Docker container is problematic if you want to use Docker containers in your pipelines. Jenkins [recommends](https://www.jenkins.io/doc/book/installing/docker/) using a DinD (Docker in Docker) container. This is [problematic](https://jpetazzo.github.io/2015/09/03/do-not-use-docker-in-docker-for-ci/) for production, but should work for a local dev stack.
+
+If you have a dedicated VM for Jenkins, where you are not worried about java VM version differences, etc, then you should consider installing Jenkins in standalone mode, with Docker CLI installed on the same VM. That simplifies using Docker in your pipelines. ***The instructions below are still somewhat useful because they lay out how to user JCasC and plugins, in preparation of automating Jenkins setup.***
 
 > We are doing this step-by-step to increase learning. If this were for efficiency, we'd use some IaC tools like Ansible.
-
-## Install Git
-
-I installed git on Ubuntu in WSL2, but it might work passed through from Windows.
-
-## Install Docker
-
-- Ideally do not install Docker Desktop because it is helpful to do everything via Docker CLI to increase your DevOps skills.
-- I installed Docker Demon directly on Ubuntu in WSL.
-- I think I used this blog to install Docker on WSL2 [Install Docker on WSL Without Docker Desktop](https://dev.to/bowmanjd/install-docker-on-windows-wsl-without-docker-desktop-34m9) (it was a while ago) when I set up Docker for use with VSCode devcontainers and it is available for this project with no additional work.
-
-## Create a bridge network and Mapped Drives
-
-This is so all of our containers can talk to each other easily. This will become useful in Part 2.
-
-`docker network create jenkins`
-
-## Add Custom Jenkins Docker Image
 
 These instructions are built on top of some shoulders:
 
 - [How to Run Jenkins on Docker](https://www.youtube.com/watch?v=QNZNfvrFBMo), by CloudBeesTV.
 
-We are going to set up our stack with `--restart=no` so that the stack is only loaded when I `docker start` it.
+## Required Apps
 
-You will be creating a Dockerfile and some other files, so I recommend you create a dir. Mine is `~/dev/jenkins-docker`
+### Install Git
 
-Create your custom Jenkins Dockerfile in `~/dev/jenkins-docker`.
+I installed git on Ubuntu in WSL2, so the daemon runs the same as it would in a linux VM. I keep the IaC faith and don't install anything for the CLI.
 
-There are 2 custom image options (read below).
+### Install Docker
 
-Both customizations will add:
+- I installed Docker Demon directly on Ubuntu in WSL.
 
-- keyring info to let Jenkins talk to the Docker image archive
-- docker-ce-cli: docker container engine CLI
-- blueocean and docker-workflow Jenkins plugins
+- I do not recommend installing Docker Desktop for Windows, though it can be "passed through" to your WSL VM. It is helpful to do everything via Docker CLI to increase your DevOps skills and to simulate a production Linux VM.
 
-### Option 1: Customize Jenkins Docker Image, Partial Automation
+- Use these directions to [Install Docker in WSL 2 without Docker Desktop](https://nickjanetakis.com/blog/install-docker-in-wsl-2-without-docker-desktop) I originally set up Docker for use with VSCode devcontainers and it was available for this project with no additional work. TODO: script the install with Ansible or some such
 
-This is the version you'll find in the Jenkins docs.
+- The Jenkins docs has [instructions for using Jenkins in Docker](https://www.jenkins.io/doc/book/installing/docker/)
+  - Because we're running in WSL, note the instructions to manage Docker as a non-root user ***in Linux***. It links to [Linux post-installation steps for Docker Engine](https://docs.docker.com/engine/install/linux-postinstall/).
+  - TLDR:
+    - You are going to create a group called Docker, add your user to it, and hot load the group membership.
 
-```Dockerfile
-# Dockerfile
-FROM jenkins/jenkins:2.387.3
-USER root
-RUN apt-get update && apt-get install -y lsb-release
-RUN curl -fsSLo /usr/share/keyrings/docker-archive-keyring.asc \
-  https://download.docker.com/linux/debian/gpg
-RUN echo "deb [arch=$(dpkg --print-architecture) \
-  signed-by=/usr/share/keyrings/docker-archive-keyring.asc] \
-  https://download.docker.com/linux/debian \
-  $(lsb_release -cs) stable" > /etc/apt/sources.list.d/docker.list
-RUN apt-get update && apt-get install -y docker-ce-cli
-USER jenkins
-RUN jenkins-plugin-cli --plugins "blueocean docker-workflow"
-```
+    ```Bash
+    sudo groupadd docker && sudo usermod -aG docker $USER && newgrp docker
+    ```
 
-#### Build Option 1 Image
+    - Test by running `docker run hello-world`
+    - You should also make Docker boot on WSL start with systemd.
 
-Build it from  `~/dev/jenkins-docker`:
-`docker build -t jenkins-blueocean-option1 .`
+    ```Bash
+    sudo systemctl enable docker.service
+    sudo systemctl enable containerd.service
+    ```
 
-#### Run the Option 1 custom Jenkins container
+## Step 1: Create Jenkins Automation Code
 
-```bash
-docker run --name jenkins-blueocean \
-  --detach --rm --restart=no \
-  --network jenkins \
-  --env DOCKER_HOST=tcp://docker:2376 \
-  --env DOCKER_CERT_PATH=/certs/client \
-  --env DOCKER_TLS_VERIFY=1 \
-  --publish 8080:8080 \
-  --publish 50000:50000 \
-  --volume jenkins-data:/var/jenkins_home \
-  --volume jenkins-docker-certs:/certs/client:ro \
-  myjenkins-blueocean:2.387.3-1
-```
+We will create several files for this project. Keep them all together in a dir. I use `~/dev/jenkins-docker/`. You might also want to make the folder a git repo for later use.
 
-- We set some args because we are experimetnting:
-  - --rm to remove the container after it is stopped
-  - --restart=no
-- This created 2 docker volumes to hold Jenkins config data between container sessions. We'll use the jenkins-docker-certs in Part 2: Jenkins Docker Agents with DindD Cloud.
-  If you dont want to keep the configurations after you are done experimenting, stop the container (which will auto remove itself).
-  
-  To safely remove the volumes we created here, run `docker volume ls` then `docker volume rm < volume name>`.
-  
-  To quickly and unsafely remove the volumes instead, run `docker volume rm $(docker volume ls -qf dangling=true)`. This works because the Jenkins Docker volumes are now orphaned. DONT DO THIS IF YOU HAVE SOME OTHER CONTAINER EXPERIMENTS IN PLAY.
+### The Plugin Installation Manager
 
-> Don't forget that you can access Jenkins via `docker exec -it jenkins-blueocean bash`
+We are automating the installation of all of our plugins using [jenkins-plugin-cli](https://github.com/jenkinsci/plugin-installation-manager-tool).
 
-Log in to Jenkins at [http://localhost:8080](http://localhost:8080).
+The app is built into [Jenkins Docker images](https://hub.docker.com/r/jenkins/jenkins), so we don't need to install it. We use it to bake all the plugins in to our custom Docker image.
 
-- Login is user=admin, pwd=admin
-- When prompted: Install Default Plugins
+The list below will add all default/recommended plugins, plus a few extra ones we need, including the [Configuration As Code Plugin](https://github.com/jenkinsci/configuration-as-code-plugin#getting-started). It also includes plugins that we will be using for creating a Docker "cloud" using DinD, and integrating a SonarQube server docker container.
 
-### Option 2: Further Automate Jenkins using Configuration As Code
+The format is "shortname:version". If no version is specified, it will pull the latest version.
 
-We are going to make our custom Jenkins container even better than Option 1 by using the JCasC plugin.
+> See ["Addendum: How To Output A List of your Installed Jenkins Plugins"]() below to learn how to get a list of installed plugins in an existing Jenkins server. Its how I generated the plugins list below.
 
-These articles were helpful:
-
-- [The JCasC (Jenkins Configuration As Code) Plugin](https://plugins.jenkins.io/configuration-as-code/)
-- [Automating Jenkins Setup using Docker and Jenkins Configuration as Code](https://abrahamntd.medium.com/automating-jenkins-setup-using-docker-and-jenkins-configuration-as-code-897e6640af9d)
-- [How To Automate Jenkins Setup with Docker and Jenkins Configuration as Code](https://www.digitalocean.com/community/tutorials/how-to-automate-jenkins-setup-with-docker-and-jenkins-configuration-as-code)
-
-Later, we'll create an IaC script to do all this and Jenkins will be ready to use with far less time up front or user error.
-
-#### Jenkins Config for Option 2
-
-- Create `jenkins-configuration.yaml` in `~/dev/jenkins-docker`.
-
-```yaml
-jenkins:
-  systemMessage: "Automating Jenkins Setup using Docker and Jenkins Configuration as Code\n\n"
-  remotingSecurity:
-   enabled: true
-  securityRealm:
-    local:
-      allowsSignup: false
-      users:
-       - id: ${JENKINS_ADMIN_ID}
-         password: ${JENKINS_ADMIN_PASSWORD}
-  authorizationStrategy:
-    globalMatrix:
-      permissions:
-        - "Overall/Administer:admin"
-        - "Overall/Read:authenticated"
-unclassified:
-  location:
-    url: http://127.0.0.1:8080/jenkins/
-
-```
-
-> After Jenkins is up and running, see what properties are available, navigate to server_ip:8080/configuration-as-code/reference, and you’ll find a page of documentation that is customized to your particular Jenkins installation.
-
-#### Plugin List File for Option 2
-
-We were already using the included java app `jenkins-plugin-cli` to add blueocean and docker-workflow plugins in Option 1. Now we are going to add all the plugins using the same java app:
-
-> See Addendum 1: "How To Output A List of your Installed Jenkins Plugins" below to learn how to get a list of installed plugins in an existing Jenkins server. Its how I generated the plugins list below.
-
-- Create `plugins.txt` in `~/dev/jenkins-docker`.
-- This list below will add all default plugins, plus a few extra ones we need, by copying and pasting the text below into the file. Later in the series we will be creating a Docker "cloud" using DinD, and integrating a SonarQube server docker container.
-- The format is "shortname:version". If no version is specified, it will pull the latest version.
+- Create `plugins.txt` in `~/dev/jenkins-docker/`.
+- Copy and past the text below into `plugins.txt`.
 
 ```Text
 ant
@@ -212,6 +131,7 @@ cloudbees-folder
 command-launcher
 commons-lang3-api
 commons-text-api
+configuration-as-code
 credentials
 credentials-binding
 display-url-api
@@ -296,42 +216,138 @@ workflow-support
 ws-cleanup
 ```
 
-#### Custom Option 2 Dockerfile
+### JCasC (Jenkins Configuration As Code)
 
-The file below has the setupWizard disabled.
+We use the [Configuration As Code Plugin](https://github.com/jenkinsci/configuration-as-code-plugin#getting-started) to automate as much of the Jenkins setup routine as possible and we bake it into our custom Jenkins Docker image.
+
+We set up a CasC folder for the config yaml files so we can break our configs into seperate files, based on config "roots". The rule is that the config files cannot try to config the same settings or it will cause an error.
+
+> [Addendum: Useful JCasC articles]() that I used to create this.
+
+- Create a subdirectory below the Dockerfile: `~/dev/jenkins-docker/casc_configs/`
+- Create the files `/casc_configs/jenkins.yaml` and `/casc_configs/unclassified.yaml`.
+
+Jenkins core is not a plugin, but we can config it in CasC. Examples are [here](https://github.com/jenkinsci/configuration-as-code-plugin/blob/master/demos/jenkins/jenkins.yaml). Jenkins is one of the config "roots".
+
+- Note the line `- "Overall/Administer:${JENKINS_ADMIN_ID}"` which takes our Docker run args and gives the user admin privs.
+- We create a non admin user `edpike365`. I added some example user configs there as well.
+- The matrix config gives the admin full power. Other authenticated users can only do job stuff.
+
+```yaml
+# jenkins.yaml
+jenkins:
+  systemMessage: "EdPike365: Automating Jenkins Setup using Docker and Jenkins Configuration as Code\n\n"
+  remotingSecurity:
+   enabled: true
+  securityRealm:
+    local:
+      allowsSignup: false
+      users:
+       - id: ${JENKINS_ADMIN_ID}
+         password: ${JENKINS_ADMIN_PASSWORD}
+       - id: edpike365
+         name: "Ed Pike"
+         password: edpike365
+         properties:
+         - mailer:
+             emailAddress: "edpike365@gmail.com"
+  authorizationStrategy:
+    globalMatrix:
+      permissions:
+        - "Overall/Administer:${JENKINS_ADMIN_ID}"
+        - "Overall/Read:authenticated"
+        - "Job/Build:authenticated"
+        - "Job/Cancel:authenticated"
+        - "Job/Configure:authenticated"
+        - "Job/Create:authenticated"
+        - "Job/Delete:authenticated"
+        - "Job/Discover:authenticated"
+        - "Job/Move:authenticated"
+        - "Job/Read:authenticated"
+        - "Job/Workspace:authenticated"
+        - "View/Read:anonymous"
+```
+
+"Unclassified" is another config root and gets its own file.
+
+```yaml
+# unclassified.yaml
+unclassified:
+  location:
+    adminAddress: you@example.com
+    url: http://localhost:8080
+```
+
+## Step 2: Custom Jenkins Docker Image
+
+### Custom Dockerfile
+
+The customizations will add:
+
+- install Docker hub credentials to the keyring
+- install Docker CE CLI
+- disable the setup wizard
+- copy our local CasC config folder to /var/jenkins_home/casc_configs on the image
+- copy our local plugins list file to /usr/share/jenkins/ref/plugins.txt on the image
 
 ```Dockerfile
 # Dockerfile
+# Jenkins LTS as of 2023-05-03
 FROM jenkins/jenkins:2.387.3
+
 USER root
+
+# Update and install modules, show Linux Standard Base info
 RUN apt-get update && apt-get install -y lsb-release
+
+# Setup access to docker hub
 RUN curl -fsSLo /usr/share/keyrings/docker-archive-keyring.asc \
   https://download.docker.com/linux/debian/gpg
 RUN echo "deb [arch=$(dpkg --print-architecture) \
   signed-by=/usr/share/keyrings/docker-archive-keyring.asc] \
   https://download.docker.com/linux/debian \
   $(lsb_release -cs) stable" > /etc/apt/sources.list.d/docker.list
+
+# Install the Docker community edition CLI
+# Our docker run code specifies DOCKER_HOST so local Docker commands are executed on a remote Docker daemon
 RUN apt-get update && apt-get install -y docker-ce-cli
+
 USER jenkins
+
 ENV JAVA_OPTS -Djenkins.install.runSetupWizard=false
-COPY jenkins-configuration.yaml /var/jenkins_home/jenkins-configuration.yaml
-ENV CASC_JENKINS_CONFIG /var/jenkins_home/jenkins-configuration.yaml
+
+COPY ./casc_configs /var/jenkins_home/casc_configs
+ENV CASC_JENKINS_CONFIG /var/jenkins_home/casc_configs
+
 COPY plugins.txt /usr/share/jenkins/ref/plugins.txt
 RUN jenkins-plugin-cli --plugin-file /usr/share/jenkins/ref/plugins.txt
 ```
 
-#### Build The Option 2 Custom Image
+### Build The Custom Image
 
-Build the image from within  `~/dev/jenkins-docker`. We add "my" to the front to clearly mark it as a custom image:
-`docker build -t myjenkins-blueocean-option2 .`
+Build the image from within `~/dev/jenkins-docker/`. We add "my" to the front to clearly mark it as a custom image:
 
-#### Run the Option 2 custom Jenkins container
+`docker build -t myjenkins:2.387.3 .`
 
-- Option 2 requires that we pass in the ADMIN_ID and ADMIN_PASSWORD
-- Create a file names `docker_run.sh` and paste the below code into it.
+## Step 3: Custom Jenkins Container
+
+### Create a bridge network
+
+This is so all of our containers can talk to each other easily later. This will become useful in Part 2, but we need it now so we can add Jenkins to it and not have to edit our Docker run code later.
+
+`docker network create jenkins`
+
+### Create Docker run bash script
+
+- While we are experimenting, we want the container to disappear when it is stopped, so `--rm`.
+- We use the jenkins network created above.
+- We set up our stack with `--restart=no` so that the stack is only loaded when I `docker start` it.
+- Our JCasC steup (above) requires that we pass in the `JENKINS_ADMIN_ID` and `JENKINS_ADMIN_PASSWORD`.
+
+- Create a file named `docker-run.sh` and paste the code below into it. Modify to taste.
 
 ```bash
-docker run --name jenkins-blueocean-option2 \
+docker run --name jenkins \
   --detach --rm --restart=no \
   --network jenkins \
   --env DOCKER_HOST=tcp://docker:2376 \
@@ -339,41 +355,81 @@ docker run --name jenkins-blueocean-option2 \
   --env DOCKER_TLS_VERIFY=1 \
   --publish 8080:8080 \
   --publish 50000:50000 \
-  --env JENKINS_ADMIN_ID=admin --env JENKINS_ADMIN_PASSWORD=admin \
+  --env JENKINS_ADMIN_ID=myadmin --env JENKINS_ADMIN_PASSWORD=myadmin \
   --volume jenkins-data:/var/jenkins_home \
   --volume jenkins-docker-certs:/certs/client:ro \
-  myjenkins-blueocean-option2
+  myjenkins:2.387.3
 ```
 
-Type `bash ./docker_run.sh`
+Type `bash ./docker-run.sh`
 
-Log in to Jenkins at [http://127.0.0.1:8080](http://127.0.0.1:8080). It should be ready to go!
+Log in to Jenkins at [http://localhost:8080](http://localhost:8080). It should be ready to go!
 
-#### Caveats
+- Log in as the admin we created dynamically in JCasC from the Docker env vars:
+  - user: "myadmin", password: "myadmin"
+  - Everything should be available, including Jenkins mgt.
 
-The warnings that are present on the home page are the same as those you would get if you set Jenkins up the manual way. One warning will be that the URL is empty, but thats because we used on `localhost` or `127.0.0.1` instead of a proper host name.
+- Logout then login as the hardcoded, non-admin user from JCasC:
+  - user: "edpike365", password: "edpike365"
+  - You should not see any Jenkins admin options
 
-#### If Jenkins Works
+> Don't forget that you can access the Jenkins container via `docker exec -it jenkins bash`
 
-Now that we've got it working, we will now make our custom Jenkins container persistant over restarts:
+### If Jenkins Doesn't Work
 
-- Get the container id with `docker ps`
-- Stop the container with `docker stop <container id>`
-- Remove the --rm from the `docker_run.sh` and the sh script again.
+I made this useful bash script while developing this tutorial. It deletes the old stuff and reruns the Docker build and run.
 
-### Restarts
+```Bash
+# reset.sh
+CONTAINERID=$(docker ps -aqf "name=jenkins")
+if [[ ! -z "$CONTAINERID" ]]
+then
+  echo "Jenkins was running"
+  echo "CONTAINERID is $CONTAINERID"
+  docker stop $CONTAINERID
+else
+  echo "CONTAINERID was empty, jenkins container was not running"
+fi
+docker volume rm jenkins-data
+docker volume rm jenkins-docker-certs
+docker build -t myjenkins:2.387.3 .
+sh ./docker-run.sh
+```
 
-In the default instructions, the Jenkins container will be set to autorun on start. I explicitly set mine to manual start `--restart=no` (which is the default but we are being explicit).
+## Step 4: Tests
 
-I have to start it every Jenkins session:
+### Test 1: Built In Hello World Pipeline
 
-` docker start jenkins-blueocean-option2 `
+Use the built in "Hello World" pipeline to test for basic functionality.
 
-If you want it to start everytime you reboot, change the code in `docker_run.sh` to `--restart=unless-stopped`, then follow the same instructions as for chaning `--rm`. See [Start containers automatically](https://docs.docker.com/config/containers/start-containers-automatically/).
+- Jenkins Dashboard > New Item > Item Name "hello test" > Choose Pipeline > OK
+- Scroll down to the Pipeline Script area.
+- In the upper right corner, use the "try sample Pipeline" dropdown to select "Hello World".
+- Save > Build Now
+- After it completes, it should have a green block in "Stage View".
+- To view the details, click on "Build History" > #1 (in lower left corner)
 
-We'll create a master `start.sh` script later to launch the additional default/core docker containers (DinD and SonarQube).
+### Test 2: MultiBranch Public Github Repo
+
+- Jenkins Dashboard > New Item > Item Name "public MB test" > Choose ***Multibranch Pipeline*** > OK
+- Display Name: "my mb test"
+- Branch Source: mine is Github
+  - Credentials: none
+  - Repo URL:
+
+    I get the URL from the [EdPike365/bmi-calculator](https://github.com/EdPike365/bmi-calculator) repo that I forked for the Manning tutorial.
+
+    Go to `<> Code` and select HTTPS. Copy [the link](https://github.com/EdPike365/bmi-calculator.git).
+
+    Paste it into the Jenkins HTTPS URL field. Click the `Validate` button.
   
-## Integrate Jenkins With SCM
+- Mode: Jenkinfile (your public repo will need a Jenkinsfile. Copy the pipeline from the first test and put it in a Jenkinsfile.)
+
+- Click `Save` and Jenkins will scan the repo and log the results. It should end in "Finished: SUCCESS"
+
+### Test 3: Private Repo Pipeline Test
+
+
 
 ### Add Credentials for Jenkins-to-GitHub
 
@@ -381,7 +437,12 @@ You only need to do this for a private repo. We're going to use a "personal acce
 
 Use [this video from CloudBeesTV](https://www.youtube.com/watch?v=HSA_mZoADSw) but add the credential through the "Manage Jenkins" interface, not via the Pipeline interface (because its cleaner and we have not set up our pipeline yet anyway).
 
+### Add Credentials Using JSaaC Configuration
 
+TODO: We set up our SCM and SonarQube credentials using JSaaC.
+
+We will have a folder for config files and a file ***similar to this*** will be added to it
+[jenkins_credentials.yaml](https://gist.github.com/apr-1985/9b5cf46497f82c11f00e05363ad45107#file-jenkins_credentials-yaml)
 
 ### Create a Test Pipeline
 
@@ -453,261 +514,78 @@ pipeline {
 
 ```
 
+
+
+
+### When the tests pass, edit docker-run.sh
+
+Now that it works, we make our custom Jenkins container persistant over restarts.
+
+Edit the `docker-run.sh`
+
+- Remove the `--rm`
+- Change `--restart=no` to `--restart=unless-stopped` (See [Start containers automatically](https://docs.docker.com/config/containers/start-containers-automatically/))
+- Run the script again: `bash ./docker-run.sh`
+
+We'll create a master `start.sh` script later to launch the additional default/core docker containers (DinD and SonarQube).
+
 ## Addendums
 
-### Addendum 1: How To Output A List of your Installed Jenkins Plugins
+### Addendum: Useful JCasC articles
 
-`install-plugins.sh` was removed and replaced with [Plugin Installation Manager Tool for Jenkins](https://github.com/jenkinsci/plugin-installation-manager-tool/#readme)
+- [Getting started with Jenkins Configuration as Code](https://www.eficode.com/blog/start-jenkins-config-as-code)
+- [The JCasC (Jenkins Configuration As Code) Plugin](https://plugins.jenkins.io/configuration-as-code/)
+- [Automating Jenkins Setup using Docker and Jenkins Configuration as Code](https://abrahamntd.medium.com/automating-jenkins-setup-using-docker-and-jenkins-configuration-as-code-897e6640af9d)
+- [How To Automate Jenkins Setup with Docker and Jenkins Configuration as Code](https://www.digitalocean.com/community/tutorials/how-to-automate-jenkins-setup-with-docker-and-jenkins-configuration-as-code)
+- [Jenkins JCasC for Beginners](https://medium.com/globant/jenkins-jcasc-for-beginners-819dff6f8bc)
 
-We can specify a --plugin-file /path/to/file and also --plugins "space delimited list of plugins"
+### Addendum: How To Output And Use A List of your Installed Jenkins Plugins
 
-The expected format for plugins in the .txt file or entered through the --plugins CLI option is artifact ID:version or artifact ID:url or artifact:version:url
-Script to display list of current plugins in jenkins/script interface
-def pluginList = new ArrayList(Jenkins.instance.pluginManager.plugins)
+We are using [Plugin Installation Manager Tool for Jenkins](https://github.com/jenkinsci/plugin-installation-manager-tool/#readme). It replaces `install-plugins.sh` from ye olden days.
 
-To run the script go to http://127.0.0.1:8080/script
+We can specify a `--plugin-file /path/to/file` ***and** also `--plugins "space delimited list of plugins"`
 
-Run this code. The second version gets it in the format that we need for `plugins.txt`.
+The expected formats for plugins in the .txt file, or entered through the --plugins CLI option, are:
+
+- `artifact ID:version` (if no version specified, `latest` is used)
+- `artifact ID:url`
+- `artifact:version:url`
+
+Run this script to display list of current plugins in jenkins/script interface. The results are in two formats:
+
+- A summary that gives you the most useful info.
+- An abbreviated version that will get the `latest` of each plugin that we can use for `plugins.txt`.
+
+Edit the second list if you want to use one of the other formats for the Plugin Tool.
 
 ```groovy
+def pluginList = new ArrayList(Jenkins.instance.pluginManager.plugins)
+
+//List them with full info
+println ("Format: DisplayName ShortName: Version: URL")
+println ("=======================================")
 pluginList.sort { it.getShortName() }.each{
   plugin -> 
-    // println ("${plugin.getDisplayName()} (${plugin.getShortName()}): ${plugin.getVersion()}")
-    println ("${plugin.getShortName()}:${plugin.getVersion()}")
+    println ("${plugin.getDisplayName()} (${plugin.getShortName()}): ${plugin.getVersion()}: ${plugin.getUrl()}")
 }
+
+println()
+println()
+
+//List them in a version that will fetch the latest, if thats what you are in to.
+println ("Format: DisplayName")
+println ("=======================================")
+pluginList.sort { it.getShortName() }.each{
+  plugin -> 
+    println ("${plugin.getShortName()}")
+}
+
+//If these are not here, the function appends some useless text here.
+println()
+println()
+
 ```
 
 The last line will be a comma delimited list of the plugins, repeated for some reason. I ignore that line when copying and pasting.
 
-### ADDENDUM 2: Script to Create Credentials
-
-THIS IS A WORK IN PROGRESS
-
-I'll be adding a way to programmatically generate a GitHub user token and use it to create a GitHub credential for Jenkins. It will be part of the overall "Local DevOps Stack" build script.
-
-- [How to manage Credentials via the REST API](https://docs.cloudbees.com/docs/cloudbees-ci-kb/latest/client-and-managed-masters/how-to-manage-credentials-via-the-rest-api) Is this a plugin and is it free? Its part of CloudBees CI apparently and it cost a fair bit, no free tier.
-
-#### Get GitHub Token
-
-#### Use It to Create Jenkins Credential
-
-Generated with ChatGPT
-
-```Python
-import requests
-import json
-
-jenkins_url = 'http://your-jenkins-server-url'
-username = 'your-username'
-api_token = 'your-api-token'
-
-# Authenticate with Jenkins
-auth = (username, api_token)
-
-# Define the credential data
-credential_data = {
-    "": "0",
-    "credentials": {
-        "scope": "GLOBAL",
-        "id": "my-credential-id",
-        "username": "my-username",
-        "password": "my-password",
-        "description": "My Credential Description",
-        "$class": "com.cloudbees.plugins.credentials.impl.UsernamePasswordCredentialsImpl"
-    }
-}
-
-# Convert credential data to JSON
-credential_json = json.dumps(credential_data)
-
-# Create the credential
-create_credential_url = f"{jenkins_url}/credentials/store/system/domain/_/createCredentials"
-response = requests.post(create_credential_url, data=credential_json, auth=auth, headers={'Content-Type': 'application/json'})
-
-if response.status_code == 200:
-    print("Credential created successfully.")
-else:
-    print(f"Failed to create credential. Status code: {response.status_code}, Error: {response.text}")
-```
-
-
-## OLD VERSION
-
-Useful for Manning projects.
-4 Projects:
-
-1. Static Code Analysis
-
-   - [Integrating Sonarqube With Jenkins](https://liveproject.manning.com/module/900_2_1/static-code-analysis/1--integrating-sonarqube-with-jenkins/1-1-workflow%3a-integrating-sonarqube-with-jenkins?)
-
-   - [Static Code Analysis](https://liveproject.manning.com/module/900_3_1/static-code-analysis/2--static-code-analysis-in-pipeline-for-reactjs-application/2-1-workflow%3a-static-code-analysis-in-pipeline-for-reactjs-application?)
-
-1. Continuous Integration
-
-   - [Configure unit tests and code coverage with Quality Gate](https://liveproject.manning.com/module/901_2_1/continuous-integration/1--configure-unit-tests-and-code-coverage-with-quality-gate/1-1-workflow%3a-configure-unit-tests-and-code-coverage-with-quality-gate?)
-
-   - [Build And Archive Artifact](https://liveproject.manning.com/module/901_3_1/continuous-integration/2--build-and-archive-the-artifact/2-1-workflow%3a-build-and-archive-the-artifact?comment=540613&groupId=2070)
-
-1. Build and Scan Docker Image
-
-   - [Build Docker Image](https://liveproject.manning.com/module/902_2_1/build-and-scan-docker-image/1--building-docker-images/1-1-workflow%3a-building-docker-images?)
-
-   - [Scanning Docker Images for Vulnerabilities](https://liveproject.manning.com/module/902_3_1/build-and-scan-docker-image/2--scanning-docker-images-for-vulnerabilities/2-1-workflow%3a-scanning-docker-images-for-vulnerabilities?)
-
-1. Continuous Deployment
-
-   - [Deploy In Kubernetes Cluster](https://liveproject.manning.com/module/903_2_1/continuous-deployment/1--deploy-reactjs-application-in-kubernetes-cluster/1-1-workflow%3a-deploy-reactjs-application-in-kubernetes-cluster?)
-
-   - [Load Testing With Apache JMeter](https://liveproject.manning.com/module/903_3_1/continuous-deployment/2--load-testing-with-apache-jmeter/2-1-workflow%3a-load-testing-with-apache-jmeter?)
-
-### Useful Links
-
-- [Using Docker With Pipeline](https://www.jenkins.io/doc/book/pipeline/docker/)
-- [Docker Containers As Build Slaves](https://devopscube.com/docker-containers-as-build-slaves-jenkins/)
-- [Docker build/push with declarative pipeline in Jenkins](https://faun.pub/docker-build-push-with-declarative-pipeline-in-jenkins-2f12c2e43807)
-
-## Get a Docker Hosting env
-
-- assuming Windows 10/11, WSL2, Docker Desktop
-
-## Prep docker host
-
-`docker volume create jenkins-data`
-
-`docker volume create jenkins-docker-certs`
-
-`docker network ls`
-
-Create a network for jenkins and jenkins-docker-proxy containers to communicate. Creates a network with the default DRIVER type of "bridge" and local scope.
-`docker network create jenkins`
-
-Note that user defined networks allow connection via container name, not just IP address via `automatic service discovery`. It uses the DNS service embedded in the docker host.
-
-Refs:
-
-- [Jenkins Book: Using Docker](https://www.jenkins.io/doc/book/installing/docker/)
-
-- [Run Jenkins in a Docker container — part 1 — Docker-in-Docker](https://davelms.medium.com/run-jenkins-in-a-docker-container-part-1-docker-in-docker-7ca75262619d)
-
-- [Run Jenkins in a Docker container — part 2 — socat](https://davelms.medium.com/run-jenkins-in-a-docker-container-part-2-socat-d5f18820fe1d)
-
-- [Run Jenkins in a Docker container — part 3 — run as root user](https://davelms.medium.com/run-jenkins-in-a-docker-container-part-3-run-as-root-user-12b9624a340b)
-
-- [Docker – Using Docker containers for your Jenkins build nodes](https://devopspoints.com/docker-using-docker-containers-for-your-jenkins-build-nodes.html)
-
-- [Connecting to Docker Daemon from jenkins running inside a docker container](https://stackoverflow.com/questions/66492160/connecting-to-docker-daemon-from-jenkins-running-inside-a-docker-container)
-
-- Useful Commands
-
-  `docker container inspect CONTAINER`
-
-## Launch Docker Proxy Container
-
-```bash
-#!/bin/bash
-docker container run --name jenkins-docker \
- --detach --restart unless-stopped \
- --privileged \
- --network jenkins --network-alias docker \
---env DOCKER_TLS_CERTDIR="/certs" \
- --volume jenkins-docker-certs:/certs/client \
- --volume jenkins-data:/var/jenkins_home \
- docker:dind
-```
-
-`--network-alias docker` adds an extra "conatiner name" that can be used on the `jenkins` user defined network. YOU ARE NOT ALIASING THE ACTUAL NETWORK.
-
-After running this command, a Docker-in-Docker container will be listening on port 2376 and since we gave it the network alias of `docker` then we will be able to reach it from Jenkins on tcp://docker:2376.
-
-`docker network inspect jenkins`
-
-Consider adding -dit vs --detach. -dit means "detached interactive terminal". Then you should be able to use `docker attach alpine`. Alpine default terminal is "ash", not "bash".
-
-`docker attach jenkins-docker`
-
-`# ip addr show`
-
-`# ping -c 2 google.com`
-
-`CTRL + p then q`
-
-> **_Notes:_**
->
-> - on initial start-up, Docker will create client and server certificates under `/certs`
->   you will need these later when configuring the docker cloud.
->
-> - variation. to skip TLS and use port 2375, set DOCKER_TLS_CERTDIR=""
->   <br/><br/>
-
-## Launch Jenkins Container
-
-```bash
-#!/bin/bash
-docker container run --name jenkins-blueocean \
-  --detach --restart unless-stopped \
-  --network jenkins \
-  --env DOCKER_HOST="tcp://docker:2376" \
-  --env DOCKER_CERT_PATH=/certs/client \
-  --env DOCKER_TLS_VERIFY=1 \
-  --volume jenkins-docker-certs:/certs/client:ro \
-  --volume jenkins-data:/var/jenkins_home \
-  --publish 9999:8080 --publish 50000:50000 \
-  jenkinsci/blueocean
-```
-
-If you chose to skip TLS and are using port 2375, use these environment variables:
-
-```text
-  --env DOCKER_HOST="tcp://docker:2375"
-  --env DOCKER_CERT_PATH=""
-  --env DOCKER_TLS_VERIFY=""
-```
-
-Now that Jenkins is started, head over to http://localhost:9999 to go through the initial set up wizard.
-
-Next:
-
-- Jenkins docker plugin
-- New cloud, specify `tcp://docker:2376`
-- “X.509 Client Certificate”
-- Docker Agent Template: `jenkins/agent:latest-jdk11`
-- name: jenkins-agent-jdk11
-- label: "docker-dind jenkins-agent-jdk11"
-
-[Further directions](https://davelms.medium.com/run-jenkins-in-a-docker-container-part-1-docker-in-docker-7ca75262619d)
-
-NOTE: Name the docker Cloud that points at your dind server "docker-dind". The only change seems to be that the console output for a build will say "Running on jenkins-agent-jdk11-0000am08jei12 on docker-dind". Later, we will add another docker Cloud that uses the sock method and call it "docker-sock".
-
-Docker Plugin works with jenkins even if you have no cloud configured. It just needs to be able to use the docker host that the jenkins controller container is running on. HOWEVER, we are going to try to get docker-dind to handle docker agent request.
-
-## Launch SonarQube Container
-
-## Test Networking
-
-Test that everything can talk to each other over the `jenkins` network.
-
-`docker attach jenkins-docker`
-
-`# ping -c 2 {jenkins-ip}`
-
-`CTRL + p then q`
-
-`docker attach jenkins`
-
-`# ping -c 2 {jenkins-docker-ip}`
-
-## Test Using FreeStyle
-
-NOTE: Freestyle jobs can be run when the master node is marked temporarily offline.
-
-## Test Using Pipeline
-
-NOTE 1: Pipeline jobs will NOT initiate when the master node is marked temporarily offline. If you click the "build now" button, nothing will happen. If you want to force use of a docker cloud, you need to configure the master (aka built-in Node) and set number of executors to 0.
-
-NOTE 2: Freestyle docker cloud jobs clean up their agent immediately IF THE BUILT-IN NODE HAS EXECUTORS (even when the build was definitely done on a cloud agent). If Built-in Node executors are set to 0, Freestyle job cloud agents linger just like Pipeline jobs do. Pipeline jobs ALWAYS leave the agent around for about 2 minutes, first marked ? then additonally marked ?. TODO figure out why Executors call immediate cloud agent cleanup while Pipeline jobs linger.
-
-## Test Using Multi
-
-### Addendum 3: Physical Requirements
-
-In case you have performance problems, I developed this project on Ubuntu 22 on WSL2 on Windows 11 Pro (i9-9900KF, 16 vCores, 64GB Ram). Unfortunately that would hide those problems on my end; so let me know if its slow on your machine.
+To run the script go to http://localhost:8080/script, or go to Dashboard > Manage Jenkins > Script Console.

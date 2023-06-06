@@ -772,3 +772,158 @@ if response.status_code == 200:
 else:
     print(f"Failed to create credential. Status code: {response.status_code}, Error: {response.text}")
 ```
+
+
+
+
+
+## OLD VERSION
+
+Useful for Manning projects.
+4 Projects:
+
+1. Static Code Analysis
+
+   - [Integrating Sonarqube With Jenkins](https://liveproject.manning.com/module/900_2_1/static-code-analysis/1--integrating-sonarqube-with-jenkins/1-1-workflow%3a-integrating-sonarqube-with-jenkins?)
+
+   - [Static Code Analysis](https://liveproject.manning.com/module/900_3_1/static-code-analysis/2--static-code-analysis-in-pipeline-for-reactjs-application/2-1-workflow%3a-static-code-analysis-in-pipeline-for-reactjs-application?)
+
+1. Continuous Integration
+
+   - [Configure unit tests and code coverage with Quality Gate](https://liveproject.manning.com/module/901_2_1/continuous-integration/1--configure-unit-tests-and-code-coverage-with-quality-gate/1-1-workflow%3a-configure-unit-tests-and-code-coverage-with-quality-gate?)
+
+   - [Build And Archive Artifact](https://liveproject.manning.com/module/901_3_1/continuous-integration/2--build-and-archive-the-artifact/2-1-workflow%3a-build-and-archive-the-artifact?comment=540613&groupId=2070)
+
+1. Build and Scan Docker Image
+
+   - [Build Docker Image](https://liveproject.manning.com/module/902_2_1/build-and-scan-docker-image/1--building-docker-images/1-1-workflow%3a-building-docker-images?)
+
+   - [Scanning Docker Images for Vulnerabilities](https://liveproject.manning.com/module/902_3_1/build-and-scan-docker-image/2--scanning-docker-images-for-vulnerabilities/2-1-workflow%3a-scanning-docker-images-for-vulnerabilities?)
+
+1. Continuous Deployment
+
+   - [Deploy In Kubernetes Cluster](https://liveproject.manning.com/module/903_2_1/continuous-deployment/1--deploy-reactjs-application-in-kubernetes-cluster/1-1-workflow%3a-deploy-reactjs-application-in-kubernetes-cluster?)
+
+   - [Load Testing With Apache JMeter](https://liveproject.manning.com/module/903_3_1/continuous-deployment/2--load-testing-with-apache-jmeter/2-1-workflow%3a-load-testing-with-apache-jmeter?)
+
+### Useful Links
+
+- [Using Docker With Pipeline](https://www.jenkins.io/doc/book/pipeline/docker/)
+- [Docker Containers As Build Slaves](https://devopscube.com/docker-containers-as-build-slaves-jenkins/)
+- [Docker build/push with declarative pipeline in Jenkins](https://faun.pub/docker-build-push-with-declarative-pipeline-in-jenkins-2f12c2e43807)
+
+## Get a Docker Hosting env
+
+- assuming Windows 10/11, WSL2, Docker Desktop
+
+Refs:
+
+- [Run Jenkins in a Docker container — part 1 — Docker-in-Docker](https://davelms.medium.com/run-jenkins-in-a-docker-container-part-1-docker-in-docker-7ca75262619d)
+
+- [Run Jenkins in a Docker container — part 2 — socat](https://davelms.medium.com/run-jenkins-in-a-docker-container-part-2-socat-d5f18820fe1d)
+
+- [Run Jenkins in a Docker container — part 3 — run as root user](https://davelms.medium.com/run-jenkins-in-a-docker-container-part-3-run-as-root-user-12b9624a340b)
+
+- [Docker – Using Docker containers for your Jenkins build nodes](https://devopspoints.com/docker-using-docker-containers-for-your-jenkins-build-nodes.html)
+
+- [Connecting to Docker Daemon from jenkins running inside a docker container](https://stackoverflow.com/questions/66492160/connecting-to-docker-daemon-from-jenkins-running-inside-a-docker-container)
+
+
+
+
+`--network-alias docker` adds an extra "conatiner name" that can be used on the `jenkins` user defined network. YOU ARE NOT ALIASING THE ACTUAL NETWORK.
+
+After running this command, a Docker-in-Docker container will be listening on port 2376 and since we gave it the network alias of `docker` then we will be able to reach it from Jenkins on tcp://docker:2376.
+
+`docker network inspect jenkins`
+
+Consider adding -dit vs --detach. -dit means "detached interactive terminal". Then you should be able to use `docker attach alpine`. Alpine default terminal is "ash", not "bash".
+
+`docker attach jenkins-docker`
+
+`# ip addr show`
+
+`# ping -c 2 google.com`
+
+`CTRL + p then q`
+
+> **_Notes:_**
+>
+> - on initial start-up, Docker will create client and server certificates under `/certs`
+>   you will need these later when configuring the docker cloud.
+>
+> - variation. to skip TLS and use port 2375, set DOCKER_TLS_CERTDIR=""
+>   <br/><br/>
+
+## Launch Jenkins Container
+
+```bash
+#!/bin/bash
+docker container run --name jenkins-blueocean \
+  --detach --restart unless-stopped \
+  --network jenkins \
+  --env DOCKER_HOST="tcp://docker:2376" \
+  --env DOCKER_CERT_PATH=/certs/client \
+  --env DOCKER_TLS_VERIFY=1 \
+  --volume jenkins-docker-certs:/certs/client:ro \
+  --volume jenkins-data:/var/jenkins_home \
+  --publish 9999:8080 --publish 50000:50000 \
+  jenkinsci/blueocean
+```
+
+If you chose to skip TLS and are using port 2375, use these environment variables:
+
+```text
+  --env DOCKER_HOST="tcp://docker:2375"
+  --env DOCKER_CERT_PATH=""
+  --env DOCKER_TLS_VERIFY=""
+```
+
+Now that Jenkins is started, head over to http://localhost:9999 to go through the initial set up wizard.
+
+Next:
+
+- Jenkins docker plugin
+- New cloud, specify `tcp://docker:2376`
+- “X.509 Client Certificate”
+- Docker Agent Template: `jenkins/agent:latest-jdk11`
+- name: jenkins-agent-jdk11
+- label: "docker-dind jenkins-agent-jdk11"
+
+[Further directions](https://davelms.medium.com/run-jenkins-in-a-docker-container-part-1-docker-in-docker-7ca75262619d)
+
+NOTE: Name the docker Cloud that points at your dind server "docker-dind". The only change seems to be that the console output for a build will say "Running on jenkins-agent-jdk11-0000am08jei12 on docker-dind". Later, we will add another docker Cloud that uses the sock method and call it "docker-sock".
+
+Docker Plugin works with jenkins even if you have no cloud configured. It just needs to be able to use the docker host that the jenkins controller container is running on. HOWEVER, we are going to try to get docker-dind to handle docker agent request.
+
+## Launch SonarQube Container
+
+## Test Networking
+
+Test that everything can talk to each other over the `jenkins` network.
+
+`docker attach jenkins-docker`
+
+`# ping -c 2 {jenkins-ip}`
+
+`CTRL + p then q`
+
+`docker attach jenkins`
+
+`# ping -c 2 {jenkins-docker-ip}`
+
+## Test Using FreeStyle
+
+NOTE: Freestyle jobs can be run when the master node is marked temporarily offline.
+
+## Test Using Pipeline
+
+NOTE 1: Pipeline jobs will NOT initiate when the master node is marked temporarily offline. If you click the "build now" button, nothing will happen. If you want to force use of a docker cloud, you need to configure the master (aka built-in Node) and set number of executors to 0.
+
+NOTE 2: Freestyle docker cloud jobs clean up their agent immediately IF THE BUILT-IN NODE HAS EXECUTORS (even when the build was definitely done on a cloud agent). If Built-in Node executors are set to 0, Freestyle job cloud agents linger just like Pipeline jobs do. Pipeline jobs ALWAYS leave the agent around for about 2 minutes, first marked ? then additonally marked ?. TODO figure out why Executors call immediate cloud agent cleanup while Pipeline jobs linger.
+
+## Test Using Multi
+
+### Addendum 3: Physical Requirements
+
+In case you have performance problems, I developed this project on Ubuntu 22 on WSL2 on Windows 11 Pro (i9-9900KF, 16 vCores, 64GB Ram). Unfortunately that would hide those problems on my end; so let me know if its slow on your machine.

@@ -9,7 +9,9 @@ tags:
 
 ---
 
-### Coming Soon
+#### Coming Soon
+
+![DataOps Cycle](./dataops_cycle.webp)
 
 - Data Scientist
 - Data Engineer
