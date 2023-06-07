@@ -104,11 +104,21 @@ See [Hugging Face](https://huggingface.co/)
 - AI21 Labs
 - Antrhopic
 
-#### To File
+#### Generative Graphics
 
 - Google Imagen
-- Dall-E 2
-
+- [Dall-E 2](https://openai.com/dall-e-2)
+  - By OpenAI
+- Midjourney
+  - Runs inside Discord
+  - [Docs](https://docs.midjourney.com/docs/quick-start)
+  - Relaxed Mode:
+    - free time use, slow, use for experiment
+    - /relax
+  - Fast Mode (Fast GPU):
+    - use for upscaling, etc, something you discovered in Relaxed Mode
+    - /fast
+  
 ### Misc
 
 ### Libs and Langs

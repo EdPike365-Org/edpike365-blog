@@ -1,5 +1,5 @@
 ---
-title: "Jenkins in Docker for Local CI/CD"
+title: "Jenkins in Docker with JCasC for Local CI/CD"
 date: "2023-05-21T22:12:03.284Z"
 status: published
 author: EdPike365
@@ -8,18 +8,19 @@ tags:
   - docker
   - pipeline
   - JCasC
-  - automation
+  - IaC
 ---
 
-#### Garaunteed to work in Windows WSL2, and probably in Linux and MacOS.
+#### Garaunteed to work in Windows WSL2, and probably in Linux and MacOS
 
-This is part 1 of a series "CI/CD With Jenkins":
+![Jenkins In Docker](./jenkins_docker.png)
 
-- Part 1: Jenkins In Docker for Local CI/CD
-- Part 2: Jenkins Docker Agents with DindD Cloud
+This is part 1 of a series "Local CI/CD With Jenkins in Docker":
+
+- Part 2: [Jenkins Docker Agents with DindD Cloud](/blog/jenkins-docker-agents)
 - Part 3: Jenkins with SonarQube Docker Agent
 
-The stack we build in the series can be used as the base stack for Mannings Live Project: [CI/CD Pipeline for a Web Application Using Jenkins](https://www.manning.com/liveprojectseries/ci-cd-pipeline-ser)
+The stack we build in the series can be used as the base stack for Mannings Live Project: [CI/CD Pipeline for a Web Application Using Jenkins](https://www.manning.com/liveprojectseries/ci-cd-pipeline-ser).
 
 Below, we will:
 
@@ -40,11 +41,7 @@ Running Jenkins as a Docker container is problematic if you want to use Docker c
 
 If you have a dedicated VM for Jenkins, where you are not worried about java VM version differences, etc, then you should consider installing Jenkins in standalone mode, with Docker CLI installed on the same VM. That simplifies using Docker in your pipelines. ***The instructions below are still somewhat useful because they lay out how to user JCasC and plugins, in preparation of automating Jenkins setup.***
 
-> We are doing this step-by-step to increase learning. If this were for efficiency, we'd use some IaC tools like Ansible.
-
-These instructions are built on top of some shoulders:
-
-- [How to Run Jenkins on Docker](https://www.youtube.com/watch?v=QNZNfvrFBMo), by CloudBeesTV.
+> We are doing this step-by-step to increase learning. If this were for efficiency, we'd use some IaC tools like Ansible. A blog entry for that is on my TODO list.
 
 ## Required Apps
 
@@ -60,10 +57,10 @@ I installed git on Ubuntu in WSL2, so the daemon runs the same as it would in a 
 
 - Use these directions to [Install Docker in WSL 2 without Docker Desktop](https://nickjanetakis.com/blog/install-docker-in-wsl-2-without-docker-desktop) I originally set up Docker for use with VSCode devcontainers and it was available for this project with no additional work. TODO: script the install with Ansible or some such
 
-- The Jenkins docs has [instructions for using Jenkins in Docker](https://www.jenkins.io/doc/book/installing/docker/)
-  - Because we're running in WSL, note the instructions to manage Docker as a non-root user ***in Linux***. It links to [Linux post-installation steps for Docker Engine](https://docs.docker.com/engine/install/linux-postinstall/).
+- The Jenkins docs has instructions for [running Jenkins as a Docker Container](https://www.jenkins.io/doc/book/installing/docker/)
+  - Because we're running in WSL, we use the instructions to manage Docker as a non-root user ***in Linux***. It links to [Linux post-installation steps for Docker Engine](https://docs.docker.com/engine/install/linux-postinstall/).
   - TLDR:
-    - You are going to create a group called Docker, add your user to it, and hot load the group membership.
+    - After installing Docker, you are going to create a group called Docker, add your user to it, and hot load the group membership.
 
     ```Bash
     sudo groupadd docker && sudo usermod -aG docker $USER && newgrp docker
@@ -77,23 +74,29 @@ I installed git on Ubuntu in WSL2, so the daemon runs the same as it would in a 
     sudo systemctl enable containerd.service
     ```
 
+## Step 0: Create A Git Repo for this project
+
+We will create several files for this project. I recommend that you create a git repo on GitHub called `docker-cicd`. 
+
+I have a `dev` folder in my home dir that I use for all my projects. I cd to `~/dev/`, and pull down my repo.
+
 ## Step 1: Create Jenkins Automation Code
 
-We will create several files for this project. Keep them all together in a dir. I use `~/dev/jenkins-docker/`. You might also want to make the folder a git repo for later use.
+Each container gets its own subdirectory. Jenkins gets `~/dev/docker-cicd/jenkins/`.
 
 ### The Plugin Installation Manager
 
 We are automating the installation of all of our plugins using [jenkins-plugin-cli](https://github.com/jenkinsci/plugin-installation-manager-tool).
 
-The app is built into [Jenkins Docker images](https://hub.docker.com/r/jenkins/jenkins), so we don't need to install it. We use it to bake all the plugins in to our custom Docker image.
+These days, the app is built into [Jenkins Docker images](https://hub.docker.com/r/jenkins/jenkins), so we don't need to install it. We use it to bake all the plugins in to our custom Docker image.
 
-The list below will add all default/recommended plugins, plus a few extra ones we need, including the [Configuration As Code Plugin](https://github.com/jenkinsci/configuration-as-code-plugin#getting-started). It also includes plugins that we will be using for creating a Docker "cloud" using DinD, and integrating a SonarQube server docker container.
+The list below will add all default/recommended plugins, plus a few extra ones we need, including the [Configuration As Code Plugin](https://github.com/jenkinsci/configuration-as-code-plugin#getting-started). It also includes plugins that we will be using later in this series for creating a Docker "cloud" using DinD, and integrating a SonarQube server docker container.
 
 The format is "shortname:version". If no version is specified, it will pull the latest version.
 
-> See ["Addendum: How To Output A List of your Installed Jenkins Plugins"]() below to learn how to get a list of installed plugins in an existing Jenkins server. Its how I generated the plugins list below.
+> See ["Addendum: How To Output A List of your Installed Jenkins Plugins"](#addendum-how-to-output-and-use-a-list-of-your-installed-jenkins-plugins) below to learn how to get a list of installed plugins in an existing Jenkins server. Its how I generated the plugins list below.
 
-- Create `plugins.txt` in `~/dev/jenkins-docker/`.
+- Create `plugins.txt` in `~/dev/docker-cicd/jenkins/`.
 - Copy and past the text below into `plugins.txt`.
 
 ```Text
@@ -218,18 +221,18 @@ ws-cleanup
 
 ### JCasC (Jenkins Configuration As Code)
 
-We use the [Configuration As Code Plugin](https://github.com/jenkinsci/configuration-as-code-plugin#getting-started) to automate as much of the Jenkins setup routine as possible and we bake it into our custom Jenkins Docker image.
+We use the [Configuration As Code Plugin](https://github.com/jenkinsci/configuration-as-code-plugin) to automate as much of the Jenkins setup routine as possible and we bake it into our custom Jenkins Docker image.
 
 We set up a CasC folder for the config yaml files so we can break our configs into seperate files, based on config "roots". The rule is that the config files cannot try to config the same settings or it will cause an error.
 
-> [Addendum: Useful JCasC articles]() that I used to create this.
+> Addendum: [Useful JCasC articles](#addendum-useful-jcasc-articles) that I used to create this.
 
-- Create a subdirectory below the Dockerfile: `~/dev/jenkins-docker/casc_configs/`
+- Create a subdirectory below the Dockerfile: `~/dev/docker-cicd/jenkins/casc_configs/`
 - Create the files `/casc_configs/jenkins.yaml` and `/casc_configs/unclassified.yaml`.
 
 Jenkins core is not a plugin, but we can config it in CasC. Examples are [here](https://github.com/jenkinsci/configuration-as-code-plugin/blob/master/demos/jenkins/jenkins.yaml). Jenkins is one of the config "roots".
 
-- Note the line `- "Overall/Administer:${JENKINS_ADMIN_ID}"` which takes our Docker run args and gives the user admin privs.
+- Note the line `- "Overall/Administer:${JENKINS_ADMIN_ID}"` which takes our `Docker run` args and gives the user admin privs.
 - We create a non admin user `edpike365`. I added some example user configs there as well.
 - The matrix config gives the admin full power. Other authenticated users can only do job stuff.
 
@@ -325,7 +328,7 @@ RUN jenkins-plugin-cli --plugin-file /usr/share/jenkins/ref/plugins.txt
 
 ### Build The Custom Image
 
-Build the image from within `~/dev/jenkins-docker/`. We add "my" to the front to clearly mark it as a custom image:
+Build the image from within `~/dev/docker-cicd/jenkins/`. We add "my" to the front to clearly mark it as a custom image:
 
 `docker build -t myjenkins:2.387.3 .`
 
@@ -333,18 +336,20 @@ Build the image from within `~/dev/jenkins-docker/`. We add "my" to the front to
 
 ### Create a bridge network
 
-This is so all of our containers can talk to each other easily later. This will become useful in Part 2, but we need it now so we can add Jenkins to it and not have to edit our Docker run code later.
+This is so all of our containers can talk to each other easily later. This will become useful in Part 2 of this Series (DinD). We set it up now so we can add the Jenkins container to it and not have to edit our Docker run code later.
 
 `docker network create jenkins`
 
 ### Create Docker run bash script
 
-- While we are experimenting, we want the container to disappear when it is stopped, so `--rm`.
-- We use the jenkins network created above.
-- We set up our stack with `--restart=no` so that the stack is only loaded when I `docker start` it.
-- Our JCasC steup (above) requires that we pass in the `JENKINS_ADMIN_ID` and `JENKINS_ADMIN_PASSWORD`.
+Explaining the settings:
 
-- Create a file named `docker-run.sh` and paste the code below into it. Modify to taste.
+- While we are experimenting, we want the container to disappear when it is stopped, so `--rm`.
+- We use the `jenkins` network created above.
+- To save local computer resources, we set up our stack with `--restart=no` so that the stack is only loaded when I `docker start` it.
+- Our JCasC setup (above) requires that we pass in the `JENKINS_ADMIN_ID` and `JENKINS_ADMIN_PASSWORD`.
+
+Create a file named `run-jenkins.sh` and paste the code below into it. Modify to taste.
 
 ```bash
 docker run --name jenkins \
@@ -361,15 +366,15 @@ docker run --name jenkins \
   myjenkins:2.387.3
 ```
 
-Type `bash ./docker-run.sh`
+Type `bash run-jenkins.sh`
 
 Log in to Jenkins at [http://localhost:8080](http://localhost:8080). It should be ready to go!
 
 - Log in as the admin we created dynamically in JCasC from the Docker env vars:
   - user: "myadmin", password: "myadmin"
-  - Everything should be available, including Jenkins mgt.
+  - Everything should be available in the GUI, including Jenkins mgt.
 
-- Logout then login as the hardcoded, non-admin user from JCasC:
+- Logout, then login as the hardcoded, non-admin user from JCasC:
   - user: "edpike365", password: "edpike365"
   - You should not see any Jenkins admin options
 
@@ -393,12 +398,12 @@ fi
 docker volume rm jenkins-data
 docker volume rm jenkins-docker-certs
 docker build -t myjenkins:2.387.3 .
-sh ./docker-run.sh
+sh ./run-jenkins.sh
 ```
 
 ## Step 4: Tests
 
-### Test 1: Built In Hello World Pipeline
+### Test 1: Hello World Pipeline
 
 Use the built in "Hello World" pipeline to test for basic functionality.
 
@@ -409,7 +414,7 @@ Use the built in "Hello World" pipeline to test for basic functionality.
 - After it completes, it should have a green block in "Stage View".
 - To view the details, click on "Build History" > #1 (in lower left corner)
 
-### Test 2: MultiBranch Public Github Repo
+### Test 2: Pipeline to Public Github Repo
 
 - Jenkins Dashboard > New Item > Item Name "public MB test" > Choose ***Multibranch Pipeline*** > OK
 - Display Name: "my mb test"
@@ -427,105 +432,129 @@ Use the built in "Hello World" pipeline to test for basic functionality.
 
 - Click `Save` and Jenkins will scan the repo and log the results. It should end in "Finished: SUCCESS"
 
-### Test 3: Private Repo Pipeline Test
+### Test 3: Private Repo Pipeline Test With JCasC Credentials
 
+#### Step 3.1: Create a Private Repo
 
+Or use a private repo that you already have. It needs two branches. Each branch needs a Jenkinsfile.
 
-### Add Credentials for Jenkins-to-GitHub
+I'm creating a private repo just for this tutorial:
 
-You only need to do this for a private repo. We're going to use a "personal access token" because password auth was removed in 2021.
+- Launch Jenkins, create a pipeline and select the built in "Hello World" pipeline. Copy it.
+- In GitHub (any SCM), create a private repo.
+- On the main branch, create a Jenkinsfile. Paste in the "Hello World" content.
+- Edit the echo line by appending "from MAIN branch" at the end.
 
-Use [this video from CloudBeesTV](https://www.youtube.com/watch?v=HSA_mZoADSw) but add the credential through the "Manage Jenkins" interface, not via the Pipeline interface (because its cleaner and we have not set up our pipeline yet anyway).
-
-### Add Credentials Using JSaaC Configuration
-
-TODO: We set up our SCM and SonarQube credentials using JSaaC.
-
-We will have a folder for config files and a file ***similar to this*** will be added to it
-[jenkins_credentials.yaml](https://gist.github.com/apr-1985/9b5cf46497f82c11f00e05363ad45107#file-jenkins_credentials-yaml)
-
-### Create a Test Pipeline
-
-```Bash
-
-git remote add <name> <url>
-git ls-remote <name>
-
-```
-
-Lets test that we can talk to our GitHub account. (generated with ChatGPT)
-
-```Groovy
-
+```groovy
 pipeline {
     agent any
-    
+
     stages {
-
-        stage('Checkout') {
+        stage('Hello') {
             steps {
-                // Checkout the repository using Git
-                git 'https://github.com/edpike365/bmi-calculator.git'
-            }
-        }
-        
-        stage('List Repositories') {
-            steps {
-                script {
-                    // Fetch the list of repositories
-                    def repositories = sh(script: 'git ls-remote --get-url', returnStdout: true).trim().split('\n')
-                    
-                    // Print the list of repositories
-                    echo "List of repositories:"
-                    repositories.each { repository ->
-                        echo repository
-                        
-                        // Fetch the branches for each repository
-                        def branches = sh(script: "git ls-remote --heads ${repository} | awk '{print \$2}' | sed 's/refs\\/heads\\///'", returnStdout: true).trim().split('\n')
-                        
-                        // Print the branches for the repository
-                        echo "Branches:"
-                        branches.each { branch ->
-                            echo "  - ${branch}"
-                        }
-                    }
-                }
+                echo 'Hello World from MAIN branch.'
             }
         }
     }
 }
-
 ```
 
-From Google GenAI:
+- Create a `feature` branch. Edit the Jenkins file to say "from FEATURE branch" at the end.
 
-```Groovy
+#### Step 3.2: JCasC Credential Code
 
-pipeline {
-  agent any
-  stages {
-    stage ('List Repos') {
-      steps {
-        sh 'git ls-remote'
-      }
-    }
-  }
-}
+"Credentials" are a JCasC root config object, so it should get its own file.
 
+We are creating a Jenkins "usernamePassword" type credential, though technically the password is a PAT (personal access token). We're using a PAT because password auth was removed in 2021.
+
+We pass in the SCM username and password from Host env vars.
+
+- Add a `credentials.yaml` file to your `jcasc` directory. Paste this content:
+
+```yaml
+credentials:
+  system:
+    domainCredentials:
+      - credentials:
+          - usernamePassword:
+              id: "github-credentials"
+              password: ${SCM_TOKEN}
+              scope: GLOBAL
+              username: ${SCM_USERNAME}
 ```
 
+If you want to know more, sample configurations can be found at [jenkins_credentials.yaml](https://gist.github.com/apr-1985/9b5cf46497f82c11f00e05363ad45107#file-jenkins_credentials-yaml).
 
+#### Step 3.3: Modify Docker Run Code
 
+Add the following lines to `docker-run.sh`, under the `JENKINS_ADMIN_ID` line:
 
-### When the tests pass, edit docker-run.sh
+```bash
+  --env SCM_USERNAME=$HOST_SCM_USERNAME \
+  --env SCM_TOKEN=$HOST_SCM_TOKEN \
+```
+
+#### Step 3.4: Create GitHub Personal Access Token
+
+[This video](https://www.youtube.com/watch?v=HSA_mZoADSw) from CloudBeesTV is helpful if you don't know how. It will also show you the traditional way to create credentials in Jenkins.
+
+The short version:
+
+- On GitHub, open your user options dropdown from your icon in the top right corner
+- Select Settings > Developer Settings > Personal access tokens > Tokens > Generate new token > use "Note" as a name field
+  - Yes, we used the "classic" token options
+  - I named mine `jenkins-docker-example`
+  - Check Scopes: "repo", "user > user:email", "admin:org > read:org"
+  - Copy the token. You won't have access to it again!
+  - Use the PAT string and your GitHub id to run the script below on your Host:
+
+  ```bash
+  HOST_SCM_USERNAME=<your scm user name> && export HOST_SCM_USERNAME && \
+  HOST_SCM_TOKEN=<your token> && export HOST_SCM_TOKEN
+  ```
+
+- Run the `reset.sh` script.
+
+#### Step 3.5: Verify Credentials Exist in Jenkins
+
+Log in as "myadmin".
+
+Navigate to Dashboard > Manage Jenkins > Scroll to "Credentials".
+
+You should see a system Credential there with ID as "github-credentials".
+
+#### Step 3.6: Use the Credentials to Run a Pipeline
+
+You can test this with a normal `declarative pipeline` with the source being your GitHub repo OR you can test it with a `Multibranch pipeline`. I'm using Multibranch here.
+
+Create an MB Multibranch Pipeline job:
+
+- Dashboard > New Item
+  - Enter a name
+  - Choose Multibranch Pipleline
+  - OK
+- General
+  - Display Name
+  - Branch Sources
+    - GitHub
+  - Credentials Dropdown
+    - "github-credentials"
+  - Repo HTTPS URL > Get the HTTPS link to your test repo
+  - Validate
+  - Discover branches > All branches
+  - Everything else leave as defaults
+  - Save
+  - The log should show that both branches had a Jenkinsfile.
+
+### FINALLY: When the tests pass, edit docker-run.sh
 
 Now that it works, we make our custom Jenkins container persistant over restarts.
 
-Edit the `docker-run.sh`
+Edit the `run-jenkins.sh`
 
 - Remove the `--rm`
 - Change `--restart=no` to `--restart=unless-stopped` (See [Start containers automatically](https://docs.docker.com/config/containers/start-containers-automatically/))
-- Run the script again: `bash ./docker-run.sh`
+- Run the script again: `bash ./run-jenkins.sh`
 
 We'll create a master `start.sh` script later to launch the additional default/core docker containers (DinD and SonarQube).
 
