@@ -88,18 +88,26 @@ You want to set the Docker Host URI to tcp://docker:2376 and then run a Test Con
 
 
 
-## Install SonarQube as Docker Container
+## SonarQube Server and SonarScanner
 
-We will run a SonarQube container to get credentials that Jenkins needs to run SonarQube jobs. The settings are persisted in Docker volumes.
+To use SonarQube with Jenkins, there are 3 components:
 
-We don't need it to run all the time after that, only in build pipelines as a container.
+- SonarQube Server: this can be anywhere on the internet. We have our own running locally in Docker.
+- Jenkins SonarQube Plugin: configure connections to one or more SonarQube servers. Lets you inject the credentials in pipelines.
+- SonarQube Scanner: runs the actual scans. Sends summary info to the designated SonarQube server, where it is persisted.
+
+### SonarQube Server in Docker
 
 Create a sister subdirectory: `~/dev/docker-cicd/sonarqube/`
 
-### Persistent install
-
 - Do ***NOT*** follow the instructions on [Try Out SonarQube](https://docs.sonarqube.org/latest/try-out-sonarqube/). It will create a transient version and we need to persist access tokens, etc, across out DevOps sessions.
 - To create a persitent install, we follow directions [here](https://docs.sonarqube.org/latest/setup-and-upgrade/install-the-server/#installing-sonarqube-from-the-docker-image). I've reproduced the steps below to be more succinct.
+
+The instructions on the page assume you want to set up Oracle DB. In this tutorial, we are only ever going to use the default H2 DB.
+
+> The default embedded H2 database should be used for evaluation purposes only.
+> The embedded database will not scale, it will not support upgrading to newer versions of SonarQube, and there is no support for migrating your data out of it into a different database engine.
+> However, setting up a production grade DB for SonarQube is beyond the scope of this tutorial.
 
 - Create volumes to prevent loss of info between sessions:
 
@@ -109,12 +117,6 @@ docker volume create --name sonarqube_logs && \
 docker volume create --name sonarqube_extensions
 ```
 
-The instructions on the page assume you want to set up Oracle DB. We are only ever going to use the default H2 DB.
-
-> The default embedded H2 database should be used for evaluation purposes only.
-> The embedded database will not scale, it will not support upgrading to newer versions of SonarQube, and there is no support for migrating your data out of it into a different database engine.
-> However, setting up a production grade DB for SonarQube is beyond the scope of this tutorial.
-
 Create a file `~/dev/docker-cicd/sonarqube/run-sonarqube.sh` and paste the below into it.
 
 ```bash
@@ -122,16 +124,84 @@ docker run -d --name sonarqube-server \
   --restart=no \
   -p 9000:9000 \
   -v sonarqube_data:/opt/sonarqube/data \
-  -v sonarqube_extensions:/opt/sonarqube/extensions \
   -v sonarqube_logs:/opt/sonarqube/logs \
+  -v sonarqube_extensions:/opt/sonarqube/extensions \
   sonarqube:9.9.1-community
 ```
 
-Reminder: I explicitly set `--restart=no` so it doesn't use resources when I'm not doing Jenkins stuff.
+I explicitly set `--restart=no` so it doesn't use resources when I'm not doing Jenkins stuff.
 
 Run it with `bash run-sonarqube.sh`
 
-First Login: user = admin, pwd = admin
+Access it at [localhost:9000](http://localhost:9000). First login is: user = admin, pwd = admin
+
+We use this first run to set up our project and get credentials to access it remotely from Jenkins.
+The settings are persisted in the Docker volumes created above.
+
+Once it works, add SonarQube server container to our stack: `~/dev/local-cicd/start-stack.sh`
+
+## Add SonarQube Server To Jenkins
+
+
+
+### SonarQube Server Connection
+
+[Jenkins extension for SonarQube](https://docs.sonarqube.org/9.8/analyzing-source-code/scanners/jenkins-extension-sonarqube/)
+
+### Using SonarQube Scanner Extension
+
+There are 4 different SonarScanner Jenkins plugins:
+
+- [SonarScanner (Generic)](https://docs.sonarqube.org/9.8/analyzing-source-code/scanners/sonarscanner/) Image: sonarsource/sonar-scanner-cli
+- [SonarScanner for Maven](https://docs.sonarqube.org/9.8/analyzing-source-code/scanners/sonarscanner-for-maven/)
+- [SonarScanner for Gradle](https://docs.sonarqube.org/9.8/analyzing-source-code/scanners/sonarscanner-for-gradle/)
+- [SonarScanner for .NET](https://docs.sonarqube.org/9.8/analyzing-source-code/scanners/sonarscanner-for-dotnet/)
+
+We are using the "generic" SonarScanner plugin because it can be run within a docker container and there are run as non-root options.
+
+### SonarQube Scan Pipeline
+
+This uses the SonarScanner CLI docker image. It normally requires some env vars to set Sonar Server connection information. We are using the Jenkins Sonar Plugin, which lets us inject that info using `withSonarQubeEnv`.
+
+```groovy
+pipeline {
+
+  //can we do agent none?
+  agent any
+  
+  stages {
+    
+    stage("SCA") {
+      
+      agent {
+        docker {
+          image 'sonarsource/sonar-scanner-cli:latest'
+        }
+      }
+      
+      // NO echos allowed outside steps
+      steps {
+        
+        echo "!!! Step 1"
+        withSonarQubeEnv(installationName: "sonarqube-on-ec2", credentialsId: "sonarqube") { 
+          sh "sonar-scanner -Dsonar.projectVersion=1.0 -Dsonar.projectKey=react-bmi-app -Dsonar.sources=src" 
+        }
+        
+        echo "!!! Step 2"
+        timeout(time: 5, unit: 'MINUTES') {
+          waitForQualityGate abortPipeline: true
+        }
+        
+      }
+    }
+  
+  }
+}
+```
+
+
+
+
 
 ## Link Jenkins to your SonarQube
 

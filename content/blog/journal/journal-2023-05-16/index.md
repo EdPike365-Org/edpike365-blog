@@ -15,6 +15,17 @@ tags:
 
 ---
 
+[Semantic Search in Confluence Wiki With LlamaIndex and Pinecone](https://betterprogramming.pub/semantic-search-in-confluence-wiki-with-llamaindex-and-pinecone-eb39c1d8c004)
+  
+- Lexical vs semantic search
+
+[How Microsoft Fabric aims to beat Amazon and Google in the cloud war](https://venturebeat.com/data-infrastructure/how-microsoft-fabric-aims-to-beat-amazon-and-google-in-the-cloud-war/?mkt_tok=NjczLVBISy05NDgAAAGMNVleYW-MNlKTz6-5tnmeSPjOgRkZv74qq-fU28MrmyNXtyJByRxIyNlfZDB0rhdGJq1bw3sGZDIkMV-Q2pACUs3kA8VfNdGxFLImfvW2)
+
+- [Microsoft Fabric](https://www.microsoft.com/en-us/microsoft-fabric)
+- One datalake (OneLake) based on [Apache Parquet](https://parquet.apache.org/), pulls in data from any data source and converts it into parquet.
+- Transform data from third-party services with its [Data Factory](https://blog.fabric.microsoft.com/en-us/blog/introducing-data-factory-in-microsoft-fabric//), which offers more than 150 pre-built connectors.
+- MS enters “lakehouse” market, which combines two technologies: a data lake to store a company’s data, and a data warehouse to analyze it. Competes with Databricks and Snowflake.
+
 [MIT: How AI-generated video is chaning film (The Frost)](https://www.technologyreview.com/2023/06/01/1073858/surreal-ai-generative-video-changing-film/?truid=c84c818a07377edb7a5220f7e0820e5e&utm_source=the_download&utm_medium=email&utm_campaign=the_download.unpaid.engagement&utm_term=Active%20Qualified&utm_content=06-02-2023&mc_cid=11e143350e&mc_eid=77b3f0fccb)
 
 ## COMPUTEX 2023
@@ -29,7 +40,7 @@ tags:
     - 144 TB GPU Memory (Low energy DRAM?)
     - 150 miles of Fiber Optical
     - 230 TB/sec NVLINK BW
-    - 2,122 60mm Fans :-(
+    - 2,122 60mm Fans ☹️
     - 40K lbs (4 elephants)
     - about size of 24 humans standing shoulder to shoulder
     - bluefield 3 smart nic
