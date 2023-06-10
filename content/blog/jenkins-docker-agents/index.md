@@ -12,14 +12,20 @@ tags:
 
 Build a local devops stack using a Jenkins container running in Docker and using a DinD (Docker in Docker) container to launch other containers. Containers!
 
+![SonarQube](./sonar.png)
+
 This is part 2 of a series "Local CI/CD With Jenkins in Docker":
 
 - Part 1: [Jenkins In Docker for Local CI/CD](/blog/jenkins-in-docker)
 - Part 3: [Jenkins with SonarQube Docker Agent]
 
-## Expected Assets
+Jenkins needs to spin up docker containers as agents. However, Jenkins is running in a docker container. Linux users and groups are isolated within the container for security purposes.
 
-Complete Part 1 of the series and you will have:
+There are various solutions and none of them are great. The one recommended by Jenkins is using a sidecar DinD container. It acts as a broker to give Jenkins access to the "parent" Docker daemon on the host.
+
+## Before Beginning
+
+You need the following assets and you will have them if you completed [Part 1](/blog/jenkins-in-docker) of the series:
 
 - Git CLI
 - Docker Daemon
@@ -29,99 +35,138 @@ Complete Part 1 of the series and you will have:
   - Supporting files in `~/dev/docker-cicd/jenkins/`
   - GitHub credentials
   - An admin user: myadmin/myadmin
-- Ideally, a git repo called `docker-cicd`
+- Ideally, all in a git repo called `docker-cicd`
 
 ## Add the DinD (Docker-in-Docker) Container
 
-- Jenkins needs to spin up docker containers as agents. Jenkins will be running in a docker container so you need an additional special docker container running as a sister to Jenkins. It gives Jenkins access to the Docker daemon running on the host (in my case Ubuntu on WSL2).
+- The Jenkins.io instructions for installing Jenkins in Docker are [here](https://www.jenkins.io/doc/book/installing/docker/).  I've tweaked them a little below to smooth the way. The biggest difference is that we set Jenkins up first, and now are doing DinD container second, versus the other way around.
 
-- The core Jenkins.io instructions are [here](https://www.jenkins.io/doc/book/installing/docker/).  I've tweaked them a little below to smooth the way. It has you use a DinD container.
-
-- Useful blog about setting up Jenkins in Docker and how to use DinD for Docker agents [here](https://davelms.medium.com/run-jenkins-in-a-docker-container-part-1-docker-in-docker-7ca75262619d) to run jobs. He gives two other aproaches and, essentially, lays out why you might as well use DinD (and its what Jenkins docs have you set up).
+- A useful blog to set up Jenkins in Docker, with a DinD cloud agent source, is [here](https://davelms.medium.com/run-jenkins-in-a-docker-container-part-1-docker-in-docker-7ca75262619d). The author gives two other aproaches and, essentially, lays out why you might as well use DinD (and its also what Jenkins docs have you set up).
 
 ### Create DinD Container
 
-From Part 1, you should have a project directory in your WSL2 Linux system with a name like `~/dev/docker-cicd/jenkins/`. We could add our DinD container in a multicontainer Dockerfile, etc. I'd rather create a subdirectory for it and let it have its own `Dockerfile`. This has the added benefit that if we ever need to add some automation files, etc, we have a place for them.
+From Part 1, you should have a project directory in your WSL2 Linux system with a name like `~/dev/docker-cicd/jenkins/`. We could add our DinD container in a multicontainer Dockerfile, etc. I think its better for DinD to have its own directory. This has the  benefit that if we ever need to add a custom Dockerfile, or some automation files, etc, we have a place for them.
 
 - Create a sister subdirectory `~/dev/docker-cicd/dind/`.
-- Create a file `run-dind.sh`
-- Put the code below in it.
+- Create a file `docker-run-dind.sh`
+- Copy this code to it:
 
 ```bash
 #!/bin/bash
 docker run --name jenkins-dind \
---detach --restart no \
+--detach \
+--restart no \
 --privileged \
---network jenkins --network-alias docker \
---env DOCKER_TLS_CERTDIR=/certs \
+--network jenkins \
+--network-alias docker \
+--env DOCKER_TLS_CERTDIR="" \
 --volume jenkins-docker-certs:/certs/client \
 --volume jenkins-data:/var/jenkins_home \
---publish 2376:2376 \
-docker:dind --storage-driver overlay2
+--publish 2375:2375 \
+docker:dind \
+--storage-driver overlay2
 ```
 
 Arguments explained:
 
+- --name: I named it jenkins-dind because it exists in the Jenkins network, for the use of Jenkins.
+- --network-alias: It is pretending to be a docker service, so it has a network-alias of docker.
+- This stack is meant to run on your local machine. So we are simplifying our setup by not using TLS.
+  - --env DOCKER_TLS_CERTDIR="", instead of "/certs"
+  - --publish is 2375:2375, instead of 2376
 - This created 2 volumes to persist data between restarts:
-  - `jenkins-docker-certs` For persisting and sharing certs so Jenkins can talk to DinD
-  - `jenkins-data` TODO: find out why we need this 😊
+  - `jenkins-docker-certs` For persisting and sharing certs so Jenkins can talk to DinD (not used in our setup)
+  - `jenkins-data` TODO: find out why DinD needs this 😊, its probably to let DinD reach out to Jenkins.
+- --storage-driver overlay2. TODO: I used to know this, but I need to look it up again.
 
-Now DinD is listening on port 2376 and Jenkins can reach it on tcp://docker:2376.
+Run it with: `bash docker-run-dind.sh`
 
-### Test Docker in a Pipeline
-
-
-
+Now DinD is listening on port 2375 and Jenkins can reach it on `tcp://docker:2375`. You can access the container with `docker exec -it jenkins-dind bash`.
 
 ### Configure Docker Cloud
 
-The docker plugin should already be installed.
+- The Docker plugin should already be installed during [Part 1](/blog/jenkins-in-docker).
+  - If not, install the Docker plugin `docker-plugin`
+  - The Docker plugin also installs the `docker-java-api`
+- Go to Dashboard > Manage Jenkins > Manage Nodes and Clouds > Configure Clouds (in upper left corner)
+- In "Add a new cloud" dropdown choose Docker.
+- Name: docker
+- Docker Cloud Details
+  - Docker Host URI: tcp://docker:2375
+  - Server Credentials: -none-
+  - Click "Test Connection"
+  - Check "Enabled"
+- Docker Agent templates
+  - Labels: jenkins-agent
+  - Check "Enabled"
+  - Name: jenkins-agent
+  - Docker Image: `jenkins/agent:latest-jdk11`
+  - Remote File System Root: `/home/jenkins/agent`
 
-Go to Manage Nodes and Clouds and then Configure Clouds and Add a new cloud. The type of “docker” should automatically appear in the dropdown.
+> We are configuring "cloud agents" the old fashion way. This is not the same as creating docker containers on the fly in a pipeline. We'll cover that later.
 
-You want to set the Docker Host URI to tcp://docker:2376 and then run a Test Connection. Unfortunately, you will see the following (misleading?) error — “Client sent an HTTP request to an HTTPS server” — and to solve this we need to set up the Server Credentials.
-
-(if you decided to skip TLS and are using port 2375, your test should have worked and you will be able to jump over the next steps).
+We use the generic `jenkins-agent` image for now. Add other agent images as you need them.
 
 ### Test Docker Cloud
 
+Test your docker cloud by running a simple Freestyle Job.
 
+- Dashboard > New Item
+  - Item Name: docker cloud test
+  - Freestyle project
+  - Click "OK"
+- Configure
+  - "Restrict where this project can be run": jenkins-agent
+  - "Build Steps" > Execute shell:
+    - echo "Hello World!"
+  - Save
+- Project Page
+  - Build Now (it will have to pull the jenkins-agent image down first time, be patient)
+  - Click on the build record "#1" in the lower left corner
+  - Click "Console Output"
 
+> The DinD container has its own Docker daemon, the images and containers are running in it. If you want to see whats going on, you'll have to do something like `docker exec -it jenkins-dind docker image ls`. In this case you see the downloaded `jenkins-agent` image. Next time it will run quickly.
 
-## SonarQube Server and SonarScanner
+### Test DinD Container Image Persistance
+
+- `docker stop jenkins-dind`
+- `docker start jenkins-dind`
+- Wait for it to boot, maybe a minute
+- `docker exec -it jenkins-dind docker image ls`
+- `jenkins-agent` should still be there.
+
+## SonarQube
 
 To use SonarQube with Jenkins, there are 3 components:
 
-- SonarQube Server: this can be anywhere on the internet. We have our own running locally in Docker.
-- Jenkins SonarQube Plugin: configure connections to one or more SonarQube servers. Lets you inject the credentials in pipelines.
-- SonarQube Scanner: runs the actual scans. Sends summary info to the designated SonarQube server, where it is persisted.
+- SonarQube Server:
+  - can be anywhere on the internet
+  - holds quality gate configuration
+  - ours is running locally in Docker
+- Jenkins SonarQube Plugin:
+  - stores connection configurations to one or more SonarQube servers, including credentials
+  - exposes a webhook endpoint that lets SonarQube send asynch information back to Jenkins
+- SonarQube Scanner Plugin: scans pipeline target code locally on a Jenkins agent. Sends summary info to the designated SonarQube server, where it is analyzed and persisted.
 
 ### SonarQube Server in Docker
 
 Create a sister subdirectory: `~/dev/docker-cicd/sonarqube/`
 
 - Do ***NOT*** follow the instructions on [Try Out SonarQube](https://docs.sonarqube.org/latest/try-out-sonarqube/). It will create a transient version and we need to persist access tokens, etc, across out DevOps sessions.
-- To create a persitent install, we follow directions [here](https://docs.sonarqube.org/latest/setup-and-upgrade/install-the-server/#installing-sonarqube-from-the-docker-image). I've reproduced the steps below to be more succinct.
+- To create a persitent install, we make modified directions from [here](https://docs.sonarqube.org/latest/setup-and-upgrade/install-the-server/#installing-sonarqube-from-the-docker-image).
 
-The instructions on the page assume you want to set up Oracle DB. In this tutorial, we are only ever going to use the default H2 DB.
+Sonarqubes default instructions assume you want to set up Oracle DB. In this tutorial, we are only ever going to use the default H2 DB.
 
 > The default embedded H2 database should be used for evaluation purposes only.
 > The embedded database will not scale, it will not support upgrading to newer versions of SonarQube, and there is no support for migrating your data out of it into a different database engine.
 > However, setting up a production grade DB for SonarQube is beyond the scope of this tutorial.
 
-- Create volumes to prevent loss of info between sessions:
+Create a file `~/dev/docker-cicd/sonarqube/docker-run-sonarqube.sh` and paste the below into it.
 
 ```bash
-docker volume create --name sonarqube_data && \
-docker volume create --name sonarqube_logs && \
-docker volume create --name sonarqube_extensions
-```
-
-Create a file `~/dev/docker-cicd/sonarqube/run-sonarqube.sh` and paste the below into it.
-
-```bash
-docker run -d --name sonarqube-server \
-  --restart=no \
+docker run -d --name sonarqube \
+  --restart unless-stopped \
+  --network jenkins \
   -p 9000:9000 \
   -v sonarqube_data:/opt/sonarqube/data \
   -v sonarqube_logs:/opt/sonarqube/logs \
@@ -129,24 +174,97 @@ docker run -d --name sonarqube-server \
   sonarqube:9.9.1-community
 ```
 
-I explicitly set `--restart=no` so it doesn't use resources when I'm not doing Jenkins stuff.
+Arguments Explained:
 
-Run it with `bash run-sonarqube.sh`
+- I set `--restart=unless-stopped`. This is like "always", but if I `docker stop` it or it crashes, it won't restart on Docker daemon reboot, computer restart.
+- Create volumes to prevent loss of info between sessions:
 
-Access it at [localhost:9000](http://localhost:9000). First login is: user = admin, pwd = admin
+> I could have added `-env SONAR_FORCEAUTHENTICATION=false` to disable SonarQube auth so Jenkins would not need credentials but I think its valuable to learn it so I left it as the default value: `true`.
+
+#### First Run
 
 We use this first run to set up our project and get credentials to access it remotely from Jenkins.
 The settings are persisted in the Docker volumes created above.
 
+- Run SonarQube with `bash docker-run-sonarqube.sh`
+- Access it at [localhost:9000](http://localhost:9000). First login is: user = admin, pwd = admin.
+
+#### Create Webhook
+
+In SonarQube:
+
+- Navigate to Home > Administration > Configuration dropdown > Webhooks
+- Click "Create" and configure the popup:
+  - Name: jenkins-localhost
+  - URL: http://jenkins:8080/sonarqube-webhook/
+  - Click "Create"
+
+#### Create Quality Gate
+
+SonarQube comes with a default quality gate, called "Sonar way", that is used to grade code unless a specific one is specified.
+Lets create another one!
+
+In SonarQube:
+
+- Navigate to Home > Quality Gates  
+- Click "Create"
+  - Name "wu way" (it is created with default "Clean as You Code" conditions)
+- Edit Condition Setting
+  - Scroll down and click "Unlock Editing" (an "Add Condition" button appears above the Conditions list)
+  - Click "Add Condition"
+- "Add Condition" Popup
+  - Check "On Overall Code"
+  - Quality Gate fails when (dropdown): Maintability Rating
+  - Operator: is worse than A
+  - Click "Add Condition"
+- Edit Condition Setting
+  - We could make this the default gate by clicking "Set as Default" (upper right corner). However, we will not so we can learn how to specify one in our pipeline.
+
 Once it works, add SonarQube server container to our stack: `~/dev/local-cicd/start-stack.sh`
 
-## Add SonarQube Server To Jenkins
+### Jenkins SonarQube Plugin
+
+- The SonarQube plugin lets Jenkins store SonarQube server locations and connection credentials.
+
+- It also creates a webhook endpoint that lets SonarQube server send back the analysis summary and a Quality Gate pass/fail signal for your pipeline.
 
 
+#### Step 1: Get a SonarQube Token
 
-### SonarQube Server Connection
+When we add the SonarQube server to Jenkins (Step 3), we'll need a SonarQube token. The "Add" button in Jenkins wizards does not work dependably for me, so I get it ahead of time and set it up so that it appears in the Jenkins SonarQube plugin config wizard.
 
-[Jenkins extension for SonarQube](https://docs.sonarqube.org/9.8/analyzing-source-code/scanners/jenkins-extension-sonarqube/)
+In a SonarQube browser tab, Log into SonarQube
+
+- User (upper right corner) > My Account (near upper right corner)> Security
+- In the Tokens panel > Generate Tokens, fill in the form
+  - Name: Local Jenkins Token
+  - Type: user
+  - Expires: 1 year
+  - Click "Generate"
+  - Copy the token, you won't see it again
+
+#### Step 2: Add a Secret Text credential to Jenkins
+
+In a Jenkins tab, logged in as an admin:
+
+- Dashboard > Manage Jenkins > Credentials > System > Global > New Credential
+  - Kind: Secret text
+  - Scope: Global
+  - Secret: paste the SonarQube token here
+  - ID: sonarqube-localhost
+  - Click "Create"
+
+#### Step 3: Create Jenkins SonarQube Config
+
+- Dashboard > Manage Jenkins > Configure System
+  - scroll down to the `SonarQube servers` configuration section
+  - Check "Environment variables"
+  - click `Add SonarQube`, and add the values you're prompted for.
+    - Name: sonarqube-localhost
+    - Server URL: http://sonarqube-server:9000
+    - Server authentication token dropdown:
+      - Choose "sonarqube-localhost"
+    - Click "Save"
 
 ### Using SonarQube Scanner Extension
 
@@ -157,11 +275,12 @@ There are 4 different SonarScanner Jenkins plugins:
 - [SonarScanner for Gradle](https://docs.sonarqube.org/9.8/analyzing-source-code/scanners/sonarscanner-for-gradle/)
 - [SonarScanner for .NET](https://docs.sonarqube.org/9.8/analyzing-source-code/scanners/sonarscanner-for-dotnet/)
 
-We are using the "generic" SonarScanner plugin because it can be run within a docker container and there are run as non-root options.
+???
+We use the "generic" SonarScanner plugin because it can be run within a docker container and there are run as non-root options.
 
 ### SonarQube Scan Pipeline
 
-This uses the SonarScanner CLI docker image. It normally requires some env vars to set Sonar Server connection information. We are using the Jenkins Sonar Plugin, which lets us inject that info using `withSonarQubeEnv`.
+This uses the SonarScanner CLI docker image. It normally requires some env vars to set Sonar Server connection information. We use the Jenkins Sonar Plugin (above), which lets us inject that info using `withSonarQubeEnv`.
 
 ```groovy
 pipeline {
@@ -169,8 +288,13 @@ pipeline {
   //can we do agent none?
   agent any
   
+  options {
+    buildDiscarder(logRotator(numToKeepStr: '5'))
+  }
+
   stages {
     
+    //Static Code Analysis
     stage("SCA") {
       
       agent {
@@ -182,15 +306,18 @@ pipeline {
       // NO echos allowed outside steps
       steps {
         
-        echo "!!! Step 1"
-        withSonarQubeEnv(installationName: "sonarqube-on-ec2", credentialsId: "sonarqube") { 
-          sh "sonar-scanner -Dsonar.projectVersion=1.0 -Dsonar.projectKey=react-bmi-app -Dsonar.sources=src" 
-        }
+        echo "!!! Step 1: SonarQube scan "
         
-        echo "!!! Step 2"
-        timeout(time: 5, unit: 'MINUTES') {
-          waitForQualityGate abortPipeline: true
+        // withSonarQubeEnv() does not have a credentials arg because we set that up in the plugin
+        withSonarQubeEnv(installationName: "sonarqube-localhost") { 
+          
+          sh "sonar-scanner -Dsonar.projectVersion=1.0 -Dsonar.projectKey=react-bmi-app -Dsonar.sources=src" 
+          
+          // if we used one of the other 3 SonarQube scanners, config would look like this
+          // sh './mvnw clean org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.0.2155:sonar'
         }
+
+        // TODO: Step 2: Quality Gate
         
       }
     }
@@ -198,6 +325,69 @@ pipeline {
   }
 }
 ```
+
+Explanation:
+
+- `sh "sonar-scanner -Dsonar.projectVersion=1.0 -Dsonar.projectKey=react-bmi-app -Dsonar.sources=src"`
+  We pass in the SonarQube project configs here. We could instead have a `sonar-project.properties` file in the target repo that has similar args. This line would then be `sh 'sonar-scanner'`
+  - `-Dsonar.projectKey=react-bmi-app` designates which "project" to store the analysis results in on SonarQube server. Does the project have to be defined on SonarQube or is it auto created if it does not exist???
+
+### Add SonarQube QualityGate
+
+#### Configure the QualityGate
+ 
+ to SonarQube
+
+#### Add Jenkins WebHook on SonarQube Server
+
+SonarQube calls back to Jenkins when it is done analyzing the code. It uses a webhook to do so and we have to set that up.
+
+The Jenkins SonarQube plugin automatically exposes a webhook address at 
+
+In SonarQube:
+-
+
+Add this as a second step in the Jenksfile from above;
+
+```groovy
+        echo "!!! Step 2: Wait Quality Gate"
+        timeout(time: 5, unit: 'MINUTES') {
+          waitForQualityGate abortPipeline: true
+        }
+```
+
+From [SonarQube Scanner for Jenkins](https://www.jenkins.io/doc/pipeline/steps/sonar/)
+
+```groovy
+
+ pipeline {
+        agent none
+        stages {
+          stage("build & SonarQube analysis") {
+            agent any
+            steps {
+              withSonarQubeEnv('My SonarQube Server') {
+                sh 'mvn clean package sonar:sonar'
+              }
+            }
+          }
+          stage("Quality Gate") {
+            steps {
+              timeout(time: 1, unit: 'HOURS') {
+                waitForQualityGate abortPipeline: true
+              }
+            }
+          }
+        }
+      }
+
+```
+
+
+
+
+
+
 
 
 

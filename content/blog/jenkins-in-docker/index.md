@@ -145,6 +145,8 @@ credentials
 credentials-binding
 display-url-api
 docker-commons
+docker-java-api
+docker-plugin
 docker-workflow
 durable-task
 echarts-api
@@ -357,6 +359,10 @@ Explaining the settings:
 
 - While we are experimenting, we want the container to disappear when it is stopped, so `--rm`.
 - We use the `jenkins` network created above.
+- This stack is meant to run completely on your local machine. Therefore, we are going to not enable docker TLS
+  - --env DOCKER_HOST=tcp://docker:2375, instead of 2376
+  - --env DOCKER_CERT_PATH="", instad of /certs/client
+  - --env DOCKER_TLS_VERIFY="", instead of 1
 - To save local computer resources, we set up our stack with `--restart=no` so that the stack is only loaded when I `docker start` it.
 - Our JCasC setup (above) requires that we pass in the `JENKINS_ADMIN_ID` and `JENKINS_ADMIN_PASSWORD`.
 
@@ -366,9 +372,10 @@ Create a file named `run-jenkins.sh` and paste the code below into it. Modify to
 docker run --name jenkins \
   --detach --rm --restart=no \
   --network jenkins \
-  --env DOCKER_HOST=tcp://docker:2376 \
-  --env DOCKER_CERT_PATH=/certs/client \
-  --env DOCKER_TLS_VERIFY=1 \
+  --network-alias jenkins \
+  --env DOCKER_HOST=tcp://docker:2375 \
+  --env DOCKER_CERT_PATH="" \
+  --env DOCKER_TLS_VERIFY="" \
   --publish 8080:8080 \
   --publish 50000:50000 \
   --env JENKINS_ADMIN_ID=myadmin --env JENKINS_ADMIN_PASSWORD=myadmin \
