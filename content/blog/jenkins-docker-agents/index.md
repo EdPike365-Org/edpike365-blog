@@ -187,7 +187,7 @@ We use this first run to set up our project and get credentials to access it rem
 The settings are persisted in the Docker volumes created above.
 
 - Run SonarQube with `bash docker-run-sonarqube.sh`
-- Access it at [localhost:9000](http://localhost:9000). First login is: user = admin, pwd = admin.
+- Access it at [localhost:9000](http://localhost:9000). First login is: user = admin, pwd = admin. It forces you to change. I changed mine to admin/myadmin
 
 #### Create Webhook
 
