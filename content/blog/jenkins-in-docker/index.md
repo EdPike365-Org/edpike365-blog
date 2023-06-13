@@ -24,9 +24,9 @@ The stack we build in the series can be used as the base stack for Mannings Live
 
 Below, we will:
 
-- build a custom Jenkins docker image
+- build a custom Jenkins docker image with JCasC and Plugin Manager
 - run and test it for basic function
-- add credentials to talk to GitHub
+- auto add credentials to talk to GitHub with JCasC
 - test the certificate with a simple pipeline to GitHub
 
 ### Why Jenkins in Docker?
@@ -84,7 +84,12 @@ I have a `dev` folder in my Linux home dir that I use for all my projects. I cd 
 
 The core containers for our CI/CD stack are Jenkins, DinD, and SonarQube. When we use the stack they all need to be running, otherwise they are stopped to save local machine resources.
 
-We add startup scripts for each container to a central sh script. Create an empty file: `touch ~/dev/docker-cicd/launch-stack.sh`.
+Create the central scripts to control our local devops stack. For now its just Jenkins, but it will grow in later parts of this series. We populate them as we go :
+
+- `touch ~/dev/docker-cicd/create-stack.sh`: create the stack
+- `touch ~/dev/docker-cicd/start-stack.sh`: startup scripts for each container
+- `touch ~/dev/docker-cicd/stop-stack.sh`: stop but don't delete all the containers
+- `touch ~/dev/docker-cicd/delete-stack.sh`: delete all containers, network, and volumes 
 
 ## Step 1: Create Jenkins Automation Code
 
@@ -379,7 +384,7 @@ docker run --name jenkins \
 
 Settings explained:
 
-- --restart unless-stopped: If you explicitly shut down Jenkins, it will not restart automatically. You have to `docker start` it.
+- --restart unless-stopped: If you explicitly shut down Jenkins, it will not restart automatically. You will have to `docker start` it.
 - We use the `jenkins` network created above.
 - This stack is meant to run completely on your local machine. Therefore, we will not enable docker TLS.
   - --env DOCKER_HOST=tcp://docker:2375 (instead of 2376)
@@ -647,19 +652,40 @@ Create an MB Multibranch Pipeline job:
 
 ### FINALLY: When the tests pass, edit docker-run.sh
 
-Now that it works, we make our custom Jenkins container persistant over restarts.
+Now that it works, we lets complete and test our IaC scripts.
 
-Edit the `~/dev/docker-cicd/jenkins/docker-run-jenkins.sh` on your Jenkins host.
+- `~/dev/docker-cicd/create-stack.sh`
+  
+  ```Bash
 
-- Remove the `--rm`
-- Change `--restart=no` to `--restart=unless-stopped` (See [Start containers automatically](https://docs.docker.com/config/containers/start-containers-automatically/))
-- Run the script again: `bash ./run-jenkins.sh`
+  ```
 
-To pick up the changes and test that the GitHub credentials survive a restart, run:
+- `~/dev/docker-cicd/start-stack.sh`: startup scripts for each container
 
-`~/dev/docker-cicd/jenkins/reset-jenkins.sh`
+  ```Bash
 
-The pipelines will be gone, but the credentials should be there.
+  ```
+
+- `~/dev/docker-cicd/stop-stack.sh`: stop but don't delete all the containers
+
+  ```Bash
+
+  ```
+
+- `~/dev/docker-cicd/delete-stack.sh`: delete all containers, network, and volumes (TODO: add "are you sure?" prompt)
+
+  ```Bash
+
+  ```
+
+Test persistance:
+
+- stop Jenkins: `docker stop jenkins`
+- delete the container: `docker delete jenkins`
+- run (and create) the container: `docker-run-jenkins.sh`
+- log in to Jenkins, check the following exist:
+  - GitHub credentials (could just be from JCasC)
+  - build jobs
 
 <br/>
 Edit `~/dev/docker-cicd/launch-stack.sh` to add our Jenkins container.
