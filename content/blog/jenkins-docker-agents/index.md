@@ -16,7 +16,7 @@ Build a local devops stack using a Jenkins container running in Docker and using
 
 This is part 2 of a series "Local CI/CD With Jenkins in Docker":
 
-- Part 1: [Jenkins In Docker for Local CI/CD](/blog/jenkins-in-docker)
+- Part 1: [Local CI/CD with Jenkins, Docker, and JCasC](/blog/jenkins-in-docker)
 - Part 3: [Jenkins with SonarQube Docker Agent]
 
 Jenkins needs to spin up docker containers as agents. However, Jenkins is running in a docker container. Linux users and groups are isolated within the container for security purposes.
@@ -76,8 +76,8 @@ Arguments explained:
   - --publish is 2375:2375, instead of 2376
 - This created 2 volumes to persist data between restarts:
   - `jenkins-docker-certs` For persisting and sharing certs so Jenkins can talk to DinD (not used in our setup)
-  - `jenkins-data` TODO: find out why DinD needs this 😊, its probably to let DinD reach out to Jenkins.
-- --storage-driver overlay2. TODO: I used to know this, but I need to look it up again.
+  - `jenkins-data` TODO: find out why DinD needs this 😊. I would think Docker cloud agents think they are node agents and therefore communicate with the controller with SSH or jnlp. I'm guessing this is a "backdoor" because the controller is in fact the actual agent.
+- --storage-driver [overlay2](https://docs.docker.com/storage/storagedriver/overlayfs-driver/#:~:text=The%20overlay2%20driver%20natively%20supports,inodes%20on%20the%20backing%20filesystem.)
 
 Run it with: `bash docker-run-dind.sh`
 
@@ -253,6 +253,18 @@ In a Jenkins tab, logged in as an admin:
   - Secret: paste the SonarQube token here
   - ID: sonarqube-localhost
   - Click "Create"
+
+```yaml
+credentials:
+  system:
+    domainCredentials:
+      - credentials:
+          - usernamePassword:
+              scope: GLOBAL
+              password: ${SONARQUBE_TOKEN}
+              id: "sonarqube"
+              description: "SonarQube token"
+```
 
 #### Step 3: Create Jenkins SonarQube Config
 

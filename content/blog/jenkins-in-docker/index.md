@@ -1,5 +1,5 @@
 ---
-title: "Jenkins in Docker with JCasC for Local CI/CD"
+title: "Local CI/CD with Jenkins, Docker, and JCasC"
 date: "2023-05-21T22:12:03.284Z"
 status: published
 author: EdPike365
@@ -22,34 +22,33 @@ This is part 1 of a series "Local CI/CD With Jenkins in Docker":
 
 The stack we build in the series can be used as the base stack for Mannings Live Project: [CI/CD Pipeline for a Web Application Using Jenkins](https://www.manning.com/liveprojectseries/ci-cd-pipeline-ser).
 
-Below, we will:
+Steps:
 
 - build a custom Jenkins docker image with JCasC and Plugin Manager
 - run and test it for basic function
 - auto add credentials to talk to GitHub with JCasC
-- test the certificate with a simple pipeline to GitHub
+- test the credentials with a simple pipeline to a private GitHub repo
+- develop shell scripts to manage the stack
 
 ### Why Jenkins in Docker?
 
-I try to keep my dev stack off of Windows. I only use Windows for gaming so I don't want the dev resources loading unless I need them. WSL works great for that. The WSL Ubuntu "VM" (sorta kinda), does not even load until I tell it to.
+When I do local development I use my strongest machine, which is also my Windows gaming rig. I ***only*** use Windows for gaming so I don't want the dev resources loading in Windows unless I need them. WSL (Windows Subsystem for Linux) works great for that. By default, the WSL Ubuntu "VM" does not load until I tell it to. On top of that, I configure my local dev stack to run in Docker and to only load when I tell them to.
 
-I also have Ubuntu desktop via dual boot, but it keeps failing for various reasons, NVIDIA drivers key among them. So I use WSL and I'll show you how.
+Putting Jenkins in Docker also avoids getting tangled up in Java VM version hell on your dev machine. If you install Jenkins from the ground up, you also have to install Java. Jenkins container images already have the correct version of Java installed for the Jenkins version in the image. If another app in your stack requires a different Java VM, it doesn't matter a ***bit***.
 
-Putting Jenkins in Docker also avoids getting tangled up in Java VM hell on your dev machine. If you install Jenkins from the ground up, you also have to install Java. Jenkins images already have the correct version of Java installed for the Jenkins version in the image.
+However, running Jenkins as a Docker container using Docker daemon is problematic if you want to use Docker containers in your pipelines. Jenkins [recommends](https://www.jenkins.io/doc/book/installing/docker/) using a DinD (Docker in Docker) container. This is [suboptimal](https://jpetazzo.github.io/2015/09/03/do-not-use-docker-in-docker-for-ci/) for production, but will work for a local dev stack.
 
-Running Jenkins as a Docker container is problematic if you want to use Docker containers in your pipelines. Jenkins [recommends](https://www.jenkins.io/doc/book/installing/docker/) using a DinD (Docker in Docker) container. This is [problematic](https://jpetazzo.github.io/2015/09/03/do-not-use-docker-in-docker-for-ci/) for production, but should work for a local dev stack.
+If you have a dedicated VM for Jenkins, where you are not worried about java VM version differences, etc, then you should consider installing Jenkins in standalone mode, with Docker CLI installed on the same VM. That simplifies using Docker in your pipelines and better emulates production. ***The instructions below are still somewhat useful because they lay out how to user JCasC and plugins, in preparation of automating Jenkins setup.***
 
-If you have a dedicated VM for Jenkins, where you are not worried about java VM version differences, etc, then you should consider installing Jenkins in standalone mode, with Docker CLI installed on the same VM. That simplifies using Docker in your pipelines. ***The instructions below are still somewhat useful because they lay out how to user JCasC and plugins, in preparation of automating Jenkins setup.***
-
-> We are doing this step-by-step to increase learning. If this were for efficiency, we'd use some IaC tools like Ansible. A blog entry for that is on my TODO list.
+> We build this stack step-by-step to increase learning. If this were for efficiency, we'd use Docker Compose and some IaC tools like Ansible. A blog entry for that is on my TODO list.
 
 ## Required Apps
 
 ### Git CLI and a remote SCM
 
-I installed git on Ubuntu in WSL2, so the daemon runs the same as it would in a linux VM. I keep the IaC faith and don't install anything for the CLI.
+I installed generic git on Ubuntu in WSL2, so the daemon runs the same as it would in a linux VM. I keep the IaC faith and don't install any sort of git GUI.
 
-I use GitHub in this tutorial.
+I use GitHub to host repos.
 
 ### Docker Daemon
 
@@ -57,7 +56,7 @@ I use GitHub in this tutorial.
 
 - I do ***NOT*** recommend installing Docker Desktop for Windows, though it can be "passed through" to your WSL VM. It is helpful to do everything via Docker CLI to increase your DevOps skills and to simulate a production Linux VM.
 
-- Use these directions to [Install Docker in WSL 2 without Docker Desktop](https://nickjanetakis.com/blog/install-docker-in-wsl-2-without-docker-desktop) I originally set up Docker for use with VSCode devcontainers and it was available for this project with no additional work. TODO: script the install with Ansible or some such
+- Use these directions to [Install Docker in WSL 2 without Docker Desktop](https://nickjanetakis.com/blog/install-docker-in-wsl-2-without-docker-desktop) I originally set up Docker for use with VSCode devcontainers and it was available for this project with no additional work.
 
 - The Jenkins docs has instructions for [running Jenkins as a Docker Container](https://www.jenkins.io/doc/book/installing/docker/)
   - Because we're running in WSL, we use the instructions to manage Docker as a non-root user ***in Linux***. It links to [Linux post-installation steps for Docker Engine](https://docs.docker.com/engine/install/linux-postinstall/).
@@ -84,13 +83,6 @@ I have a `dev` folder in my Linux home dir that I use for all my projects. I cd 
 
 The core containers for our CI/CD stack are Jenkins, DinD, and SonarQube. When we use the stack they all need to be running, otherwise they are stopped to save local machine resources.
 
-Create the central scripts to control our local devops stack. For now its just Jenkins, but it will grow in later parts of this series. We populate them as we go :
-
-- `touch ~/dev/docker-cicd/create-stack.sh`: create the stack
-- `touch ~/dev/docker-cicd/start-stack.sh`: startup scripts for each container
-- `touch ~/dev/docker-cicd/stop-stack.sh`: stop but don't delete all the containers
-- `touch ~/dev/docker-cicd/delete-stack.sh`: delete all containers, network, and volumes 
-
 ## Step 1: Create Jenkins Automation Code
 
 Each container gets its own subdirectory. Jenkins gets `~/dev/docker-cicd/jenkins/`.
@@ -101,7 +93,7 @@ We are automating the installation of all of our plugins using [jenkins-plugin-c
 
 These days, the app is built into [Jenkins Docker images](https://hub.docker.com/r/jenkins/jenkins), so we don't need to install it. We use it to bake all the plugins in to our custom Docker image with code.
 
-The list below adds all default/recommended plugins, plus a few extra ones we need, including the [Configuration As Code Plugin](https://github.com/jenkinsci/configuration-as-code-plugin#getting-started). It also includes plugins that we use later in this series to create a Docker "cloud" using DinD, and integrate a SonarQube server docker container.
+The list below adds all default/recommended plugins, plus a few extra ones we need, including the [JCasC (Configuration As Code Plugin)](https://github.com/jenkinsci/configuration-as-code-plugin#getting-started). It also includes plugins that we use later in this series to create a Docker "cloud" using DinD, and to integrate with SonarQube.
 
 The format is "shortname:version". If no version is specified, it pulls the latest version.
 
@@ -111,6 +103,8 @@ The format is "shortname:version". If no version is specified, it pulls the late
 - Copy and past the text below into `plugins.txt`.
 
 ```Text
+# plugins.txt
+
 ant
 antisamy-markup-formatter
 apache-httpcomponents-client-4-api
@@ -646,42 +640,138 @@ Create an MB Multibranch Pipeline job:
   - Save
   - The log should show that both branches had a Jenkinsfile.
 
-- Click on the job (for convenience use the Dashboard > jenkins-docker-private-test breadcrumb in the upper left corner)
+- Click on the job (for convenience, use the Dashboard > jenkins-docker-private-test breadcrumb in the upper left corner)
 - You will see 2 branchs listed by name. Each represents a normal pipeline
 - Click on one, view the Build History > Console Output and see the "Hello World" message.
 
-### FINALLY: When the tests pass, edit docker-run.sh
+## FINALLY: After the tests pass, make and test our our IaC script
 
-Now that it works, we lets complete and test our IaC scripts.
+### Create Stack IaC Scripts
 
-- `~/dev/docker-cicd/create-stack.sh`
+They will to control our local devops stack. For now its just Jenkins, but it will grow in later parts of this series.
+
+#### Stack Status
+
+```Bash
+#!/bin/bash
+# ~/dev/docker-cicd/status-stack.sh
+
+# jenkins network
+JENKINS_NETWORK=$(docker network inspect jenkins 2>&1)
+if [ "$?" -eq 0 ];
+then
+  echo "Jenkins network exists."
+else
+  echo "Jenkins network DOES NOT exist!"
+fi
+
+# jenkins container
+CONTAINERID=$(docker container inspect jenkins 2>&1)
+if [ "$?" -eq 0 ];
+then
+  echo "Jenkins container exists."
+else
+  echo "Jenkins container DOES NOT exist!"
+fi
+
+# jenkins folders
+JENKINS_DATA=$(docker volume inspect jenkins-data 2>&1)
+if [ "$?" -eq 0 ];
+then
+  echo "Volume jenkins-data exists."
+else
+  echo "Volume jenkins-data DOES NOT exist!"
+fi
+
+JENKINS_DOCKER_CERTS=$(docker volume inspect jenkins-docker-certs 2>&1)
+if [ "$?" -eq 0 ];
+then
+  echo "Volume jenkins-docker-certs exists."
+else
+  echo "Volume jenkins-docker-certs DOCES NOT exist!"
+fi
+
+# SCM tokens host env vars
+if [[ ! -z "$HOST_SCM_USERNAME" ]]
+then
+  echo "Host SCM username exists."
+else
+  echo "Host SCM username was EMPTY!"
+fi
+
+if [[ ! -z "$HOST_SCM_TOKEN" ]]
+then
+  echo "Host SCM token exists."
+else
+  echo "Host SCM token was EMPTY!"
+fi
+
+```
+
+#### Build Stack Images
+
+Create the stack. Assumes Dockerfiles are in the subfolders.
   
-  ```Bash
+```Bash
+#!/bin/bash
+# ~/dev/docker-cicd/build-stack.sh
+docker build . -t jenkins:2.387.3-custom -f ./jenkins/Dockerfile
+```
 
-  ```
+#### Run Stack Containers
 
-- `~/dev/docker-cicd/start-stack.sh`: startup scripts for each container
+Startup scripts to create the `jenkins` network and run each container.
 
-  ```Bash
+```Bash
+#!/bin/bash
+# ~/dev/docker-cicd/run-stack.sh
+bash ./jenkins/docker-run-jenkins.sh
+```
 
-  ```
+#### Stop Stack Containers
 
-- `~/dev/docker-cicd/stop-stack.sh`: stop but don't delete all the containers
+Stop, but don't delete all the containers.
 
-  ```Bash
+```Bash
+#!/bin/bash
+# ~/dev/docker-cicd/stop-stack.sh
+docker stop jenkins
+```
 
-  ```
+#### Remove Stack Containers and Network
 
-- `~/dev/docker-cicd/delete-stack.sh`: delete all containers, network, and volumes (TODO: add "are you sure?" prompt)
+ Runs `stop-stack.sh` then removes all containers and the Jenkins network.
 
-  ```Bash
+```Bash
+#!/bin/bash
+# ~/dev/docker-cicd/remove-stack.sh
 
-  ```
+sh ./stop-stack.sh
+docker container rm jenkins
 
-Test persistance:
+docker network rm jenkins
 
-- stop Jenkins: `docker stop jenkins`
-- delete the container: `docker delete jenkins`
+```
+
+#### Clean Stack (complete reset)
+
+Runs `remove-stack.sh`, which runs `stop-stack.sh`, and then removes volumes. Leaves the images in place.
+
+```Bash
+#!/bin/bash
+# ~/dev/docker-cicd/clean-stack.sh
+sh ./stop-stack.sh
+sh ./clean-stack.sh
+sh ./jenkins/clean-jenkins.sh
+```
+
+### Test persistance:
+
+`stop-stack.sh`
+
+`delete-stack.sh`:
+- verify with `docker ps -a`
+
 - run (and create) the container: `docker-run-jenkins.sh`
 - log in to Jenkins, check the following exist:
   - GitHub credentials (could just be from JCasC)
