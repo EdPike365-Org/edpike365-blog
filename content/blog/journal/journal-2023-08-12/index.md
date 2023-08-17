@@ -19,7 +19,24 @@ tags:
 
 Caught up with Medium feed summer vacation. You'll notice a lack of full stack web app stuff and a ton of devops stuff. I'll loop back around to the full stack stuff once I get my DevOps/SRE demo ready.
 
-### Log (FILO)
+### Log (FIFO)
+
+- Terraform is going essentially closed source and I'm learning about OpenTF, by the same folks who wrote Terragrunt, etc. Getting Java flashbacks. Was going to do a Pulumi dive anyway but moving that up. Was also planning closer look for Crossplane but that lives inside of Kubernetes and I need something outside *and* vendor neutral.
+
+- I think I'll implement this tutorial [Jenkins pipeline with Argo CD and Kubernetes](https://medium.com/@maheshbiradar8887/jenkins-pipeline-with-argo-cd-and-kubernetes-84e9f943cf13).
+
+- Need to find out more about NixOS.
+
+- Argo Workflows 3.5 released.
+
+- [Fireside Chat: Scott Johnston and Kelsey Hightower](https://www.youtube.com/watch?v=WUSpcgNWWqc) From Docker Inc. Thinking deeply about containers. Docker extensions. Docker Desktop for Linux exists.
+
+- eBPF: [Kernel Recipes 2022 - The untold story of BPF](https://www.youtube.com/watch?v=DAvZH13725I)
+
+- extended Berkely Packet Filter (eBPF): [Dynamically program the kernel for efficient networking, observability, tracing, and security](https://ebpf.io/). [What is eBPF?](https://ebpf.io/what-is-ebpf/). I learned about it while studying for my CKS test. Now its popping up all over (like Rust).
+
+> By allowing to run sandboxed programs within the operating system, application developers can run eBPF programs to add additional capabilities to the operating system at runtime. The operating system then guarantees safety and execution efficiency as if natively compiled with the aid of a Just-In-Time (JIT) compiler and verification engine.
+The Just-in-Time (JIT) compilation step translates the generic bytecode of the program into the machine specific instruction set to optimize execution speed of the program. This makes eBPF programs run as efficiently as natively compiled kernel code or as code loaded as a kernel module.
 
 ### Articles
 
@@ -29,9 +46,16 @@ Caught up with Medium feed summer vacation. You'll notice a lack of full stack w
 
 - [Terraform: planning a new project with Dev/Prod environments](https://itnext.io/terraform-planning-a-new-project-with-dev-prod-environments-2724ebd08ba9). [Terraform Best Practices](https://www.terraform-best-practices.com/).
 
-- [Building a Multi-Region Kubernetes Worker Nodes Cluster with Tailscale VPN](https://faun.pub/building-a-multi-region-kubernetes-worker-nodes-cluster-with-tailscale-vpn-646f6767bda6). Spoiler: Tailscale is a VPN mesh built on WireGuard, encrypted. [Free tier](https://tailscale.com/pricing/) is 3 users and 100 devices. I'm really interest in multi region and hybrid on prem DNS routing and failover for intranet apps.
+- [Building a Multi-Region Kubernetes Worker Nodes Cluster with Tailscale VPN](https://faun.pub/building-a-multi-region-kubernetes-worker-nodes-cluster-with-tailscale-vpn-646f6767bda6). Spoiler: Tailscale is a VPN mesh built on WireGuard VPN protocol, encrypted. [Free tier](https://tailscale.com/pricing/) is 3 users and 100 devices. I'm really interest in multi region and hybrid on prem DNS routing and failover for intranet apps.
+
+- [Tailscale for Secure Access to Kubernetes Applications without external Load Balancers](https://chimbu.medium.com/access-kubernetes-applications-securely-without-load-balancers-via-tailscale-792584d5a59c)
+Peer to peer, never hits central server. Install Tailscale app on each server or client (like your phone?). Useful for sharing experimental services with team. Free tier.
+
+> Tailscale automatically assigns each machine on your network a unique 100.x.y.z IP address, so that you can establish stable connections between machines no matter where they are in the world, even when they switch networks, and even behind a firewall. You can view all the connected devices in the console.
 
 - [DevOps in Argo Rollouts — Blue-green Deployment](https://blog.devgenius.io/devops-in-argo-rollouts-blue-green-deployment-f24084534213):  Argo Rollouts automates the process of creating and managing blue-green replica sets and performing the cutover from the previous to the new version.
+
+- [The common traits of successful MLOps](https://bdtechtalks.com/2022/12/12/successful-mlops/)
 
 - [Securing your CI/CD by Removing Long-Lived Passwords: an OIDC Tutorial (AWS OIDC, HashiCorp Vault)](https://medium.com/4th-coffee/securing-your-ci-cd-by-removing-long-lived-passwords-an-oidc-tutorial-e4f53f271c1d): 
   - Best Practice #1: No Long-Lived Credentials
@@ -51,6 +75,10 @@ Caught up with Medium feed summer vacation. You'll notice a lack of full stack w
 - Learned about Kubernetes image cacheing with [Harbor](https://goharbor.io/docs/2.1.0/administration/configure-proxy-cache/), a recently graduated CNCF project. It's a "pull through" proxy cache.
 
 - CNCF [KEDA](https://www.cncf.io/projects/keda/) can watch an event bus like Kafka, etc, and scale a pod based on rules.
+
+- [Networks can solve AI problems from robotics to self-driving cars](https://venturebeat.com/ai/how-mits-liquid-neural-networks-can-solve-ai-problems-from-robotics-to-self-driving-cars/) Research from [MIT CSAIL](https://www.csail.mit.edu/) (Computer Science and Artificial Intelligence Laboratory)  Inspired by the research on biological neurons found in small organisms, such as the C. Elegans worm, which performs complicated tasks with no more than 302 neurons. The result of their work was [liquid neural networks (LNN)](https://www.science.org/doi/10.1126/scirobotics.adc8892). The key to LNNs’ efficiency lies in their use of dynamically adjustable differential equations, which allows them to adapt to new situations after training. This is a capability not found in typical neural networks. LNNs also use a wiring architecture that is different from traditional neural networks and allows for lateral and recurrent connections within the same layer.
+
+> A classic deep neural network requires around 100,000 artificial neurons and half a million parameters to perform a task such as keeping a car in its lane. In contrast, Rus and her colleagues were able to train an LNN to accomplish the same task with just 19 neurons.
 
 - [EtLT](https://blog.devgenius.io/elt-is-dead-and-etlt-will-be-the-end-of-modern-data-processing-architecture-154b87c1cce0) supplanted ETL because of the need to feed AI training. Learned of the existence of [Apache DolphinScheduler](https://dolphinscheduler.apache.org/en-us) visual workflow orchestration tool for big data. Also [Apache SeaTunnel](https://seatunnel.apache.org/) (formerly Waterdrop) for EtLT.
 
