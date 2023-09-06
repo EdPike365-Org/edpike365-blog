@@ -108,8 +108,8 @@ After Vercel, the maker of Next.js, hired [Svelte's](https://svelte.dev/) creato
 - Gatsby V3 documentation build flow diagrams uses GraphViz and does not render.
 
 ### Strategic TODOs
-
-I'm transitioning these to [Jira](https://edpike365.atlassian.net/jira/software/projects/ECDT/boards/1) (UPDATE: actually Github issues).
+fadaf
+NOTE this list is deprecated. I'm transitioning these to a private [Jira](https://edpike365.atlassian.net/jira/software/projects/ECDT/boards/1). I think I gave anonymous users the ability to browse the issues using [these instructions](https://support.atlassian.com/jira-cloud-administration/docs/allow-anonymous-access-to-projects/) but I have not tested it yet. It looks like I cannot actually do it because I'm on a free Jira cloud account. TODO: explore using trello or github issues.
 
 - Anchor URLs do not work unless from same MD page they are on. (Reach Router)
 - Using an anchor crushes the top nav grid div and you can't scroll back up to very top, only to top of content grid div, without reloading the page. (Reach Router)

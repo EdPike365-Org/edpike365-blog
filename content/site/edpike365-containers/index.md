@@ -1,6 +1,6 @@
 ---
-title: "Containers and Orchestration"
-date: "2021-08-23T22:12:03.284Z"
+title: "Containers and K8s"
+date: "2022-08-23T22:12:03.284Z"
 status: published
 author: EdPike365
 tags:
@@ -12,44 +12,86 @@ tags:
 
 [OCI/Docker](#oci-docker) | [Kubernetes Orchestration](#kubernetes-container-orchestration) | [Hosting](#hosting-providers)
 
-> Servers should be cattle, not pets.
+> Servers should be cattle, not pets. But it's OK to miss "the servers of Middle Earth".
 
-### OCI, Docker
+## VM Hypervisors
 
-- OCI ([Open Container Initiative](https://opencontainers.org/))
+- VMWare
+- KVM
+- Hyper-V
 
-  - runC: OCI universal OS container runtime.
-  - ContainerD: daemon that interfaces between container engine and container runtimes.
+## Container History
 
-- Container Runtimes
+Containers appeared after invention of cgroups and namespaces. [LXC](https://linuxcontainers.org/lxc/introduction/) was an early try.
 
-  - Docker
-    - Docker CLI
-    - Docker Desktop: Docker needs Linux, so MacOS (Unix, not Linux), needs a VM, just like Windows (except WSL2).
-    - DinD
-    - Docker Hub
-    - VSCode DevContainers
-  - Podman: No daemon, each container is self-sufficient. So no SPOF (single point of failure). NOT root by default. More secure than Docker.
+[LXC](https://linuxcontainers.org/lxc/introduction/) Linux Containers
 
-    - Podman CLI (vs Docker CLI) at
-    - [Switching from Docker to Podman (devcontainer)](https://www.troykershaw.com/vscode-dev-containers-podman/)
-    - [VSCode Remote Container Support](https://y0n1.medium.com/using-podman-with-the-docker-extension-for-visual-studio-code-a828be26d285)
+- Between OCI and fullblown VM
+- Docker was originally built on top of LXC.
+- LXD: extension of LXC
 
-  - Also Rans
-    - LXC: Canonical, pre Docker. No daemon.
-    - rkt: formerly CoreOS Rocket. Can run Docker. No daemon. RedHat.
+> "LXD is designed for hosting virtual environments that “will typically be long running and based on a clean distribution image,” whereas “Docker focuses on ephemeral, stateless, minimal containers that won’t typically get upgraded or re-configured but instead just be replaced entirely.”
 
-- Container Image Repos
+### CRI, OCI
 
-  - Docker Hub
-  - GitHub Containers
-  - Artifactory Docker Reg: Local repo option.
-  - AWS Container Registry
+- [CRI](https://kubernetes.io/docs/concepts/architecture/cri/) (Container Runtime Interface) Compliant Runtimes
+  - Kubernetes API that allows you to use different container runtimes (like containerd and CRI-O).
+  - Defines [gRPC](https://grpc.io/) protocol for communicating between cluster components.
 
-### Kubernetes Container Orchestration
+- OCI ([Open Container Initiative](https://opencontainers.org/)) Specs for building images and running containers.
+  Has 3 parts:
+  - Runtime Spec
+  - Image Spec
+  - Distribution Spec
+
+- Runtime Specs
+  - High Level runtimes
+    - [containerD](https://containerd.io/): daemon that interfaces between container engine and container runtimes.
+      - CRI compliant through cri plugin (this still true?)
+      - Originally from Docker
+    - Docker
+    - [CRI-O](https://cri-o.io/)
+      - Red Hat/IBM
+    - podman
+  - Low Level
+    - runc: OCI universal OS container runtime.
+      - by Docker, now part of CNCF
+      - Docker and Containerd run on it
+    - gvisor
+    - kata
+
+### Docker
+
+- Docker CLI
+- Docker Desktop: Docker needs Linux, so MacOS (Unix, not Linux), needs a VM, just like Windows (except WSL2).
+- DinD
+- Docker Hub
+- VSCode DevContainers
+
+### Podman
+
+No daemon, each container is self-sufficient. So no SPOF (single point of failure). NOT root by default. More secure than Docker.
+
+- Podman CLI (vs Docker CLI)
+- [Switching from Docker to Podman (devcontainer)](https://www.troykershaw.com/vscode-dev-containers-podman/)
+- [VSCode Remote Container Support](https://y0n1.medium.com/using-podman-with-the-docker-extension-for-visual-studio-code-a828be26d285)
+
+### Others
+
+- LXC: Canonical, pre Docker. No daemon.
+- rkt: formerly CoreOS Rocket. Can run Docker. No daemon. RedHat.
+
+## Container Image Repos
+
+- Docker Hub
+- GitHub Containers
+- Artifactory Docker Reg: Local repo option.
+- AWS Container Registry
+
+## Kubernetes Container Orchestration
 
 - Docker Compose: smaller apps
-- K8s (Kubernetes)
+- K8s (Kubernetes) for the big kahunas
 
   - Cluster Architecture
 
@@ -89,6 +131,7 @@ tags:
       1. Docker Engine
       1. containerd
       1. CRI-O
+    - [crictl](https://kubernetes.io/docs/reference/tools/map-crictl-dockercli/)
 
   - [Addons](https://kubernetes.io/docs/concepts/cluster-administration/addons/)
 
@@ -203,3 +246,6 @@ tags:
       - Docker CE, CLI (they are open source)
       - [Install in WSL 2](https://itspyworld.blogspot.com/2021/11/install-minikube-in-wsl-2-with-kubectl.html)
     - [Rancher Desktop](https://rancherdesktop.io/)
+
+Storage:
+- Longhorn (Rancher Labs)

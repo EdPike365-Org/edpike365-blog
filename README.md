@@ -1,45 +1,55 @@
 # EdPike365.com
 
-<p align="center">
-  <a href="https://www.gatsbyjs.com">
-    <img alt="Gatsby" src="https://www.gatsbyjs.com/Gatsby-Monogram.svg" width="60" />
-  </a>
-</p>
+This blog started with [Gatsby's basic blog starter](https://github.com/gatsbyjs/gatsby-starter-blog). I wanted to start with something really simple and customize it manually to better learn Gatsby, React, GraphyQL, etc.
 
-This blog started with [Gatsby's basic blog starter](https://github.com/gatsbyjs/gatsby-starter-blog).
+## Customizations
 
-A little Mermaid example. Flowcharts and other diagrams in MD.
+### Custom Build and Publish Workflow
 
-```mermaid
-  graph TD;
-      A-->B;
-      A-->C;
-      B-->D;
-      C-->D;
-```
+I create a few top level core pages using .js files in the normal way. These are pages that need data or have forms.
 
-## Vanilla Gatsby Folders
+I create all other core pages with MD because they were mostly text and I appreciate the convenience of MD. This required customizing the page building code so that they would not end up as blog entries. Once I implement MDX, I may convert some of the .js pages into MDX.
 
-1. **`/node_modules`**: This directory contains all of the modules of code that your project depends on (npm packages) are automatically installed.
+All of the blogs entries are MD files, using the original Gatsby core. HOWEVER, I added a publishing mechanism. It uses .env.development and .env.production file variables to control which articles get shown on the web site. The per file publishing state is based on a headmatter string.
 
-2. **`/src`**: This directory will contain all of the code related to what you will see on the front-end of your site (what you see in the browser) such as your site header or a page template. `src` is a convention for “source code”.
+In actual production, the env vars are handled by the hosting company (Netlify at the moment).
 
-3. **`.gitignore`**: This file tells git which files it should not track / not maintain a version history for.
+### Custom Modules
 
-4. **`.prettierrc`**: This is a configuration file for [Prettier](https://prettier.io/). Prettier is a tool to help keep the formatting of your code consistent.
+I've heavily customized the basic core and use 2 NPM modules that I wrote specifically for Gatsby.
 
-5. **`gatsby-browser.js`**: This file is where Gatsby expects to find any usage of the [Gatsby browser APIs](https://www.gatsbyjs.com/docs/browser-apis/) (if any). These allow customization/extension of default Gatsby settings affecting the browser.
+- [gatsby-source-build-date](https://www.gatsbyjs.com/plugins/gatsby-source-build-date/?=gatsby-source-build)
+- [gatsby-head-style-boss](https://www.gatsbyjs.com/plugins/gatsby-head-style-boss/?=gatsby-head)
 
-6. **`gatsby-config.js`**: This is the main configuration file for a Gatsby site. This is where you can specify information about your site (metadata) like the site title and description, which Gatsby plugins you’d like to include, etc. (Check out the [config docs](https://www.gatsbyjs.com/docs/gatsby-config/) for more detail).
+## Mobile-First Repsonsive Design
 
-7. **`gatsby-node.js`**: This file is where Gatsby expects to find any usage of the [Gatsby Node APIs](https://www.gatsbyjs.com/docs/node-apis/) (if any). These allow customization/extension of default Gatsby settings affecting pieces of the site build process.
+I designed the site to be useful on the smallest phones, then added functionality as the size grows. I use a top layer LayoutGrid with nested components. The top nav changes a lot as the width changes and is easily customizable.
 
-8. **`gatsby-ssr.js`**: This file is where Gatsby expects to find any usage of the [Gatsby server-side rendering APIs](https://www.gatsbyjs.com/docs/ssr-apis/) (if any). These allow customization of default Gatsby settings affecting server-side rendering.
+I use the emotion plugin for CSS execpt when I need to insert some custom layout in MD.
 
-9. **`LICENSE`**: This Gatsby starter is licensed under the 0BSD license. This means that you can see this file as a placeholder and replace it with your own license.
+## Fancy Nav Bars, Back To Top Button
 
-10. **`package-lock.json`** (See `package.json` below, first). This is an automatically generated file based on the exact versions of your npm dependencies that were installed for your project. **(You won’t change this file directly).**
+I wrote a custom left nav bar with collapsing folders. I could have used some libraries but they come with a lot of baggage and this way I learned a lot more about React and modern CSS, like pseudo selectors. I wanted to animate the sliding in and out, but I also wanted to use CSS only and I could not get the animation to work correctly (yet).
 
-11. **`package.json`**: A manifest file for Node.js projects, which includes things like metadata (the project’s name, author, etc). This manifest is how npm knows which packages to install for your project.
+The top nav bar has an animated logo and a custom transition that happens when you move from the largest mobile width to the lowest web browser width.
 
-12. **`README.md`**: A text file containing useful reference information about your project. test
+The floating "back to top" button shows up when scroll to the bottom of a large page.
+
+## Future Looking
+
+- User login: User signup, signin, SSO
+- Secure site admin area: manage users, email list
+- Secure user area: manage profile
+- Email List form with db backend and email notification to site admin
+  - The standard "form mail" functionality offered by Netlify, etc, is host specific but I'm doing this to learn some third party db provider, like Contentful.  
+  - That still leaves the email notification code for when someone signs up. I haven't looked into "the JAMstack way" for that.
+- User page comments
+- TS
+- Auto build testing
+- Auto web UI testing (probably Selenium)
+
+## Odds and Ends
+
+[NPM notes to myself](./README-NPM.md)
+
+[Original Readme Generated By Gatsby](./README-ORIGINAL.md)

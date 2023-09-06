@@ -26,25 +26,30 @@ REF: https://github.com/microsoft/vscode-js-debug/issues/374
     "dockerfile": "Dockerfile"
   },
 
-  // These appear in .vscode/settings.json
-  "settings": {
-    "debug.javascript.autoAttachFilter": "disabled"
-  },
-
   // Add the IDs of extensions you want installed when the container is created.
-  "extensions": [
-    "dbaeumer.vscode-eslint",
-    "ms-vscode.js-debug",
-    "ms-vscode.js-debug-companion",
-    "github.copilot",
-    "graphql.vscode-graphql",
-    "ecmel.vscode-html-css",
-    "davidanson.vscode-markdownlint",
-    "christian-kohler.npm-intellisense",
-    "esbenp.prettier-vscode",
-    "eg2.vscode-npm-script",
-    "ms-azuretools.vscode-docker"
-  ],
+  "customizations": {
+    // Configure properties specific to VS Code.
+    "vscode":{
+      // Set *default* container specific settings.json values on container create.
+      // These appear in .vscode/settings.json
+      "settings": {
+        "debug.javascript.autoAttachFilter": "disabled"
+      },
+      // Add the IDs of extensions you want installed when the container is created.
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "ms-vscode.js-debug",
+        "ms-vscode.js-debug-companion",
+        "github.copilot",
+        "graphql.vscode-graphql",
+        "ecmel.vscode-html-css",
+        "davidanson.vscode-markdownlint",
+        "christian-kohler.npm-intellisense",
+        "esbenp.prettier-vscode",
+        "ms-azuretools.vscode-docker"
+      ]
+    }
+  },
 
   "mounts": [
     // Locally cache project node_modules (won't be in project folder)

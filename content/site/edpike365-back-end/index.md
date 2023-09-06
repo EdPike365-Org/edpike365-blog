@@ -16,24 +16,56 @@ tags:
 
 ### Web Servers
 
-- [NGINX](https://www.nginx.com/) Also: Kubernetes Ingress fame. Asynch non-blocking.
-- [Apache HTTPD](https://httpd.apache.org/) Honored ancestor. Preinstalled on CentOS, Ubuntu. Good for shared envs by using `.htaccess` files.
+- [NGINX](https://www.nginx.com/) Asynch, non-blocking. Kubernetes Ingress fame. Owned by F5.
+- [Apache HTTPD](https://httpd.apache.org/) Honored ancestor. Preinstalled on CentOS, Ubuntu. Uses `.htaccess` files.
+
+### Load Balancers
+
+- [NGINX](https://docs.nginx.com/nginx/admin-guide/load-balancer/http-load-balancer/)
 - [HAProxy](http://www.haproxy.org/)
 - [AWS Elastic Load Balancing](https://aws.amazon.com/elasticloadbalancing/)
 
 ### App Servers
 
-- [Tomcat](https://tomcat.apache.org/)
-- [Flask](https://flask.palletsprojects.com/en/2.0.x/) Python. No asynch.
-  - [DJango](https://www.djangoproject.com/)
+#### Java
+
+- [Tomcat](https://tomcat.apache.org/), Tomcat Embedded
+- [Jetty](https://www.eclipse.org/jetty/)
+- [Spring Boot](https://spring.io/)
+- [Dropwizard](https://github.com/dropwizard/dropwizard) Embedded Jetty, [Google Guava](https://github.com/google/guava), Hibernate
+- [JHipster](https://www.jhipster.tech/) App generator: Spring Boot plus AngualarJS (sadly).
+
+#### Python
+
+- [DJango](https://www.djangoproject.com/) CMS, large projects
+- [Flask](https://flask.palletsprojects.com/en/2.0.x/) No asynch.
+
+#### GoLang
+
 - [Hugo](https://gohugo.io/) GoLang
+- [Gin](https://gin-gonic.com/) Identical syntax to Django.
+- [Beego](https://github.com/beego/beego) Similar to Django, MVC, ORM
+- Others: [Echo](https://echo.labstack.com/), [Kit](https://gokit.io/), [Fiber](https://docs.gofiber.io/), [Iris](https://www.iris-go.com/), [Go-zero](https://go-zero.dev/), [Kratos](https://go-kratos.dev/en/)
+
+#### NodeJS
+
+- [Express](https://expressjs.com/) MVC
+- [Fastify](https://www.fastify.io/) 4x faster than Express
+- [Koa](https://koajs.com/)
+- [tRPC](https://trpc.io/) TS RPCs, new, growing
+- [SvelteKit](https://kit.svelte.dev/) data fetching API, GraphQL
+- [Nest](https://nestjs.com/)
+- [Remix Server](https://remix.run/) Can run in Deno, Cloudflare Workers
+- [Strapi](https://strapi.io/) headless CMS and API REST server.
+
+#### Other
+
 - [WordPress](https://wordpress.com/) PHP
 - [Laravel](https://laravel.com/) PHP
 
 ### APIs
 
-- [Swagger]() API definition
-- OpenAPI
+- [OpenAPI](https://swagger.io/specification/) was Swagger API definition
 - REST
   - [Express.js](https://expressjs.com/) NodeJS
   - [FastAPI](https://fastapi.tiangolo.com/) Async. Highest performing Python.
@@ -42,14 +74,26 @@ tags:
 - GraphQL
   - [Apollo](https://www.apollographql.com/)
   - [GraphiQL IDE](https://github.com/graphql/graphiql)
-- API Gateways
-  - [AWS API Gateway](https://aws.amazon.com/api-gateway/)
-  - [GCP Apigee](https://cloud.google.com/apigee)
-- Serverless
-  - [AWS Lambda](https://aws.amazon.com/lambda/)
-  - [GCP Firebase Cloud Functions](https://firebase.google.com/firebase-and-gcp)
-- Service Mesh
-  - [Istio](https://istio.io/)
+
+### Serverless
+
+#### Kubernetes
+
+- [Kubeless](https://kubeless.io/) Lambda compatible
+- [Knative](https://knative.dev/docs/) Dev by Google, IBM, RedHat, vmware. Uses [CloudEvents](https://cloudevents.io/). Needs BIG cluster.
+
+#### Cloud
+
+- [AWS Lambda](https://aws.amazon.com/lambda/)
+  - [Serverless Framework](serverless.com)
+- [GCP Firebase Cloud Functions](https://firebase.google.com/firebase-and-gcp)
+- [Azure Serverless](https://azure.microsoft.com/en-us/solutions/serverless/)
+- [AWS Fargate](https://aws.amazon.com/fargate/) Serverless for containers.
+- [Netlify Functions](https://www.netlify.com/products/functions/)
+
+#### Other
+
+- [AWS Outposts Lambda](https://aws.amazon.com/blogs/compute/running-aws-lambda-functions-on-aws-outposts-using-aws-iot-greengrass/)
 
 ### Databases
 
@@ -65,6 +109,11 @@ tags:
   - [Memcached](https://memcached.org/) key-value. Aimpler than Redis.
   - [AWS Elasticache](https://aws.amazon.com/elasticache/?p=ft&c=db&z=3) Managed Redis or Memcached. [Which?](https://aws.amazon.com/elasticache/redis-vs-memcached/)
 
+- Headless CMS
+  - [Contentful](https://www.contentful.com/)
+  - [Sanity.io](https://www.sanity.io/)
+  - [Strapi](https://strapi.io/)
+
 - RDMS
 
   - [PostgresSQL](https://www.postgresql.org/) I pick this over MySQL/Maria because the license is cleaner. PostgresSQL 9.3 and higher has a NoSQL option.
@@ -74,9 +123,10 @@ tags:
   - [SQLite](https://www.sqlite.org/index.html): embedded in web client or IOT devices. PostgresSQL syntax.
 
 - Graph DBs
-
+  - [Graph DBs and the Semantic Web](https://graphdb.ontotext.com/documentation/9.11/enterprise/introduction-to-semantic-web.html)
   - [Neo4J](https://neo4j.com/)
   - [AWS Neptune](https://aws.amazon.com/neptune/)
+  - [GrapahDB](https://graphdb.ontotext.com/documentation/9.11/enterprise/index.html)
 
 - Object Storage and Warehouse
   - [AWS S3 with Athena](https://aws.amazon.com/athena/?whats-new-cards.sort-by=item.additionalFields.postDateTime&whats-new-cards.sort-order=desc)
@@ -88,8 +138,6 @@ tags:
 
 - [Okta](https://www.okta.com/)
 - [Auth0](https://auth0.com/) Bought by Okta.
-- [AWS Cognito](https://aws.amazon.com/cognito/)
 - [GCP Firebase](https://firebase.google.com/)
-- [LDAP](https://ldap.com/)
-- [MS Active Directory](https://azure.microsoft.com/en-us/services/active-directory/)
-- [Google Cloud Directory Sync](https://tools.google.com/dlpage/dirsync/)
+- [AWS Cognito](https://aws.amazon.com/cognito/)
+- [SAML](https://en.wikipedia.org/wiki/Security_Assertion_Markup_Language) An option in many of the above services.

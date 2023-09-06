@@ -77,7 +77,7 @@ module.exports = {
               alwaysEnabled: false,
               componentType: "STYLE",
               pathToCSSFile: "./src/styles/fireTheme.css",
-              media: "(max-width: 600px)",
+              media: "(max-width: 900px)",
               minify: false,
             },
           ],
