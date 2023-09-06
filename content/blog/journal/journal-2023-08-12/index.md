@@ -25,9 +25,27 @@ Caught up with Medium feed summer vacation. You'll notice a lack of full stack w
 
 - I think I'll implement this tutorial [Jenkins pipeline with Argo CD and Kubernetes](https://medium.com/@maheshbiradar8887/jenkins-pipeline-with-argo-cd-and-kubernetes-84e9f943cf13).
 
-- Need to find out more about NixOS.
+- Apparently immutable Linux distros is a growing thing, which makes sense from a security point of view but also from a debugging aspect. I'm thinking like Functional programming but for the OS level of your app stack.
+
+- Need to find out more about [NixOS](https://nixos.org/). Why? See immutable Linux distros.
+
+- Istio added an Ambient Mesh which gets rid of istio sidecars.
+  - ztunnels handle secure overlay traffic, in simple terms, it’s Layer 3 and Layer 4 traffic.
+  - Waypoint proxies bring in capabilities to the application layer (L7 processing).
 
 - Argo Workflows 3.5 released.
+
+- Need to ty [Podman](https://podman.io/) container engine by RedHat.
+  - daemonless (uses fork-exec model, so its only a process, 1 per container?)
+  - rootless (or rooted if you container needs it)
+  - modular design allows Podman to use individual system components only when needed.
+  - uses [Buildah](https://buildah.io/) to build images
+  - no "swarm" support
+  - podman-compose?
+
+- Need to deep dive GitLab with focus on its claimed "DevSecOps" support.
+
+- Need to compare Portainer with Podman, GitLab, etc.
 
 - [Fireside Chat: Scott Johnston and Kelsey Hightower](https://www.youtube.com/watch?v=WUSpcgNWWqc) From Docker Inc. Thinking deeply about containers. Docker extensions. Docker Desktop for Linux exists.
 
@@ -38,7 +56,20 @@ Caught up with Medium feed summer vacation. You'll notice a lack of full stack w
 > By allowing to run sandboxed programs within the operating system, application developers can run eBPF programs to add additional capabilities to the operating system at runtime. The operating system then guarantees safety and execution efficiency as if natively compiled with the aid of a Just-In-Time (JIT) compiler and verification engine.
 The Just-in-Time (JIT) compilation step translates the generic bytecode of the program into the machine specific instruction set to optimize execution speed of the program. This makes eBPF programs run as efficiently as natively compiled kernel code or as code loaded as a kernel module.
 
+- Linux commands hotlist:
+  - cpu: cat /proc/version, /proc/cpuinfo, uptime
+  - cron jobs
+  - OS: cat /etc/lsb-release
+  - swap: swapon -s, /proc/sys/vm/swappiness, sysctl vm.swappiness
+  - systemd
+
 ### Articles
+
+Most of the articles I read ad hoc are on Medium and I usually only add them to [my lists there](https://medium.com/@edpike365/lists), not here.
+
+- [Sorry Cypress on Kubernetes](https://itnext.io/sorry-cypress-quick-start-349f283ca258) Like a Jenkins home page but just for Cypress projects?
+
+- Not sure about SOPS vs other Secrets solutions. [The SOPS Way: The Only Way to Keep Your Secrets Safe in Git](https://medium.com/@seifeddinerajhi/the-sops-way-the-only-way-to-keep-your-secrets-safe-in-git-4a17e83ef6c6) Traditionally, secrets are stored in a separate, secure location, such as Hashicorp Vault, AWS Secrets Manager, GCP KMS, Azure Key Vault, and the well-known credential storages out there like 1Password. SOPS offers a simplified version of secret storage. With SOPS, the secret values are directly stored in the code, and they are encrypted using a key that is stored in a separate file.
 
 - [Apache Druid: overview, running in Kubernetes and monitoring with Prometheus](https://itnext.io/apache-druid-overview-running-in-kubernetes-and-monitoring-with-prometheus-4c8d29f6c8b9): Apache Druid is a distributed, cloud native columnar database focused on working with large amounts of data, combining the features and benefits  of Time-Series Database, Data Warehouse, and search engine. Useful for real-time ingestion, fast queries, and hight uptime. Common use cases: clickstream analytics, risk and fraud analysis, and server metrics storage.
 
@@ -89,6 +120,9 @@ Peer to peer, never hits central server. Install Tailscale app on each server or
   L(oad) — Loading: The loading stage is no longer just about data loading but also involves adapting data source structures and content to suit the target data destination (Data Target). It should handle data structure changes (Schema Evolution) in the source and support efficient loading methods such as Bulk Load, SaaS loading (Reverse ETL), and JDBC loading. EtLT ensures support for real-time data and data structure changes, along with fast batch data loading.
   
   (T)ransform — Conversion: In cloud data warehouses, on-premises data warehouses, or new data federations, business logic is processed. This is typically achieved using SQL, either in real-time or batch mode, to transform complex business rules accurately and quickly into data usable by business or AI applications.
+
+
+
 
 ### Books
 

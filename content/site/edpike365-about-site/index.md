@@ -12,7 +12,29 @@ tags:
 
 ### Site Evolution
 
-I wanted to learn about SPA Frameworks (React/Vue/Angular), JAM Stack, GraphQL, CSS in JS, responsive mobile-first design, and NPM publishing. Previous to this, I'd done traditional multipage apps using jQuery and AJAX. The apps were mostly part of a corporate intranet and mostly used on prem and via a desktop browser, so it was a good solution and worked in a pinch on a mobile browser.
+Most of my career, I've done traditional multipage apps for corporations, mostly Intranets and Extranets. It was a good solution and worked in a pinch on a mobile browser.
+
+- vanilla HTML
+- vanilla CSS
+- jQuery for polyfills and AJAX convenience
+- SSR with JSPs (Java Server Pages) via Tomcat
+- REST API's using Jersey
+- Desktop first
+- SSO using ActiveDirectory
+- Store locator using Google maps API
+- RDMS via SQL
+
+I wanted to learn about:
+
+- SPA Frameworks (React/Vue/Angular)
+- JAM Stack (Javascript, API, Markdown)
+- GraphQL
+- CSS in JS
+- responsive, mobile-first design
+- node package creation (NPM) and publishing
+- headless CMS's
+- NoSQL DBs
+- Social Auth
 
 I wrote EdPike365.com in [Gatsby](https://www.gatsbyjs.com/) because it checked all the boxes.
 
@@ -22,7 +44,9 @@ The first time I used a fairly elaborate "starter", with [Contentful Headless CM
 
 I was interested in search engine rankings (SEO) so I knew I wanted server side rendering (SSR). At the time, Gatsby was a better offer than NextJS.
 
-Since then, NextJS and Gatsby have evolved convergently. NextJS is said to favor programmers like me vs Gatsby, which favors refugees from WordPress. I'm looking for a project to do in NextJS.
+Since then, NextJS and Gatsby have evolved convergently. NextJS is said to favor programmers like me vs Gatsby, which favors refugees from WordPress. 
+
+I learned a lot from Gatsby but I'm looking for a project to do in NextJS.
 
 #### Gatsby Plugins
 
@@ -40,7 +64,7 @@ I got to know [Josh Comeau's](https://www.joshwcomeau.com/) work to handle moder
 
 ### What about non SSR Frameworks?
 
-I played with [Create React App](https://create-react-app.dev/) and I'll use it for something that requires lively data interaction but not SEO. I might to EdPike365.com's admin interface in it. 
+I played with [Create React App](https://create-react-app.dev/) and I'll use it for something that requires lively data interaction but not SEO.
 
 Vue has much smaller market share and not different enough from React from my perspective. AngularJS was much disparaged so I'm skipping that. Angular 2+ was new enough and had small enough share that I put off learning about it. Svelte was essentially in beta back then.
 
