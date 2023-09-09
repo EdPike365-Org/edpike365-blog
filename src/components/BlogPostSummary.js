@@ -18,22 +18,15 @@ const SummaryContainer = styled.div`
     padding: 1rem;
     margin: 0.5rem;
   }
+
 `
 
-// The "&"s are Emotions placeholders for the complie time class name
 const Header = styled.h3`
   margin-top: 0px;
   margin-bottom: 0px;
-  transition: color 400ms ease-in-out, background-color 400ms ease-in-out;
-
-  & > a:link {
-    text-decoration: none;
-  }
-
-  & > a:hover {
-    background-color: var(--palette-action-hover);
-  }
+  */ I had a transition here, but it was apparently adding it to the one defined in the a tag /*
 `
+
 const BlogPostDescription = styled.div``
 
 const BlogPostSummary = ({ post }) => {
@@ -49,9 +42,14 @@ const BlogPostSummary = ({ post }) => {
     color: var(--color-text-secondary);
     text-decoration: none;
     transition: color 400ms ease-in-out, background-color 400ms ease-in-out;
-    :hover {
-      color: var(--color-text-primary);
+
+    &:hover {
+      ${SummaryContainer} {
+        transform: translateX(-1px) translateY(-1px);
+        border-color: var(--color-text-secondary);
+      }
     }
+
   `
 
   return (
@@ -60,11 +58,10 @@ const BlogPostSummary = ({ post }) => {
       itemScope
       itemType="http://schema.org/Article"
     >
+      <LinK to={slug} itemProp="url">
       <SummaryContainer>
         <Header>
-          <LinK to={slug} itemProp="url">
             <span itemProp="headline">{title}</span>
-          </LinK>
         </Header>
         <span className="overline">{postDate}</span>
         <BlogPostDescription>
@@ -76,7 +73,8 @@ const BlogPostSummary = ({ post }) => {
             itemProp="description"
           />
         </BlogPostDescription>
-      </SummaryContainer>
+       </SummaryContainer>
+       </LinK>
     </article>
   )
 }

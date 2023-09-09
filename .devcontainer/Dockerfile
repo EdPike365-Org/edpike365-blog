@@ -25,7 +25,7 @@ RUN apt-get update \
     && apt-get install -y curl apt-transport-https lsb-release \
     #
     # Install tslint and typescript globally, latest gatsby-cli v4
-    && npm install -g tslint typescript gatsby-cli@"^4.17.1" \
+    && npm install -g tslint typescript gatsby-cli@"^4.x.x" \
     #
     # [Optional] Update a non-root user to match UID/GID - see https://aka.ms/vscode-remote/containers/non-root-user.
     && if [ "$USER_GID" != "1000" ]; then groupmod node --gid $USER_GID; fi \
