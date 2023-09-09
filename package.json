@@ -7,14 +7,14 @@
         "edpike365"
     ],
     "homepage": "https://github.com/edpike365/edpike365-blog#readme",
-    "version": "4.0.0",
+    "version": "5.0.0",
     "author": "Ed Pike <edpike365@gmail.com>",
     "bugs": {
         "url": "https://github.com/edpike365/edpike365-blog/issues"
     },
     "license": "0BSD",
     "main": "n/a",
-    "repository": "github:edpike365/edpike365-blog",
+    "repository": "https://github.com/EdPike365-Org/edpike365-blog",
     "scripts": {
         "build": "gatsby build",
         "develop": "gatsby develop",
@@ -73,7 +73,7 @@
         "prettier": "^3.0.3"
     },
     "engines": {
-        "node": ">=16.14.0",
-        "npm": ">=8.3.1"
+        "node": ">=18.17.1",
+        "npm": ">=9.6.7"
     }
 }
