@@ -47,6 +47,15 @@ exports.createSitePagesFromMDFiles = async (
     const nodes = queryResults.data.allMarkdownRemark.nodes
     if (nodes.length > 0) {
       nodes.forEach(node => {
+/*
+Action createPage was called outside of its expected
+asynchronous lifecycle createPages in default-site-plugin.
+Ensure that you return a Promise from createPages and are awaiting
+any asynchronous method invocations (like graphql or http requests).
+For more info and debugging tips: see
+https://gatsby.dev/sync-actions
+*/
+
         // `context` is available in the template as a prop and as a variable in GraphQL
         createPage({
           path: node.fields.slug,
