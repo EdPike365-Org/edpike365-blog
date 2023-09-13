@@ -23,6 +23,11 @@ const NavBar = () => {
           </NavLink>
         </NavLI>
         <NavLI>
+          <NavLink to={"/contact/"} itemProp="url">
+            Contact
+          </NavLink>
+        </NavLI> 
+        <NavLI>
           <NavLink to={"/bloglist/"} itemProp="url">
             Blog
           </NavLink>
@@ -271,11 +276,7 @@ const NavBar = () => {
             Settings
           </NavLink>
         </NavLI>
-        <NavLI>
-          <NavLink to={"/contact/"} itemProp="url">
-            Contact
-          </NavLink>
-        </NavLI>        
+       
       </NavUL>
     </Nav>
   )
