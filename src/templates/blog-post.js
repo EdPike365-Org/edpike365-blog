@@ -4,6 +4,7 @@ import { getSrc } from "gatsby-plugin-image"
 import styled from "@emotion/styled"
 import "./styles.css"
 
+import SubscribeWidget from "../components/layout/SubscribeWidget"
 import Bio from "../components/Bio"
 import Layout from "../components/layout/Layout"
 import Seo from "../components/SEO"
@@ -52,6 +53,8 @@ const BlogPostTemplate = ({ data, location }) => {
           dangerouslySetInnerHTML={{ __html: post.html }}
           itemProp="articleBody"
         />
+        <hr/>
+        <SubscribeWidget/>
         <hr />
         <footer>
           <Bio />

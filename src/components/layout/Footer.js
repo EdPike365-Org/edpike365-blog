@@ -44,7 +44,7 @@ export default function Footer() {
       <span css={spanCSS}>
         © {cyear}, Edward Pike
         <br />
-        Built with <a href="https://www.gatsbyjs.com">Gatsby v4</a> in{" "}
+        Built with <a href="https://www.gatsbyjs.com">Gatsby v5</a> in{" "}
         {`${process.env.NODE_ENV}`} mode.
       </span>
       <div css={spacerDivCSS} />
