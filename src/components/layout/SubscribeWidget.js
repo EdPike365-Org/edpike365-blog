@@ -5,6 +5,8 @@ import * as Yup from "yup";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import ErrMsgRenderer from "../forms/ErrMsgRenderer"
 
+// The senderEmail is hidden in the form, but is required by the netlify mail integration
+// Formik does not support hidden fields so it has to be added here and in initial values
 const validationSchema = Yup.object({
   senderEmail: Yup.string()
     .required('senderEmail is empty'),
@@ -20,6 +22,11 @@ const initialValues = {
 }
 
 const handleSubmit = (values) => {
+
+  values["form-name"] = "subscribe"
+
+  var botField = document.getElementsByName("bot-field")[0]
+  values["bot-field"] = botField.value
 
   fetch('/.netlify/functions/subscribe', {
     method: 'POST',
@@ -61,6 +68,7 @@ const SubscribeWidget = () => {
                 Do fill this out if you are human: <input name="bot-field" />
               </label>
             </HiddenP>
+            <input type="hidden" name="form-name" value="subscribe" />
             <InputGroup>
               <label htmlFor="email">Email:</label>
               <ErrorMessage name="email" render={ErrMsgRenderer} />

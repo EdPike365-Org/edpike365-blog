@@ -2,6 +2,8 @@ import fetch from "node-fetch";
 
 const handler = async function (event) {
 
+    //NOTE: you can preview mail forms using http://localhost:8888/.netlify/functions/emails/subscribed-admin-notice
+
     if (event.body === null) {
         return {
             statusCode: 400,
@@ -11,6 +13,10 @@ const handler = async function (event) {
 
     const reqBody = JSON.parse(event.body);
 
+    //TODO add data to a db, maybe airtable, firebase?
+    //https://www.netlify.com/blog/2018/09/14/forms-and-functions/
+
+    // send a confirmation email to the contactor
     await fetch(`${process.env.URL}/.netlify/functions/emails/contact-user-notice`, {
         headers: {
             "netlify-emails-secret": process.env.NETLIFY_EMAILS_SECRET,
@@ -30,6 +36,7 @@ const handler = async function (event) {
         }),
     });
 
+    // let the admin know about the contact
     await fetch(`${process.env.URL}/.netlify/functions/emails/contact-admin-notice`, {
         headers: {
             "netlify-emails-secret": process.env.NETLIFY_EMAILS_SECRET,

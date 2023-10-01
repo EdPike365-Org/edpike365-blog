@@ -43,7 +43,12 @@ const initialValues = {
 
 const Contact = ({ location }) => {
 
-  const handleSubmit = (values, { setSubmitting }) => {
+  const handleSubmit = (values, actions) => {
+
+    values["form-name"] = "contact"
+
+    var botField = document.getElementsByName("bot-field")[0]
+    values["bot-field"] = botField.value
 
     fetch('/.netlify/functions/contact', {
       method: 'POST',
