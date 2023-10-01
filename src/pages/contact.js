@@ -3,6 +3,7 @@ import { navigate } from "gatsby"
 import Layout from "../components/layout/Layout"
 import Seo from "../components/SEO"
 import Required from "../components/forms/Required"
+import ErrMsgRenderer from "../components/forms/ErrMsgRenderer"
 import styled from "@emotion/styled"
 import { css } from "@emotion/react"
 import * as Yup from "yup";
@@ -12,10 +13,9 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 // Using netlify cli (in dev container) to test email endpoint https://docs.netlify.com/cli/get-started/
 // and its spam filters https://docs.netlify.com/forms/spam-filters/
 
-// this seemed useful https://github.com/swyxio/gatsby-netlify-form-example-v2
-const sleepPromise = (ms) => new Promise((r) => setTimeout(r, ms));
-
 const validationSchema = Yup.object({
+  senderEmail: Yup.string()
+    .required('senderEmail is empty'),
   first_name: Yup.string()
     .max(50, 'Must be 50 characters or less'),
   last_name: Yup.string()
@@ -33,6 +33,7 @@ const validationSchema = Yup.object({
 })
 
 const initialValues = {
+  senderEmail: "ed@edpike365.com",
   first_name: '',
   last_name: '',
   email: '',
@@ -43,18 +44,15 @@ const initialValues = {
 const Contact = ({ location }) => {
 
   const handleSubmit = (values, { setSubmitting }) => {
-    setTimeout(() => {
-      alert(JSON.stringify(values, null, 2))
-      setSubmitting(false)
-    }, 400)
-
-    // navigate("/contact-success/")
 
     fetch('/.netlify/functions/contact', {
       method: 'POST',
       body: JSON.stringify(values),
     })
-      .then((res) => res.text())
+      .then((res) => {
+        res.text()
+        res.status === 200 ? navigate("/contact-success/") : alert("There was a problem sending your message.  Please try again later.")
+      })
       .then((text) => console.log(text))
       .catch((error) => alert(error))
 
@@ -68,6 +66,8 @@ const Contact = ({ location }) => {
       Questions or complaints?  Please fill out the form below.
       <br />
       After you send it, I'll send you a confirmation email and get back to you as soon as I can.
+      <br />
+      This form uses Formik, Yup, and Netlify Functions. The Netlify Function is a serverless function that uses SendGrid to send the email.
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
@@ -88,33 +88,32 @@ const Contact = ({ location }) => {
                     Do fill this out if you are human: <input name="bot-field" />
                   </label>
                 </HiddenP>
-                <input type="hidden" name="senderEmail" value="ed@edpike365.com" />
+                <noscript>
+                  <p>This form will not work with Javascript disabled</p>
+                </noscript>
                 <InputGroup>
-                  <noscript>
-                    <p>This form will not work with Javascript disabled</p>
-                  </noscript>
                   <label htmlFor="first_name">First Name:</label>
-                  <ErrorMessage name="first_name" render={renderError} />
+                  <ErrorMessage name="first_name" render={ErrMsgRenderer} />
                   <Field name="first_name" type="text" css={txtCSS} />
                 </InputGroup>
                 <InputGroup>
                   <label htmlFor="last_name">Last Name:</label>
-                  <ErrorMessage name="last_name" render={renderError} />
+                  <ErrorMessage name="last_name" render={ErrMsgRenderer} />
                   <Field name="last_name" type="text" css={txtCSS} />
                 </InputGroup>
                 <InputGroup>
                   <label htmlFor="email">Email:<Required /></label>
-                  <ErrorMessage name="email" render={renderError} />
+                  <ErrorMessage name="email" render={ErrMsgRenderer} />
                   <Field name="email" type="email" css={txtCSS} />
                 </InputGroup>
                 <InputGroup>
                   <label htmlFor="subject">Subject:<Required /></label>
-                  <ErrorMessage name="subject" render={renderError} />
+                  <ErrorMessage name="subject" render={ErrMsgRenderer} />
                   <Field name="subject" type="text" css={txtLongCSS} />
                 </InputGroup>
                 <InputGroup>
-                  <label htmlFor="message">Message:</label>
-                  <ErrorMessage name="message" render={renderError} />
+                  <label htmlFor="message">Message:<Required /></label>
+                  <ErrorMessage name="message" render={ErrMsgRenderer} />
                   <Field name="message" as="textarea" rows="5" />
                 </InputGroup>
               </FormColumn>
@@ -251,9 +250,5 @@ const txtCSS = css({
 const txtLongCSS = css({
   width: `100rem`,
 })
-
-//TODO fix
-const renderError = (message) => <p className="help is-danger">{message}&nbsp;&nbsp;</p>;
-
 
 export default Contact

@@ -23,7 +23,6 @@ const handler = async function (event) {
       to: requestBody.email,
       subject: "You are now subscribed to EdPike365.com!",
       parameters: {
-        name: requestBody.name,
         email: requestBody.email,
       },
     }),
@@ -38,9 +37,8 @@ const handler = async function (event) {
     body: JSON.stringify({
       from: requestBody.senderEmail,
       to: requestBody.senderEmail,
-      subject: "EdPike365.com subscriber: " + requestBody.name,
+      subject: "New EdPike365.com subscriber: " + requestBody.email,
       parameters: {
-        name: requestBody.name,
         email: requestBody.email,
       },
     }),

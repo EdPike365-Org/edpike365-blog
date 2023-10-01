@@ -8,10 +8,14 @@ const ContactSuccess = ({ data, pageContext, location }) => {
 
   return (
     <Layout location={location}>
+    <br/>
     <h2>Thanks for contacting EdPike365!</h2>
-    You should receive a response email as well.
+    You should receive a response email to the email you used in the form.
+    <br/>
     <br/>
     I'll respond as soon as I can.
+    <br/>
+    <br/>
     </Layout>
   )
 }
