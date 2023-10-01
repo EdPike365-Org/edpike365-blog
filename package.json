@@ -31,6 +31,7 @@
         "@react-icons/all-files": "^4.1.0",
         "dotenv": "^16.3.1",
         "eslint": "^8.49.0",
+        "formik": "^2.4.5",
         "gatsby": "^5.12.4",
         "gatsby-cli": "^5.12.1",
         "gatsby-head-style-boss": "^3.2.0",
@@ -67,7 +68,8 @@
         "react-dom": "^18.2.0",
         "react-google-recaptcha": "^3.1.0",
         "react-helmet": "^6.1.0",
-        "react-tiny-fab": "^4.0.4"
+        "react-tiny-fab": "^4.0.4",
+        "yup": "^1.3.1"
     },
     "devDependencies": {
         "babel-eslint": "^10.1.0",
