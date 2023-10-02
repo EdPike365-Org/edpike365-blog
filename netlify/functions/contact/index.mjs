@@ -13,8 +13,9 @@ const handler = async function (event) {
 
     const reqBody = JSON.parse(event.body);
 
-    //TODO add data to a db, maybe airtable, firebase?
+    //TODO add data to a db, maybe airtable, supabase, firebase?
     //https://www.netlify.com/blog/2018/09/14/forms-and-functions/
+    //https://www.netlify.com/blog/2021/06/28/saving-data-to-supabase-and-getting-it-back-again/
 
     // send a confirmation email to the contactor
     await fetch(`${process.env.URL}/.netlify/functions/emails/contact-user-notice`, {

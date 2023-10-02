@@ -8,12 +8,16 @@ import styled from "@emotion/styled"
 import { css } from "@emotion/react"
 import * as Yup from "yup";
 import { Formik, Form, Field, ErrorMessage } from "formik";
+import { InputRow } from "../components/forms/FormComponents"
+import ReCAPTCHA from "react-google-recaptcha"
 
 // Using netlify email integration, using SendGrid
 // Using netlify cli (in dev container) to test email endpoint https://docs.netlify.com/cli/get-started/
 // and its spam filters https://docs.netlify.com/forms/spam-filters/
 
 const validationSchema = Yup.object({
+  "form-name": Yup.string()
+    .required('form-name is empty'),
   senderEmail: Yup.string()
     .required('senderEmail is empty'),
   first_name: Yup.string()
@@ -33,22 +37,27 @@ const validationSchema = Yup.object({
 })
 
 const initialValues = {
+  "form-name": "contact",
+  "bot-field": "",
   senderEmail: "ed@edpike365.com",
   first_name: '',
   last_name: '',
   email: '',
   subject: '',
-  message: '',
+  message: '',  
 }
 
 const Contact = ({ location }) => {
 
   const handleSubmit = (values, actions) => {
 
-    values["form-name"] = "contact"
-
+    //Formik does not support hidden fields so it has to be added here
     var botField = document.getElementsByName("bot-field")[0]
     values["bot-field"] = botField.value
+
+    //https://www.seancdavis.com/posts/how-to-use-netlify-forms-with-gatsby/
+    //Netlify's reCAPTCHA support doesn't extend to forms rendered by JavaScript (as Gatsby's pages are/).
+    //g-recaptcha-response is needed for netlify forms
 
     fetch('/.netlify/functions/contact', {
       method: 'POST',
@@ -83,15 +92,18 @@ const Contact = ({ location }) => {
             name="contact"
             method="post"
             netlify-honeypot="bot-field"
+            data-netlify-recaptcha="true"
             data-netlify="true"
             action="/contact-success/"
           >
             <FormSubSection>
               <FormColumn>
+                <input type="hidden" name="form-name" value="contact" />
                 <HiddenP>
-                  <label>
-                    Do fill this out if you are human: <input name="bot-field" />
+                  <label htmlFor="bot-field">
+                    Do fill this out if you are human:
                   </label>
+                  <Field name="bot-field" type="text" />
                 </HiddenP>
                 <noscript>
                   <p>This form will not work with Javascript disabled</p>
@@ -121,6 +133,9 @@ const Contact = ({ location }) => {
                   <ErrorMessage name="message" render={ErrMsgRenderer} />
                   <Field name="message" as="textarea" rows="5" />
                 </InputGroup>
+                <InputRow>
+                  <ReCAPTCHA sitekey="{process.env.GATSBY_APP_SITE_RECAPTCHA_KEY}" />
+                </InputRow>
               </FormColumn>
             </FormSubSection>
             <FormSubSection>
