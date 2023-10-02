@@ -14,6 +14,7 @@ import ReCAPTCHA from "react-google-recaptcha"
 // Using netlify email integration, using SendGrid
 // Using netlify cli (in dev container) to test email endpoint https://docs.netlify.com/cli/get-started/
 // and its spam filters https://docs.netlify.com/forms/spam-filters/
+const recaptchaKey = process.env.GATSBY_APP_SITE_RECAPTCHA_KEY
 
 const validationSchema = Yup.object({
   "form-name": Yup.string()
@@ -103,7 +104,7 @@ const Contact = ({ location }) => {
                   <label htmlFor="bot-field">
                     Do fill this out if you are human:
                   </label>
-                  <Field name="bot-field" type="text" />
+                  <Field name="bot-field" id="bot-field" type="text" />
                 </HiddenP>
                 <noscript>
                   <p>This form will not work with Javascript disabled</p>
@@ -111,17 +112,17 @@ const Contact = ({ location }) => {
                 <InputGroup>
                   <label htmlFor="first_name">First Name:</label>
                   <ErrorMessage name="first_name" render={ErrMsgRenderer} />
-                  <Field name="first_name" type="text" css={txtCSS} />
+                  <Field name="first_name" id="first_name" type="text" css={txtCSS} />
                 </InputGroup>
                 <InputGroup>
                   <label htmlFor="last_name">Last Name:</label>
                   <ErrorMessage name="last_name" render={ErrMsgRenderer} />
-                  <Field name="last_name" type="text" css={txtCSS} />
+                  <Field name="last_name" id="last_name" type="text" css={txtCSS} />
                 </InputGroup>
                 <InputGroup>
                   <label htmlFor="email">Email:<Required /></label>
                   <ErrorMessage name="email" render={ErrMsgRenderer} />
-                  <Field name="email" type="email" css={txtCSS} />
+                  <Field name="email" id="email" type="email" css={txtCSS} />
                 </InputGroup>
                 <InputGroup>
                   <label htmlFor="subject">Subject:<Required /></label>
@@ -134,7 +135,7 @@ const Contact = ({ location }) => {
                   <Field name="message" as="textarea" rows="5" />
                 </InputGroup>
                 <InputRow>
-                  <ReCAPTCHA sitekey="{process.env.GATSBY_APP_SITE_RECAPTCHA_KEY}" />
+                  <ReCAPTCHA sitekey={process.env.GATSBY_APP_SITE_RECAPTCHA_KEY} />
                 </InputRow>
               </FormColumn>
             </FormSubSection>
