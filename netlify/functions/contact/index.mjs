@@ -2,6 +2,8 @@ import fetch from "node-fetch";
 
 const handler = async function (event) {
 
+    // recaptcha was valid in order to get here or Netlify would have put this in spam submissions
+    
     //NOTE: you can preview mail forms using http://localhost:8888/.netlify/functions/emails/subscribed-admin-notice
 
     if (event.body === null) {

@@ -11,33 +11,24 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import { InputRow } from "../components/forms/FormComponents"
 import ReCAPTCHA from "react-google-recaptcha"
 
+//TODO fix reCAPTCHA couldn't find user-provided function: onloadCallback
+
 // Using netlify email integration, using SendGrid
 // Using netlify cli (in dev container) to test email endpoint https://docs.netlify.com/cli/get-started/
 // and its spam filters https://docs.netlify.com/forms/spam-filters/
-const recaptchaKey = process.env.GATSBY_APP_SITE_RECAPTCHA_KEY
+// recaptcha articles
+//    https://www.delasign.com/blog/react-gatsby-recaptcha-protection/
+//    https://www.seancdavis.com/posts/how-to-use-netlify-forms-with-gatsby/
+//    https://medium.com/hackernoon/formik-handling-files-and-recaptcha-209cbeae10bc
+//    https://www.delasign.com/blog/ts-serverless-recaptcha/
+//    https://www.delasign.com/blog/react-gatsby-recaptcha-protection/
+//    https://stackoverflow.com/questions/65901771/how-to-make-invisible-react-google-recaptcha-formik-and-yup-work-together
+//  includes serverside validation: https://blog.logrocket.com/implement-recaptcha-react-application/
 
-const validationSchema = Yup.object({
-  "form-name": Yup.string()
-    .required('form-name is empty'),
-  senderEmail: Yup.string()
-    .required('senderEmail is empty'),
-  first_name: Yup.string()
-    .max(50, 'Must be 50 characters or less'),
-  last_name: Yup.string()
-    .max(50, 'Must be 50 characters or less'),
-  email: Yup.string()
-    .email('Invalid email address')
-    .max(320, 'Must be 320 characters or less')
-    .required('Email is required'),
-  subject: Yup.string()
-    .max(256, 'Must be 256 characters or less')
-    .required('Subject is required'),
-  message: Yup.string()
-    .max(1027, 'Must be 1027 characters or less')
-    .required('Message is required'),
-})
-
-const initialValues = {
+// "g-recaptcha-response" required for netlify forms, populate from validator function
+const myInitialValues = {
+  recaptchaToken: "",
+  "g-recaptcha-response": "",
   "form-name": "contact",
   "bot-field": "",
   senderEmail: "ed@edpike365.com",
@@ -45,27 +36,88 @@ const initialValues = {
   last_name: '',
   email: '',
   subject: '',
-  message: '',  
+  message: '',
 }
 
 const Contact = ({ location }) => {
 
-  const handleSubmit = (values, actions) => {
+  //must use useRef to get the recaptcha value
+  //useRef must be in the functional component body
+  const reCaptchaRef = React.useRef(null);
+
+  Yup.addMethod(Yup.string, "recaptchaValidate", function (errorMessage) {
+
+    return this.test(
+      "recaptcha-validate",
+      errorMessage,
+      async (value) => {
+        /*
+        As far as I can tell, "value" is always going to be null because 
+        I cannot figure out how to get Yup to get the value
+        hence this custom test, but I ignore the value
+        TODO fix this
+        */
+        try {
+
+          const token = reCaptchaRef.current.getValue()
+          //console.log("recaptchaValidate: token = " + token)
+
+          //reCaptchaRef.current.reset();
+          return !!token;
+
+        } catch (error) {
+          console.error(error);
+          return false;
+        }
+      }
+    );
+
+  });
+//.required('form-name is empty'),
+  const myValidationSchema = Yup.object({
+    recaptchaToken: Yup.string()
+      .recaptchaValidate('Please complete the reCAPTCHA'),
+    "g-recaptcha-response": Yup.string(),
+    "form-name": Yup.string(),      
+    senderEmail: Yup.string()
+      .required('senderEmail is empty'),
+    first_name: Yup.string()
+      .max(50, 'Must be 50 characters or less'),
+    last_name: Yup.string()
+      .max(50, 'Must be 50 characters or less'),
+    email: Yup.string()
+      .email('Invalid email address')
+      .max(320, 'Must be 320 characters or less')
+      .required('Email is required'),
+    subject: Yup.string()
+      .max(256, 'Must be 256 characters or less')
+      .required('Subject is required'),
+    message: Yup.string()
+      .max(1027, 'Must be 1027 characters or less')
+      .required('Message is required'),
+  })
+
+  const myHandleSubmit = (values, actions) => {
 
     //Formik does not support hidden fields so it has to be added here
     var botField = document.getElementsByName("bot-field")[0]
     values["bot-field"] = botField.value
 
-    //https://www.seancdavis.com/posts/how-to-use-netlify-forms-with-gatsby/
-    //Netlify's reCAPTCHA support doesn't extend to forms rendered by JavaScript (as Gatsby's pages are/).
-    //g-recaptcha-response is needed for netlify forms
+    // https://www.seancdavis.com/posts/how-to-use-netlify-forms-with-gatsby/
+    // Netlify's reCAPTCHA support doesn't extend to forms rendered by JavaScript (as Gatsby's pages are/).
+    // g-recaptcha-response is needed for netlify forms to 
+    // filter out spam before it gets to the netlify serverless function, saving on function invocations
+    values["g-recaptcha-response"] = reCaptchaRef.current.getValue()
+
+    //alert(JSON.stringify(values, null, 2))
 
     fetch('/.netlify/functions/contact', {
       method: 'POST',
       body: JSON.stringify(values),
     })
       .then((res) => {
-        res.text()
+        // an async error might fire even if you get back a 200 (related to recaptcha)?
+        // then you get an "undefined" because we are not on this page anymore??
         res.status === 200 ? navigate("/contact-success/") : alert("There was a problem sending your message.  Please try again later.")
       })
       .then((text) => console.log(text))
@@ -84,10 +136,11 @@ const Contact = ({ location }) => {
       <br />
       This form uses Formik, Yup, and Netlify Functions. The Netlify Function is a serverless function that uses SendGrid to send the email.
       <Formik
-        initialValues={initialValues}
-        validationSchema={validationSchema}
-        onSubmit={handleSubmit}
+        initialValues={myInitialValues}
+        validationSchema={myValidationSchema}
+        onSubmit={myHandleSubmit}
       >
+        {({ isSubmitting, isValid, dirty, validateField }) => (
         <FormDiv>
           <Form
             name="contact"
@@ -127,27 +180,35 @@ const Contact = ({ location }) => {
                 <InputGroup>
                   <label htmlFor="subject">Subject:<Required /></label>
                   <ErrorMessage name="subject" render={ErrMsgRenderer} />
-                  <Field name="subject" type="text" css={txtLongCSS} />
+                  <Field name="subject" id="subject" type="text" css={txtLongCSS} />
                 </InputGroup>
                 <InputGroup>
                   <label htmlFor="message">Message:<Required /></label>
                   <ErrorMessage name="message" render={ErrMsgRenderer} />
-                  <Field name="message" as="textarea" rows="5" />
+                  <Field name="message" id="message" as="textarea" rows="5" />
                 </InputGroup>
                 <InputRow>
-                  <ReCAPTCHA sitekey={process.env.GATSBY_APP_SITE_RECAPTCHA_KEY} />
+                  <ErrorMessage name="recaptchaToken" render={ErrMsgRenderer} />
+                </InputRow>
+                <InputRow>
+                  <ReCAPTCHA
+                    ref={reCaptchaRef}
+                    sitekey={process.env.GATSBY_APP_SITE_RECAPTCHA_KEY}
+                    onChange={() => validateField('recaptchaToken')}
+                  />
                 </InputRow>
               </FormColumn>
             </FormSubSection>
             <FormSubSection>
-              <button type="submit">Send</button>
-              <input type="reset" value="Clear" />
+              <button type="submit" disabled={ isSubmitting || !dirty || !isValid} >Send</button>
+              <input type="reset" disabled={ isSubmitting || !dirty } value="Clear" />
             </FormSubSection>
             <FormSubSection>
               <Required /> = required field
             </FormSubSection>
           </Form>
         </FormDiv>
+        )}
       </Formik>
       <br />
     </Layout >

@@ -279,6 +279,14 @@ module.exports = {
       },
     },
     `gatsby-plugin-react-helmet`,
+    {
+      resolve: `gatsby-plugin-recaptcha`,
+      options: {
+         async: false,
+         defer: false,
+         args: `?onload=onloadCallback&render=explicit`,
+      },
+    },    
     `gatsby-plugin-emotion`,
     {
       resolve: `gatsby-source-build-date`,
