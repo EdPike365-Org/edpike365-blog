@@ -53,7 +53,6 @@ const BlogPostTemplate = ({ data, location }) => {
           dangerouslySetInnerHTML={{ __html: post.html }}
           itemProp="articleBody"
         />
-        <hr/>
         <SubscribeWidget/>
         <hr />
         <footer>
