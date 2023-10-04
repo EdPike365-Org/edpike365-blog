@@ -3,7 +3,10 @@ import { css } from "@emotion/react"
 import DarkModeButton from "../Buttons/DarkModeButton"
 import SettingsButton from "../Buttons/SettingsButton"
 import UserButton from "../Buttons/UserButton"
+import LoginButton from "../Buttons/LoginButton";
+import LogoutButton from "../Buttons/LogoutButton"
 import { buttonDivBaseCSS } from "./styles.js"
+import { useAuth0 } from "@auth0/auth0-react";
 
 const buttonDivRightCSS = css`
   justify-content: right;
@@ -37,11 +40,26 @@ const buttonDivRightCSS = css`
 `
 
 export const ButtonDivRight = () => {
+
+  const {
+    isAuthenticated
+  } = useAuth0();
+
+  function UserButtons() {
+
+    if (isAuthenticated) {
+      return <><UserButton /><LogoutButton /></>
+    } else {
+      return <LoginButton />
+    }
+
+  }
+
   return (
     <div css={[buttonDivBaseCSS, buttonDivRightCSS]}>
       <DarkModeButton />
       <SettingsButton />
-      <UserButton />
+      <UserButtons />
     </div>
   )
 }

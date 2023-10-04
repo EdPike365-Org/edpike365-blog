@@ -9,6 +9,7 @@ export const NavContext = createContext({
 })
 
 // we have multiple states in one context
+// element is a special prop that contains the children
 export const NavContextProvider = element => {
   // State 1: showNav. Controls the left side navbar visibility.
   let initialShowNavState = false
