@@ -5,7 +5,15 @@ import commonButtonCSS from "./buttonCSS"
 import UserIcon from "../../../../icons/UserIcon"
 import { useAuth0 } from '@auth0/auth0-react';
 
-const userButtonCSS = css``
+const userButtonCSS = css`
+  img {
+    border-radius: 50%;
+  }  
+  &:hover {
+    transform: translateX(-1px) translateY(-1px);
+  }
+`
+
 //Note: if button has no dimensions, or no text, icons wont render
 const UserButton = () => {
 
@@ -22,7 +30,7 @@ const UserButton = () => {
         <img
         src={picture}
         alt="Profile Picture"
-      />
+       />
       ) 
     }else{
       return(
