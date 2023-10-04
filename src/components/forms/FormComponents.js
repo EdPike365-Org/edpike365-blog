@@ -96,6 +96,24 @@ export const ButtonGroup = styled.div`
   }
 `
 
+//TODO remove this code from buttongroup above
+export const FormButton = styled.button`
+  padding: 1rem;
+  margin: .5rem;
+  border: none;
+  
+  border-radius: 5px;
+  font: inherit;
+  font-weight: bold;
+
+  background-color: var(--color-primary-main);
+
+  &:hover {
+    transform: translateX(-1px) translateY(-1px);
+  }
+
+`
+
 // create hidden field p tag for bot-field
 export const HiddenP = styled.p`
   display: none;

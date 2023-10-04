@@ -73,7 +73,7 @@ const Contact = ({ location }) => {
     );
 
   });
-//.required('form-name is empty'),
+
   const myValidationSchema = Yup.object({
     recaptchaToken: Yup.string()
       .recaptchaValidate('Please complete the reCAPTCHA'),
