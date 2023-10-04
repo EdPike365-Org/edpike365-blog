@@ -700,8 +700,11 @@ pluginList.sort { it.getShortName() }.each{
 }
 ```
 
-Or download it using `curl https://raw.githubusercontent.com/jenkinsci/jenkins/master/core/src/main/resources/jenkins/install/platform-plugins.json | jq -r -c '.[].plugins[] | select(.suggested==true) | .name' | sort`
+Or download it using:
 
+```Bash
+curl https://raw.githubusercontent.com/jenkinsci/jenkins/master/core/src/main/resources/jenkins/install/platform-plugins.json | jq -r -c '.[].plugins[] | select(.suggested==true) | .name' | sort
+```
 
 ### Script to Create Credentials
 
