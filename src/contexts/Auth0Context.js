@@ -10,11 +10,13 @@ const onRedirectCallback = (appState) => {
 // we have multiple states in one context
 export const Auth0Context = element => {
 
+    //domain={process.env.AUTH0_DOMAIN}
+    //clientId={process.env.AUTH0_CLIENTID}
     return(
     <Auth0Provider
-        domain={process.env.AUTH0_DOMAIN}
-        clientId={process.env.AUTH0_CLIENTID}
-        redirectUri={window.location.origin}
+        domain={process.env.GATSBY_AUTH0_DOMAIN}
+        clientId={process.env.GATSBY_AUTH0_CLIENTID}
+        authorizationParams={{ redirect_uri: window.location.origin }} 
         onRedirectCallback={onRedirectCallback}
     >
         {element.children}

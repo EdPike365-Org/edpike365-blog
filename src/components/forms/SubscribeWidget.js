@@ -1,8 +1,8 @@
 import * as React from "react"
 import * as Yup from "yup";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import ErrMsgRenderer from "../forms/ErrMsgRenderer"
-import { FormDiv, TitleRow, InputRow, InputGroup, ButtonGroup, HiddenP, txtCSS } from "../forms/FormComponents"
+import ErrMsgRenderer from "./ErrMsgRenderer"
+import { FormDiv, TitleRow, InputRow, InputGroup, ButtonGroup, HiddenP, txtCSS } from "./FormComponents"
 
 // The senderEmail is hidden in the form, but is required by the netlify mail integration
 // Formik does not support hidden fields so it has to be added here and in initial values

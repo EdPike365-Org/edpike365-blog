@@ -4,7 +4,7 @@ import { getSrc } from "gatsby-plugin-image"
 import styled from "@emotion/styled"
 import "./styles.css"
 
-import SubscribeWidget from "../components/layout/SubscribeWidget"
+import SubscribeWidget from "../components/forms/SubscribeWidget"
 import Bio from "../components/Bio"
 import Layout from "../components/layout/Layout"
 import Seo from "../components/SEO"
