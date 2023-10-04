@@ -48,7 +48,7 @@ export const ButtonDivRight = () => {
   function UserButtons() {
 
     if (isAuthenticated) {
-      return <><UserButton /><LogoutButton /></>
+      return <><UserButton /></>
     } else {
       return <LoginButton />
     }
