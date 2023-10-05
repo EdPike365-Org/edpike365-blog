@@ -2,7 +2,7 @@ import React from "react"
 import { navigate } from "gatsby"
 import { css } from "@emotion/react"
 import commonButtonCSS from "./buttonCSS"
-import UserIcon from "../../../../icons/UserIcon"
+import UserCircleIcon from "../../../../icons/UserCircleIcon"
 import { useAuth0 } from '@auth0/auth0-react';
 
 const userButtonCSS = css`
@@ -18,13 +18,14 @@ const userButtonCSS = css`
 const UserButton = () => {
 
   const { user } = useAuth0();
-  const { name, picture, email } = user;
+  const { picture } = user;
 
   const handleClick = () => {
     navigate("/account")
   }
 
   function UserImage() {
+
     if (picture) {
       return(
         <img
@@ -34,7 +35,7 @@ const UserButton = () => {
       ) 
     }else{
       return(
-        <UserIcon />
+        <UserCircleIcon />
       )
     }
 

@@ -20,6 +20,10 @@ const dmButtonCSS = css`
     height: 100%;
     width: 100%;
     aspect-ratio: 1 / 1;
+
+    &:hover {
+      transform: translateX(-1px) translateY(-1px);
+    }
   }
 `
 
