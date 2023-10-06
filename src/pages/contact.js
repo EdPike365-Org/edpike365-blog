@@ -109,8 +109,6 @@ const Contact = ({ location }) => {
     // filter out spam before it gets to the netlify serverless function, saving on function invocations
     values["g-recaptcha-response"] = reCaptchaRef.current.getValue()
 
-    //alert(JSON.stringify(values, null, 2))
-
     fetch('/.netlify/functions/contact', {
       method: 'POST',
       body: JSON.stringify(values),

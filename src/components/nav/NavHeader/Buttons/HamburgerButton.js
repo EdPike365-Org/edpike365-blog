@@ -15,6 +15,9 @@ const hamburgerButtonCSS = css`
     height: 100%;
     width: 100%;
   }
+  &:hover {
+    transform: translateX(-1px) translateY(-1px);
+  }
 `
 
 //Note: if button has no dimensions, or no text, icons wont render
