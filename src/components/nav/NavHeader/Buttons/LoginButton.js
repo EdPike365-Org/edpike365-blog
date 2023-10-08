@@ -13,18 +13,16 @@ const loginButtonCSS = css`
 `
 
 function LoginButton() {
- const {
-  isAuthenticated,
-  loginWithRedirect,
-   } = useAuth0();
 
-   return !isAuthenticated && (
-    <button 
-        id="loginButton"
-        css={[commonButtonCSS, loginButtonCSS]}
-        aria-label={"Log In"}
-        onClick={loginWithRedirect}
-    ><LoginIcon/></button>
+  const { isAuthenticated, loginWithRedirect } = useAuth0();
+
+  return !isAuthenticated && (
+    <button
+      id="loginButton"
+      css={[commonButtonCSS, loginButtonCSS]}
+      aria-label={"Log In"}
+      onClick={loginWithRedirect}
+    ><LoginIcon /></button>
   );
 };
 
