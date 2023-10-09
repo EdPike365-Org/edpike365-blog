@@ -9,7 +9,7 @@ const AuthCallback = ({location}) => {
     //const x = SPARedirectLoginOptions;
     const { user, error } = useAuth0()
 
-    console.log("AuthCallback stringified user = " + JSON.stringify(user, null, 2))
+    //console.log("AuthCallback stringified user = " + JSON.stringify(user, null, 2))
 //TODO if error, show error here
 //TODO, consider not using layout so wont show footer
     return (
