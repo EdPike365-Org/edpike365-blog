@@ -1,8 +1,12 @@
 import React from "react"
+import { Link } from "gatsby"
 import { css } from "@emotion/react"
 
 const footerCSS = css`
   display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
   margin: auto;
   background-color: var(--color-background-paper);
@@ -42,8 +46,16 @@ export default function Footer() {
     <footer css={footerCSS}>
       <div css={spacerDivCSS} />
       <span css={spanCSS}>
-        © {cyear}, Edward Pike
-        <br />
+        <Link to="/privacy" itemProp="url" >Privacy Policy</Link>
+        &nbsp; | &nbsp;
+        <Link to="/cookie-policy" itemProp="url" >Cookie Policy</Link>
+        &nbsp; | &nbsp;
+        <Link to="/terms-of-service" >Terms of Use</Link>
+        &nbsp; | &nbsp;
+        <Link to="/contact">Contact Us</Link>
+      </span>
+      <span css={spanCSS}>
+        © {cyear}, Edward Pike &nbsp; | &nbsp;   
         Built with <a href="https://www.gatsbyjs.com">Gatsby v5</a> in{" "}
         {`${process.env.NODE_ENV}`} mode.
       </span>
