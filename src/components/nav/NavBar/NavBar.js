@@ -26,7 +26,7 @@ const NavBar = () => {
           <NavLink to={"/contact/"} itemProp="url">
             Contact
           </NavLink>
-        </NavLI> 
+        </NavLI>
         <NavLI>
           <NavLink to={"/bloglist/"} itemProp="url">
             Blog
@@ -36,38 +36,38 @@ const NavBar = () => {
           <NavLink to={"/edpike365-portfolio/"} itemProp="url">
             Portfolio
           </NavLink>
-        </NavLI>  
-        <NavLI>          
+        </NavLI>
+        <NavLI>
           <NavLink to={"/edpike365-about-site/"} itemProp="url">
             About Site
-          </NavLink>          
-        </NavLI>        
+          </NavLink>
+        </NavLI>
         <NavSubMenu
           title={"ABOUT ME"}
           navTarget={"/edpike365-about-me-now"}
           uuid={"NavSubMenu-ABOUT"}
         >
-        <NavLI>
-          <NavLink to={"/edpike365-about-me-now/"} itemProp="url">
-            Now
-          </NavLink>
-        </NavLI>
-        <NavLI>
-          <NavLink to={"/edpike365-about-me-near/"} itemProp="url">
-            Near Future
-          </NavLink>
-        </NavLI>
-        <NavLI>
-          <NavLink to={"/edpike365-certs-classes/"} itemProp="url">
-            Certs and Classes
-          </NavLink>
-        </NavLI>        
-        <NavLI>
-          <NavLink to={"/edpike365-about-me-past/"} itemProp="url">
-            Past
-          </NavLink>
-        </NavLI>
-        </NavSubMenu>                      
+          <NavLI>
+            <NavLink to={"/edpike365-about-me-now/"} itemProp="url">
+              Now
+            </NavLink>
+          </NavLI>
+          <NavLI>
+            <NavLink to={"/edpike365-about-me-near/"} itemProp="url">
+              Near Future
+            </NavLink>
+          </NavLI>
+          <NavLI>
+            <NavLink to={"/edpike365-certs-classes/"} itemProp="url">
+              Certs and Classes
+            </NavLink>
+          </NavLI>
+          <NavLI>
+            <NavLink to={"/edpike365-about-me-past/"} itemProp="url">
+              Past
+            </NavLink>
+          </NavLI>
+        </NavSubMenu>
 
         <NavSubMenu
           title={"FRONT END"}
@@ -259,24 +259,28 @@ const NavBar = () => {
             <NavLink to={"/edpike365-ai/"} itemProp="url">
               AI, ML
             </NavLink>
-          </NavLI> 
+          </NavLI>
           <NavLI>
-          <NavLink to={"/edpike365-mlops/"} itemProp="url">
+            <NavLink to={"/edpike365-mlops/"} itemProp="url">
               MLOps
             </NavLink>
-          </NavLI> 
-        </NavSubMenu>        
-        <NavLI>
-          <NavLink to={"/edpike365-dataops/"} itemProp="url">
-            DataOps
-          </NavLink>
-        </NavLI> 
+          </NavLI>
+          <NavLI>
+            <NavLink to={"/edpike365-dataops/"} itemProp="url">
+              DataOps
+            </NavLink>
+          </NavLI>
+        </NavSubMenu>
         <NavLI>
           <NavLink to={"/settings/"} itemProp="url">
             Settings
           </NavLink>
         </NavLI>
-       
+        <NavLI>
+          <NavLink to={"/account/"} itemProp="url">
+            Account
+          </NavLink>
+        </NavLI>
       </NavUL>
     </Nav>
   )
