@@ -49,10 +49,10 @@ export const pageQuery = graphql`
     }
     allMarkdownRemark(
       filter: {
-        fileAbsolutePath: { regex: "/content/blog/" }
+        fileAbsolutePath: { regex: "/content/blog/" },
         frontmatter: { status: { in: $allowedBlogStatuses } }
       }
-      sort: { fields: [frontmatter___date], order: DESC }
+      sort: { frontmatter: {date: DESC}}
     ) {
       totalCount
       nodes {
