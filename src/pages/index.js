@@ -62,10 +62,10 @@ export const pageQuery = graphql`
   query HomePageQuery($allowedBlogStatuses: [String], $limit: Int) {
     allMarkdownRemark(
       filter: {
-        fileAbsolutePath: { regex: "/content/blog/" }
+        fileAbsolutePath: { regex: "/content/blog/" },
         frontmatter: { status: { in: $allowedBlogStatuses } }
       }
-      sort: { fields: [frontmatter___date], order: DESC }
+      sort: { frontmatter:{date:DESC}}
       limit: $limit
     ) {
       totalCount

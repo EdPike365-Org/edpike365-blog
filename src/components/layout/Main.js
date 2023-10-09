@@ -44,13 +44,13 @@ const mainCSS = css`
   }
 `
 
-const Main = ({ children }) => {
+const Main = ({ children, suppressFooter }) => {
   const mainRef = useRef(null)
 
   return (
     <main ref={mainRef} css={mainCSS}>
       {children}
-      <Footer />
+      { suppressFooter ? null : <Footer />}
       <ScrollToTopButton targetRef={mainRef}>
         <FaArrowCircleUp />
       </ScrollToTopButton>

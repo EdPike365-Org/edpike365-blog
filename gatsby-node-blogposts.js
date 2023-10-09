@@ -32,13 +32,13 @@ exports.createBlogPages = async (
     `
       {
         allMarkdownRemark(
-          sort: { fields: [frontmatter___date], order: ASC }
+          sort: { frontmatter:{date:ASC} }
           filter:
           {
             fileAbsolutePath: {regex: "/content/blog/"},
             frontmatter: {status: {in: ` +
-      JSON.stringify(arBlogStatusesToShow) +
-      ` }}
+            JSON.stringify(arBlogStatusesToShow) +
+            ` }}
         }        
           limit: 1000
         ) {
