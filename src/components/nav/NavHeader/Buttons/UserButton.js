@@ -30,7 +30,7 @@ const UserButton = () => {
       return(
         <img
         src={picture}
-        alt="Profile Picture"
+        alt="Profile"
        />
       ) 
     }else{
