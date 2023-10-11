@@ -1,6 +1,11 @@
 import React from "react"
 import Layout from "../components/layout/Layout"
 import { Link } from "gatsby"
+import { Seo } from "../components/seo"
+
+export const Head = () => (
+  <Seo  title="Support" />
+)
 
 const Support = () => {
 

@@ -1,7 +1,6 @@
 import * as React from "react"
 import { navigate } from "gatsby"
 import Layout from "../components/layout/Layout"
-import Seo from "../components/SEO"
 import Required from "../components/forms/Required"
 import ErrMsgRenderer from "../components/forms/ErrMsgRenderer"
 import styled from "@emotion/styled"
@@ -125,7 +124,6 @@ const Contact = ({ location }) => {
 
   return (
     <Layout location={location}>
-      <Seo title="Contact EdPike365" />
       <br />
       <h2>Contact</h2>
       Questions or complaints?  Please fill out the form below.

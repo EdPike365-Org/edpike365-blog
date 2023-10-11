@@ -3,8 +3,12 @@ import { graphql } from "gatsby"
 
 import Bio from "../components/Bio"
 import Layout from "../components/layout/Layout"
-import Seo from "../components/SEO"
+import { Seo } from "../components/seo"
 import BlogPostSummary from "../components/BlogPostSummary"
+
+export const Head = () => (
+  <Seo  title="All Blog Posts" />
+)
 
 const BlogList = ({ data, location }) => {
   const posts = data.allMarkdownRemark.nodes
@@ -13,7 +17,6 @@ const BlogList = ({ data, location }) => {
   if (posts.length === 0) {
     return (
       <Layout location={location}>
-        <Seo title="All Blog Posts" />
         <Bio />
         <p>No blog posts found.</p>
       </Layout>
@@ -22,7 +25,6 @@ const BlogList = ({ data, location }) => {
 
   return (
     <Layout location={location}>
-      <Seo title="All Blog Posts" />
       <h2>All {totalCount} Blog Entries</h2>
       Ordered by most recent.
       <ol style={{ listStyle: `none`, paddingInlineStart: `0px` }}>

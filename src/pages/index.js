@@ -1,14 +1,18 @@
 import * as React from "react"
 import { Link, graphql } from "gatsby"
 import styled from "@emotion/styled"
-
-import Bio from "../components/Bio"
 import Layout from "../components/layout/Layout"
-import Seo from "../components/SEO"
+import { Seo } from "../components/seo"
+import Bio from "../components/Bio"
 import BlogPostSummary from "../components/BlogPostSummary"
 
 // Gatsby auto passes in location object,
 // but only for pages in "pages" and "templates", not "components"
+
+export const Head = () => (
+  <Seo  title="Home" />
+)
+
 const HomePage = ({ data, pageContext, location }) => {
   const numPostsToShow = pageContext.limit
   const posts = data.allMarkdownRemark.nodes
@@ -30,7 +34,6 @@ const HomePage = ({ data, pageContext, location }) => {
 
   return (
     <Layout location={location}>
-      <Seo title="Home" />
       <P>
         Welcome to my personal site! 
         <br/>
