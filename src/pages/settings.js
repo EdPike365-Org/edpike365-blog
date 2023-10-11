@@ -1,7 +1,6 @@
 import * as React from "react"
 import styled from "@emotion/styled"
 import Layout from "../components/layout/Layout"
-import Seo from "../components/SEO"
 import Section from "../components/Section"
 import DarkModeToggle from "gatsby-head-style-boss/components/DarkModeToggle"
 import StyleSelector from "gatsby-head-style-boss/components/StyleSelector"
@@ -21,7 +20,6 @@ const DarkModeToggleIconDiv = styled.div`
 const Settings = () => {
   return (
     <Layout>
-      <Seo title="Settings" />
       <h2>Settings</h2>The widgets on this
       page are part of a library that I wrote called{" "}
       <a href="https://www.gatsbyjs.com/plugins/gatsby-head-style-boss/">

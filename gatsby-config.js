@@ -11,11 +11,12 @@ module.exports = {
   siteMetadata: {
     title: `EdPike365`,
     author: {
-      name: `EdPike365`,
+      name: `Ed Pike`,
       summary: `: Full Stack, DevOps, Tech Educator, Science Enthusiast.`,
     },
-    description: `Portfolio and blog about programming, Gatsby, technology, science.`,
+    description: `Technology blog, portfolio and custom Gatsby demo.`,
     siteUrl: `https://www.edpike365.com/`,
+    image: "/logo.svg",
     monetization: "$ilp.uphold.com/yLBeLwUyE2A2",
     social: {
       twitter: process.env.TWITTER,

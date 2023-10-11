@@ -7,9 +7,28 @@ import "./styles.css"
 import SubscribeWidget from "../components/forms/SubscribeWidget"
 import Bio from "../components/Bio"
 import Layout from "../components/layout/Layout"
-import Seo from "../components/SEO"
+import { Seo } from "../components/seo"
 
 require(`katex/dist/katex.min.css`)
+
+export const Head = ({ data}) => {
+
+  const post = data.markdownRemark
+
+  const { ogimage } = post.frontmatter
+  // const ogImagePath = ogimage && ogimage.childImageSharp.fixed.src
+  const ogImagePath = ogimage && getSrc(ogimage)
+  // https://juliangaramendy.dev/blog/custom-open-graph-images-in-gatsby-blog
+
+  return(
+    <Seo  
+    title={post.frontmatter.title} 
+    description={post.frontmatter.description || post.excerpt}
+    image={ogImagePath}    
+    />
+  )
+
+}
 
 const BlogHeader = styled.header`
   & > h1 {
@@ -21,6 +40,7 @@ const BlogHeader = styled.header`
 `
 
 const BlogPostTemplate = ({ data, location }) => {
+
   const post = data.markdownRemark
   const siteTitle = data.site.siteMetadata?.title || `Title`
 
@@ -28,18 +48,9 @@ const BlogPostTemplate = ({ data, location }) => {
   const postDate = post.frontmatter.date
 
   const { previous, next } = data
-  const { ogimage } = post.frontmatter
-  // const ogImagePath = ogimage && ogimage.childImageSharp.fixed.src
-  const ogImagePath = ogimage && getSrc(ogimage)
-  // https://juliangaramendy.dev/blog/custom-open-graph-images-in-gatsby-blog
 
   return (
     <Layout location={location} title={siteTitle}>
-      <Seo
-        title={post.frontmatter.title}
-        description={post.frontmatter.description || post.excerpt}
-        image={ogImagePath}
-      />
       <article
         className="blog-post"
         itemScope

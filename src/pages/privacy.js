@@ -1,6 +1,11 @@
 import React from "react"
 import { Link } from "gatsby"
 import Layout from "../components/layout/Layout"
+import { Seo } from "../components/seo"
+
+export const Head = () => (
+  <Seo  title="Privacy Policy" />
+)
 
 const Privacy = () => {
 

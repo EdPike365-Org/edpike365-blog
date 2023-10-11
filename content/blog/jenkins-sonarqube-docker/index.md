@@ -368,7 +368,7 @@ Don't forget to hit the "validate" button.
 
 Lets test that we can talk to our GitHub account.
 
-```Jenkinsfile
+```JSON
 pipeline {
   // this is the master agent to run this pipeline
   agent any
@@ -482,7 +482,7 @@ We need to add credentials to Jenkins so it can communicate with SonarQube.
 
 Paste this code in the General > Pipeline > Definition Script Box:
 
-```Jenkinsfile
+```JSON
 pipeline {
   agent any
   options {

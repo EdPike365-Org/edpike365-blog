@@ -3,15 +3,16 @@ import PropTypes from "prop-types"
 import { Helmet } from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
 
-/* og image should be 1,200 x 630 px
+/* 
+
+og image should be 1,200 x 630 px
    twitter size min 120 x 120, 
   recommended 600 x 600 (also pinterest), max 1,200 x 1,200 
   (also facebook and instagram)
 */
 import defaultOpenGraphImage from "/src/images/profile-pic.png"
 
-// Renaming to Seo to remove PasCal case lint warnings
-// until I can figure out how to edit Gatsby's lint settings
+
 const Seo = ({ description, lang, meta, title, image }) => {
   const { site } = useStaticQuery(
     graphql`
@@ -66,22 +67,6 @@ const Seo = ({ description, lang, meta, title, image }) => {
         {
           property: `og:image`,
           content: ogImageUrl,
-        },
-        {
-          name: `twitter:card`,
-          content: `summary`,
-        },
-        {
-          name: `twitter:creator`,
-          content: site.siteMetadata?.social?.twitter || ``,
-        },
-        {
-          name: `twitter:title`,
-          content: title,
-        },
-        {
-          name: `twitter:description`,
-          content: metaDescription,
         },
         {
           property: `twitter:image`,

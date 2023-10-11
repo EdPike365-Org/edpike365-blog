@@ -5,7 +5,26 @@ import { css } from "@emotion/react"
 import "./styles.css"
 
 import Layout from "../components/layout/Layout"
-import Seo from "../components/SEO"
+import { Seo } from "../components/seo"
+
+export const Head = ({ data }) => {
+
+  const post = data.markdownRemark
+
+  const { ogimage } = post.frontmatter
+  // const ogImagePath = ogimage && ogimage.childImageSharp.fixed.src
+  const ogImagePath = ogimage && getSrc(ogimage)
+  // https://juliangaramendy.dev/blog/custom-open-graph-images-in-gatsby-blog
+
+  return(
+    <Seo  
+    title={post.frontmatter.title} 
+    description={post.frontmatter.description || post.excerpt}
+    image={ogImagePath}    
+    />
+  )
+
+}
 
 const headerCSS = css`
   & > h1 {
@@ -23,18 +42,8 @@ const BlogPostTemplate = ({ data, location }) => {
   const title = post.frontmatter.title || post.fields.slug
   const postDate = post.frontmatter.date
 
-  const { ogimage } = post.frontmatter
-  // const ogImagePath = ogimage && ogimage.childImageSharp.fixed.src
-  const ogImagePath = ogimage && getSrc(ogimage)
-  // https://juliangaramendy.dev/blog/custom-open-graph-images-in-gatsby-blog
-
   return (
     <Layout location={location} title={siteTitle}>
-      <Seo
-        title={post.frontmatter.title}
-        description={post.frontmatter.description || post.excerpt}
-        image={ogImagePath}
-      />
       <article
         className="blog-post"
         itemScope

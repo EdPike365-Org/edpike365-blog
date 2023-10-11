@@ -457,7 +457,7 @@ We need to add credentials to Jenkins so it can communicate with SonarQube.
 
 Paste this code in the General > Pipeline > Definition Script Box:
 
-```Jenkinsfile
+```JSON
 pipeline {
   agent any
   options {
