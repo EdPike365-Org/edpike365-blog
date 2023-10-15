@@ -40,7 +40,7 @@ const HomePage = ({ data, pageContext, location }) => {
         It is 3 things:
         <li>A blog.</li>
         <li>A portfolio.</li>
-        <li>A training set for "AI me".</li>
+        <li>A training set for my AI twin.</li>
       </P>
       {numPostsToShow} Most Recent Posts ({" "}
       <StyledLink to="/bloglist/">See all {totalCount}</StyledLink> )
