@@ -51,7 +51,7 @@ export const Seo = ({ title, description, pathname, children }) => {
       <meta name="twitter:description" content={seo.description} />
       <meta name="twitter:image" content={seo.image} />
       <meta name="twitter:creator" content={seo.twitterUsername} />
-      <link rel="icon" href="/icon.svg" />
+      <link rel="icon" href="/favicon.svg" />
       {children}
     </>
   )

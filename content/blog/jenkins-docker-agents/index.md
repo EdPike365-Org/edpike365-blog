@@ -1,7 +1,7 @@
 ---
 title: "Jenkins Docker Cloud Agents with DinD"
 date: "2023-05-22T22:12:03.284Z"
-status: published
+status: draft
 author: EdPike365
 tags:
   - jenkins

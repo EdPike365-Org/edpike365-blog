@@ -4,6 +4,7 @@ import styled from "@emotion/styled"
 import Layout from "../components/layout/Layout"
 import { Seo } from "../components/seo"
 import Bio from "../components/Bio"
+import BuildInfo from "../components/BuildInfo"
 import BlogPostSummary from "../components/BlogPostSummary"
 
 // Gatsby auto passes in location object,
@@ -49,12 +50,7 @@ const HomePage = ({ data, pageContext, location }) => {
       {posts.map(post => {
         return <BlogPostSummary key={post.fields.slug} post={post} />
       })}
-      <br />
       <Bio />
-      <br />
-      Last Built: {data.currentBuildDate.currentDate}
-      <br/>
-      Date formatting provided by my custom NPM package <a href="https://www.npmjs.com/package/gatsby-source-build-date">gatsby-source-build-date</a>
     </Layout>
   )
 }
@@ -84,9 +80,6 @@ export const pageQuery = graphql`
           description
         }
       }
-    }
-    currentBuildDate {
-      currentDate
     }
   }
 `
