@@ -5,6 +5,7 @@ import styled from "@emotion/styled"
 import { css } from "@emotion/react"
 
 const Bio = () => {
+  
   const data = useStaticQuery(
     graphql`
       query BioQuery {
@@ -27,11 +28,12 @@ const Bio = () => {
   const author = data.site.siteMetadata?.author
 
   const BioDiv = styled.div`
+    display: flex;
     color: var(--color-text-primary);
     width: 100%;
-    display: flex;
     align-items: center;
     justify-content: center;
+    padding: 0.5rem;
   `
   const TextSpan = styled.span`
     padding: 0.5rem;

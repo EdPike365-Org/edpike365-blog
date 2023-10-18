@@ -2,11 +2,33 @@ import React from "react"
 import { Link } from "gatsby"
 import { css } from "@emotion/react"
 
+export default function Footer() {
+  const today = new Date()
+  const [cyear] = [today.getFullYear()]
+
+  return (
+    <footer css={footerCSS}>
+      <div css={footerRowCSS}>
+          <Link to="/privacy" itemProp="url" css={footerLinkCSS} >Privacy</Link>
+          <Link to="/cookie-policy" itemProp="url" css={footerLinkCSS}>Cookies</Link>
+          <Link to="/terms-of-service" itemProp="url" css={footerLinkCSS} >Terms</Link>
+          <Link to="/contact" itemProp="url" css={footerLinkCSS} >Contact</Link>
+      </div>
+      <div css={footerRowCSS}>
+        <div>
+          © {cyear}, Edward Pike - All Rights Reserved.
+        </div>
+      </div>
+    </footer>
+  )
+}
+
 const footerCSS = css`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 100%;
 
   margin: auto;
   background-color: var(--color-background-paper);
@@ -15,7 +37,10 @@ const footerCSS = css`
 
   text-align: center;
   font-size: 0.75rem;
-  padding: 0 0;
+  
+  //left right padding to reserve space for the floating back to top button
+  padding: .5rem 60px;
+
   z-index: 999;
 
   /* ---- Larger Phones (540 x ) ---- */
@@ -24,42 +49,20 @@ const footerCSS = css`
   Otherwise, when the footer is wide enough, its gets very short in height.
   */
   @media only screen and (min-width: 540px) {
-    height: 70px;
+    min-height: 3rem;
   }
 `
 
-// We need to resrve space for the floating back to top button
-// TODO set the BackToTop button height and width in the CSS file for universal reference
-const spacerDivCSS = css`
-  width: 75px;
+const footerRowCSS = css`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 100%; 
+  padding: .35rem 0;
 `
 
-const spanCSS = css`
-  margin: auto;
+const footerLinkCSS = css`
+  margin: 0 .5rem;
 `
-
-export default function Footer() {
-  const today = new Date()
-  const [cyear] = [today.getFullYear()]
-
-  return (
-    <footer css={footerCSS}>
-      <div css={spacerDivCSS} />
-      <span css={spanCSS}>
-        <Link to="/privacy" itemProp="url" >Privacy Policy</Link>
-        &nbsp; | &nbsp;
-        <Link to="/cookie-policy" itemProp="url" >Cookie Policy</Link>
-        &nbsp; | &nbsp;
-        <Link to="/terms-of-service" >Terms of Use</Link>
-        &nbsp; | &nbsp;
-        <Link to="/contact">Contact Us</Link>
-      </span>
-      <span css={spanCSS}>
-        © {cyear}, Edward Pike &nbsp; | &nbsp;   
-        Built with <a href="https://www.gatsbyjs.com">Gatsby v5</a> in{" "}
-        {`${process.env.NODE_ENV}`} mode.
-      </span>
-      <div css={spacerDivCSS} />
-    </footer>
-  )
-}

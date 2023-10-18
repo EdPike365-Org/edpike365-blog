@@ -26,22 +26,20 @@ const HomePage = ({ data, pageContext, location }) => {
 
   /* this uses the "props to className" override functionality of Emotion */
   const StyledLink = styled(props => <Link {...props} />)`
-    color: var(--color-primary-dark);
-    text-decoration: none;
-    border-bottom: 2px solid transparent;
-    transition: color 400ms ease-in-out, background-color 400ms ease-in-out;
+    color: var(--color-primary-main);
+
   `
 
   return (
     <Layout location={location}>
-      <P>
-        Welcome to my personal site! 
-        <br/>
-        It is 3 things:
+      <P>Welcome to my personal site!</P>
+      <P>It is 3 things:</P>
+        <ul>
         <li>A blog.</li>
         <li>A portfolio.</li>
         <li>A training set for my AI twin.</li>
-      </P>
+        </ul>
+
       {numPostsToShow} Most Recent Posts ({" "}
       <StyledLink to="/bloglist/">See all {totalCount}</StyledLink> )
       <hr />
@@ -49,12 +47,7 @@ const HomePage = ({ data, pageContext, location }) => {
       {posts.map(post => {
         return <BlogPostSummary key={post.fields.slug} post={post} />
       })}
-      <br />
       <Bio />
-      <br />
-      Last Built: {data.currentBuildDate.currentDate}
-      <br/>
-      Date formatting provided by my custom NPM package <a href="https://www.npmjs.com/package/gatsby-source-build-date">gatsby-source-build-date</a>
     </Layout>
   )
 }
@@ -84,9 +77,6 @@ export const pageQuery = graphql`
           description
         }
       }
-    }
-    currentBuildDate {
-      currentDate
     }
   }
 `

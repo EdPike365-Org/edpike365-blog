@@ -1,21 +1,21 @@
 import * as React from "react"
 import { navigate } from "gatsby"
-import Layout from "../components/layout/Layout"
-import Required from "../components/forms/Required"
-import ErrMsgRenderer from "../components/forms/ErrMsgRenderer"
 import styled from "@emotion/styled"
 import { css } from "@emotion/react"
 import * as Yup from "yup";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form, Field, ErrorMessage, useField, useFormikContext } from "formik";
+import Layout from "../components/layout/Layout"
+import Required from "../components/forms/Required"
+import ErrMsgRenderer from "../components/forms/ErrMsgRenderer"
 import { InputRow } from "../components/forms/FormComponents"
 import ReCAPTCHA from "react-google-recaptcha"
-
-//TODO fix reCAPTCHA couldn't find user-provided function: onloadCallback
+import LoaderSpinner from "../components/LoaderSpinner";
 
 // Using netlify email integration, using SendGrid
 // Using netlify cli (in dev container) to test email endpoint https://docs.netlify.com/cli/get-started/
 // and its spam filters https://docs.netlify.com/forms/spam-filters/
-// recaptcha articles
+//
+// Recaptcha articles:
 //    https://www.delasign.com/blog/react-gatsby-recaptcha-protection/
 //    https://www.seancdavis.com/posts/how-to-use-netlify-forms-with-gatsby/
 //    https://medium.com/hackernoon/formik-handling-files-and-recaptcha-209cbeae10bc
@@ -26,6 +26,7 @@ import ReCAPTCHA from "react-google-recaptcha"
 
 // "g-recaptcha-response" required for netlify forms, populate from validator function
 const myInitialValues = {
+
   recaptchaToken: "",
   "g-recaptcha-response": "",
   "form-name": "contact",
@@ -36,6 +37,7 @@ const myInitialValues = {
   email: '',
   subject: '',
   message: '',
+
 }
 
 const Contact = ({ location }) => {
@@ -44,26 +46,21 @@ const Contact = ({ location }) => {
   //useRef must be in the functional component body
   const reCaptchaRef = React.useRef(null);
 
+  // this custom validator may not be needed anymore since I'm using useField
+  // but I'm leaving it here because it is AT LEAST a good demo 
   Yup.addMethod(Yup.string, "recaptchaValidate", function (errorMessage) {
 
     return this.test(
       "recaptcha-validate",
       errorMessage,
       async (value) => {
-        /*
-        As far as I can tell, "value" is always going to be null because 
-        I cannot figure out how to get Yup to get the value
-        hence this custom test, but I ignore the value
-        TODO fix this
-        */
+        //console.log("recaptchaValidate: value = ", value)
+        
+        // the value passed in above was always null, so we had to get it from the ref
+        // but then it seems that is started working when I added useField
         try {
-
-          const token = reCaptchaRef.current.getValue()
-          //console.log("recaptchaValidate: token = " + token)
-
-          //reCaptchaRef.current.reset();
-          return !!token;
-
+          //const token = reCaptchaRef.current.getValue()
+          return !!value;
         } catch (error) {
           console.error(error);
           return false;
@@ -73,11 +70,47 @@ const Contact = ({ location }) => {
 
   });
 
+  const MyRecaptcha = ({ label, ...props }) => {
+    const [fieldProps] = useField(props.name);
+    const { setFieldValue } = useFormikContext();
+    return (
+      <>
+        <InputRow>
+          <ErrorMessage name="recaptchaToken" render={ErrMsgRenderer} />
+        </InputRow>
+        <InputRow>
+          <ReCAPTCHA
+            ref={reCaptchaRef}
+            sitekey={process.env.GATSBY_APP_SITE_RECAPTCHA_KEY}
+            {...fieldProps}
+            {...props}
+
+            onChange={(val) => {
+              //val is actually the token from the recaptcha, but it is not being 
+              //used for setFieldValue automatically by Formik for some reason, so we do it manually.
+
+              // if the verification expires, this will make error message appear
+              //validateField('recaptchaToken')
+
+              // this will cause isDirty to become true!!! yay!!!
+              // the last arg is to run validate form, and we need to
+              // because otherwise isValid will be true even though the rest of the form is not valid
+              setFieldValue('recaptchaToken', val, true)
+
+              }
+            }
+          />
+        </InputRow>
+
+      </>
+    );
+  }
+
   const myValidationSchema = Yup.object({
     recaptchaToken: Yup.string()
       .recaptchaValidate('Please complete the reCAPTCHA'),
     "g-recaptcha-response": Yup.string(),
-    "form-name": Yup.string(),      
+    "form-name": Yup.string(),
     senderEmail: Yup.string()
       .required('senderEmail is empty'),
     first_name: Yup.string()
@@ -99,27 +132,43 @@ const Contact = ({ location }) => {
   const myHandleSubmit = (values, actions) => {
 
     //Formik does not support hidden fields so it has to be added here
-    var botField = document.getElementsByName("bot-field")[0]
-    values["bot-field"] = botField.value
+    const botField = document.getElementsByName("bot-field")[0]
+    //values["bot-field"] = botField.value
+    actions.setFieldValue("bot-field", botField.value)
 
     // https://www.seancdavis.com/posts/how-to-use-netlify-forms-with-gatsby/
-    // Netlify's reCAPTCHA support doesn't extend to forms rendered by JavaScript (as Gatsby's pages are/).
+    // Netlify's reCAPTCHA *automatic* support doesn't extend to forms rendered by JavaScript
+    // (as Gatsby's pages are/). 
     // g-recaptcha-response is needed for netlify forms to 
     // filter out spam before it gets to the netlify serverless function, saving on function invocations
-    values["g-recaptcha-response"] = reCaptchaRef.current.getValue()
+    //values["g-recaptcha-response"] = values["recaptchaToken"]
+    actions.setFieldValue("g-recaptcha-response", values["recaptchaToken"])
 
     fetch('/.netlify/functions/contact', {
       method: 'POST',
       body: JSON.stringify(values),
     })
-      .then((res) => {
+      .then((response) => {
         // an async error might fire even if you get back a 200 (related to recaptcha)?
         // then you get an "undefined" because we are not on this page anymore??
-        res.status === 200 ? navigate("/contact-success/") : alert("There was a problem sending your message.  Please try again later.")
+        if (response.status === 200) {
+          navigate("/contact-success/")
+        } else {
+          alert("There was a problem sending your message.  Please try again later.")
+        }
       })
-      .then((text) => console.log(text))
+      .then((data) => {
+        //console.log("data = " + JSON.stringify(data))
+      })
       .catch((error) => alert(error))
+      .finally(() => {
 
+      })
+
+  }
+
+  const myHandleReset = (values, actions) => {
+    reCaptchaRef.current.reset()
   }
 
   return (
@@ -135,75 +184,69 @@ const Contact = ({ location }) => {
         initialValues={myInitialValues}
         validationSchema={myValidationSchema}
         onSubmit={myHandleSubmit}
+        onReset={myHandleReset}
       >
-        {({ isSubmitting, isValid, dirty, validateField }) => (
-        <FormDiv>
-          <Form
-            name="contact"
-            method="post"
-            netlify-honeypot="bot-field"
-            data-netlify-recaptcha="true"
-            data-netlify="true"
-            action="/contact-success/"
-          >
-            <FormSubSection>
-              <FormColumn>
-                <input type="hidden" name="form-name" value="contact" />
-                <HiddenP>
-                  <label htmlFor="bot-field">
-                    Do fill this out if you are human:
-                  </label>
-                  <Field name="bot-field" id="bot-field" type="text" />
-                </HiddenP>
-                <noscript>
-                  <p>This form will not work with Javascript disabled</p>
-                </noscript>
-                <InputGroup>
-                  <label htmlFor="first_name">First Name:</label>
-                  <ErrorMessage name="first_name" render={ErrMsgRenderer} />
-                  <Field name="first_name" id="first_name" type="text" css={txtCSS} />
-                </InputGroup>
-                <InputGroup>
-                  <label htmlFor="last_name">Last Name:</label>
-                  <ErrorMessage name="last_name" render={ErrMsgRenderer} />
-                  <Field name="last_name" id="last_name" type="text" css={txtCSS} />
-                </InputGroup>
-                <InputGroup>
-                  <label htmlFor="email">Email:<Required /></label>
-                  <ErrorMessage name="email" render={ErrMsgRenderer} />
-                  <Field name="email" id="email" type="email" css={txtCSS} />
-                </InputGroup>
-                <InputGroup>
-                  <label htmlFor="subject">Subject:<Required /></label>
-                  <ErrorMessage name="subject" render={ErrMsgRenderer} />
-                  <Field name="subject" id="subject" type="text" css={txtLongCSS} />
-                </InputGroup>
-                <InputGroup>
-                  <label htmlFor="message">Message:<Required /></label>
-                  <ErrorMessage name="message" render={ErrMsgRenderer} />
-                  <Field name="message" id="message" as="textarea" rows="5" />
-                </InputGroup>
-                <InputRow>
-                  <ErrorMessage name="recaptchaToken" render={ErrMsgRenderer} />
-                </InputRow>
-                <InputRow>
-                  <ReCAPTCHA
-                    ref={reCaptchaRef}
-                    sitekey={process.env.GATSBY_APP_SITE_RECAPTCHA_KEY}
-                    onChange={() => validateField('recaptchaToken')}
-                  />
-                </InputRow>
-              </FormColumn>
-            </FormSubSection>
-            <FormSubSection>
-              <button type="submit" disabled={ isSubmitting || !dirty || !isValid} >Send</button>
-              <input type="reset" disabled={ isSubmitting || !dirty } value="Clear" />
-            </FormSubSection>
-            <FormSubSection>
-              <Required /> = required field
-            </FormSubSection>
-          </Form>
-        </FormDiv>
+        {({ isSubmitting, isValid, dirty, validateField, setFieldTouched }) => (
+          //for list of props, see https://formik.org/docs/api/formik
+          <FormDiv>
+          { isSubmitting? (  <LoaderSpinner message={"Contacting..."} /> ) : null }
+            <Form
+              name="contact"
+              method="post"
+              netlify-honeypot="bot-field"
+              data-netlify-recaptcha="true"
+              data-netlify="true"
+              action="/contact-success/"
+            >
+              <FormSubSection>
+                <FormColumn>
+                  <input type="hidden" name="form-name" value="contact" />
+                  <HiddenP>
+                    <label htmlFor="bot-field">
+                      Do fill this out if you are human:
+                    </label>
+                    <Field name="bot-field" id="bot-field" type="text" />
+                  </HiddenP>
+                  <noscript>
+                    <p>This form will not work with Javascript disabled</p>
+                  </noscript>
+                  <InputGroup>
+                    <label htmlFor="first_name">First Name:</label>
+                    <ErrorMessage name="first_name" render={ErrMsgRenderer} />
+                    <Field name="first_name" id="first_name" type="text" css={txtCSS} />
+                  </InputGroup>
+                  <InputGroup>
+                    <label htmlFor="last_name">Last Name:</label>
+                    <ErrorMessage name="last_name" render={ErrMsgRenderer} />
+                    <Field name="last_name" id="last_name" type="text" css={txtCSS} />
+                  </InputGroup>
+                  <InputGroup>
+                    <label htmlFor="email">Email:<Required /></label>
+                    <ErrorMessage name="email" render={ErrMsgRenderer} />
+                    <Field name="email" id="email" type="email" css={txtCSS} />
+                  </InputGroup>
+                  <InputGroup>
+                    <label htmlFor="subject">Subject:<Required /></label>
+                    <ErrorMessage name="subject" render={ErrMsgRenderer} />
+                    <Field name="subject" id="subject" type="text" css={txtLongCSS} />
+                  </InputGroup>
+                  <InputGroup>
+                    <label htmlFor="message">Message:<Required /></label>
+                    <ErrorMessage name="message" render={ErrMsgRenderer} />
+                    <Field name="message" id="message" as="textarea" rows="5" />
+                  </InputGroup>
+                  <MyRecaptcha name="recaptchaToken" id="recaptchaToken" />
+                </FormColumn>
+              </FormSubSection>
+              <FormSubSection>
+                <button type="submit" disabled={isSubmitting || !dirty || !isValid } >Send</button>
+                <button type="reset" disabled={isSubmitting || !dirty } >Reset</button>
+              </FormSubSection>
+              <FormSubSection>
+                <Required /> = required field
+              </FormSubSection>
+            </Form>
+          </FormDiv>
         )}
       </Formik>
       <br />
@@ -249,7 +292,7 @@ const FormSubSection = styled.div`
 
   }
 
-  & > input[type=reset] {
+  & > button[type=reset] {
     padding: 1rem;
     margin: .5rem;
     border: none;

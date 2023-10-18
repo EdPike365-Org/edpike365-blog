@@ -6,6 +6,7 @@ import DarkModeToggle from "gatsby-head-style-boss/components/DarkModeToggle"
 import StyleSelector from "gatsby-head-style-boss/components/StyleSelector"
 import StylesSummary from "gatsby-head-style-boss/components/StylesSummary"
 import PrefersDarkMode from "gatsby-head-style-boss/components/PrefersDarkMode"
+import BuildInfo from "../components/BuildInfo"
 
 const DarkModeToggleIconDiv = styled.div`
   display: inline-flex;
@@ -42,6 +43,11 @@ const Settings = () => {
         <hr />
         <StylesSummary />
       </Section>
+      <br />
+      <Section title="Build Info">
+        <BuildInfo />
+      </Section>
+      <br/>
     </Layout>
   )
 }
