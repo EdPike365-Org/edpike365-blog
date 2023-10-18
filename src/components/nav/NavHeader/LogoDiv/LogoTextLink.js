@@ -14,7 +14,7 @@ const logoTextLinkCSS = css`
 
 const LogoTextLink = ({ children }) => {
   return (
-    <Link css={logoTextLinkCSS} to="/">
+    <Link css={logoTextLinkCSS} to="/" aria-label="EdPike365 Home Page">
       {children}
     </Link>
   )

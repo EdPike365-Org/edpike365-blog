@@ -4,7 +4,6 @@ import styled from "@emotion/styled"
 import Layout from "../components/layout/Layout"
 import { Seo } from "../components/seo"
 import Bio from "../components/Bio"
-import BuildInfo from "../components/BuildInfo"
 import BlogPostSummary from "../components/BlogPostSummary"
 
 // Gatsby auto passes in location object,
@@ -27,22 +26,20 @@ const HomePage = ({ data, pageContext, location }) => {
 
   /* this uses the "props to className" override functionality of Emotion */
   const StyledLink = styled(props => <Link {...props} />)`
-    color: var(--color-primary-dark);
-    text-decoration: none;
-    border-bottom: 2px solid transparent;
-    transition: color 400ms ease-in-out, background-color 400ms ease-in-out;
+    color: var(--color-primary-main);
+
   `
 
   return (
     <Layout location={location}>
-      <P>
-        Welcome to my personal site! 
-        <br/>
-        It is 3 things:
+      <P>Welcome to my personal site!</P>
+      <P>It is 3 things:</P>
+        <ul>
         <li>A blog.</li>
         <li>A portfolio.</li>
         <li>A training set for my AI twin.</li>
-      </P>
+        </ul>
+
       {numPostsToShow} Most Recent Posts ({" "}
       <StyledLink to="/bloglist/">See all {totalCount}</StyledLink> )
       <hr />

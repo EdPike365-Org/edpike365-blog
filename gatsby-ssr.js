@@ -7,3 +7,7 @@ import { NavContextProvider } from "./src/contexts/NavContext"
 export const wrapRootElement = ({ element }) => {
   return <NavContextProvider>{element}</NavContextProvider>
 }
+
+export const onRenderBody = ({ setHtmlAttributes }) => {
+  setHtmlAttributes({ lang: 'en-US' });
+};
