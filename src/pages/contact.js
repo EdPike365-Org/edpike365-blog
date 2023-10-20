@@ -4,11 +4,11 @@ import styled from "@emotion/styled"
 import { css } from "@emotion/react"
 import * as Yup from "yup";
 import { Formik, Form, Field, ErrorMessage, useField, useFormikContext } from "formik";
+import ReCAPTCHA from "react-google-recaptcha"
 import Layout from "../components/layout/Layout"
 import Required from "../components/forms/Required"
 import ErrMsgRenderer from "../components/forms/ErrMsgRenderer"
 import { InputRow } from "../components/forms/FormComponents"
-import ReCAPTCHA from "react-google-recaptcha"
 import LoaderSpinner from "../components/LoaderSpinner";
 
 // Using netlify email integration, using SendGrid
@@ -84,7 +84,7 @@ const Contact = ({ location }) => {
             sitekey={process.env.GATSBY_APP_SITE_RECAPTCHA_KEY}
             {...fieldProps}
             {...props}
-
+            size="normal"
             onChange={(val) => {
               //val is actually the token from the recaptcha, but it is not being 
               //used for setFieldValue automatically by Formik for some reason, so we do it manually.
@@ -254,6 +254,7 @@ const Contact = ({ location }) => {
   )
 }
 
+//TODO move this css to another file and define the components in seperate files
 const FormDiv = styled.div`
   box-sizing: border-box;
   margin: 0 0;

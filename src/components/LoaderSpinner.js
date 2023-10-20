@@ -29,12 +29,6 @@ const messageCSS = css`
     margins: 0;
     text-align: center;
 `
-//#L1
-//wrapperStyle={{loaderWrapperStyle}}
-const loaderWrapperStyle = css`
-    color: "#fff";
-    height: 200;
-    width: 200;
-`
+
 
 

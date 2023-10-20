@@ -286,14 +286,6 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-plugin-recaptcha`,
-      options: {
-         async: false,
-         defer: false,
-         args: `?onload=onloadCallback&render=explicit`,
-      },
-    },  
-    {
       resolve: `gatsby-plugin-nprogress`,
       options: {
         // Setting a color is optional.
