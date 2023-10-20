@@ -1,5 +1,6 @@
 import React from "react"
 import Layout from "../../components/layout/Layout"
+import LoaderSpinner from "../../components/LoaderSpinner"
 //import { useAuth0 } from "@auth0/auth0-react"
 
 const AuthCallback = ({ location }) => {
@@ -11,7 +12,7 @@ const AuthCallback = ({ location }) => {
     //TODO add a full page overlay spinner here
     return (
         <Layout suppressFooter>
-            <h1>Loggin in......</h1>
+            <LoaderSpinner message={"Logging in..."} />
         </Layout>
     )
 }

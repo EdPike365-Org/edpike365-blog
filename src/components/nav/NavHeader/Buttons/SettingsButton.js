@@ -11,9 +11,9 @@ const settingsButtonCSS = css`
 `
 
 //Note: if button has no dimensions, or no text, icons wont render
-const SettingsButton = () => {
+const SettingsButton = (props) => {
   const handleClick = () => {
-    navigate("/settings/")
+    navigate(props.target)
   }
 
   return (

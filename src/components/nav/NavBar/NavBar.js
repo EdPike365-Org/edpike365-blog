@@ -272,8 +272,8 @@ const NavBar = () => {
           </NavLI>
         </NavSubMenu>
         <NavLI>
-          <NavLink to={"/settings/"} itemProp="url">
-            Settings
+          <NavLink to={"/site-settings/"} itemProp="url">
+            Site Settings
           </NavLink>
         </NavLI>
         <NavLI>
