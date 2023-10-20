@@ -11,6 +11,9 @@ import ErrMsgRenderer from "../components/forms/ErrMsgRenderer"
 import { InputRow } from "../components/forms/FormComponents"
 import LoaderSpinner from "../components/LoaderSpinner";
 
+//TODO implement recaptcha server side validation
+// https://alphonso-javier.medium.com/how-to-use-recaptcha-v3-with-gatsbyjs-and-express-2e963575db60
+
 // Using netlify email integration, using SendGrid
 // Using netlify cli (in dev container) to test email endpoint https://docs.netlify.com/cli/get-started/
 // and its spam filters https://docs.netlify.com/forms/spam-filters/
