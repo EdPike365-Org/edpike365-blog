@@ -41,7 +41,7 @@ export const ButtonDivRight = () => {
   return (
     <div css={[buttonDivBaseCSS, buttonDivRightCSS]}>
       <DarkModeButton />
-      <SettingsButton target="site-settings" />
+      <SettingsButton target="/site-settings/" />
       <UserButtons />
     </div>
   )

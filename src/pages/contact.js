@@ -84,7 +84,7 @@ const Contact = ({ location }) => {
             sitekey={process.env.GATSBY_APP_SITE_RECAPTCHA_KEY}
             {...fieldProps}
             {...props}
-            size="normal"
+            size="compact"
             onChange={(val) => {
               //val is actually the token from the recaptcha, but it is not being 
               //used for setFieldValue automatically by Formik for some reason, so we do it manually.
