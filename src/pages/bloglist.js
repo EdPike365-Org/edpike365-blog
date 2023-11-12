@@ -1,12 +1,10 @@
-import * as React from "react"
-import { graphql } from "gatsby"
-import Seo from "../components/Seo"
-import Layout from "../components/layout/Layout"
-import BlogPostSummary from "../components/BlogPostSummary"
+import * as React from 'react'
+import { graphql } from 'gatsby'
+import Seo from '../components/common/Seo'
+import Layout from '../components/layout/Layout'
+import BlogPostSummary from '../components/common/BlogPostSummary'
 
-export const Head = () => (
-  <Seo title="All Blog Posts" />
-)
+export const Head = () => <Seo title="All Blog Posts" />
 
 const BlogList = ({ data, location }) => {
   const posts = data.allMarkdownRemark.nodes
@@ -48,10 +46,10 @@ export const pageQuery = graphql`
     }
     allMarkdownRemark(
       filter: {
-        fileAbsolutePath: { regex: "/content/blog/" },
+        fileAbsolutePath: { regex: "/content/blog/" }
         frontmatter: { status: { in: $allowedBlogStatuses } }
       }
-      sort: { frontmatter: {date: DESC}}
+      sort: { frontmatter: { date: DESC } }
     ) {
       totalCount
       nodes {

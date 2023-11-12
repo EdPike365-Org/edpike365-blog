@@ -1,8 +1,8 @@
 import * as React from 'react'
 import Layout from '../components/layout/Layout'
 import Section from '../components/layout/main/Section'
-import StyleSettings from '../components/StyleSettings'
-import BuildInfo from '../components/BuildInfo'
+import StyleSettings from '../components/common/StyleSettings'
+import BuildInfo from '../components/common/BuildInfo'
 
 const SiteSettings = () => {
   return (

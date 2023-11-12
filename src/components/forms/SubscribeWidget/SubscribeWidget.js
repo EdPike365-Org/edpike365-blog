@@ -3,7 +3,7 @@ import * as React from 'react'
 import * as styles from '../FormComponents.module.css'
 import * as Yup from 'yup'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
-import LoaderSpinner from '../../LoaderSpinner'
+import LoaderSpinner from '../../common/LoaderSpinner'
 import ErrMsgRenderer from '../ErrMsgRenderer'
 
 // The senderEmail is hidden in the form, but is required by the netlify mail integration

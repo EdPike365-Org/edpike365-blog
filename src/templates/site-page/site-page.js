@@ -4,7 +4,7 @@ import { getSrc } from 'gatsby-plugin-image'
 import * as styles from './site-page.module.css'
 
 import Layout from '../../components/layout/Layout'
-import Seo from '../../components/Seo'
+import Seo from '../../components/common/Seo'
 
 export const Head = ({ data }) => {
   const post = data.markdownRemark

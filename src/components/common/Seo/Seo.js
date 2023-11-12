@@ -1,5 +1,5 @@
-import React from "react"
-import { useSiteMetadata } from "../../hooks/use-site-metadata"
+import React from 'react'
+import { useSiteMetadata } from '../../../hooks/use-site-metadata'
 
 // TODO: implemnt Seo.propTypes
 
@@ -27,9 +27,14 @@ Seo.propTypes = {
 
 // Naming Seo to cmply with PascalCase rule
 const Seo = ({ title, description, pathname, children }) => {
-
   //get default values from the metadata hook
-  const { title: defaultTitle, description: defaultDescription, image, siteUrl, social } = useSiteMetadata()
+  const {
+    title: defaultTitle,
+    description: defaultDescription,
+    image,
+    siteUrl,
+    social,
+  } = useSiteMetadata()
   const twitterUsername = social?.twitter || ``
 
   const seo = {

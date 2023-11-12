@@ -3,10 +3,10 @@ import { Link, graphql } from 'gatsby'
 import { getSrc } from 'gatsby-plugin-image'
 import * as styles from './blog-post.module.css'
 
-import Seo from '../../components/Seo'
+import Seo from '../../components/common/Seo'
 import Layout from '../../components/layout/Layout'
 import SubscribeWidget from '../../components/forms/SubscribeWidget'
-import Bio from '../../components/Bio'
+import Bio from '../../components/common/Bio'
 
 require(`katex/dist/katex.min.css`)
 
