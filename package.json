@@ -5,8 +5,8 @@
   "version": "5.12.0",
   "author": "Ed Pike <edpike365@gmail.com>",
   "bugs": {
-      "url": "https://github.com/edpike365/edpike365-blog/issues"
-  },  
+    "url": "https://github.com/edpike365/edpike365-blog/issues"
+  },
   "license": "0BSD",
   "main": "n/a",
   "repository": {
@@ -29,6 +29,7 @@
     "@react-icons/all-files": "^4.1.0",
     "formik": "^2.4.5",
     "gatsby": "^5.12.4",
+    "gatsby-adapter-netlify": "^1.0.3",
     "gatsby-plugin-catch-links": "^5.12.0",
     "gatsby-plugin-feed": "^5.12.3",
     "gatsby-plugin-image": "^3.12.3",

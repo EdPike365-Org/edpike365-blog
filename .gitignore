@@ -72,3 +72,5 @@ yarn-error.log
 
 # ? from gatsby-starter-contentful-homepage
 dist
+# Local Netlify folder
+.netlify

@@ -1,2 +1,2 @@
-import StyleSettings from "./StyleSettings";
-export default StyleSettings;
+import StyleSettings from './StyleSettings'
+export default StyleSettings

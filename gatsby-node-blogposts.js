@@ -4,23 +4,25 @@ const path = require(`path`)
 
 exports.getBlogStatusesToShow = strBlogStatusesToShow => {
   let arBlogStatusesToShow = []
+
   if (
     strBlogStatusesToShow == null ||
     strBlogStatusesToShow == undefined ||
     strBlogStatusesToShow == ''
   ) {
     console.warn(
-      ' gatsby-node-blogposts.js: arBlogStatusesToShow is null, undefined or empty. Make sure it is defined in env vars.'
+      ' gatsby-node-blogposts.js: strBlogStatusesToShow is null, undefined or empty. Make sure it is defined in env vars.'
     )
   } else {
     // Change the comma seperated list to an array
     arBlogStatusesToShow = strBlogStatusesToShow.split(',')
     // To write out string '["abc", "xyz"]', call JSON.stringify(arBlogStatusesToShow)
     console.info(
-      ' gatsby-node.js arBlogStatusesToShow JSON = ' +
+      ' gatsby-node-blogposts.js arBlogStatusesToShow JSON = ' +
         JSON.stringify(arBlogStatusesToShow)
     )
   }
+
   return arBlogStatusesToShow
 }
 
