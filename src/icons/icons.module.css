@@ -1,0 +1,9 @@
+.commonIconCSS {
+    fill: var(--color-text-secondary);
+    stroke: var(--color-text-secondary);
+}
+
+.logoIconCSS {
+    fill: var(--color-primary-main);
+    stroke: var(--color-primary-main);
+}  

@@ -1,13 +1,11 @@
 import * as React from "react"
 import { graphql } from "gatsby"
-
-import Bio from "../components/Bio"
+import Seo from "../components/Seo"
 import Layout from "../components/layout/Layout"
-import { Seo } from "../components/seo"
 import BlogPostSummary from "../components/BlogPostSummary"
 
 export const Head = () => (
-  <Seo  title="All Blog Posts" />
+  <Seo title="All Blog Posts" />
 )
 
 const BlogList = ({ data, location }) => {
@@ -17,7 +15,6 @@ const BlogList = ({ data, location }) => {
   if (posts.length === 0) {
     return (
       <Layout location={location}>
-        <Bio />
         <p>No blog posts found.</p>
       </Layout>
     )

@@ -1,0 +1,58 @@
+/* Remember: kebab case here gets translated to camel case in the js file */
+.nav-link-style {
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition: color 400ms ease-in-out, background-color 400ms ease-in-out;
+}
+
+.nav-link-style:hover {
+  color: var(--color-text-primary);
+  border-bottom: 2px solid var(--color-primary-dark);
+}
+
+/* preserve space for the active arrow with invisible arrow */
+.nav-link-style::after {
+  white-space: pre;
+  color: var(--color-background-paper);
+  content: " >";
+  display: none;
+}
+
+.nav-link-style:active::after {
+  color: var(--color-text-primary);
+  content: " >";
+  display: inline;
+}
+
+/* 
+TODO When using css modules, the order listed here is more important than the order
+listed in the rendered source code. When I had this active class listed first,
+in the file (above the normal .navLinkStyle), the rendered component listed them
+in the expected order, but the "computed" class was backward.
+*/
+
+@keyframes active-pulse {
+  0% {
+    color: var(--color-text-secondary);
+  }
+  80% {
+    color: var(--color-text-primary);
+  }
+  100% {
+    color: var(--color-text-primary);
+  }
+}
+
+.active-link-css {
+  background: var(--color-background-paper);
+  
+  animation-name: active-pulse;
+  animation-duration: 1s;
+  animation-timing-function: linear;
+  animation-delay: 0s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  
+  /*  animation: active-pulse 2s linear infinite;*/
+}

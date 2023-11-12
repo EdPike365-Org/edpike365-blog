@@ -1,6 +1,6 @@
 import * as React from "react"
 import Layout from "../components/layout/Layout"
-import Section from "../components/Section"
+import Section from "../components/layout/main/Section"
 import StyleSettings from "../components/StyleSettings"
 import BuildInfo from "../components/BuildInfo"
 

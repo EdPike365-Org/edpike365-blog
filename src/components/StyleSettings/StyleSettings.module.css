@@ -1,0 +1,38 @@
+.style-settings-div {
+
+    & :global(.sun-icon-solid) {
+        fill: var(--color-text-secondary);
+        stroke: var(--color-text-secondary);
+    }
+
+    & :global(.moon-icon-solid) {
+        fill: var(--color-text-secondary);
+        stroke: var(--color-text-secondary);
+    }
+
+    & :global(.style-sheet-selector) {
+        color: var(--color-text-secondary);
+        background-color: var(--color-background-paper);
+    }
+
+    & :global(.style-sheet-summary-card-div) {
+        color: var(--color-text-secondary);
+        background-color: var(--color-background-default);
+        border: var(--shape-border);
+        border-radius: var(--shape-border-radius);
+
+        & :global(.style-sheet-summary-card-title-div) {
+            color: var(--color-text-secondary);
+
+            &>h5 {
+                font-weight: bolder;
+            }
+        }
+
+        & :global(.style-sheet-summary-card-detail) {
+            color: var(--color-text-secondary);
+            background-color: var(--color-background-paper);
+        }
+    }
+
+}

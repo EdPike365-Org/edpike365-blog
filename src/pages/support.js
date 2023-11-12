@@ -1,7 +1,7 @@
 import React from "react"
-import Layout from "../components/layout/Layout"
 import { Link } from "gatsby"
-import { Seo } from "../components/seo"
+import Layout from "../components/layout/Layout"
+import Seo from "../components/Seo"
 
 export const Head = () => (
   <Seo  title="Support" />

@@ -1,0 +1,56 @@
+.buttonDivBaseCSS {
+  box-sizing: border-box;
+  border: 0px 0px;
+
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+
+  /* this height also controls the height/width of the buttons */
+  height: 100%;
+}
+
+.buttonDivLeftCSS{
+  justify-content: left;
+
+  /* ---- LapTop (1366 x ) ---- */
+  /* Now that page is wide enough, Navbar permanently shows. Hamburger disappears. */
+  @media only screen and (min-width: 1366px) {
+    display: none;
+    /* TODO: Show more major nav links, like in Vice.com */
+  }
+}
+
+.buttonDivRightCSS {
+  justify-content: right;
+
+  /* ---- DEFAULT (tiny): Small Narrow Phones (280 x 653) ---- */
+  /* DarkMode Toggle and SettingsButton are hidden */
+
+  /* We are doing it as a child so not every instance of DarkMode toggle disappears */
+  & > :global(#darkModeToggleDiv) > :global(.dark-mode-toggle) {
+    display: none;
+  }
+
+  & > :global(#settingsButton) {
+    display: none;
+  }
+
+  @media only screen and (min-width: 411px) {
+    /* now Settings Button appears */
+    & > :global(#settingsButton) {
+      display: inline-flex;
+    }
+  }
+
+  /* ---- Larger Phones (540 x ) ---- */
+  @media only screen and (min-width: 540px) {
+    /* Now DarkMode toggle appears */
+    & > :global(#darkModeToggleDiv) > :global(.dark-mode-toggle){
+      display: inline-flex;
+    }
+  }
+}
+
+
+

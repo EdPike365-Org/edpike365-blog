@@ -1,6 +1,6 @@
 import React from "react"
 import Layout from "../components/layout/Layout"
-import { Seo } from "../components/seo"
+import Seo from "../components/Seo"
 
 export const Head = () => (
   <Seo  title="Cookie Policy" />

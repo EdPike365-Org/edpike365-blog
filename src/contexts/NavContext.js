@@ -1,6 +1,10 @@
 import React, { createContext, useState, useEffect } from "react"
 import { isSSR } from "../utils/HelperFunctions"
 
+// REMEMBER, this context must be mounted in the gatsby-browser.js file.
+
+// TODO rename showNavState to navBarOpenState
+
 const WINDOW_WIDTH_THRESHOLD = 1366
 
 export const NavContext = createContext({

@@ -1,14 +1,13 @@
 import React from "react"
-import { css } from "@emotion/react"
+import * as styles from "./icons.module.css"
 
 const XIconRegular = props => {
   return (
     <svg
-      id="XIconRegular"
-      css={css`
-        fill: var(--color-text-secondary);
-        stroke: var(--color-text-secondary);
-      `}
+
+      id="xIconRegular"
+      className={`${styles.commonIconCSS} x-icon-regular`}
+
       viewBox="0 0 320 512"
       aria-hidden="true"
       focusable="false"

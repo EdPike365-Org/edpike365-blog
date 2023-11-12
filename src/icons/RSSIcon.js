@@ -1,5 +1,5 @@
 import React from "react"
-import { css } from "@emotion/react"
+import * as styles from "./icons.module.css"
 
 const RSSIcon = props => {
   return (
@@ -12,10 +12,10 @@ const RSSIcon = props => {
       stroke-width="2"
       stroke-linecap="round"
       stroke-linejoin="round"
-      css={css`
-        fill: var(--color-text-secondary);
-        stroke: var(--color-text-secondary);
-      `}
+      style={{
+        fill: "var(--color-text-secondary)",
+        stroke: "var(--color-text-secondary)",
+      }}
     >
       <title id="rss-title">RSS Feed</title>
       <path d="M4 11a9 9 0 0 1 9 9"></path>

@@ -1,0 +1,12 @@
+.titleDiv {
+    color: var(--color-text-primary);
+    transition: color 400ms ease-in-out, background-color 400ms ease-in-out;
+
+    & p {
+        font-size: 1.5rem;
+    }
+}
+
+.linkToBlogList {
+    color: var(--color-primary-main);
+}

@@ -1,0 +1,43 @@
+.footerCSS {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+
+  margin: auto;
+  background-color: var(--color-background-paper);
+  color: var(--color-text-secondary);
+  transition: color 400ms ease-in-out, background-color 400ms ease-in-out;
+
+  text-align: center;
+  font-size: 0.75rem;
+  
+  /* left right padding to reserve space for the floating back to top button */
+  padding: .5rem 60px;
+
+  z-index: 999;
+
+  /* ---- Larger Phones (540 x ) ---- */
+  /* 
+  Forcing a min height to support docking the floating scrollToTop button 
+  Otherwise, when the footer is wide enough, its gets very short in height.
+  */
+  @media only screen and (min-width: 540px) {
+    min-height: 3rem;
+  }
+}
+
+.footerRowCSS {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 100%; 
+  padding: .35rem 0;
+}
+
+.footerLinkCSS {
+  margin: 0 .5rem;
+}

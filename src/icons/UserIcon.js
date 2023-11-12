@@ -1,13 +1,13 @@
 import React from "react"
-import { css } from "@emotion/react"
+import * as styles from "./icons.module.css"
 
 const UserIcon = () => {
   return (
     <svg
-      css={css`
-        fill: var(--color-text-secondary);
-        stroke: var(--color-text-secondary);
-      `}
+    
+      id="userIcon"
+      className={`${styles.commonIconCSS} user-icon`}
+
       viewBox="0 0 448 512"
       aria-hidden="true"
       focusable="false"

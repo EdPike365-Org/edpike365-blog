@@ -1,8 +1,0 @@
-a.anchor {
-  fill: var(--color-text-primary);
-}
-
-/* the anchor is a little low on the h3, fine on h4 */
-h3 a.anchor.before {
-  top: -3px;
-}

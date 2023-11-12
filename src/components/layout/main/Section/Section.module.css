@@ -1,0 +1,10 @@
+.sectionCSS {
+  color: var(--color-text-secondary);
+  background-color: var(--color-background-paper);
+  transition: color 400ms ease-in-out, background-color 400ms ease-in-out;
+
+  padding: 10px;
+  border-radius: var(--shape-border-radius);
+  border: var(--shape-border);
+  box-shadow: var(--shape-box-shadow);
+}

@@ -1,5 +1,5 @@
 import React from "react"
-import { css } from "@emotion/react"
+import * as styles from "./icons.module.css"
 
 //https://totalwar.fandom.com/wiki/Bessho_Clan
 // https://mai-ko.com/travel/culture-in-japan/crests/japanese-family-crests-kamon-2/
@@ -10,10 +10,10 @@ import { css } from "@emotion/react"
 const LogoIcon = () => {
   return (
     <svg
-      css={css`
-        fill: var(--color-primary-main);
-        stroke: var(--color-primary-main);
-      `}
+
+      id="logoIcon"
+      className={`${styles.logoIconCSS} logo-icon`}
+
       viewBox="-10 -10 276 276"
       preserveAspectRatio="xMidYMid meet"
       aria-hidden="true"

@@ -1,0 +1,54 @@
+/* shared by nav buttons, can be extended in the button component */
+.commonButtonCSS {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 10px;
+  margin: 0px 1px 0px 1px;
+  height: 100%;
+  aspect-ratio: 1 / 1;
+
+  border: none;
+  letter-spacing: 0px;
+  cursor: pointer;
+  background-color: var(--color-background-paper);
+  transition: color 400ms ease-in-out, background-color 400ms ease-in-out;
+
+  &:hover {
+    transform: translateX(-1px) translateY(-1px);
+  }
+}
+
+.navBarToggleButtonCSS {
+  /* 
+  These 2 icons show small because they have larger built in padding. 
+  */
+  padding: 0;
+
+  & :global(.hamburger-icon) {
+    height: 100%;
+    padding: 8px;
+  }
+
+  & :global(.x-icon-regular) {
+    height: 100%;
+    width: 100%;
+    padding: 2px;
+  }
+
+}
+
+.loginButtonCSS {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
+
+.settingsButtonCSS {}
+
+.userButtonCSS {
+  & img {
+    border-radius: 50%;
+  }
+}

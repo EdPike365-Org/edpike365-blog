@@ -1,13 +1,13 @@
 import React from "react"
-import { css } from "@emotion/react"
+import * as styles from "./icons.module.css"
 
 const SliderIcon = () => {
   return (
     <svg
-      css={css`
-        fill: var(--color-text-secondary);
-        stroke: var(--color-text-secondary);
-      `}
+
+      id="sliderIcon"
+      className={`${styles.commonIconCSS} slider-icon`}
+
       viewBox="0 0 512 512"
       aria-hidden="true"
       focusable="false"

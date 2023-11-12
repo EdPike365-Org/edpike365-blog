@@ -1,0 +1,127 @@
+.inputRowDiv {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+}
+
+.formDiv {
+  box-sizing: border-box;
+  margin: 0 0;
+  padding: 0;
+
+  max-width: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  background-color: var(--color-background-paper);
+  border-radius: 5px;
+  border: 1px solid var(--color-primary-main);
+}
+
+.titleRow {
+  display: flex;
+  justify-content: center;
+  width: 98%;
+  padding: 0.5rem;
+
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.3rem;
+}
+
+.responseRow {
+  display: none;
+  justify-content: center;
+  padding: 1rem;
+  width: 98%;
+  vertical-align: middle;
+  text-align: center;
+  visibility: hidden;
+}
+
+.inputRow {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 0.5rem;
+  max-width: 100%;
+  align-items: center;
+  vertical-align: middle;
+
+  & > label {
+    vertical-align: middle;
+    margin-right: 1rem;
+    padding: 0 0;
+    font-weight: bold;
+    max-width: 20rem;
+  }
+
+  & > input {
+    padding: 0.5rem;
+    border-radius: 5px;
+    border: 1px solid var(--color-text-secondary);
+    min-width: 10rem;
+    max-width: 100rem;
+    max-height: 2rem;
+  }
+}
+
+.buttonGroup {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  & > button[type='submit'] {
+    padding: 1rem;
+    margin: 0.5rem;
+    border: none;
+
+    border-radius: 5px;
+    font: inherit;
+    font-weight: bold;
+
+    background-color: var(--color-primary-main);
+
+    &:hover {
+      transform: translateX(-1px) translateY(-1px);
+    }
+  }
+}
+
+/* TODO remove this code from buttongroup above */
+.formButton {
+  padding: 1rem;
+  margin: 0.5rem;
+  border: none;
+
+  border-radius: 5px;
+  font: inherit;
+  font-weight: bold;
+
+  background-color: var(--color-primary-main);
+
+  &:hover {
+    transform: translateX(-1px) translateY(-1px);
+  }
+}
+
+/* create hidden field p tag for bot-field */
+.hiddenP {
+  display: none;
+}
+
+.txtCSS {
+  width: 30rem;
+}

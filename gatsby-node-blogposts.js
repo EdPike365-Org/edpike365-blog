@@ -3,13 +3,24 @@ const path = require(`path`)
 //I moved these functions here to clean up gatsby-node.js
 
 exports.getBlogStatusesToShow = strBlogStatusesToShow => {
-  // Change the comma seperated list to an array
-  const arBlogStatusesToShow = strBlogStatusesToShow.split(",")
-  // To write out string '["abc", "xyz"]', call JSON.stringify(arBlogStatusesToShow)
-  console.info(
-    " gatsby-node.js arBlogStatusesToShow JSON = " +
-      JSON.stringify(arBlogStatusesToShow)
-  )
+  let arBlogStatusesToShow = []
+  if (
+    strBlogStatusesToShow == null ||
+    strBlogStatusesToShow == undefined ||
+    strBlogStatusesToShow == ''
+  ) {
+    console.warn(
+      ' gatsby-node-blogposts.js: arBlogStatusesToShow is null, undefined or empty. Make sure it is defined in env vars.'
+    )
+  } else {
+    // Change the comma seperated list to an array
+    arBlogStatusesToShow = strBlogStatusesToShow.split(',')
+    // To write out string '["abc", "xyz"]', call JSON.stringify(arBlogStatusesToShow)
+    console.info(
+      ' gatsby-node.js arBlogStatusesToShow JSON = ' +
+        JSON.stringify(arBlogStatusesToShow)
+    )
+  }
   return arBlogStatusesToShow
 }
 
@@ -21,7 +32,9 @@ exports.createBlogPages = async (
   createPage
 ) => {
   // Define a template for blog post
-  const blogPostTemplate = path.resolve(`./src/templates/blog-post.js`)
+  const blogPostTemplate = path.resolve(
+    `./src/templates/blog-post/blog-post.js`
+  )
 
   // Get all markdown blog posts sorted by date
   // limit them to those with frontmatter "status" in the list of allowed statuses
@@ -37,8 +50,8 @@ exports.createBlogPages = async (
           {
             fileAbsolutePath: {regex: "/content/blog/"},
             frontmatter: {status: {in: ` +
-            JSON.stringify(arBlogStatusesToShow) +
-            ` }}
+      JSON.stringify(arBlogStatusesToShow) +
+      ` }}
         }        
           limit: 1000
         ) {
@@ -62,7 +75,7 @@ exports.createBlogPages = async (
 
     const posts = blogPostResults.data.allMarkdownRemark.nodes
     console.info(
-      "gatsby-node-blogposts.js: got num blog posts = " + posts.length
+      'gatsby-node-blogposts.js: got num blog posts = ' + posts.length
     )
 
     // Create blog posts pages
@@ -75,7 +88,7 @@ exports.createBlogPages = async (
 
         // `context` is available in the template as a prop and as a variable in GraphQL
         createPage({
-          path: "/blog" + post.fields.slug,
+          path: '/blog' + post.fields.slug,
           component: blogPostTemplate,
           context: {
             id: post.id,
@@ -94,14 +107,13 @@ exports.addFiltersToBlogListingPages = (
   createPage,
   arBlogStatusesToShow
 ) => {
-
   // If a MD blogpost is not in allowed statuses, the pages page for the
   // blogpost will not exist (filtered in createSitePages)
   // HOWEVER, pages that *list* blogposts will still create summaries and links to them
   // So we have to pass in some context variables that are used in the page query
   // TODO: I need to somehow filter them at a higher level
 
-  if (page.path == "/bloglist/") {
+  if (page.path == '/bloglist/') {
     // limit which blog posts appear on the "bloglist" page
     deletePage(page)
     createPage({
@@ -111,7 +123,7 @@ exports.addFiltersToBlogListingPages = (
         allowedBlogStatuses: arBlogStatusesToShow,
       },
     })
-  } else if (page.path == "/") {
+  } else if (page.path == '/') {
     // limit the number and statuses of blog posts
     // that appear on the Home Page (typically 3)
     deletePage(page)
@@ -125,4 +137,3 @@ exports.addFiltersToBlogListingPages = (
     })
   }
 }
-

@@ -1,14 +1,16 @@
 import React from "react"
-import { css } from "@emotion/react"
+import * as styles from "./icons.module.css"
 
 const XIconSolid = props => {
   return (
     <svg
-      css={css`
-        fill: var(--color-text-secondary);
-        stroke: var(--color-text-secondary);
-        height: 1.8rem; /* height will also modify width. The X is smallish so we are making it bigger. */
-      `}
+
+      id="xIconSolid"
+      className={`${styles.commonIconCSS} x-icon-solid`}
+
+      /* height will also modify width. The X is smallish so we are making it bigger. */
+      height="1.8rem"
+
       viewBox="0 0 352 512"
       aria-hidden="true"
       focusable="false"
