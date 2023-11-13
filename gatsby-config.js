@@ -1,23 +1,34 @@
-require("dotenv").config({
+/**
+ * Configure your Gatsby site with this file.
+ *
+ * See: https://www.gatsbyjs.com/docs/reference/config-files/gatsby-config/
+ */
+require('dotenv').config({
   path: `.env.${process.env.NODE_ENV}`,
 })
+
+// TODO You can author gatsby-config and gatsby-node in ESM syntax.
+// This feature was added in gatsby@5.3.0.
 
 // NOTES:
 // Gatsby CLI location, etc: npm list -g --depth 0
 // webpack.config.js is in C:\Users\EdPike365\code\edpike365-blog\node_modules\gatsby\dist\utils
 // How to modify gatsby webpack: https://gist.github.com/m-allanson/8fc8943f621a6e5460fb9aa65d2451a9
 
+/**
+ * @type {import('gatsby').GatsbyConfig}
+ */
 module.exports = {
   siteMetadata: {
     title: `EdPike365`,
     author: {
       name: `Ed Pike`,
-      summary: `: Full Stack, DevOps, Tech Educator, Science Enthusiast.`,
+      summary: `Full Stack, DevOps, Tech Educator, Science Enthusiast.`,
     },
     description: `Technology blog, portfolio and custom Gatsby demo.`,
     siteUrl: `https://www.edpike365.com/`,
-    image: "/logo.svg",
-    monetization: "$ilp.uphold.com/yLBeLwUyE2A2",
+    image: '/logo.svg',
+    monetization: '$ilp.uphold.com/yLBeLwUyE2A2',
     social: {
       twitter: process.env.TWITTER,
     },
@@ -31,54 +42,54 @@ module.exports = {
           minifyBrowserFunction: false,
           styleConfigs: [
             {
-              key: "normalize",
-              displayName: "Normalize2 Reset",
+              key: 'normalize',
+              displayName: 'Normalize2 Reset',
               alwaysEnabled: true,
-              componentType: "STYLE",
-              crossorigin: "false",
-              pathToCSSFile: "./src/styles/normalize2.css",
+              componentType: 'STYLE',
+              crossorigin: 'false',
+              pathToCSSFile: './src/styles/normalize2.css',
             },
             {
-              key: "core",
-              displayName: "Core Theme",
+              key: 'core',
+              displayName: 'Core Theme',
               alwaysEnabled: true,
-              componentType: "STYLE",
-              crossorigin: "false",
-              pathToCSSFile: "./src/styles/coreTheme.css",
+              componentType: 'STYLE',
+              crossorigin: 'false',
+              pathToCSSFile: './src/styles/coreTheme.css',
               minify: true,
             },
             {
-              key: "light",
-              displayName: "Default, Light Theme",
+              key: 'light',
+              displayName: 'Default, Light Theme',
               alwaysEnabled: false,
-              uses: "default",
-              componentType: "STYLE",
-              pathToCSSFile: "./src/styles/lightTheme.css",
+              uses: 'default',
+              componentType: 'STYLE',
+              pathToCSSFile: './src/styles/lightTheme.css',
               minify: false,
             },
             {
-              key: "dark",
-              displayName: "Dark Theme",
+              key: 'dark',
+              displayName: 'Dark Theme',
               alwaysEnabled: false,
-              uses: "dark",
-              componentType: "STYLE",
-              pathToCSSFile: "./src/styles/darkTheme.css",
+              uses: 'dark',
+              componentType: 'STYLE',
+              pathToCSSFile: './src/styles/darkTheme.css',
               minify: false,
             },
             {
-              key: "burger",
-              displayName: "Burger King",
-              componentType: "LINK",
-              remoteHREF: "https://www.edpike365.com/test/burger.css",
+              key: 'burger',
+              displayName: 'Burger King',
+              componentType: 'LINK',
+              remoteHREF: 'https://www.edpike365.com/test/burger.css',
               cacheRemoteCSS: false,
             },
             {
-              key: "fire",
-              displayName: "Fire Theme",
+              key: 'fire',
+              displayName: 'Fire Theme',
               alwaysEnabled: false,
-              componentType: "STYLE",
-              pathToCSSFile: "./src/styles/fireTheme.css",
-              media: "(max-width: 1280px)",
+              componentType: 'STYLE',
+              pathToCSSFile: './src/styles/fireTheme.css',
+              media: '(max-width: 1280px)',
               minify: false,
             },
           ],
@@ -125,12 +136,12 @@ module.exports = {
           {
             resolve: `gatsby-remark-table-of-contents`,
             options: {
-              exclude: "Table of Contents",
+              exclude: 'Table of Contents',
               tight: true,
               ordered: false,
               fromHeading: 2,
               toHeading: 4,
-              className: "table-of-contents",
+              className: 'table-of-contents',
             },
           },
           {
@@ -150,16 +161,16 @@ module.exports = {
             resolve: `gatsby-remark-embed-snippet`,
             options: {
               // Example code links are relative to this dir.
-              directory: `${__dirname}/src/code-examples/`,
+              directory: `${__dirname}/content/blog/gatsby/code-examples/`,
             },
           },
           `gatsby-remark-code-titles`,
           `gatsby-remark-prismjs`,
           `gatsby-remark-copy-linked-files`,
           {
-            resolve: "gatsby-remark-smartypants",
+            resolve: 'gatsby-remark-smartypants',
             options: {
-              dashes: "oldschool",
+              dashes: 'oldschool',
             },
           },
           {
@@ -173,7 +184,7 @@ module.exports = {
             resolve: `gatsby-remark-emoji`,
             options: {
               // default emojiConversion --> shortnameToUnicode
-              emojiConversion: "shortnameToUnicode",
+              emojiConversion: 'shortnameToUnicode',
               // when true, matches ASCII characters (in unicodeToImage and shortnameToImage)
               // e.g. ;) --> 😉
               ascii: true,
@@ -207,27 +218,17 @@ module.exports = {
         excludeRegex: /excluded-link/,
       },
     },
-    // {
-    //   resolve: `gatsby-plugin-google-analytics`,
-    //   options: {
-    //     trackingId: `ADD YOUR TRACKING ID HERE`,
-    //   },
-    // },
+    /*
+    {
+       resolve: `gatsby-plugin-google-analytics`,
+       options: {
+         trackingId: `ADD YOUR TRACKING ID HERE`,
+       },
+     },    
+    */
     {
       resolve: `gatsby-plugin-feed`,
       options: {
-        query: `
-          {
-            site {
-              siteMetadata {
-                title
-                description
-                siteUrl
-                site_url: siteUrl
-              }
-            }
-          }
-        `,
         feeds: [
           {
             serialize: ({ query: { site, allMarkdownRemark } }) => {
@@ -237,7 +238,7 @@ module.exports = {
                   date: node.frontmatter.date,
                   url: site.siteMetadata.siteUrl + node.fields.slug,
                   guid: site.siteMetadata.siteUrl + node.fields.slug,
-                  custom_elements: [{ "content:encoded": node.html }],
+                  custom_elements: [{ 'content:encoded': node.html }],
                 })
               })
             },
@@ -260,8 +261,8 @@ module.exports = {
                 }
               }
             `,
-            title: "EdPike365 RSS Feed",
-            output: "/rss.xml",
+            title: 'EdPike365 RSS Feed',
+            output: '/rss.xml',
           },
         ],
       },
@@ -276,43 +277,29 @@ module.exports = {
         theme_color: `#000000`,
         // Enables "Add to Homescreen" prompt and disables browser UI (including back button)
         // see https://developers.google.com/web/fundamentals/web-app-manifest/#display
-        display: `standalone`,        
+        display: `standalone`,
         icon: `src/images/logo.svg`, // This path is relative to the src root of the site.
         // An optional attribute which provides support for CORS check.
         // If you do not provide a crossOrigin option, it will skip CORS for manifest.
         // Any invalid keyword or empty string defaults to `anonymous`
-        crossOrigin: `use-credentials`,        
+        crossOrigin: `use-credentials`,
         theme_color_in_head: false, // This will avoid adding theme-color meta tag.
       },
     },
     {
-      resolve: `gatsby-plugin-nprogress`,
-      options: {
-        // Setting a color is optional.
-        color: `tomato`,
-        // Disable the loading spinner.
-        showSpinner: true,
-      },
-    },      
-    `gatsby-plugin-emotion`,
-    {
       resolve: `gatsby-source-build-date`,
       options: {
-        locales: "fr-FR",
+        locales: 'fr-FR',
         options: {
-          hour: "numeric",
-          minute: "numeric",
-          second: "numeric",
-          weekday: "long",
-          day: "numeric",
-          month: "long",
-          year: "numeric",
+          hour: 'numeric',
+          minute: 'numeric',
+          second: 'numeric',
+          weekday: 'long',
+          day: 'numeric',
+          month: 'long',
+          year: 'numeric',
         },
       },
     },
-    `gatsby-plugin-gatsby-cloud`,
-    // this (optional) plugin enables Progressive Web App + Offline functionality
-    // To learn more, visit: https://gatsby.dev/offline
-    // `gatsby-plugin-offline`,
   ],
 }

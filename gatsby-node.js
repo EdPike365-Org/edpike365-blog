@@ -1,12 +1,15 @@
 const { createFilePath } = require(`gatsby-source-filesystem`)
+
+// TODO You can author gatsby-config and gatsby-node in ESM syntax.
+// This feature was added in gatsby@5.3.0.
+
 const {
   getBlogStatusesToShow,
   createBlogPages,
-  addFiltersToBlogListingPages
+  addFiltersToBlogListingPages,
 } = require(`./gatsby-node-blogposts`)
-const {
-  createSitePagesFromMDFiles
-} = require(`./gatsby-node-mdsitepages`)
+
+const { createSitePagesFromMDFiles } = require(`./gatsby-node-mdsitepages`)
 
 // We do not need to require/import dotenv because it was already done in gatsby-config.js
 // It loads .env.production or .env.development depending on the build mode
@@ -17,9 +20,14 @@ const arBlogStatusesToShow = getBlogStatusesToShow(
 exports.createPages = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions
 
-  createSitePagesFromMDFiles(arBlogStatusesToShow, graphql, reporter, createPage)
+  await createSitePagesFromMDFiles(
+    arBlogStatusesToShow,
+    graphql,
+    reporter,
+    createPage
+  )
 
-  createBlogPages(arBlogStatusesToShow, graphql, reporter, createPage)
+  await createBlogPages(arBlogStatusesToShow, graphql, reporter, createPage)
 }
 
 exports.onCreateNode = ({ node, actions, getNode }) => {
@@ -42,7 +50,12 @@ exports.onCreatePage = ({ page, actions }) => {
   const { createPage, deletePage } = actions
 
   // Some pages have lists of blogs and need GraphQL filters injected
-  addFiltersToBlogListingPages(page, deletePage, createPage, arBlogStatusesToShow)
+  addFiltersToBlogListingPages(
+    page,
+    deletePage,
+    createPage,
+    arBlogStatusesToShow
+  )
 
   /* 
   Since this section will have dynamic content that shouldn’t be rendered statically, 
@@ -50,7 +63,7 @@ exports.onCreatePage = ({ page, actions }) => {
   page.matchPath is a special key that's used for matching pages only on the client.
     */
   if (page.path.match(/^\/account/)) {
-    page.matchPath = "/account/*"
+    page.matchPath = '/account/*'
 
     // Update the page.
     createPage(page)

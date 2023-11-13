@@ -1,14 +1,15 @@
 import React from "react"
-import { css } from "@emotion/react"
+import * as styles from "./icons.module.css"
+//https://www.freecodecamp.org/news/how-to-import-svgs-in-react-and-vite/
 
+//let classNames = classnames(styles.sideMenu, { [styles.active]: this.props.menuOpen });
 const HamburgerIcon = () => {
   return (
     <svg
-      id="HamburgerIcon"
-      css={css`
-        fill: var(--color-text-secondary);
-        stroke: var(--color-text-secondary);
-      `}
+    
+      id="hamburgerIcon"
+      className={`${styles.commonIconCSS} hamburger-icon`}
+      
       viewBox="0 0 448 512"
       aria-hidden="true"
       focusable="false"

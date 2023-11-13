@@ -1,3 +1,4 @@
+# This came from gatsby-starter-blog
 # Logs
 logs
 *.log
@@ -51,9 +52,9 @@ typings/
 # Output of 'npm pack'
 *.tgz
 
-# dotenv environment variable files, let .env.sample not ignored
-.env.development
-.env.production
+# dotenv environment variable files
+.env*
+!.env.example
 
 # gatsby files
 .cache/
@@ -69,5 +70,7 @@ yarn-error.log
 # Yarn Integrity file
 .yarn-integrity
 
+# ? from gatsby-starter-contentful-homepage
+dist
 # Local Netlify folder
 .netlify

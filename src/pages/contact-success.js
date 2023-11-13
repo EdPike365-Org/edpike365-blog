@@ -5,7 +5,6 @@ import Layout from "../components/layout/Layout"
 // but only for pages in "pages" and "templates", not "components"
 const ContactSuccess = ({ data, pageContext, location }) => {
 
-
   return (
     <Layout location={location}>
     <br/>

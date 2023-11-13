@@ -1,0 +1,5 @@
+.wrapperDiv {
+  max-width: var(--app-max-width);
+  margin: 0px auto;
+  padding: 0px;
+}

@@ -1,13 +1,13 @@
 import React from "react"
-import { css } from "@emotion/react"
+import * as styles from "./icons.module.css"
 
-const HollowBellIcon = props => {
+const HollowBellIcon = () => {
   return (
     <svg
-      css={css`
-        fill: var(--color-text-secondary);
-        stroke: var(--color-text-secondary);
-      `}
+
+      id="hollowBellIcon"
+      className={`${styles.commonIconCSS} hollow-bell-icon`}
+
       viewBox="0 0 448 512"
       aria-hidden="true"
       focusable="false"

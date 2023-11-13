@@ -1,47 +1,36 @@
-import * as React from "react"
-import { Link, graphql } from "gatsby"
-import styled from "@emotion/styled"
-import Layout from "../components/layout/Layout"
-import { Seo } from "../components/seo"
-import Bio from "../components/Bio"
-import BlogPostSummary from "../components/BlogPostSummary"
+import * as React from 'react'
+import { Link, graphql } from 'gatsby'
+import Seo from '../components/common/Seo'
+import Layout from '../components/layout/Layout'
+import BlogPostSummary from '../components/common/BlogPostSummary'
+import Bio from '../components/common/Bio'
 
-// Gatsby auto passes in location object,
-// but only for pages in "pages" and "templates", not "components"
+import * as styles from './index.module.css'
 
-export const Head = () => (
-  <Seo  title="Home" />
-)
+export const Head = () => <Seo title="Home" />
 
-const HomePage = ({ data, pageContext, location }) => {
+//const HomePage = ({ data, pageContext, location }) => {
+const Home = ({ data, pageContext, location }) => {
   const numPostsToShow = pageContext.limit
   const posts = data.allMarkdownRemark.nodes
   const totalCount = data.allMarkdownRemark.totalCount
 
-  const P = styled.p`
-    color: var(--color-text-primary);
-    font-size: 1.5rem;
-    transition: color 400ms ease-in-out, background-color 400ms ease-in-out;
-  `
-
-  /* this uses the "props to className" override functionality of Emotion */
-  const StyledLink = styled(props => <Link {...props} />)`
-    color: var(--color-primary-main);
-
-  `
-
   return (
-    <Layout location={location}>
-      <P>Welcome to my personal site!</P>
-      <P>It is 3 things:</P>
+    <Layout>
+      <div className={styles.titleDiv}>
+        <p>Welcome to my personal site!</p>
+        <p>It is 3 things:</p>
         <ul>
-        <li>A blog.</li>
-        <li>A portfolio.</li>
-        <li>A training set for my AI twin.</li>
+          <li>A blog.</li>
+          <li>A portfolio.</li>
+          <li>A training set for my AI twin.</li>
         </ul>
-
-      {numPostsToShow} Most Recent Posts ({" "}
-      <StyledLink to="/bloglist/">See all {totalCount}</StyledLink> )
+      </div>
+      {numPostsToShow} Most Recent Posts ({' '}
+      <Link to="/bloglist/" className={`${styles.linkToBlogList}`}>
+        See all {totalCount}
+      </Link>
+      )
       <hr />
       {/* Duplicate components need unique key to keep react from complaining */}
       {posts.map(post => {
@@ -52,16 +41,16 @@ const HomePage = ({ data, pageContext, location }) => {
   )
 }
 
-export default HomePage
+export default Home
 
 export const pageQuery = graphql`
   query HomePageQuery($allowedBlogStatuses: [String], $limit: Int) {
     allMarkdownRemark(
       filter: {
-        fileAbsolutePath: { regex: "/content/blog/" },
+        fileAbsolutePath: { regex: "/content/blog/" }
         frontmatter: { status: { in: $allowedBlogStatuses } }
       }
-      sort: { frontmatter:{date:DESC}}
+      sort: { frontmatter: { date: DESC } }
       limit: $limit
     ) {
       totalCount

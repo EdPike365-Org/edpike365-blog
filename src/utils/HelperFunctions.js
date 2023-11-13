@@ -1,4 +1,4 @@
-
+/*
 export function OLDarrayEquals(a, b) {
     return (
       Array.isArray(a) &&
@@ -7,7 +7,7 @@ export function OLDarrayEquals(a, b) {
       a.every((val, index) => val === b[index])
     )
   }
-
+*/
 export const isSSR = () => {
   return typeof window === "undefined"
 }

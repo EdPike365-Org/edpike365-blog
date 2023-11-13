@@ -1,0 +1,25 @@
+a.anchor {
+  fill: var(--color-text-primary);
+}
+
+/* the anchor is a little low on the h3, fine on h4 */
+h3 a.anchor.before {
+  top: -3px;
+}
+
+.blogHeader {
+  & > h1 {
+    margin-top: 0rem;
+    margin-bottom: 0.5rem;
+    font-weight: var(--font-weight-light);
+    text-align: center;
+  }
+}
+
+.blogPostListUL {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  list-style: none;
+  padding: 0;
+}

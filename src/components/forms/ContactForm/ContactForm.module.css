@@ -1,0 +1,120 @@
+.inputRowDiv {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+}
+
+.formDiv {
+  box-sizing: border-box;
+  margin: 0 0;
+  padding: 0;
+
+  max-width: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  background-color: var(--color-background-paper);
+  border-radius: 5px;
+}
+
+.formSubSectionDiv {
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+  min-width: 98%;
+  max-width: 99%;
+
+  & > button[type='submit'] {
+    padding: 1rem;
+    margin: 0.5rem;
+    border: none;
+
+    border-radius: 5px;
+    font: inherit;
+    font-weight: bold;
+
+    background-color: var(--color-primary-main);
+
+    &:hover {
+      transform: translateX(-1px) translateY(-1px);
+    }
+  }
+
+  & > button[type='reset'] {
+    padding: 1rem;
+    margin: 0.5rem;
+    border: none;
+
+    background-color: var(--color-primary-main);
+    border-radius: 5px;
+    font: inherit;
+    font-weight: bold;
+
+    &:hover {
+      transform: translateX(-1px) translateY(-1px);
+    }
+  }
+}
+
+.formColumnDiv {
+  display: flex;
+  flex-direction: column;
+  padding: 0.75rem;
+  width: 100%;
+  min-width: 33%;
+  max-width: 100rem;
+
+  border: 1px solid var(--color-primary-main);
+}
+
+.inputGroupDiv {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 0.5rem;
+  max-width: 100%;
+  align-items: center;
+
+  & > label {
+    vertical-align: middle;
+    margin-right: 1rem;
+    padding: 0 0;
+    font-weight: bold;
+    min-width: 7rem;
+    max-width: 20rem;
+  }
+
+  & > input {
+    padding: 0.5rem;
+    border-radius: 5px;
+    border: 1px solid var(--color-text-secondary);
+    min-width: 10rem;
+    max-width: 100rem;
+    max-height: 2rem;
+  }
+
+  & > textarea {
+    padding: 0.5rem;
+    border-radius: 5px;
+    border: 1px solid var(--color-text-secondary);
+    width: 100%;
+    min-width: 10rem;
+    max-width: 100rem;
+    resize: none;
+  }
+}
+
+.hiddenP {
+  display: none;
+}
+
+.txtCSS {
+  width: 30rem;
+}
+
+.txtLongCSS {
+  width: 100rem;
+}

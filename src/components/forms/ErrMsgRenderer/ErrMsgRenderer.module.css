@@ -1,0 +1,5 @@
+.errMsgDiv {
+  color: var(--color-error-dark);
+  transition: color 400ms ease-in-out, background-color 400ms ease-in-out;
+  font-style: bold;
+}
