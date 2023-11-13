@@ -1,72 +1,37 @@
-import React from "react"
-import { navigate } from "gatsby"
-import * as styles from "../Buttons.module.css"
-import UserCircleIcon from "../../../../../../icons/UserCircleIcon"
-//import { useAuth0 } from '@auth0/auth0-react';
+import React from 'react'
+import { navigate } from 'gatsby'
+import * as styles from '../Buttons.module.css'
+import UserCircleIcon from '../../../../../../icons/UserCircleIcon'
+import { useAuth0 } from '@auth0/auth0-react'
 
 const handleClick = () => {
-  navigate("/account")
+  navigate('/account')
 }
 
 //Note: if button has no dimensions, or no text, icons wont render
 const UserButton = () => {
-  
-  function UserImage() {
+  const { user } = useAuth0()
+  const { picture } = user
 
-      return(
-        <UserCircleIcon />
-      ) 
+  function UserImage() {
+    if (picture) {
+      return <img src={picture} alt="Profile" />
+    } else {
+      return <UserCircleIcon />
+    }
   }
 
   return (
     <button
       id="userButton"
       className={`${styles.commonButtonCSS} ${styles.userButtonCSS} user-button`}
-      aria-label={"User Account Settings"}
+      aria-label={'User Account Settings'}
       title="User Account Settings"
       onClick={handleClick}
     >
       <UserImage />
     </button>
   )
-
 }
-
-/*
-const UserButton = () => {
-
-  const { user } = useAuth0();
-  const { picture } = user;
-
-  function UserImage() {
-
-    if (picture) {
-      return(
-        <img
-        src={picture}
-        alt="Profile"
-       />
-      ) 
-    }else{
-      return(
-        <UserCircleIcon />
-      )
-    }
-
-  }
-
-  return (
-    <button
-      id="userButton"
-      className={[classes.commonButtonCSS, classes.userButtonCSS]}
-      aria-label={"User Account Button"}
-      onClick={handleClick}
-    >
-      <UserImage />
-    </button>
-  )
-}
-*/
-
 
 export default UserButton

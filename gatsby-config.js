@@ -161,7 +161,7 @@ module.exports = {
             resolve: `gatsby-remark-embed-snippet`,
             options: {
               // Example code links are relative to this dir.
-              directory: `${__dirname}/src/code-examples/`,
+              directory: `${__dirname}/content/blog/gatsby/code-examples/`,
             },
           },
           `gatsby-remark-code-titles`,

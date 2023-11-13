@@ -1,15 +1,14 @@
-import React from "react"
-import Layout from "../components/layout/Layout"
+import React from 'react'
+import Layout from '../components/layout/Layout'
 
 const LoggedOut = () => {
-
-    return (
+  return (
     <Layout>
-      <br/>
+      <br />
       <div>
         <h2>Logged Out!</h2>
-        <p>Auth0 sent you here because you logged out. I configured Auth0 to send you here.</p>
-        <br/>
+        <p>I configured Auth0 to send you here when you log out.</p>
+        <br />
       </div>
     </Layout>
   )

@@ -1,22 +1,17 @@
-import React from "react";
-import * as styles from "../Buttons.modules.css"
-//import { useAuth0 } from "@auth0/auth0-react";
-import { FormButton } from "/src/components/forms/FormComponents"
+import React from 'react'
+import * as styles from '../Buttons.module.css'
+import { useAuth0 } from '@auth0/auth0-react'
 
 function LogoutButton() {
-/*
-  const {
-    logout, isAuthenticated
-  } = useAuth0();
-*/ 
-  const handleLogout = () => {
+  const { logout, isAuthenticated } = useAuth0()
 
-    var returnToURL = "renderedInSSG";
+  const handleLogout = () => {
+    var returnToURL = 'renderedInSSG'
     if (typeof window !== 'undefined') {
-        returnToURL = `${window.location.origin}/loggedout`;
+      returnToURL = `${window.location.origin}/loggedout`
     }
-    console.log("Auth0Context handleLogout() returnToURL = " + returnToURL)
-  
+    console.log('Auth0Context handleLogout() returnToURL = ' + returnToURL)
+
     /*
     https://auth0.com/docs/authenticate/login/logout/redirect-users-after-logout
     LogoutOptions: 
@@ -44,34 +39,34 @@ function LogoutButton() {
     */
 
     // From: https://auth0.com/docs/authenticate/login/logout/redirect-users-after-logout
-    // "If the client_id parameter is included and the returnTo URL is not set, 
+    // "If the client_id parameter is included and the returnTo URL is not set,
     // the server returns the user to the first Allowed Logout URLs
     // set in the Dashboard."
 
     //build a LogoutOptions object and pass it in
     const myLogoutOptions = {
-        clientID: process.env.GATSBY_AUTH0_CLIENTID,
-        logoutParams: { 
-          returnTo: returnToURL
-        }
-    };
- 
-    //was logout({ returnTo: window.location.origin });  
-    //logout(myLogoutOptions);
-  
+      clientID: process.env.GATSBY_AUTH0_CLIENTID,
+      logoutParams: {
+        returnTo: returnToURL,
+      },
+    }
+
+    //was logout({ returnTo: window.location.origin });
+    logout(myLogoutOptions)
   }
 
-  //return isAuthenticated && (
   return (
-    <>
-      <FormButton
+    isAuthenticated && (
+      <button
+        className={`${styles.formButton} logout-button`}
         id="logoutButton"
-        className={`logout-button`}
-        aria-label={"Log Out"}
-        onClick={ handleLogout }
-      >Log Out</FormButton>
-    </>
-  );
-};
+        aria-label={'Log Out'}
+        onClick={handleLogout}
+      >
+        Log Out
+      </button>
+    )
+  )
+}
 
-export default LogoutButton;
+export default LogoutButton
