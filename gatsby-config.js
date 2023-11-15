@@ -80,7 +80,8 @@ module.exports = {
               key: 'burger',
               displayName: 'Burger King',
               componentType: 'LINK',
-              remoteHREF: 'https://www.edpike365.com/test/burger.css',
+              remoteHREF:
+                'https://www.edpike365.com/gatsby-head-style-boss-test/burger.css',
               cacheRemoteCSS: false,
             },
             {

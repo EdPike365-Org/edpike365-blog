@@ -1,4 +1,20 @@
-# Gatsby
+# Code Quality
+
+https://blog.theodo.com/2019/08/empower-your-dev-environment-with-eslint-prettier-and-editorconfig-with-no-conflicts/
+
+https://dev.to/npranto/how-i-setup-eslint-prettier-and-editorconfig-for-static-sites-33ep
+
+https://leandroaps.medium.com/setting-up-eslint-prettier-and-husky-in-a-react-18-project-a-comprehensive-guide-the-update-40f4ff0b42ca
+
+https://leandroaps.medium.com/setting-up-eslint-prettier-and-husky-in-a-react-18-project-a-comprehensive-guide-the-update-40f4ff0b42ca
+
+I ended up disabling any custom eslint, deleting my custom eslint.rc and letting Gatsby do the linting. I set up prettier to run on file save using the prettier vscode plugin.
+
+The prettier extension for vscode seemed to not work with prettier v3+, so I pinned Prettier to v2.8.8.
+
+I will explore husky later.
+
+# Gatsby ESLint
 
 Gatsby advanced starter has a custom ESLint (and testing with jest and cypress).
 
@@ -22,7 +38,7 @@ https://www.gatsbyjs.com/plugins/gatsby-plugin-eslint/
 
 ## My first shot
 
-Would use Prettier for formatting.
+ESLint only lints, no formatting. Have ESLint use Prettier for formatting.
 
 ```JS
 //.eslintrc.js

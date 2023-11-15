@@ -1,12 +1,22 @@
-# Code Quality
+# Errata
 
-https://blog.theodo.com/2019/08/empower-your-dev-environment-with-eslint-prettier-and-editorconfig-with-no-conflicts/
+A scratch sheet.
 
-https://dev.to/npranto/how-i-setup-eslint-prettier-and-editorconfig-for-static-sites-33ep
+## Mermaid
 
-https://leandroaps.medium.com/setting-up-eslint-prettier-and-husky-in-a-react-18-project-a-comprehensive-guide-the-update-40f4ff0b42ca
+A little Mermaid example. Flowcharts and other diagrams in MD.
 
-https://leandroaps.medium.com/setting-up-eslint-prettier-and-husky-in-a-react-18-project-a-comprehensive-guide-the-update-40f4ff0b42ca
+```mermaid
+  graph TD;
+      A-->B;
+      A-->C;
+      B-->D;
+      C-->D;
+```
+
+## Note on Webpack Experimental
+
+At some point Gatsby 5 started using a webpack experimental settings which cause an error message like below:
 
 ```text
 npm WARN While resolving: react-server-dom-webpack@0.0.0-experimental-c8b778b7f-20220825
@@ -20,10 +30,12 @@ npm WARN     3 more (gatsby-link, gatsby-react-router-scroll, gatsby-script)
 npm WARN   9 more (@react-icons/all-files, gatsby, gatsby-link, ...)
 ```
 
+To get rid of it you can override it?
+
 ```JS
   "overrides": {
     "react-server-dom-webpack@0.0.0-experimental-c8b778b7f-20220825": {
       "react": "^18.2.0"
     }
   },
-```  
+```

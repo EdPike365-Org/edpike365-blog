@@ -28,7 +28,7 @@
     "@netlify/functions": "^2.4.0",
     "@react-icons/all-files": "^4.1.0",
     "formik": "^2.4.5",
-    "gatsby": "^5.12.4",
+    "gatsby": "^5.12.9",
     "gatsby-adapter-netlify": "^1.0.3",
     "gatsby-head-style-boss": "^5.1.0",
     "gatsby-plugin-catch-links": "^5.12.0",
