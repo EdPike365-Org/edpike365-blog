@@ -1,5 +1,5 @@
-import React from "react"
-import * as styles from "./Nav.module.css"
+import React from 'react'
+import * as styles from './Nav.module.css'
 
 /* 
 Nav is the outermost container.
@@ -12,11 +12,16 @@ TODO: It should **slide** open and closed but currently does not.
 */
 
 const Nav = props => {
-  return <nav
-    className={`${styles.navCSS} ${props.showNav ? styles.showNavCSS : styles.hideNavCSS} `}
-  >
-    {props.children}
-  </nav>
+  return (
+    <nav
+      aria-label="Main"
+      className={`${styles.navCSS} ${
+        props.showNav ? styles.showNavCSS : styles.hideNavCSS
+      } `}
+    >
+      {props.children}
+    </nav>
+  )
 }
 
 export default Nav

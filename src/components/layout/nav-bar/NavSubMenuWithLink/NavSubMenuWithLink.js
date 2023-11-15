@@ -1,12 +1,12 @@
-import React, { useState, useLayoutEffect, useEffect, useContext } from 'react'
+import React, { useState, useLayoutEffect, useContext } from 'react'
 import { Link } from 'gatsby'
 import { NavContext } from '../../../../contexts/NavContext'
-import * as styles from './NavSubMenu.module.css'
+import * as styles from './NavSubMenuWithLink.module.css'
 import * as linksDivStyles from './linksDiv.module.css'
 
 //TODO: add option for exclusive open. Will require a "radio group" mechanism.
 //TODO: any child links should call scrollIntoView on its parent (this)
-const NavSubMenu = ({
+const NavSubMenuWithLink = ({
   title,
   navTarget,
   uuid,
@@ -54,28 +54,34 @@ const NavSubMenu = ({
     sessionStorage.setItem(uuid, !isOpen)
   }
 
-  //      <div className={styles.subMenuActionsDiv}>
   return (
-    <ul role="menu" className={styles.navSubMenuUL}>
+    <ul className={styles.navSubMenuUL}>
       <div className={styles.subMenuActionsDiv}>
+        <Link
+          onClick={toggleShowNav}
+          className={styles.navLink}
+          activeClassName={styles.activeLinkStyle}
+          partiallyActive={true}
+          to={navTarget}
+        >
+          {title}
+        </Link>
         <button
           className={styles.expandButton}
           onClick={toggleOpen}
-          aria-haspopup="true"
-          aria-controls={uuid}
+          role="treeitem"
           aria-expanded={isOpen}
         >
-          {title} {isOpen ? '  -' : '  +'}
+          {isOpen ? '  -' : '  +'}
         </button>
       </div>
       <div
-        id={uuid}
-        role="group"
         className={`
             ${linksDivStyles.divCSS}  
             ${showAnim && linksDivStyles.divCSSTransition}
             ${isOpen ? linksDivStyles.showOpen : linksDivStyles.showClosed}
-        `}
+            `}
+        role="group"
       >
         {children}
       </div>
@@ -84,4 +90,4 @@ const NavSubMenu = ({
 }
 
 //${isOpen? linksDivStyles.showOpen : linksDivStyles.showClosed }
-export default NavSubMenu
+export default NavSubMenuWithLink

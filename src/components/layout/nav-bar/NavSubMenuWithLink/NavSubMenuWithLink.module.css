@@ -30,13 +30,12 @@
 }
 
 .activeLinkStyle {
-  color: 'var(--color-background-paper)';
-  background: 'var(--color-primary-main)';
-  transition: 'color 400ms ease-in-out, background-color 400ms ease-in-out';
+  color: "var(--color-background-paper)";
+  background: "var(--color-primary-main)";
+  transition: "color 400ms ease-in-out, background-color 400ms ease-in-out";
 }
 
 .expandButton {
-  padding: 0px;
   border: none;
   white-space: pre;
   color: var(--color-primary-main);
@@ -44,6 +43,7 @@
   background-color: var(--color-background-paper);
   cursor: pointer;
 }
+
 
 /*
 TODO
@@ -74,6 +74,7 @@ const modifySessionScrollTop = thisRef => {
   window.sessionStorage.setItem(SESSION_STORAGE_SCROLLTOP_KEY, newScrollTop)
 }
 */
+
 
 /*
  TODO implement animation

@@ -36,6 +36,7 @@ const BlogPostTemplate = ({ data, location }) => {
         className="blog-post"
         itemScope
         itemType="http://schema.org/Article"
+        id="top"
       >
         <header className={`${styles.sitePageHeader}`}>
           <h1 itemProp="headline">{title}</h1>
