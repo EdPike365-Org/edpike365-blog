@@ -2,6 +2,15 @@
 
 A scratch sheet.
 
+        icons: [
+          {
+            src: `/favicon.svg`,
+            sizes: `196x196`,
+            type: `image/png`,
+            purpose: `maskable`,
+          },
+        ],
+
 ## Mermaid
 
 A little Mermaid example. Flowcharts and other diagrams in MD.
