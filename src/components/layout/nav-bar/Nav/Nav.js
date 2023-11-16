@@ -14,7 +14,7 @@ TODO: It should **slide** open and closed but currently does not.
 const Nav = props => {
   return (
     <nav
-      aria-label="Main"
+      aria-label="EdPike365 Nav"
       className={`${styles.navCSS} ${
         props.showNav ? styles.showNavCSS : styles.hideNavCSS
       } `}

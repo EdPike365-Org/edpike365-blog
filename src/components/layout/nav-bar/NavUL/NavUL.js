@@ -48,6 +48,7 @@ const NavUL = props => {
 
   return (
     <ul
+      role="menubar"
       id="NavBarNavUL"
       ref={thisRef}
       onScroll={scrollHandler}

@@ -1,8 +1,7 @@
-import React, { useState, useLayoutEffect, useEffect, useContext } from 'react'
-import { Link } from 'gatsby'
+import React, { useState, useLayoutEffect, useContext } from 'react'
 import { NavContext } from '../../../../contexts/NavContext'
 import * as styles from './NavSubMenu.module.css'
-import * as linksDivStyles from './linksDiv.module.css'
+//import * as linksULStyles from './linksUL.module.css'
 
 //TODO: add option for exclusive open. Will require a "radio group" mechanism.
 //TODO: any child links should call scrollIntoView on its parent (this)
@@ -54,34 +53,31 @@ const NavSubMenu = ({
     sessionStorage.setItem(uuid, !isOpen)
   }
 
-  //      <div className={styles.subMenuActionsDiv}>
   return (
-    <ul role="menu" className={styles.navSubMenuUL}>
-      <div className={styles.subMenuActionsDiv}>
-        <button
-          className={styles.expandButton}
-          onClick={toggleOpen}
-          aria-haspopup="true"
-          aria-controls={uuid}
-          aria-expanded={isOpen}
-        >
-          {title} {isOpen ? '  -' : '  +'}
-        </button>
-      </div>
-      <div
-        id={uuid}
-        role="group"
+    <>
+      <button
+        role="menuitem"
+        aria-haspopup="true"
+        aria-controls={uuid}
+        aria-expanded={isOpen}
+        className={styles.expandButton}
+        onClick={toggleOpen}
+      >
+        {title} {isOpen ? '  -' : '  +'}
+      </button>
+      <ul
+        role="menu"
+        aria-label={title}
         className={`
-            ${linksDivStyles.divCSS}  
-            ${showAnim && linksDivStyles.divCSSTransition}
-            ${isOpen ? linksDivStyles.showOpen : linksDivStyles.showClosed}
-        `}
+            ${styles.ulCSS}  
+            ${showAnim && styles.ulTransition}
+            ${isOpen ? styles.showOpen : styles.showClosed}
+          `}
       >
         {children}
-      </div>
-    </ul>
+      </ul>
+    </>
   )
 }
 
-//${isOpen? linksDivStyles.showOpen : linksDivStyles.showClosed }
 export default NavSubMenu

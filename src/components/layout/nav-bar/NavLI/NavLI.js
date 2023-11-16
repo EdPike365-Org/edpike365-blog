@@ -5,7 +5,7 @@ import * as styles from './NavLI.module.css'
 //  passed in   activeStyle={styles.activeLinkStyle}
 const NavLI = props => {
   return (
-    <li role="treeitem" className={`${styles.navLICSS}`}>
+    <li role="none" className={`${styles.navLI}`}>
       {props.children}
     </li>
   )

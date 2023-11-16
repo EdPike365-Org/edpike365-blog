@@ -33,4 +33,4 @@ ssh
 
 login on browser
 
-gh ssh-key add ~/.ssh/id_ed25519.pub --title "gb-z390-gatsby5-dev-container"
+gh ssh-key add ~/.ssh/id_ed25519.pub --title "as-z390-gatsby5-dev-container"
