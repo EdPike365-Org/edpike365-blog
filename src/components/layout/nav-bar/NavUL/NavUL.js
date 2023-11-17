@@ -49,6 +49,7 @@ const NavUL = props => {
   return (
     <ul
       role="menubar"
+      aria-orientation="vertical"
       id="NavBarNavUL"
       ref={thisRef}
       onScroll={scrollHandler}

@@ -1,7 +1,6 @@
 /* https://blog.hubspot.com/website/css-hover-animation */
-@keyframes spinBothAxesKeyframes{
+@keyframes spinBothAxesKeyframes {
   0% {
-
   }
   100% {
     -ms-transform: rotateY(359deg); /* IE 9 */
@@ -10,10 +9,9 @@
   }
 }
 
-.infiniteSpinAnimation{
+.infiniteSpinAnimation {
+  animation: spinBothAxesKeyframes 2s ease-in-out 0s infinite normal none;
 
-  animation: spinBothAxesKeyframes 2s ease-in-out 0s infinite normal none; 
-  
   /* about is shorthand for:
   animation-name: infiniteSpinKeyframes;  
   animation-duration: 2s;
@@ -23,11 +21,9 @@
   animation-direction: normal;
   animation-fill-mode: none;
   */
-
 }
 
 .logoIconDivCSS {
-
   box-sizing: border-box;
 
   vertical-align: middle;
@@ -38,20 +34,21 @@
   }
 
   &:hover {
-
-    animation: spinBothAxesKeyframes 2s ease-in-out 0s infinite normal none; 
-
+    animation: spinBothAxesKeyframes 2s ease-in-out 0s infinite normal none;
   }
 
   /* ---- DEFAULT (tiny): Small Narrow Phones (280 x 653) ---- */
   /* No Logo Icon visible */
   display: none;
+  /* Aria could still see it so I had to add visibility: hidden */
+  visibility: hidden;
 
   /* ---- Normal Phones: Show Logo (320 x ) ---- */
   /* Display the LogoIcon */
   @media only screen and (min-width: 320px) {
     box-sizing: border-box;
     display: inline;
+    visibility: visible;
     align-items: center;
     padding: 0px 1px 0px 1px;
     margin: 0px;
@@ -72,7 +69,6 @@
   /* ---- LapTop (1366 x ) ---- */
   @media only screen and (min-width: 1366px) {
   }
-
 }
 
 .logoIconLinkCSS {
