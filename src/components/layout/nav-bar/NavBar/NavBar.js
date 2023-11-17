@@ -6,6 +6,8 @@ import NavLink from '../NavLink'
 import NavSubMenu from '../NavSubMenu'
 import { NavContext } from '../../../../contexts/NavContext'
 
+// https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/examples/disclosure-navigation/
+
 const NavBar = () => {
   // This NavBar uses read-only state from NavContext.
   // The state is set with the hamburger button in the NavHeader component.
