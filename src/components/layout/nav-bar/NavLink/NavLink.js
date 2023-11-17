@@ -1,7 +1,7 @@
-import React, { useContext } from "react"
-import { Link } from "gatsby"
-import { NavContext } from "../../../../contexts/NavContext"
-import * as styles from "./NavLink.module.css"
+import React, { useContext } from 'react'
+import { Link } from 'gatsby'
+import { NavContext } from '../../../../contexts/NavContext'
+import * as styles from './NavLink.module.css'
 
 // TODO The activeClassName is still not being activated when the NavLink is nested
 // under a NavSubMenu. The implementation is written in Gatsby Link.
@@ -16,6 +16,7 @@ const NavLink = props => {
   if (props.useNativeLink) {
     return (
       <a
+        role="menuitem"
         className={styles.navLinkStyle}
         href={props.to}
         onClick={toggleShowNav}
@@ -26,6 +27,7 @@ const NavLink = props => {
   } else {
     return (
       <Link
+        role="menuitem"
         className={styles.navLinkStyle}
         activeClassName={styles.activeLinkCss}
         partiallyActive={props.partiallyActive || true}

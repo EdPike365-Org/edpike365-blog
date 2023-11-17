@@ -1,41 +1,5 @@
-.navSubMenuUL {
-  list-style-type: none;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  padding: 0.5rem 1rem;
-}
-
-.subMenuActionsDiv {
-  display: flex;
-  flex-direction: row;
-  border: none;
-  background-color: var(--color-background-paper);
-  transition: color 400ms ease-in-out, background-color 400ms ease-in-out;
-  width: 100%;
-  padding: 0px;
-  margin: 0px;
-}
-
-.navLink {
-  letter-spacing: var(--font-letter-spacing-overline);
-  cursor: pointer;
-  color: var(--color-primary-main);
-  transition: color 400ms ease-in-out, background-color 400ms ease-in-out;
-  text-decoration: none;
-
-  &:hover {
-    text-decoration: underline;
-  }
-}
-
-.activeLinkStyle {
-  color: "var(--color-background-paper)";
-  background: "var(--color-primary-main)";
-  transition: "color 400ms ease-in-out, background-color 400ms ease-in-out";
-}
-
 .expandButton {
+  padding: 0px;
   border: none;
   white-space: pre;
   color: var(--color-primary-main);
@@ -44,9 +8,39 @@
   cursor: pointer;
 }
 
+.ulCSS {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  list-style-type: none;
+  padding: 0 0 0 0;
+}
+
+.ulTransition {
+  /* you have to use a bezier to get rid of the long delay before the closing animation starts */
+  /* property name | duration | easing function | delay */
+  transition: max-height 1s cubic-bezier(0, 1, 0, 1),
+    transform 0.25s ease-out 0s, opacity 0.25s ease-out 0s;
+}
+
+.showOpen {
+  /* guessing this max-height but we need it to run animation */
+  max-height: 640px;
+  transform-origin: top;
+  transform: scaleY(1);
+  opacity: 1;
+}
+
+.showClosed {
+  max-height: 0px;
+  transform-origin: top;
+  transform: scaleY(0);
+  opacity: 0.1;
+}
 
 /*
-TODO
+UPDATE: not sure this is still a thing
+TODO VERFITY still a problem
 const modifySessionScrollTop = thisRef => {
   // this is for the edge case when you close a submenu
   // then click on a link further down the page: the scrollTop is too high.
@@ -74,17 +68,3 @@ const modifySessionScrollTop = thisRef => {
   window.sessionStorage.setItem(SESSION_STORAGE_SCROLLTOP_KEY, newScrollTop)
 }
 */
-
-
-/*
- TODO implement animation
-  ${isOpen
-    ? "display: flex;"
-    : "display: none; "}
-  transition: all 1.0s ease;
-  postion: relative;
-  transform-origin: top;
-  -ms-transform: scale(1,.5);
-  -webkit-transform: scale(1,.5); 
-  transform: scale(1,.5);
-  */

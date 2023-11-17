@@ -1,0 +1,34 @@
+.divCSS {
+    display: flex;
+    flex-direction: column;
+}
+
+.divCSSTransition {
+    /* you have to use a bezier to get rid of the long delay before the closing animation starts */
+    /* property name | duration | easing function | delay */
+    transition: 
+        max-height 1s cubic-bezier(0, 1, 0, 1),
+        transform .25s ease-out 0s
+    ;
+}
+
+.showOpen {
+    /* guessing this max-height but we need it to run animation */
+    max-height: 640px;
+    transform-origin: top;
+    transform: scaleY(1);
+}
+
+.showClosed {
+    max-height: 0px;
+    transform-origin: top;
+    transform: scaleY(0);
+}
+
+/* i dont think we need this */
+.showOpenTransition{
+
+    transition: 
+    max-height 1s ease-out,
+    transform .25s ease-out .1s;
+}

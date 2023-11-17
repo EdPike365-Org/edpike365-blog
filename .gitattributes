@@ -1,2 +1,5 @@
 # Set the default behavior, in case people don't have core.autocrlf set.
-* text=auto
+# We role linux, so always convert line endings to LF on checkout, except for bat files, which will run on windows machines.
+* text=auto eol=lf
+*.{cmd,[cC][mM][dD]} text eol=crlf
+*.{bat,[bB][aA][tT]} text eol=crlf

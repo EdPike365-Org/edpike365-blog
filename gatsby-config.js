@@ -80,7 +80,8 @@ module.exports = {
               key: 'burger',
               displayName: 'Burger King',
               componentType: 'LINK',
-              remoteHREF: 'https://www.edpike365.com/test/burger.css',
+              remoteHREF:
+                'https://www.edpike365.com/gatsby-head-style-boss-test/burger.css',
               cacheRemoteCSS: false,
             },
             {
@@ -278,12 +279,55 @@ module.exports = {
         // Enables "Add to Homescreen" prompt and disables browser UI (including back button)
         // see https://developers.google.com/web/fundamentals/web-app-manifest/#display
         display: `standalone`,
-        icon: `src/images/logo.svg`, // This path is relative to the src root of the site.
+        icon: `src/images/logo-icon.svg`, // This path is relative to the src root of the site.
+        icons: [
+          {
+            src: 'icons/icon-48x48.png',
+            sizes: '48x48',
+            type: 'image/png',
+          },
+          {
+            src: 'icons/icon-72x72.png',
+            sizes: '72x72',
+            type: 'image/png',
+          },
+          {
+            src: 'icons/icon-96x96.png',
+            sizes: '96x96',
+            type: 'image/png',
+          },
+          {
+            src: 'icons/icon-144x144.png',
+            sizes: '144x144',
+            type: 'image/png',
+          },
+          {
+            src: 'icons/icon-192x192.png',
+            sizes: '192x192',
+            type: 'image/png',
+            purpose: 'maskable',
+          },
+          {
+            src: 'icons/icon-256x256.png',
+            sizes: '256x256',
+            type: 'image/png',
+          },
+          {
+            src: 'icons/icon-384x384.png',
+            sizes: '384x384',
+            type: 'image/png',
+          },
+          {
+            src: 'icons/icon-512x512.png',
+            sizes: '512x512',
+            type: 'image/png',
+          },
+        ],
         // An optional attribute which provides support for CORS check.
         // If you do not provide a crossOrigin option, it will skip CORS for manifest.
         // Any invalid keyword or empty string defaults to `anonymous`
         crossOrigin: `use-credentials`,
-        theme_color_in_head: false, // This will avoid adding theme-color meta tag.
+        theme_color_in_head: true, // This will avoid adding theme-color meta tag.
       },
     },
     {
