@@ -201,6 +201,14 @@ const NavBar = () => {
               </NavLink>
             </NavLI>
             <NavLI>
+              <NavLink
+                to={'/edpike365-sysops#sre-site-reliability-engineering'}
+                itemProp="url"
+              >
+                FinOPs
+              </NavLink>
+            </NavLI>
+            <NavLI>
               <NavLink to={'/edpike365-sysops#iac-eac'} itemProp="url">
                 IaC, EaC
               </NavLink>
@@ -238,10 +246,7 @@ const NavBar = () => {
           </NavSubMenu>
         </NavLI>
         <NavLI>
-          <NavSubMenu
-            title={'AI, MLOps, LLMOps, FinOps, RLHF, DataOps'}
-            uuid={'NavSubMenu-AI-MLOPS'}
-          >
+          <NavSubMenu title={'AI and *Ops'} uuid={'NavSubMenu-AI-MLOPS'}>
             <NavLI>
               <NavLink to={'/edpike365-ai#top'} itemProp="url">
                 AI, ML
@@ -250,6 +255,11 @@ const NavBar = () => {
             <NavLI>
               <NavLink to={'/edpike365-mlops/'} itemProp="url">
                 MLOps
+              </NavLink>
+            </NavLI>
+            <NavLI>
+              <NavLink to={'/edpike365-mlops/'} itemProp="url">
+                LLMOps, RLHF
               </NavLink>
             </NavLI>
             <NavLI>

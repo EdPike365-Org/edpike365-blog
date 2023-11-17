@@ -4,8 +4,11 @@ import Seo from '../components/common/Seo'
 import Layout from '../components/layout/Layout'
 import BlogPostSummary from '../components/common/BlogPostSummary'
 import Bio from '../components/common/Bio'
+import { getLogger } from '../loggers/pino/log-utils'
 
 import * as styles from './index.module.css'
+
+const logger = getLogger('home')
 
 export const Head = () => <Seo title="Home" />
 
@@ -14,6 +17,14 @@ const Home = ({ data, pageContext, location }) => {
   const numPostsToShow = pageContext.limit
   const posts = data.allMarkdownRemark.nodes
   const totalCount = data.allMarkdownRemark.totalCount
+
+  /*
+  logger.log('home page LOGGER log')
+  logger.error('home page LOGGER error')
+  logger.warn('home page LOGGER warn')
+  logger.info('home page LOGGER info')
+  logger.debug('home page LOGGER debug')
+  */
 
   return (
     <Layout>
