@@ -33,9 +33,11 @@ const NavSubMenu = ({ title, uuid, children, defaultOpen = false }) => {
     <>
       <button
         role="menuitem"
+        aria-label={title}
+        aria-controls={uuid + '-menu'}
         aria-haspopup="true"
-        aria-controls={uuid}
         aria-expanded={isOpen}
+        id={uuid}
         className={styles.expandButton}
         onClick={toggleOpen}
       >
@@ -43,7 +45,8 @@ const NavSubMenu = ({ title, uuid, children, defaultOpen = false }) => {
       </button>
       <ul
         role="menu"
-        aria-label={title}
+        aria-labelledby={uuid}
+        id={uuid + '-menu'}
         className={`
             ${styles.ulCSS}  
             ${showAnim && styles.ulTransition}

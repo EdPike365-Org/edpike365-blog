@@ -48,8 +48,8 @@ const NavUL = props => {
 
   return (
     <ul
-      role="menubar"
-      aria-orientation="vertical"
+      role="menu"
+      aria-label="EdPike365 Nav"
       id="NavBarNavUL"
       ref={thisRef}
       onScroll={scrollHandler}
