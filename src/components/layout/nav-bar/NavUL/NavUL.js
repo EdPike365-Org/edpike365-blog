@@ -48,7 +48,8 @@ const NavUL = props => {
 
   return (
     <ul
-      role="menubar"
+      role="menu"
+      aria-label="EdPike365 Nav"
       id="NavBarNavUL"
       ref={thisRef}
       onScroll={scrollHandler}

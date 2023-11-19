@@ -1,6 +1,8 @@
-exports.handler = async function () {
-    return {
-        statusCode: 200,
-        body: 'Hello world!',
-    };
-};
+import { Context } from '@netlify/functions'
+
+export default async function handler() {
+  return {
+    statusCode: 200,
+    body: 'Hello world!',
+  }
+}

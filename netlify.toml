@@ -1,2 +1,11 @@
 [[plugins]]
   package = "@netlify/plugin-emails"
+
+[[plugins]]
+package = "@netlify/plugin-csp-nonce"
+[plugins.inputs]
+  reportOnly = true
+  excludedPath = [
+    "/api/*",
+    "**/*.bespoke.extension"
+  ]
