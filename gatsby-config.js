@@ -34,6 +34,7 @@ module.exports = {
     },
   },
   plugins: [
+    `gatsby-plugin-csp`,
     `gatsby-plugin-image`,
     {
       resolve: `gatsby-head-style-boss`,
