@@ -33,6 +33,13 @@ functions = "functions/"
     Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
     Permissions-Policy = "camera=(), microphone=(), geolocation=()"
 
+    [[headers]]
+  for = "/*"
+  [headers.values]
+    Content-Security-Policy-Report-Only = "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline' *.edpike365.com; img-src 'self'; font-src 'self' data:;"
+
+
+
 [[headers]]
   for = "/fonts/*"
     [headers.values]
@@ -43,3 +50,6 @@ functions = "functions/"
     [headers.values]
       cache-control = 'public, max-age=31536000, immutable'
 ```
+
+
+data:font/woff2
