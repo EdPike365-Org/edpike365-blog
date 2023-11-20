@@ -2,10 +2,8 @@
   package = "@netlify/plugin-emails"
 
 [[plugins]]
-package = "@netlify/plugin-csp-nonce"
-[plugins.inputs]
-  reportOnly = true
-  excludedPath = [
-    "/api/*",
-    "**/*.bespoke.extension"
-  ]
+  package = "@netlify/plugin-lighthouse"
+
+  # optional, deploy the lighthouse report to a path under your site
+  [plugins.inputs.audits]
+    output_path = "reports/lighthouse.html"
