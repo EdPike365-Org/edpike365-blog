@@ -1,13 +1,13 @@
 ---
-title: "AI, ML, Deep Learning"
-date: "2023-05-23T22:12:03.284Z"
+title: 'AI, ML, Deep Learning'
+date: '2023-05-23T22:12:03.284Z'
 status: published
 author: EdPike365
 tags:
   - AI
   - MLOps
-  - ML 
-  - Pipeline 
+  - ML
+  - Pipeline
 ---
 
 ## Under Construction, Watch Your Step
@@ -23,19 +23,20 @@ Big surprise! MLOps is helped tremendously by knowing a fair bit about AI.
 
 ## AI
 
-AI is 
+AI is
 
 - ML
-    A subset of AI dedicated to taking data from the past and training algorithms to create models that can perform highly complex tasks without being explicitly programmed.
+  A subset of AI dedicated to taking data from the past and training algorithms to create models that can perform highly complex tasks without being explicitly programmed.
+
   - Supervised (labeled): learn from past example to make future predictions
     - Reinforcement Learning ???
       Each iteration, weights are changed to minimize **error**
     - Gradient Decent
   - Unsupervised: raw data and look for correlations (grouping)
-      ![Supervised vs Unsupervised Learning](./super-vs-unsuper.png)
+    ![Supervised vs Unsupervised Learning](./super-vs-unsuper.png)
 
   - Deep Learning
-      A subset of ML that uses artificial neural networks to process more complex patterns than traditional ML. Uses ANNs.
+    A subset of ML that uses artificial neural networks to process more complex patterns than traditional ML. Uses ANNs.
     - ANN (Artificial Neural Networks)(aka NN)
       - Multiple hidden layers (Input Layer - Hidden Layers - Output Layer)
       - Can process labeled and unlabeled data.
@@ -54,18 +55,18 @@ AI is
 ### ML/Deep Learning Model Types
 
 - Model types: Discriminative vs Generative
-    ![Discriminative and Generative Model Types](./discrim-vs-generative-model-types.png)
-- Discriminative (aka Predictive) used to ***classify*** (is this a dog or a cat or something else)
-- Generative (aka GenAI) used to ***generate*** (create a dog based on all the dog's you were trained on)
+  ![Discriminative and Generative Model Types](./discrim-vs-generative-model-types.png)
+- Discriminative (aka Predictive) used to **_classify_** (is this a dog or a cat or something else)
+- Generative (aka GenAI) used to **_generate_** (create a dog based on all the dog's you were trained on)
   - Part of flow is to check with Discriminative model to see if the generated object passes classification check.
   - Uses unstructured content to learn patterns in content.
   - NOTE: "model" can also be called a "function" with a multidimensional tensor/matrix with adjustable weights/values.
-  ![Math version](./yfx.png)
+    ![Math version](./yfx.png)
 - Classical Supervised and Unsupervised Learning
-![Classic](./classic.png)
+  ![Classic](./classic.png)
 - New Gen AI Supervised, Semi and Unsupervised Learning
   Generate a **Foundation Model** (aka a statistical model)
-![New](./new.png)
+  ![New](./new.png)
 - Gen Lang models can be asked questions (prompted)
   - PaLM ?
   - LaMDA ?
@@ -119,7 +120,7 @@ Model Types??
 Examples:
 
 - Sentiment Analysis: use Language > Extraction > Syntax Analysis > Classification > Sentiment Analysis
-- Occupancy Analytics:  use Vision > Classification > Object Detector > Detection > Occupancy Analytics
+- Occupancy Analytics: use Vision > Classification > Object Detector > Detection > Occupancy Analytics
 
 ![The Generative AI Application Landscape](./gen-ai-landscape.png)
 
@@ -137,7 +138,7 @@ On Google Cloud. See also SageMaker?
 #### PaLM API and MakerSuite
 
 - Simplifies Gen Dev Cycle
-![PaLM API and MakerSuite](./PaLM-makersuite.png)
+  ![PaLM API and MakerSuite](./PaLM-makersuite.png)
 
 ## Intro to LLMs
 
@@ -184,7 +185,7 @@ LLM Development vs. Traditional Devlopment
 #### Traditional QA
 
 - Subfield of NLP that deals with answering questions posed in nat lang
-- Retrieves answers from a ***given text***
+- Retrieves answers from a **_given text_**
   - Depending on model, answer can be directly extracted from text or generated from scratch
 - Requires Domain Knowlege to train
 
@@ -198,8 +199,8 @@ LLM Development vs. Traditional Devlopment
 
 Prompt Design:
 
-- Process of creating prompts that ***elicit the desired response*** from a language model.
-- Instructions and context passed to lang model ***for specific task***.
+- Process of creating prompts that **_elicit the desired response_** from a language model.
+- Instructions and context passed to lang model **_for specific task_**.
 
 Prompt Engineering:
 
@@ -210,15 +211,16 @@ Prompt Engineering:
 First 2 are easily confused but very diff.
 
 - Generic (or Raw): predict next word (aka token)
+
   - Token is a part of a word, the atomic unit that LLMs work in.
-![Generic Lang Model](./generic-tuned.png)
+    ![Generic Lang Model](./generic-tuned.png)
 
 - Instruction Tuned: predict a response to the instruction given in the input
-![Instruction Tuned](./instruction-tuned.png)
+  ![Instruction Tuned](./instruction-tuned.png)
 
 - Dialog Tuned: have a dialog by predicting the next response.
   - subset of Instruction Tuned
-![Dialog Tuned](./dialog-tuned.png)
+    ![Dialog Tuned](./dialog-tuned.png)
 
 ### Chain of Thought Reasoning
 
@@ -226,13 +228,13 @@ Models are better at getting the right answer when they first output text that e
 
 ### PETM (Parameter-Efficient Tuning Methods)
 
-Fine-tuning an LLM on your own custom data without duplicating the model. The base model itself is not altered. Instead, a small number of ***add-on layers*** are tuned, which can be sswapped in and out at inference time.
+Fine-tuning an LLM on your own custom data without duplicating the model. The base model itself is not altered. Instead, a small number of **_add-on layers_** are tuned, which can be sswapped in and out at inference time.
 
 Prompt Tuning: easiest PETM
 
 ### VertexAI
 
-Google Clouds ***Fully Manage*** ML platform. VS SageMaker, KubeFlow, Azure ML
+Google Clouds **_Fully Manage_** ML platform. VS SageMaker, KubeFlow, Azure ML
 
 - [Model Garden](https://cloud.google.com/model-garden)
 - [Generative AI Studio](https://cloud.google.com/generative-ai-studio)
@@ -242,9 +244,6 @@ Google Clouds ***Fully Manage*** ML platform. VS SageMaker, KubeFlow, Azure ML
 - [Vertex Data Labeling](https://cloud.google.com/vertex-ai/docs/datasets/data-labeling-job)
 
 ## Generative AI on Google Cloud
-
-
-
 
 ## AI Roles
 
@@ -303,6 +302,7 @@ See [Hugging Face](https://huggingface.co/)
 #### LLMs
 
 - ChatGPT (OpenAI)
+
   - [Plugins 2023/05/17 ](https://medium.com/pcmag-access/what-are-chatgpt-plugins-the-next-phase-of-conversational-ai-is-here-a4c288300aa1)
 
 - Google Bard
@@ -340,7 +340,7 @@ Thanks to [A comprehensive and hands-on guide to autonomous agents with GPT](htt
 - ReAct (Reasoning-Acting)
 - Reflexion
 
-![Tool Flow](./auto%20agent%20tools%20flow.webp)
+![Tool Flow](./auto-agent-tools-flow.webp)
 
 #### Vector DBs
 

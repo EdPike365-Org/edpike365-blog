@@ -1,13 +1,13 @@
 ---
-title: "AI and MLOps"
-date: "2023-05-23T22:12:03.284Z"
+title: 'AI and MLOps'
+date: '2023-05-23T22:12:03.284Z'
 status: published
 author: EdPike365
 tags:
   - AI
   - MLOps
-  - ML 
-  - Pipeline 
+  - ML
+  - Pipeline
 ---
 
 ### Under Construction, Watch Your Step
@@ -26,12 +26,14 @@ Big surprise! MLOps is helped tremendously by knowing a fair bit about AI.
 - CNN
 - CV
 - Transfer Learning
-AI
+  AI
+
   - ML
     A subset of AI dedicated to taking data from the past and training algorithms to create models that can perform highly complex tasks without being explicitly programmed.
+
     - Supervised (labeled): learn from past example to make future predictions
       - Reinforcement Learning ???
-      Each iteration, weights are changed to minimize **error**
+        Each iteration, weights are changed to minimize **error**
       - Gradient Decent
     - Unsupervised: raw data and look for correlations (grouping)
       ![Supervised vs Unsupervised Learning](./super-vs-unsuper.png)
@@ -54,17 +56,17 @@ AI
         - Subset of Deep Learning
     - ML/Deep Learning Model Types
       - Model types: Discriminative vs Generative
-      ![Discriminative and Generative Model Types](./discrim-vs-generative-model-types.png)
-      - Discriminative (aka Predictive) used to ***classify*** (is this a dog or a cat or something else)
-      - Generative (aka GenAI) used to ***generate*** (create a dog based on all the dog's you were trained on)
+        ![Discriminative and Generative Model Types](./discrim-vs-generative-model-types.png)
+      - Discriminative (aka Predictive) used to **_classify_** (is this a dog or a cat or something else)
+      - Generative (aka GenAI) used to **_generate_** (create a dog based on all the dog's you were trained on)
         - Part of flow is to check with Discriminative model to see if the generated object passes classification check.
         - Uses unstructured content to learn patterns in content.
         - NOTE: "model" can also be called a "function" with a multidimensional tensor/matrix with adjustable weights/values.
-        ![Math version](./yfx.png)
+          ![Math version](./yfx.png)
       - Classical Supervised and Unsupervised Learning
-      ![Classic](./classic.png)
+        ![Classic](./classic.png)
       - New Gen AI Supervised, Semi and Unsupervised Learning
-      ![New](./new.png)
+        ![New](./new.png)
       - Gen Lang models
         - PaLM
         - LaMDA
@@ -77,9 +79,7 @@ AI
     - ML Engineer
     - MLOps
 
-      
 - AGI
-
 
 - Training
   - Gradient Descent
@@ -118,7 +118,7 @@ See [Hugging Face](https://huggingface.co/)
   - Fast Mode (Fast GPU):
     - use for upscaling, etc, something you discovered in Relaxed Mode
     - /fast
-  
+
 ### Misc
 
 ### Libs and Langs
@@ -134,6 +134,7 @@ See [Hugging Face](https://huggingface.co/)
 #### LLMs
 
 - ChatGPT (OpenAI)
+
   - [Plugins 2023/05/17 ](https://medium.com/pcmag-access/what-are-chatgpt-plugins-the-next-phase-of-conversational-ai-is-here-a4c288300aa1)
 
 - Google Bard
@@ -173,7 +174,7 @@ Thanks to [A comprehensive and hands-on guide to autonomous agents with GPT](htt
 - ReAct (Reasoning-Acting)
 - Reflexion
 
-![Tool Flow](./auto%20agent%20tools%20flow.webp)
+![Tool Flow](./auto-agent-tools-flow.webp)
 
 #### Vector DBs
 
