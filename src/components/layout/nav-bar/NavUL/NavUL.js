@@ -48,7 +48,6 @@ const NavUL = props => {
 
   return (
     <ul
-      role="menu"
       aria-label="EdPike365 Nav"
       id="NavBarNavUL"
       ref={thisRef}

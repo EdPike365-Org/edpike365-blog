@@ -31,7 +31,9 @@ const BlogPostTemplate = ({ data, location }) => {
   const post = data.markdownRemark
   const siteTitle = data.site.siteMetadata?.title || `Title`
 
+  const kicker = post.frontmatter.kicker || 'blank'
   const title = post.frontmatter.title || post.fields.slug
+  const subTitle = post.frontmatter.subtitle || 'blank'
   const postDate = post.frontmatter.date
 
   const { previous, next } = data
@@ -44,7 +46,11 @@ const BlogPostTemplate = ({ data, location }) => {
         itemType="http://schema.org/Article"
       >
         <header className={`${styles.blogHeader}`}>
-          <h1 itemProp="headline">{title}</h1>
+          <span className="blogKicker">{kicker}</span>
+          <h1 itemProp="headline" className=".blogTitle">
+            {title}
+          </h1>
+          <span className="blogSubTitle">{subTitle}</span>
           <span className="overline">{postDate}</span>
         </header>
         <section
@@ -97,7 +103,9 @@ export const pageQuery = graphql`
       excerpt(pruneLength: 160)
       html
       frontmatter {
+        kicker
         title
+        subtitle
         date(formatString: "MMMM DD, YYYY")
         description
       }

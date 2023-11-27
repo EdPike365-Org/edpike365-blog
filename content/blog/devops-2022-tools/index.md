@@ -1,6 +1,8 @@
 ---
-title: "Best DevOps Tools 2022"
-date: "2022-02-01T22:12:03.284Z"
+kicker: 'DevOps'
+title: 'Best DevOps Tools 2022'
+subtitle: 'Tools, Frameworks, and Platforms'
+date: '2022-02-01T22:12:03.284Z'
 status: published
 author: EdPike365
 tags:
@@ -15,9 +17,7 @@ tags:
   <img src="hqdefault.jpg"  alt="DevOps Toolkit" />
 </figure>
 
-##### Tools, Frameworks, and Platforms in 2022
-
-An outline created from [The Best DevOps Tools, Frameworks, And Platforms In 2022](https://www.youtube.com/watch?v=7wIr6e6b7Ps), by Viktor Farcic at DevOps Toolkit. Subscribe and [support him](https://www.youtube.com/c/DevOpsToolkit/about)!
+I created an outline from the video [The Best DevOps Tools, Frameworks, And Platforms In 2022](https://www.youtube.com/watch?v=7wIr6e6b7Ps), by Viktor Farcic at DevOps Toolkit. Subscribe and [support him](https://www.youtube.com/c/DevOpsToolkit/about)!
 
 Category winners have links and more details.
 
@@ -31,7 +31,7 @@ to-heading: 4
 className: "table-of-contents"
 ```
 
-### Self Service (eg FAAS for local dev)
+## Self Service (eg FAAS for local dev)
 
 - convenience wrappers: ketch, shipa
 - [Knative](https://knative.dev/docs/): WINNER
@@ -40,7 +40,7 @@ className: "table-of-contents"
   - custom resource definitions
   - "Open Application Model", helping shift infrastructure left for developers.
 
-### Managed Containers
+## Managed Containers
 
 - fly.io: simple, limited
 - [GCR (Google Cloud Run)](https://cloud.google.com/run): WINNER
@@ -52,7 +52,7 @@ className: "table-of-contents"
 - AWS ECS: fargate/no fargate. Deprecate. Kubernetes competition
 - AWS Lambda: can now use containers
 
-### Infrastructure and Services
+## Infrastructure and Services
 
 - Chef and Puppet deprecated
 - Ansible: on prem infrastucture
@@ -66,7 +66,7 @@ className: "table-of-contents"
   - Works with various GitOps tools like: Argo CD, flux, Rancher Fleet
   - Supports all cloud K8s services
 
-### GitOps
+## GitOps
 
 - [Flux](https://fluxcd.io/): WINNER
   - they invented GitOps.
@@ -74,12 +74,12 @@ className: "table-of-contents"
   - open source.
 - Rancher Fleet: new, designed to run at scale.
 
-### Progressive Delivery
+## Progressive Delivery
 
 - Argo Rollouts: works well with ArgoCD
 - Flagger: works well with Flux
 
-### Security
+## Security
 
 - snyk: comprehensive.
 - Gatekeeper: powerful, difficult. OPA
@@ -91,9 +91,9 @@ className: "table-of-contents"
   - Scans multi-cloud
   - Combines in one "pane of glass".
 
-### Development
+## Development
 
-### CI/CD Pipelines
+## CI/CD Pipelines
 
 - Jenkins: Jenkins X?
 - Circle CI: outlived Travis
@@ -106,7 +106,7 @@ className: "table-of-contents"
   - so easy but not kube native
 - DevTron: opinionated tools. Good but new and rough.
 
-### Logging, Monitoring, Visualization And Troubleshooting
+## Logging, Monitoring, Visualization And Troubleshooting
 
 - Logging
 
@@ -130,7 +130,7 @@ className: "table-of-contents"
     - troubleshoot clusters you own. Gives much context.
     - tracks changes, "ripples" across stack.
 
-### Kubernetes Dashboards
+## Kubernetes Dashboards
 
 - [K9s](https://k9scli.io/): WINNER
 
@@ -149,7 +149,7 @@ className: "table-of-contents"
   - Multi clusters
   - Web UI
 
-### Containers: always run in K8s, never Docker
+## Containers: always run in K8s, never Docker
 
 - Docker: deprecated. bloated. no compose, no swarm. no K8s.
 - BuildX: demon, ok for local. Already integrated with Docker. No good for pipeline because is demon.
@@ -164,11 +164,11 @@ className: "table-of-contents"
   - From ContainerD
   - Not for production, good for laptop
 
-### Kubernetes
+## Kubernetes
 
-#### Managed Clusters (as a service)
+### Managed Clusters (as a service)
 
-##### Big Vendors
+#### Big Vendors
 
 - Amazon EKS: lags others
 - AWS Fargate: strange beast
@@ -177,7 +177,7 @@ className: "table-of-contents"
   - always ahead
   - Autopilot: fulllly managed GKE, expensive
 
-##### Small Vendors
+#### Small Vendors
 
 - Linode LKE: not HA. Cheap.
 - Digital Ocean DOKs: not HA. Cheap.
@@ -186,7 +186,7 @@ className: "table-of-contents"
   - Cheap
   - K3s so best of small guys
 
-#### Self Serve
+### Self Serve
 
 - OpenShift
 - Rancher

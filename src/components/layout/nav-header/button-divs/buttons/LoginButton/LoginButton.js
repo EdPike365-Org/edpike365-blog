@@ -4,7 +4,7 @@ import * as styles from '../Buttons.module.css'
 import LoginIcon from '../../../../../../icons/LoginIcon'
 
 function LoginButton() {
-  const { isAuthenticated, loginWithRedirect } = useAuth0()
+  const { loginWithRedirect } = useAuth0()
 
   return (
     <button
@@ -19,23 +19,4 @@ function LoginButton() {
   )
 }
 
-/*
-function LoginButton() {
-
-  const { isAuthenticated, loginWithRedirect } = useAuth0();
-
-  return !isAuthenticated && (
-  return (  
-    <button
-      id="loginButton"
-      className={[classes.commonButtonCSS, classes.loginButtonCSS]}
-      aria-label={"Log In"}
-      onClick={loginWithRedirect}
-    >
-      <LoginIcon />
-    </button>
-  )
-
-}
-*/
 export default LoginButton
