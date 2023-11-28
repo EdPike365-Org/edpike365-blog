@@ -1,0 +1,34 @@
+From GH Copilot:
+
+```
+# Start with a base image that has Node.js installed
+FROM node:14
+
+# Update the package lists
+RUN apt-get update
+
+# Install the necessary dependencies for Google Chrome
+RUN apt-get install -y \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    gnupg \
+    --no-install-recommends
+
+# Download and install Google Chrome
+RUN curl -sSL https://dl.google.com/linux/linux_signing_key.pub | apt-key add - \
+    && echo "deb https://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list \
+    && apt-get update \
+    && apt-get install -y \
+    google-chrome-stable \
+    --no-install-recommends
+
+# Verify that Google Chrome is installed correctly
+RUN google-chrome-stable --version
+
+# Clean up
+RUN apt-get purge --auto-remove -y curl gnupg \
+    && rm -rf /var/lib/apt/lists/*
+```
+
+https://blog.logrocket.com/setting-headless-chrome-node-js-server-docker/
