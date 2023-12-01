@@ -1,4 +1,17 @@
-From GH Copilot:
+# Lighthouse and Headless Chromium
+
+## Running Lighthouse With Headless Chrome
+
+- https://github.com/GoogleChrome/lighthouse/blob/main/docs/headless-chrome.md#running-lighthouse-using-headless-chrome
+- https://github.com/GoogleChrome/lighthouse/blob/main/docs/readme.md#using-programmatically
+- https://github.com/GoogleChrome/lighthouse#using-the-node-cli
+
+## Installing Headless Chromium
+
+- https://chromium.googlesource.com/chromium/src/+/lkgr/headless/README.md
+- https://blog.logrocket.com/setting-headless-chrome-node-js-server-docker/
+
+### From GH Copilot:
 
 ```
 # Start with a base image that has Node.js installed
@@ -30,5 +43,3 @@ RUN google-chrome-stable --version
 RUN apt-get purge --auto-remove -y curl gnupg \
     && rm -rf /var/lib/apt/lists/*
 ```
-
-https://blog.logrocket.com/setting-headless-chrome-node-js-server-docker/

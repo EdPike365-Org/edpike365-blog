@@ -1,3 +1,12 @@
+#!/bin/bash
+# remember: chmod +x chromium-install.sh
+
+# Check if Chromium is already installed
+if which google-chrome-stable >/dev/null; then
+    echo "Chromium (google-chrome-stable) is already installed. Version: $(google-chrome-stable --version)"
+    exit 0
+fi
+
 # Update the package lists
 RUN apt-get update
 

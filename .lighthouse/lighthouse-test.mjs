@@ -6,10 +6,12 @@ import * as chromeLauncher from 'chrome-launcher'
 
 // added --no-sandbox because we are running in a container
 // if you don't it will say it could not connect to the port
+// and something like "environment variable CHROME_PATH must be set to executable of a build of Chromium"
 const chrome = await chromeLauncher.launch({
   chromeFlags: ['--headless', '--no-sandbox'],
 })
 
+// options: https://github.com/GoogleChrome/lighthouse/blob/main/docs/configuration.md
 const options = {
   logLevel: 'info',
   output: 'html',
