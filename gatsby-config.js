@@ -7,6 +7,8 @@ require('dotenv').config({
   path: `.env.${process.env.NODE_ENV}`,
 })
 
+//const siteUrl = process.env.URL || `https://edpike365.com`
+
 // TODO You can author gatsby-config and gatsby-node in ESM syntax.
 // This feature was added in gatsby@5.3.0.
 
@@ -225,7 +227,7 @@ module.exports = {
        options: {
          trackingId: `ADD YOUR TRACKING ID HERE`,
        },
-     },    
+     },
     */
     {
       resolve: `gatsby-plugin-feed`,
@@ -342,6 +344,40 @@ module.exports = {
           day: 'numeric',
           month: 'long',
           year: 'numeric',
+        },
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-sitemap',
+      options: {
+        // This query becomes the "data" that we can access below.
+        query: `
+        {
+          allSitePage {
+            nodes {
+              path
+            }
+          },
+          site {
+            siteMetadata {
+              siteUrl
+            }
+          }
+        }
+      `,
+        resolveSiteUrl: data => {
+          return data.site.siteMetadata.siteUrl
+        },
+        resolvePages: ({ allSitePage: { nodes: allPages } }) => {
+          return allPages.map(page => {
+            return { ...page }
+          })
+        },
+        serialize: ({ path, modifiedGmt }) => {
+          return {
+            url: path,
+            lastmod: modifiedGmt,
+          }
         },
       },
     },

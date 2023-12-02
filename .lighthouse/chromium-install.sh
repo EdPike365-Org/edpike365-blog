@@ -1,4 +1,5 @@
 #!/bin/bash
+
 # remember: chmod +x chromium-install.sh
 
 # Check if Chromium is already installed

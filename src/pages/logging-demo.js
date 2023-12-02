@@ -4,7 +4,7 @@ import { getLogger } from '../loggers/pino/log-utils'
 
 const logger = getLogger('home')
 
-logger.log('home page LOGGER log')
+//logger.log('home page LOGGER log')
 logger.error('home page LOGGER error')
 logger.warn('home page LOGGER warn')
 logger.info('home page LOGGER info')
