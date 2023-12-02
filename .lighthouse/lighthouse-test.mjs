@@ -30,4 +30,10 @@ const urls = getURLs(config.excludedLocations, SITE_MAP_PATH)
 
 clearReportDir(APP_ROOT_PATH)
 
-runReports(urls)
+const testURLs = [
+  'https://www.edpike365.com',
+  'https://www.edpike365.com/about-me-now/',
+  'https://www.edpike365.com/about-me-past/',
+]
+
+runReports(testURLs)

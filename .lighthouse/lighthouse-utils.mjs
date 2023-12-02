@@ -1,11 +1,12 @@
 import fs from 'fs'
 import path from 'path'
+import url from 'url'
 import xml2js from 'xml2js'
 import lighthouse from 'lighthouse'
 import * as chromeLauncher from 'chrome-launcher'
 
 export const getURLs = (excludedLocs, siteMapPath) => {
-  console.log('excludedLocs ' + excludedLocs)
+  //console.log('excludedLocs ' + excludedLocs)
 
   // Read XML data from file
   let xmlData = ''
@@ -39,7 +40,7 @@ export const getURLs = (excludedLocs, siteMapPath) => {
     const excludedLocsSet = new Set(excludedLocs)
     const filteredLocList = locList.filter(val => !excludedLocsSet.has(val))
 
-    console.log(filteredLocList)
+    //console.log(filteredLocList)
 
     return filteredLocList
   })
@@ -72,11 +73,28 @@ export async function runReports(urls) {
   let chrome = null
 
   try {
+    // Chrome seems to be running out of memory even running one url at a time
+    // Seems to be related to running puppeteer headless in Docker
+    // https://github.com/puppeteer/puppeteer/issues/1834
+    // https://github.com/GoogleChrome/lighthouse/issues/6512
+    /*
+        return await launch({
+        chromeFlags: ['--headless', '--no-sandbox', '--disable-gpu', '--disable-dev-shm-usage'],
+        logLevel: 'info',
+        chromePath: '/usr/bin/google-chrome'
+    })
+    */
     // added --no-sandbox because we are running in a container
     // if you don't it will say it could not connect to the port
     // and something like "environment variable CHROME_PATH must be set to executable of a build of Chromium"
+
     const chrome = await chromeLauncher.launch({
-      chromeFlags: ['--headless', '--no-sandbox'],
+      chromeFlags: [
+        '--headless',
+        '--no-sandbox',
+        '--disable-gpu',
+        '--disable-dev-shm-usage',
+      ],
     })
 
     console.info(`Chrome debugging port running on ${chrome.port}`)
@@ -89,30 +107,36 @@ export async function runReports(urls) {
       port: chrome.port,
     }
 
-    const runnerResult = await lighthouse('https://www.edpike365.com', options)
-
-    // `.report` is the HTML report as a string
-    const reportHtml = runnerResult.report
+    console.log('urls ' + urls)
 
     // Iterate over the list of URLs and run the lighthouse test for each URL
-    /*
-  for (url in urls) {
-    //  const result = await lighthouse(url, options, chrome)
-    // ... handle the result
-  }
-  */
+    for await (const thisURL of urls) {
+      console.log('thisURL ' + thisURL)
+      //  const result = await lighthouse(url, options, chrome)
 
-    //const reportJson = runnerResult.lhr
-    const reportPath = './.lighthouse/reports/lhreport.html'
-    fs.writeFileSync(reportPath, reportHtml)
-    console.log(`Lighthouse report generated at ${reportPath}`)
+      const runnerResult = await lighthouse(thisURL, options)
 
-    // `.lhr` is the Lighthouse Result as a JS object
-    console.log('Report is done for', runnerResult.lhr.finalDisplayedUrl)
-    console.log(
-      'Performance score was',
-      runnerResult.lhr.categories.performance.score * 100
-    )
+      // `.lhr` is the Lighthouse Result as a JS object
+      console.log('Report is done for ', thisURL)
+      console.log('finalDisplayedUrl ', runnerResult.lhr.finalDisplayedUrl)
+      console.log(
+        'Performance score was',
+        runnerResult.lhr.categories.performance.score * 100
+      )
+
+      const urlObject = new url.URL(thisURL)
+      let reportFileName = urlObject.pathname
+      if (reportFileName === '/') {
+        reportFileName = 'index'
+      }
+      reportFileName = reportFileName.replace(/\//g, '')
+      reportFileName = reportFileName + '.html'
+      const reportPath = path.join('./.lighthouse/reports/', reportFileName)
+
+      const reportHtml = runnerResult.report
+      fs.writeFileSync(reportPath, reportHtml)
+      console.log(`Lighthouse report HTML generated at ${reportPath}`)
+    }
   } catch (error) {
     console.error('Error running Lighthouse:', error)
   } finally {
