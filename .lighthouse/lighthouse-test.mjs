@@ -1,11 +1,20 @@
 import {
   runReports,
   getConfigFromFile,
+  getURLXML,
   getURLs,
+  replaceDomains,
   clearReportDir,
 } from './lighthouse-utils.mjs'
 
 // run using `node ./.lighthouse/lighthouse-test.mjs`
+let domain = ''
+process.argv.forEach(function (val, index, array) {
+  if (val.indexOf('domain') > -1) {
+    domain = val.substring(val.indexOf('=') + 1)
+  }
+})
+console.log('domain override = ' + domain)
 
 // https://github.com/GoogleChrome/lighthouse/blob/main/readme.md#using-the-node-module
 // https://github.com/GoogleChrome/lighthouse/blob/main/docs/readme.md#using-programmatically
@@ -25,15 +34,19 @@ const SITE_MAP_PATH = './public/sitemap-0.xml'
 
 const config = getConfigFromFile(CONFIG_FILE_PATH)
 
-// Extract the list of URLs from the config
-const urls = getURLs(config.excludedLocations, SITE_MAP_PATH)
+const urlsXML = getURLXML(SITE_MAP_PATH)
+let urls = getURLs(config.excludedLocations, urlsXML)
+
+if (domain !== '') {
+  urls = replaceDomains(domain, urls)
+}
 
 clearReportDir(APP_ROOT_PATH)
 
-const testURLs = [
-  'https://www.edpike365.com',
-  'https://www.edpike365.com/about-me-now/',
-  'https://www.edpike365.com/about-me-past/',
+urls = [
+  'http://localhost:8888',
+  'http://localhost:8888/about-me-now/',
+  'http://localhost:8888/about-me-past/',
 ]
 
-runReports(testURLs)
+runReports(urls)

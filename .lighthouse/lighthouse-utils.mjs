@@ -5,9 +5,7 @@ import xml2js from 'xml2js'
 import lighthouse from 'lighthouse'
 import * as chromeLauncher from 'chrome-launcher'
 
-export const getURLs = (excludedLocs, siteMapPath) => {
-  //console.log('excludedLocs ' + excludedLocs)
-
+export const getURLXML = siteMapPath => {
   // Read XML data from file
   let xmlData = ''
   try {
@@ -15,35 +13,56 @@ export const getURLs = (excludedLocs, siteMapPath) => {
   } catch (err) {
     console.error(`Error while reading SITE_MAP_PATH at ${siteMapPath}: ${err}`)
     console.error(
-      `This lighthouse process assumes that you installed gatsby-plugin-sitemap and ran 'gatsby build' to generate the file ${SITE_MAP_PATH}.`
+      `This lighthouse process assumes that you installed gatsby-plugin-sitemap and ran 'gatsby build' to generate the file ${siteMapPath}.`
     )
     throw err
   }
+  return xmlData
+}
 
-  // Parse XML data
+export const getURLs = (excludedLocs, xmlData) => {
+  let filteredLocList = []
+
+  // Parse XML data to json list
   xml2js.parseString(xmlData, (err, result) => {
     if (err) {
       throw err
     }
 
     // Navigate to the 'url' elements and then to the 'loc' elements
-    const urls = result.urlset.url
+    // get back an array of objects
+    const urlObjects = result.urlset.url
 
-    // Extract the text content of each 'loc' element and add it to a list
-    // TODO: filter out excludedLocs before returning
-    const locList = urls.map(url => url.loc[0])
+    // Extract the text content of each 'loc' element and put it in an array
+    const locArray = urlObjects.map(url => url.loc[0])
 
     // this is O(n^2)
-    // const filteredLocList = locList.filter(val => !excludedLocs.includes(val))
+    //filteredLocList = locArray.filter(val => !excludedLocs.includes(val))
 
     // this is O(n)
     const excludedLocsSet = new Set(excludedLocs)
-    const filteredLocList = locList.filter(val => !excludedLocsSet.has(val))
-
-    //console.log(filteredLocList)
-
-    return filteredLocList
+    filteredLocList = locArray.filter(val => !excludedLocsSet.has(val))
   })
+
+  return filteredLocList
+}
+
+export const replaceDomains = (newDomain, urls) => {
+  if (urls.length === 0) {
+    console.log('no urls to replace')
+    return urls
+  }
+
+  const sampleURL = new URL(urls[0])
+  const oldDomain = sampleURL.protocol + '//' + sampleURL.hostname
+  console.log(
+    `replacing all oldDomains of ${oldDomain} with supplied new domain ${newDomain}`
+  )
+
+  const newURLs = urls.map(eachURL => {
+    return eachURL.replace(oldDomain, newDomain)
+  })
+  return newURLs
 }
 
 export const getConfigFromFile = configFilePath => {

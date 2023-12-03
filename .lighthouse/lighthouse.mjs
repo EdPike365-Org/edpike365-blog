@@ -3,6 +3,13 @@ import lighthouse from 'lighthouse'
 import * as chromeLauncher from 'chrome-launcher'
 
 // run using `node ./.lighthouse/lighthouse-test.mjs`
+console.log('Hello World')
+process.argv.forEach(function (val, index, array) {
+  console.log(index + ': ' + val)
+})
+
+process.exit(0)
+
 let chrome = null
 try {
   // added --no-sandbox because we are running in a container
