@@ -1,6 +1,6 @@
 ---
-title: "About Me Now"
-date: "2021-12-27T22:12:03.284Z"
+title: 'About Me Now'
+date: '2021-12-27T22:12:03.284Z'
 status: published
 author: EdPike365
 tags:
@@ -31,7 +31,7 @@ tags:
 
 I focused on the tech below to support my career goals. I have additional long term skills on the backburner: DevSecOps, MLOps, DataOps, IoT Edge Ops
 
-#### DevOps
+### DevOps
 
 - Jenkins with Docker and Kubernetes
 - GitHub Actions
@@ -40,18 +40,18 @@ I focused on the tech below to support my career goals. I have additional long t
 - DevSecOps
   - Supply Chain, SBOM (Software Bill of Materials), [zero trust](https://about.gitlab.com/blog/2022/08/17/why-devops-and-zero-trust-go-together/)
   - AquaSec [Trivy](https://github.com/aquasecurity/trivy) (image scans)
-  - Kubernetes Security:  AquaSec [kube-bench](https://github.com/aquasecurity/kube-bench) (CIS benchmarks), [AppArmor](https://gitlab.com/apparmor/apparmor/-/wikis/Documentation), [Falco](https://falco.org/docs/)(threat detection), Seccomp Syscalls (Restrict Syscalls)
+  - Kubernetes Security: AquaSec [kube-bench](https://github.com/aquasecurity/kube-bench) (CIS benchmarks), [AppArmor](https://gitlab.com/apparmor/apparmor/-/wikis/Documentation), [Falco](https://falco.org/docs/)(threat detection), Seccomp Syscalls (Restrict Syscalls)
 
-#### Ops, SRE, Cloud Engineering
+### Ops, SRE, Cloud Engineering
 
 - IAC: Terraform (Infrastructure), Ansible (Config)
 - AWS: I'm open to other public clouds but I chose AWS as the first one because its the biggest.
 - Kubernetes: I have ALL the certs. I can use K8s accross clouds and on prem.
 - Monitoring: Prometheus, OpenTelemetry, Grafana
 
-#### Full Stack Web Apps
+### Full Stack Web Apps
 
-- Web apps for all the *Ops, DevEx, SRE, etc.
+- Web apps for all the \*Ops, DevEx, SRE, etc.
 - FrontEnds:
   - Intranet/Extranet CRUD forms: Vanilla HTML, JS, CSS, JQuery, AJAX, SSO
   - Intranet/Extranet docs: Gatsby, with SSR and GraphQL, Emotion CSS

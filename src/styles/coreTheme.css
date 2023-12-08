@@ -47,7 +47,7 @@
   --color-common-white: #fff;
 
   --color-primary-light: #7986cb;
-  --color-primary-main: #6772ac;
+  --color-primary-main: #636da1;
   --color-primary-dark: #474f77;
   --color-primary-text: #fff; /* aka contrastText, color-on-primary */
 
@@ -125,13 +125,13 @@
   /* material ui explorer https://material-ui.com/customization/default-theme/?expand-path=$.typography */
   /* https://material.io/develop/web/guides/typography */
 
-  --old-font-family-default: "Segoe UI", "Helvetica Neue", Arial, sans-serif,
-    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  --font-family-default: "Helvetica Neue World", "Helvetica Neue", Helvetica,
+  --old-font-family-default: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  --font-family-default: 'Helvetica Neue World', 'Helvetica Neue', Helvetica,
     Arial, sans-serif;
-  --font-family-dek: "Helvetica Neue World", "Helvetica Neue", Helvetica, Arial,
+  --font-family-dek: 'Helvetica Neue World', 'Helvetica Neue', Helvetica, Arial,
     sans-serif;
-  --font-family-accent: "Source Code Pro", Monaco, monospace;
+  --font-family-accent: 'Source Code Pro', Monaco, monospace;
   --font-family-body: Lora, Georgia, serif;
 
   --font-weight-light: 300;
@@ -139,7 +139,7 @@
   --font-weight-medium: 500;
   --font-weight-bold: 700;
 
-  /* "rem" is relative to root html font-size-default, browser industry default is 16px. 
+  /* "rem" is relative to root html font-size-default, browser industry default is 16px.
      Thats not really big enough, especially for my blog focused site, so
      I'm upping it to 18px. Mat UI puts it down at 14px, I believe, good for dashboards.
      I'm using major 3rd scaling, from https://type-scale.com/
@@ -158,8 +158,8 @@
   --font-size-body2-subtitle2-button-smaller: 0.875rem; /* subtitle 2, body 2, button */
   --font-size-caption-overline: 0.75rem; /* caption and overline */
 
-  /* Line Height 
-      These sizings were based on material UI settings 
+  /* Line Height
+      These sizings were based on material UI settings
       They are more of them than font sizes because some font sizes are shared.
     */
   --font-line-height-h1: 1.167;
@@ -204,13 +204,13 @@
 
   /* TRANSITIONS */
   /* easing */
-  --easing-ease-in-out: "cubic-bezier(0.4, 0, 0.2, 1)";
-  --easing-ease-out: "cubic-bezier(0.0, 0, 0.2, 1)";
-  --easing-ease-in: "cubic-bezier(0.4, 0, 1, 1)";
-  --easing-sharp: "cubic-bezier(0.4, 0, 0.6, 1)";
+  --easing-ease-in-out: 'cubic-bezier(0.4, 0, 0.2, 1)';
+  --easing-ease-out: 'cubic-bezier(0.0, 0, 0.2, 1)';
+  --easing-ease-in: 'cubic-bezier(0.4, 0, 1, 1)';
+  --easing-sharp: 'cubic-bezier(0.4, 0, 0.6, 1)';
   /* transition variable dont seem to work (media queries dont either)*/
-  --transition-default-all: "all 220ms ease-in-out";
-  --transition-color-bgcolor: "color 400ms ease-in-out, background-color 400ms ease-in-out";
+  --transition-default-all: 'all 220ms ease-in-out';
+  --transition-color-bgcolor: 'color 400ms ease-in-out, background-color 400ms ease-in-out';
 
   /* duration */
   --duration-shortest: 150;
@@ -532,7 +532,7 @@ a:focus {
   border-left: 0.25em solid #569c3b;
 }
 /* If using PrismJS line numbering and highlighing, push the code to the right */
-.gatsby-highlight pre[class*="language-"].line-numbers {
+.gatsby-highlight pre[class*='language-'].line-numbers {
   padding-top: 0;
   padding-left: 2.8em;
 }
@@ -540,9 +540,9 @@ a:focus {
 .gatsby-code-title {
   margin-bottom: -0.6rem;
   padding: 0.5em 1em;
-  font-family: Consolas, "Andale Mono WT", "Andale Mono", "Lucida Console",
-    "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono",
-    "Liberation Mono", "Nimbus Mono L", Monaco, "Courier New", Courier,
+  font-family: Consolas, 'Andale Mono WT', 'Andale Mono', 'Lucida Console',
+    'Lucida Sans Typewriter', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono',
+    'Liberation Mono', 'Nimbus Mono L', Monaco, 'Courier New', Courier,
     monospace;
 
   background-color: #5e5b24;

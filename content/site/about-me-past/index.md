@@ -1,6 +1,6 @@
 ---
-title: "Past Work"
-date: "2021-12-27T22:12:03.284Z"
+title: 'Past Work (2000-2020)'
+date: '2021-12-27T22:12:03.284Z'
 status: published
 author: EdPike365
 tags:
@@ -8,9 +8,7 @@ tags:
   - goals
 ---
 
-## Past Work (2000 - 2020)
-
-#### Full Stack Web Apps Developer
+## Full Stack Web Apps Developer
 
 - Rich (3 Tier) Web Apps (mostly intranet, extranet)
 - REST APIs using Java 8, Tomcat, Jersey
@@ -31,7 +29,7 @@ tags:
   - server with JUnit
   - client with Selenium
 
-#### DevOps
+## DevOps
 
 - Evangelist: introduced VCS (git), build tool, automatic testing, IAC concept
 - Scoped, secured funding for, and implemented App Monitoring (AppDynamics)
@@ -45,7 +43,7 @@ tags:
   - MS Exchange SSO problems (Wireshark), org structure irregularities
 - Migrated orphaned GOlang AWS bill review process to Java (Cloudability (bought by DataDog))
 
-#### Communication
+## Communication
 
 - Mentored junior team members
 - Tutorials and documentation for APIs (Java, Python)

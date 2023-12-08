@@ -1,5 +1,13 @@
 # Lighthouse and Headless Chromium
 
+- https://github.com/GoogleChrome/lighthouse/blob/main/readme.md#using-the-node-module
+- https://github.com/GoogleChrome/lighthouse/blob/main/docs/readme.md#using-programmatically
+- https://github.com/GoogleChrome/lighthouse/blob/main/docs/configuration.md
+- https://github.com/GoogleChrome/lighthouse/blob/main/docs/user-flows.md
+- https://github.com/cloudfour/lighthouse-parade
+- https://github.com/github/lightcrawler
+- https://github.com/GoogleChrome/lighthouse-ci
+
 ## Running Lighthouse With Headless Chrome
 
 - https://github.com/GoogleChrome/lighthouse/blob/main/docs/headless-chrome.md#running-lighthouse-using-headless-chrome

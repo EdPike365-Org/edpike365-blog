@@ -1,3 +1,5 @@
 {
-  "excludedLocations": ["https://www.edpike365.com/about-me-near/"]
+  "domain": "http://localhost:8888",
+  "excludedURLs": ["https://www.edpike365.com/about-me-near/"],
+  "numURlsToProcess": 5
 }
