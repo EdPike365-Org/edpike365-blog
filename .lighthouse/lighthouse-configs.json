@@ -1,0 +1,31 @@
+{
+  "optionSets": [
+    {
+      "name": "Desktop Performance",
+      "description": "emulatedFormFactor: desktop",
+      "reportRootDir": "desktop",
+      "extends": "lighthouse:default",
+      "settings": {
+        "emulatedFormFactor": "desktop",
+        "output": ["html", "json"],
+        "onlyCategories": ["performance"]
+      },
+      "logLevel": "error",
+      "port": "set_at_run_time"
+    },
+    {
+      "name": "Mobile Performance",
+      "description": "emulatedFormFactor: mobile",
+      "reportRootDir": "mobile",
+      "extends": "lighthouse:default",
+      "settings": {
+        "emulatedFormFactor": "mobile",
+        "output": ["html", "json"],
+        "onlyCategories": ["performance"]
+      },
+      "logLevel": "error",
+      "port": "set_at_run_time"
+    }
+  ]
+
+}

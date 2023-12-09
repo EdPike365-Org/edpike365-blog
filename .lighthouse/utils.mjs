@@ -1,5 +1,8 @@
+import fs from 'fs'
 import http from 'http'
 import https from 'https'
+import { URL } from 'url'
+import path from 'path'
 
 export const fetchURLAsString = async downloadUrl => {
 
@@ -48,3 +51,24 @@ export const downloadURLAsString = downloadUrl => {
       })
   })
 }
+
+export function wait(val) {
+  return new Promise(resolve => setTimeout(resolve, val));
+}
+
+export const getJSONFromFile = (filePath) => {
+  const content = fs.readFileSync(filePath, 'utf-8')
+  const json = JSON.parse(content)
+  return json
+}
+
+export const clearDirAndRemake = dirPath => {
+
+  if (fs.existsSync(dirPath)) {
+    fs.rmSync(dirPath, { recursive: true })
+  }
+
+  fs.mkdirSync(dirPath)
+}
+
+

@@ -1,5 +1,9 @@
 # Lighthouse and Headless Chromium
 
+Seems to be ignoring "onlyCategories" in config
+
+- logLevel (silent | error | info |verbose)
+
 - https://github.com/GoogleChrome/lighthouse/blob/main/readme.md#using-the-node-module
 - https://github.com/GoogleChrome/lighthouse/blob/main/docs/readme.md#using-programmatically
 - https://github.com/GoogleChrome/lighthouse/blob/main/docs/configuration.md
