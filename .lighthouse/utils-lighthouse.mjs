@@ -112,15 +112,28 @@ export const clearReportDir = (allReportsRootPath, reportRootDir) => {
 
 export async function runReports(allReportsRootPath, urls, numURLsToProcess, chromeOpts, lighthouseOptionsArray) {
 
-  for (const lighthouseOptions of lighthouseOptionsArray.optionSets) {
+  const lighthouseOptions = {
+    name: "Desktop Performance",
+    description: "emulatedFormFactor: desktop",
+    reportRootDir: "desktop",
+    extends: 'lighthouse:default',
+    settings: {
+      onlyCategories: ['accessibility'],
+      emulatedFormFactor:'desktop',
+      output: ['html'],
+    },
+    logLevel: "error",
+  }
+
+  //for (const lighthouseOptions of lighthouseOptionsArray.optionSets) {
     console.log("\n****** Starting Lighthouse Report ******");
     console.log("name:" + lighthouseOptions.name);
     console.log("\t description:", lighthouseOptions.description);
     console.log("\t reportRootDir:", lighthouseOptions.reportRootDir);
     clearReportDir(allReportsRootPath, lighthouseOptions.reportRootDir)
     await runReportSet(lighthouseOptions, chromeOpts, urls, numURLsToProcess);
-    await wait(500);
-  }
+
+ // }
 }
 
 export async function runReportSet(lighthouseOptions, chromeOpts, urls, numURLsToProcess) {
@@ -129,7 +142,7 @@ export async function runReportSet(lighthouseOptions, chromeOpts, urls, numURLsT
 
   try {
 
-    const chrome = await chromeLauncher.launch(chromeOpts)
+    chrome = await chromeLauncher.launch(chromeOpts)
 
     // we did not pass in a port for headless chrome to run on, so we need to get it from chrome
     console.info(`\tChrome debug port: ${chrome.port}`)
@@ -139,18 +152,19 @@ export async function runReportSet(lighthouseOptions, chromeOpts, urls, numURLsT
       urls = urls.slice(0, numURLsToProcess)
     }
 
+    console.log('\t lighthouseOptions: ', JSON.stringify(lighthouseOptions, null, 2))
+
     // Iterate over the list of URLs and run the lighthouse test for each URL
     for (const thisURL of urls) {
       await runSingleReport(thisURL, lighthouseOptions)
     }
-
+    await wait(1500);
   } catch (error) {
     console.error('Error running Lighthouse:', error)
   } finally {
-    //if (chrome !== null && chrome !== undefined) {
     if (chrome) {
       console.info('Killing Chrome')
-      await chrome.kill()
+      chrome.kill()
     }
   }
 }
