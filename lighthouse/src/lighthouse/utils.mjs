@@ -1,5 +1,7 @@
 // this will remove the domain and the trailing slash
 // eg: http://localhost:8888/blog/jenkins-in-docker/ becomes dirPath "blog" and /jenkins-in-docker"
+// which becomes the file path "blog/jenkins-in-docker", and we will append .html and/or .json to it
+
 export const getFilePathFromURL = (urlString, reportRootDir) => {
   console.log('getFolderPathFromURL: urlString before change = ' + urlString)
 
