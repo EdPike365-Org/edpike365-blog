@@ -1,0 +1,24 @@
+PS C:\Users\edpik> wsl
+(base) edpike365@fractal2-win:/mnt/c/Users/edpik$ cat /etc/wsl.conf
+cat: /etc/wsl.conf: No such file or directory
+(base) edpike365@fractal2-win:/mnt/c/Users/edpik$ {
+cat <<EOT
+[boot]
+systemd=true
+EOT
+} | sudo tee /etc/wsl.conf
+[sudo] password for edpike365:
+[boot]
+systemd=true
+
+(base) edpike365@fractal2-win:/mnt/c/Users/edpik$ cat /etc/wsl.conf
+[boot]
+systemd=true
+
+(base) edpike365@fractal2-win:/mnt/c/Users/edpik$ exit
+logout
+PS C:\Users\edpik> wsl --shutdown
+PS C:\Users\edpik> wsl
+
+(base) edpike365@fractal2-win:/mnt/c/Users/edpik$ systemctl --no-pager status user.slice > /dev/null 2>&1 && echo 'OK: Systemd is running' || echo 'FAIL: Systemd not running'
+OK: Systemd is running

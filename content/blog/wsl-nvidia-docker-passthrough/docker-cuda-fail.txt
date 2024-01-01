@@ -1,0 +1,24 @@
+(base) edpike365@fractal2-win:~$ docker pull deeplabcut/deeplabcut:2.3.5-base-cuda11.7.1-cudnn8-runtime-ubuntu20.04-latest
+2.3.5-base-cuda11.7.1-cudnn8-runtime-ubuntu20.04-latest: Pulling from deeplabcut/deeplabcut
+Digest: sha256:112471fa60570e7363caf5f43ad188f2acb04f60a724f1be0cc75283aee71409
+Status: Image is up to date for deeplabcut/deeplabcut:2.3.5-base-cuda11.7.1-cudnn8-runtime-ubuntu20.04-latest
+docker.io/deeplabcut/deeplabcut:2.3.5-base-cuda11.7.1-cudnn8-runtime-ubuntu20.04-latest
+(base) edpike365@fractal2-win:~$ docker run deeplabcut/deeplabcut:2.3.5-base-cuda11.7.1-cudnn8-runtime-ubuntu20.04-latest
+
+==========
+== CUDA ==
+==========
+
+CUDA Version 11.7.1
+
+Container image Copyright (c) 2016-2023, NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+
+This container image and its contents are governed by the NVIDIA Deep Learning Container License.
+By pulling and using the container, you accept the terms and conditions of this license:
+https://developer.nvidia.com/ngc/nvidia-deep-learning-container-license
+
+A copy of this license is made available in this container at /NGC-DL-CONTAINER-LICENSE for your convenience.
+
+WARNING: The NVIDIA Driver was not detected.  GPU functionality will not be available.
+   Use the NVIDIA Container Toolkit to start this container with GPU support; see
+   https://docs.nvidia.com/datacenter/cloud-native/ .
