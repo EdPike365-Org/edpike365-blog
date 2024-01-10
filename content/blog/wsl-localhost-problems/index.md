@@ -1,6 +1,8 @@
 ---
-title: "Fixing WSL 2 Ubuntu Localhost Problems"
-date: "2021-08-25T22:12:03.284Z"
+kicker: 'VIRTUALIZATION'
+title: 'WSL Ubuntu Localhost Problems'
+subtitle: 'Fix Your Problems'
+date: '2021-08-25T22:12:03.284Z'
 status: draft
 author: EdPike365
 tags:
@@ -10,7 +12,7 @@ tags:
   - fix
   - unreachable
   - Windows
-  - "WSL 2"
+  - 'WSL 2'
 ---
 
 WSL v2 (Windows Subsytem for Linux, version 2) has an ongoing major problem. When you use it to develop web apps, `localhost` is often unreachable from a web browser running in Windows.
