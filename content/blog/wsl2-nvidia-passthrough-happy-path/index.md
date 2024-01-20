@@ -13,15 +13,27 @@ tags:
   - Ubuntu
 ---
 
-Run a Linux Virtual Machine (VM) from within Windows using Windows Subsystem For Linux (WSL). Enable your NVIDIA GPU to acclerate your Linux apps. This is useful for acclerating Linux graphics and AI apps. NVIDIA <a target="_blank" href="https://docs.nvidia.com/cuda/wsl-user-guide/index.html#getting-started-with-cuda-on-wsl">agrees</a>
+Run a Linux Virtual Machine (VM) from within Windows using Windows Subsystem For Linux v2 (WSL2). Enable your NVIDIA GPU to acclerate your Linux apps.
 
-# Overview
+## Why Use Virtual Machines?
 
-This tutorial is written for beginners **_in a hurry_**. Its TLDR all the way. It assumes that you have little to no knowledge of WSL or Linux.
+Software projects, including ones running in abstraction layers like Anaconda, can still manage to corrupt your Windows environment, or almost worse, make you **_think_** that you **_might have_**. That can lead you down a path of uninstalling/reintstalling various apps, or even Windows itself, when some app stops working correctly **_maybe_** after you installed some software package in pip, etc., or installing a full app that you needed for work or school. Or **_maybe_** a Windows or NVIDIA or Anaconda, or who knows what, update ran and broke the app that way. You are unlikely to know for sure. Worse yet, you are more likely to cause a problem when you are rushing, half asleep, to meet a deadline. Now you are now in hell.
 
-I wrote this because tutorials for setting up WSL are generally incomplete, out of date, or simply wrong. They are not very useful for new programmers and non programmers who just need to get some Linux app to run "real quick".
+That is why, if at all possible, you should work in virtual environments (<a target="_blank" href="https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary/what-is-a-virtual-machine">VMs</a> or <a target="_blank" href="https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary/what-is-a-container">containers</a>) when possible. They completely isolate Windows OS, and the apps, like most games, that can only run natively installed (**_not_** in a virtual enviroment). VMs and containers can be destroyed and rebuilt much more easily. Any damage is **_contained_**.
 
-If this tutorial doesn't work, or your situation is more complicated, or you want to understand what you are actually doing, use my tutorial: [WSL2 and NVIDIA GPU Passthrough: The Sad Path](/blog/wsl2-nvidia-passthrough-sad-path/). It points out gotchas, has acronym definitions, tech explanations, and useful asides.
+This lets you keep Windows pristine (and ready to game) while also being able to have software projects. NVIDIA <a target="_blank" href="https://docs.nvidia.com/cuda/wsl-user-guide/index.html#getting-started-with-cuda-on-wsl">agrees</a>.
+
+Once you master using GPU accelerated Linux VMs, you can completely seperate your Windows Gaming environment from your Linux working environments, like an Operating System <a target="_blank" href="https://www.thenationalnews.com/lifestyle/fashion/a-brief-history-of-the-mullet-business-up-front-and-party-at-the-back-1.1157460">mullet</a>.
+
+# Why I Wrote This
+
+This tutorial is written for beginners **_in a hurry_**. Its TLDR all the way. It assumes that you have little to no knowledge of PowerShell, WSL, or Linux.
+
+I wrote this because tutorials for setting up WSL are generally incomplete, out of date, or simply wrong. They are not very useful for new programmers, or non programmers who just need to get some Linux app to run "real quick".
+
+If this tutorial doesn't work, or your situation is more complicated, or you want to understand what you are actually doing, use my tutorial: <a target="_blank" href="/blog/wsl2-nvidia-passthrough-sad-path/">WSL2 and NVIDIA GPU Passthrough: The Sad Path</a>. It points out gotchas, has acronym definitions, tech explanations, and useful asides.
+
+## Tutorial Overview
 
 Below, we will:
 
@@ -35,9 +47,7 @@ Below, we will:
 
 WSL 2 <a target="_blank" href="https://learn.microsoft.com/en-us/windows/wsl/compare-versions">is much better than</a> WSL 1 in most ways. WSL 2 supports GPU "passthrough". That means you can run apps in WSL 2 Linux VMs and they will have access to your GPU.
 
-Once you master using GPU accelerated Linux VMs, you will be able to completely seperate your Windows Gaming environment from your Linux working environment, like an Operating System mullet.
-
-From here on, WSL means WSL 2.
+From here on, WSL also means WSL 2.
 
 NVIDIA is a little vague on <a target="_blank" href="https://docs.nvidia.com/cuda/wsl-user-guide/index.html#known-limitations-for-linux-cuda-applications">which GPUs support WSL 2</a>. Seems like most <a target="_blank" href="https://en.wikipedia.org/wiki/Pascal_(microarchitecture)">Pascal microarchitecture</a> or later GPUs will work, which means GTX 1060 6 GB or higher, all GTX 1070 and 1080s, with the exceptoin of "Tesla" cards. All Turing (16xx and 20xx), Ampere (30xx), and Ada Lovelace (40xx) series GPUs, both GTX and RTX, will work.
 
@@ -53,7 +63,7 @@ Pro Tip: Microsoft (MS) doesn't want you to know, but you can <a target="_blank"
 
 ## Windows Terminal App
 
-From here out, we will be opening various terminals for Linux and Powershell. **_Windows Terminal_** makes that easier, but we need to install it. You don't **_have_** to install Windows Terminal, but from here on, I assume you have it.
+From here out, we will be opening various terminals for Linux and Powershell. **_Windows Terminal_** makes that easier, but we need to install it. You don't **_have_** to install Windows Terminal, but from here on, I assume you have.
 
 - <a target="_blank" href="https://apps.microsoft.com/detail/9N0DX20HK701?rtc=1&hl=en-us&gl=US">Install Windows Terminal from the MS Store</a>.
 
@@ -72,7 +82,9 @@ WSL can be installed by PowerShell command line, or from the Microsoft Store. Un
 
 <a target="_blank" href="https://apps.microsoft.com/detail/9PN20MSR04DW?hl=en-US&gl=US">Install Ubuntu 22.04.x LTS</a> from the MS Store.
 
-**_Highly Recommended:_** My short guide to <a target="_blank" href="/blog/wsl-cli/">Linux and PowerShell CLI in WSL: Short Guide</a>. It covers the differences between using PowerShell and Linux terminals and list a few critical Linux commands that we use below.
+**_Highly Recommended:_** My short guide to <a target="_blank" href="/blog/wsl-cli/">Linux and PowerShell CLI in WSL: Short Guide</a>. It covers the differences between using PowerShell and Linux terminals, relative Windows/Linux file paths, and list a few critical Linux commands that we use below.
+
+    Quick Example: WSL Linux VMs map/mount to your Windows files in folders like "Desktop" and "Downloads". That means you can download a file from your web browser in Windows, into your Windows Downloads folder, and then access it from your Linux command line.
 
 Optional: Skim the <a target="_blank" href="https://learn.microsoft.com/en-us/windows/wsl/">complete WSL docs</a>, and <a target="_blank" href="https://learn.microsoft.com/en-us/windows/wsl/basic-commands">WSL commands</a>.
 
@@ -82,7 +94,7 @@ Optional: Skim the <a target="_blank" href="https://learn.microsoft.com/en-us/wi
 
 <a target="_blank" href="https://pureinfotech.com/use-tabs-panes-terminal-windows-11/">Open a Windows PowerShell (PS) tab</a> in Windows Terminal.
 
-Run `PS C:\Users\yourwindowsname>wsl --version` (starting at the `>`)
+Run `PS C:\Users\yourwindowsname>wsl --version` (starting past the `>`)
 
 You will see something like:
 
@@ -96,7 +108,7 @@ DXCore version: 10.0.25131.1002-220531-1700.rs-onecore-base2-hyp
 Windows version: 10.0.22621.2861
 ```
 
-To know more about this info, like why Windows version says "10" even though you are running "11", go to my <a target="_blank" href="/blog/wsl2-nvidia-passthrough-sad-path/">more detailed tutorial</a>. Same thing if you want a quick explanation of how the special WSL Linux VM maps/mounts to your Windows files in folders like "Desktop" and "Downloads".
+To know more about this info, like why Windows version says "10" even though you are running "11", go to my <a target="_blank" href="/blog/wsl2-nvidia-passthrough-sad-path/">more detailed tutorial</a>.
 
 List the VM's that you have installed with `wsl -l -v`. If you have not modified your WSL installation, you should see:
 
@@ -124,12 +136,12 @@ yourlinuxuser@yourcomputer:~$
 
 ## Update The Ubuntu VM
 
-The MS Store will automatically update your WSL software, and the core Linux Kernel **_but NOT your Linux VMs_**. We will update manually, though if your VMs are new, little or nothing will happen.
+The MS Store will automatically update your **_WSL software_**, and the core Linux Kernel **_but NOT your Linux VMs_**. We will update your VM manually.
 
-You will use `sudo`. It is explained in my <a target="_blank" href="/blog/wsl-cli/">Linux and PowerShell CLI in WSL: Short Guide</a> blog post. TLDR: `sudo` tells Linux that you are pretending to be the Linux administrator. It is required to do dangerous things and just makes you verify your password.
+You will use `sudo` (super user do). It is explained in my <a target="_blank" href="/blog/wsl-cli/">Linux and PowerShell CLI in WSL: Short Guide</a> blog post. TLDR: `sudo` tells Linux that you are pretending to be the Linux administrator. It is required to do dangerous things. It makes you verify your VM password.
 
 - Open an Ubuntu tab in Windows Terminal.
-- Refresh the list of available updates: `sudo apt update`
+- Refresh the list of available updates in your `apt` package manager: `sudo apt update`
 - Apply all the availabe updates: `sudo apt upgrade`.
 
 Linux Hint: If you are prompted to commit or continue, `[Y]n`, or similar, means pressing enter will be "yes".
@@ -138,7 +150,7 @@ Linux Hint: If you are prompted to commit or continue, `[Y]n`, or similar, means
 
 You should enable <a target="_blank" href="https://en.wikipedia.org/wiki/Systemd">SystemD</a>. Code examples for Ubuntu almost always assume you are running systemd and can use `systemctl`, the SystemdD system control app. SystemD is going to make your life much easier but it will slow down your WSL bootup a little, and take a bit more RAM. If the instructions below are not clear enough, <a target="_blank" href="https://devblogs.microsoft.com/commandline/systemd-support-is-now-available-in-wsl/">try Microsofts instructions</a>.
 
-Each WSL VM has a special file in its file system, `/etc/wsl.conf`, that WSL uses when launching that VM. That file is where we set our `systemd=true` flag.
+Each WSL VM has a special file in its own file system, `/etc/wsl.conf`. WSL uses it when launching that VM. That file is where we set our `systemd=true` flag.
 
 - Open a Powershell (PS) tab in Windows Terminal
 
@@ -153,7 +165,7 @@ Each WSL VM has a special file in its file system, `/etc/wsl.conf`, that WSL use
   cat: /etc/wsl.conf: No such file or directory
 ```
 
-- If the file does not exist, copy and paste the code below, then press enter:
+- If the file does not exist, copy and paste the code below to your command line, then press enter:
 
 ```bash
   {
@@ -172,16 +184,16 @@ Each WSL VM has a special file in its file system, `/etc/wsl.conf`, that WSL use
 systemd=true
 ```
 
-- If `/etc/wsl.conf` DOES already exists, add the `systemd=true` flag manually below the [boot] section and save. If the [boot] section does not exist, add it first.
+- If `/etc/wsl.conf` DOES already exists you will get a file does not exist error. Add the `systemd=true` flag manually below the [boot] section and save. If the `[boot]` section does not exist, add it first; at the bottom of the file is fine.
 
 The text editor <a target="_blank" href="https://linuxize.com/post/how-to-use-nano-text-editor/">nano</a> is included in Ubuntu by default and is easier to use than `vim`.
 
 ```bash
-$ nano /etc/wsl.conf
+$ sudo nano /etc/wsl.conf
 ```
 
 - In nano, edit the text
-- Save the changes: `ctrl+w` (write to file)
+- Save the changes: `ctrl+w` (write to file). If you did not type sudo, it may not let you write to the file.
 - Exit nano: `ctrl+x` (exit)
 
 Confirm file content:
@@ -192,17 +204,17 @@ Confirm file content:
  systemd=true
 ```
 
-- Exit the Linux VM by typing `exit` and then enter key. It will print out `logout`. It can take a few seconds, don't spam it:
+- Exit the Linux VM by typing `exit` and then press the enter key. It will print out `logout`. It can take a few seconds, don't spam it:
 
 ```bash
 $ exit
 logout
 ```
 
-- Shutdown WSL: `PS C:\Users\yourwindowsuser> wsl --shutdown`
+- Shutdown WSL: `PS C:\Users\yourwindowsuser> wsl --shutdown` (Windows Terminal, and your tabs, will stay open)
 - Restart WSL: `PS C:\Users\yourwindowsuser> wsl`
 
-Open **_a new_** Ubuntu tab in Windows Terminal (you should close any existing tabs):
+Open **_a new_** Ubuntu tab in Windows Terminal:
 
 - Copy, paste and run this script to check if SystemD is running:
 
@@ -212,7 +224,9 @@ systemctl --no-pager status user.slice > /dev/null 2>&1 && echo 'OK: Systemd is 
 
 You should get `OK: Systemd is running`
 
-You can also check SystemD with the command `systemctl list-unit-files --type=service` which should show your services’ status.
+You can also check SystemD with the command `$systemctl list-unit-files --type=service` which should show your services’ status. Remember, that $ sign is there to remind you that this a Linux prompt. Do not include it in your command.
+
+If its working, you should close the older Ubuntu tabs in Windows Terminal.
 
 # GPU Drivers For Windows OS
 
@@ -222,20 +236,20 @@ NVIDIA Game Ready drivers for Windows 11, or Windows 10 version 21H2, should sup
 
 - Already installed?
 
-  - Use the NVIDIA tray icon, usually found in the "hidden icons" area on the right side of your task bar
+  - Use the NVIDIA tray icon, usually found in the "hidden icons" area on the right side of your task bar in Windows
   - Right Click on it and choose `NVIDIA Geforce Experience`
 
-- Not installed? Install at <a target="_blank" href="https://www.nvidia.com/en-gb/geforce/geforce-experience/">GeForce Experience</a>.
+- Not installed? Install it at <a target="_blank" href="https://www.nvidia.com/en-gb/geforce/geforce-experience/">GeForce Experience</a>.
 
 - Once opened:
-  - option A: click Drivers -> "Check for updates" will be in the top middle
+  - option A: click Drivers -> "Check for updates" will be in the top middle. There may be a dropdown with an option for "Studio Drivers". Do not install those, install the Game Ready ones. We are not sure that NVIDIA studio drivers are a problem and are looking into it.
   - option B: click on the gear symbol in upper right corner, in the "general" tab, at the bottom, check the "DOWNLOADS" box
 
 ## Option 2: Install manually From the Web
 
 - Get your <a target="_blank" href="https://www.microsoft.com/en-us/windows/learning-center/how-to-check-gpu">GPU info from Windows</a>.
 - Use it to <a target="_blank" href="https://www.nvidia.com/download/index.aspx">download your driver from NVIDIA</a>.
-- While you are <a target="_blank" href="https://www.avg.com/en/signal/how-to-update-graphics-drivers#:~:text=Go%20to%20the%20Nvidia%20homepage,Then%20click%20Download.">installing the drivers</a>, you should get and accept the option to install GeForce Experience which can do auto updates.
+- While you are <a target="_blank" href="https://www.avg.com/en/signal/how-to-update-graphics-drivers#:~:text=Go%20to%20the%20Nvidia%20homepage,Then%20click%20Download.">installing the drivers</a>, you should get and accept the option to install GeForce Experience. That will let you set up auto updates.
 
 ## Option 3: Use Windows Update: "check for updates"
 
@@ -247,7 +261,7 @@ NVIDIA Game Ready drivers for Windows 11, or Windows 10 version 21H2, should sup
 
 Since roughly September 2020, NVIDIA GPU drivers for Windows support WSL, include <a target="_blank" href="https://developer.nvidia.com/about-cuda">CUDA</a>, traditional <a target="_blank" href="https://en.wikipedia.org/wiki/DirectX">DirectX</a>, **_and_** the newer <a target="_blank" href="https://learn.microsoft.com/en-us/windows/ai/directml/dml-intro">Direct ML</a> support.
 
-Once a Windows NVIDIA GPU driver is installed on the system, if you are running version `5.10.43.3`, CUDA automatically becomes available within WSL VMs. The CUDA driver installed on Windows host will be stubbed, or sym linked, inside the WSL as `libcuda.so`, therefore users _**MUST NOT**_ install any NVIDIA GPU Linux driver **_within_** WSL. It will override the symlink and passthrough with CUDA will not work.
+Once a Windows NVIDIA GPU driver is installed on the system, if you are running version `5.10.43.3`, CUDA automatically becomes available within WSL VMs. The CUDA driver installed on Windows host will be stubbed, or sym linked/mapped, inside the VM as `libcuda.so`, therefore users _**MUST NOT**_ install any NVIDIA GPU Linux driver **_within_** a WSL VM if you want GPU passthrough. Any Linux GPU driver will override the symlink and passthrough with CUDA will not work.
 
 If you need more help, read Microsoft's <a target="_blank" href="https://learn.microsoft.com/en-us/windows/ai/directml/gpu-cuda-in-wsl">Enable NVIDIA CUDA on WSL</a>. Go to NVIDIAs <a target="_blank" href="https://docs.nvidia.com/cuda/wsl-user-guide/index.html">WSL User Guide</a> for more information, though it is incomplete and a little confusing.
 
@@ -257,15 +271,82 @@ We are running 2 tests.
 
 ### Test 1: nvidia-smi
 
-NVIDIA has an app called `nvidia-smi`. SMI is short for <a target="_blank" href="https://developer.nvidia.com/nvidia-system-management-interface">System Management Interface</a>.
+NVIDIA has an app called `nvidia-smi`. SMI is short for <a target="_blank" href="https://developer.nvidia.com/nvidia-system-management-interface">System Management Interface</a>. You can use it get info on what your NVIDIA GPU is up too in any OS.
 
 If you run `nvidia-smi.exe` from within a windows directory, even from your Ubuntu VM command prompt, it will show the **_Windows OS_** processes running on your GPU. In your Ubuntu tab, copy, paste `/mnt/c/Windows/system32/nvidia-smi.exe`, then press enter:
 
-screenshot here
+```bash
+yourlinuxname@yourcomputer:~$ /mnt/c/Windows/system32/nvidia-smi.exe
+Mon Jan 15 18:37:48 2023
++---------------------------------------------------------------------------------------+
+| NVIDIA-SMI 546.33                 Driver Version: 546.33       CUDA Version: 12.3     |
+|-----------------------------------------+----------------------+----------------------+
+| GPU  Name                     TCC/WDDM  | Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |         Memory-Usage | GPU-Util  Compute M. |
+|                                         |                      |               MIG M. |
+|=========================================+======================+======================|
+|   0  NVIDIA GeForce GTX 1660 Ti   WDDM  | 00000000:01:00.0  On |                  N/A |
+|  0%   54C    P0              24W / 130W |   1513MiB /  6144MiB |      0%      Default |
+|                                         |                      |                  N/A |
++-----------------------------------------+----------------------+----------------------+
 
-If passthrough to WSL is working, you should be able to run it from an Ubuntu command prompt as `nvidia-smi` and get similar results showing what apps are using the GPU inside the current **_Ubuntu VM OS_**. However the list will probably be shorter:
++---------------------------------------------------------------------------------------+
+| Processes:                                                                            |
+|  GPU   GI   CI        PID   Type   Process name                            GPU Memory |
+|        ID   ID                                                             Usage      |
+|=======================================================================================|
+|    0   N/A  N/A      5248    C+G   C:\Windows\explorer.exe                   N/A      |
+|    0   N/A  N/A      6580    C+G   ...nt.CBS_cw5n1h2txyewy\SearchHost.exe    N/A      |
+|    0   N/A  N/A      6676    C+G   ...2txyewy\StartMenuExperienceHost.exe    N/A      |
+|    0   N/A  N/A      7508    C+G   ...__8wekyb3d8bbwe\WindowsTerminal.exe    N/A      |
+|    0   N/A  N/A      8980    C+G   ...5n1h2txyewy\ShellExperienceHost.exe    N/A      |
+|    0   N/A  N/A      9580    C+G   ...siveControlPanel\SystemSettings.exe    N/A      |
+|    0   N/A  N/A     11592    C+G   ...pdnekdrzrea0\XboxGameBarSpotify.exe    N/A      |
+|    0   N/A  N/A     11740    C+G   ...t.LockApp_cw5n1h2txyewy\LockApp.exe    N/A      |
+|    0   N/A  N/A     13872    C+G   ...oogle\Chrome\Application\chrome.exe    N/A      |
+|    0   N/A  N/A     14400    C+G   ...CBS_cw5n1h2txyewy\TextInputHost.exe    N/A      |
+|    0   N/A  N/A     14836    C+G   ...wekyb3d8bbwe\XboxGameBarWidgets.exe    N/A      |
+|    0   N/A  N/A     15064    C+G   ...ekyb3d8bbwe\PhoneExperienceHost.exe    N/A      |
+|    0   N/A  N/A     17708    C+G   ...GeForce Experience\NVIDIA Share.exe    N/A      |
+|    0   N/A  N/A     18180    C+G   ...GeForce Experience\NVIDIA Share.exe    N/A      |
+|    0   N/A  N/A     18868    C+G   ...ir\CORSAIR iCUE 4 Software\iCUE.exe    N/A      |
+|    0   N/A  N/A     18960    C+G   ...cal\Microsoft\OneDrive\OneDrive.exe    N/A      |
+|    0   N/A  N/A     19920    C+G   ...n\120.0.2210.133\msedgewebview2.exe    N/A      |
+|    0   N/A  N/A     20540    C+G   ...Master\MasterPlus\MasterPlusApp.exe    N/A      |
+|    0   N/A  N/A     21076    C+G   ...al\Discord\app-1.0.9030\Discord.exe    N/A      |
+|    0   N/A  N/A     21764    C+G   ...\cef\cef.win7x64\steamwebhelper.exe    N/A      |
+|    0   N/A  N/A     23028    C+G   ....0_x64__kzh8wxbdkxb8p\DCv2\DCv2.exe    N/A      |
+|    0   N/A  N/A     24624    C+G   ... Stream\85.0.26.0\GoogleDriveFS.exe    N/A      |
+|    0   N/A  N/A     26484    C+G   ...\Local\slack\app-4.36.136\slack.exe    N/A      |
+|    0   N/A  N/A     28052    C+G   ...Programs\Microsoft VS Code\Code.exe    N/A      |
++---------------------------------------------------------------------------------------+
+```
 
-screenshot here
+If passthrough to WSL is working, you should be able to run it from an Ubuntu command prompt as simply `nvidia-smi` and get similar results showing what apps are using the GPU inside the current **_Ubuntu VM OS_**. However the list will probably be shorter. Mine only has one app on Ubuntu vs almost 30 on Windows:
+
+```bash
+yourlinuxname@yourcomputer:~$ nvidia-smi
+Mon Jan 15 18:36:26 2024
++---------------------------------------------------------------------------------------+
+| NVIDIA-SMI 545.36                 Driver Version: 546.33       CUDA Version: 12.3     |
+|-----------------------------------------+----------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |         Memory-Usage | GPU-Util  Compute M. |
+|                                         |                      |               MIG M. |
+|=========================================+======================+======================|
+|   0  NVIDIA GeForce GTX 1660 Ti     On  | 00000000:01:00.0  On |                  N/A |
+|  0%   53C    P0              24W / 130W |   1510MiB /  6144MiB |      0%      Default |
+|                                         |                      |                  N/A |
++-----------------------------------------+----------------------+----------------------+
+
++---------------------------------------------------------------------------------------+
+| Processes:                                                                            |
+|  GPU   GI   CI        PID   Type   Process name                            GPU Memory |
+|        ID   ID                                                             Usage      |
+|=======================================================================================|
+|    0   N/A  N/A        33      G   /Xwayland                                 N/A      |
++---------------------------------------------------------------------------------------+
+```
 
 ### Test 2: TensorFlow and Python
 
@@ -283,9 +364,22 @@ Note that I'm using the Anaconda normal installation, not miniconda, but it is t
 
 **_Step 2: Install Tensorflow_**
 
-Tensorflow is picky about its enviroment, i.e. the version of Python, etc. We will isolate those dependencies in their own enviroment.
+Tensorflow is picky about its environment, i.e. the version of Python, etc. We will isolate those dependencies in their own <a target="\_blank" href="https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html">Anaconda environment</a>.
 
-NOTE: `pip install` installs software at the global level of your VM, so it's accessible to any Anaconda env. `conda install` only installs software libraries, or modules, in the current Anaconda environment, which will have its own directory that holds the environments installed libraries. TODO make sure this is true.
+WARNING: <a target="_blank" href="https://www.anaconda.com/blog/using-pip-in-a-conda-environment">Using pip inside a conda environment</a> is problematic. `pip install` can cause tricky problems by:
+
+- installing software at the global level of your VM instead of in the current environment directory.
+- overwriting and changing the version of packages or sub-packages (dependencies) installed with `conda install`
+
+Conda won't know anything about packages installed with pip, so conda can't manage future upgrades safely.
+
+`conda install` only installs software libraries, or modules, in the current Anaconda environment, which will have its own directory that holds the environments installed libraries. Always use conda install if you can. Also, it is able to install supporting libraries in other languages, not just python.
+
+If you have to use pip, use it last, and add this arg to `pip install`: "--upgrade-strategy only-if-needed"
+
+From the <a target="_blank" href="https://www.anaconda.com/blog/using-pip-in-a-conda-environment">Anaconda docs</a>:
+
+"Once pip is used to install software into a conda environment, conda will be unaware of these changes and may make modifications that would break the environment."
 
 Create an Anconda environment (aka "env"), and activate it:
 
@@ -293,11 +387,21 @@ Create an Anconda environment (aka "env"), and activate it:
 conda create --name directml python=3.6
 
 conda activate directml
+```
 
+https://www.youtube.com/watch?v=0S81koZpwPA
+
+https://www.youtube.com/watch?v=KinTNHO-6IY
+
+**_Step 3: Install Tensorflow_**
+
+Unfortunately, as of Jan 2024, tensorflow-directml is only available via pip. I could not find it on <a href="anaconda.org">anaconda.org</a>
+
+```bash
 pip install tensorflow-directml
 ```
 
-**_Step 3: Run the Test_**
+**_Step 4: Run the Test_**
 
 Verify that tensorflow-directml runs correctly by adding two tensors. You will need iPython. It is already installed in the default "base" env, but not in any additional environments, like our new `directml` env. The `directml` env does not have it so we have to install it before we can use it:
 
@@ -351,3 +455,20 @@ Whelp, that's all for now. You should have WSL2 set up to do some cool stuff lik
   - <a target="_blank" href="https://cloud.google.com/deep-learning-containers">Google's Deep Learning Containers</a>
   - <a target="_blank" href="https://docs.nvidia.com/deeplearning/frameworks/user-guide/index.html">NVIDIA Deep Learning Containers</a>
   - <a target="_blank" href="https://www.docker.com/products/ai-ml-development/">Docker Hub trusted AI/ML Images</a>
+
+cuda capability and compute capability are the same
+
+https://www.nvidia.com/en-us/geforce/graphics-cards/compare/
+
+list of desktop gpus starting with 16 series
+https://en.wikipedia.org/wiki/List_of_Nvidia_graphics_processing_units#GeForce_16_series
+
+To find the number of CUDA cores of your GPUs, you can run the following commands in the command line:
+nvidia-settings -q CUDACores -t
+nvidia-settings -q :0/CUDACores
+
+If you have the nvidia-settings utilities installed, you can query the number of CUDA cores of your gpus by running nvidia-settings -q CUDACores -t. If that's not working, try nvidia-settings -q :0/CUDACores.
+
+:0 is the gpu slot/ID: In this case 0 is refering to the first GPU.
+CUDACores is the property
+If have the cuda & nvidia-cuda-toolkit installed, try running deviceQuery. It's located somewhere in /usr/local/cuda-11/extras/demo_suite/deviceQuery Try running locate deviceQuery.
