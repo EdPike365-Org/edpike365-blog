@@ -7,6 +7,8 @@ require('dotenv').config({
   path: `.env.${process.env.NODE_ENV}`,
 })
 
+//const siteUrl = process.env.URL || `https://edpike365.com`
+
 // TODO You can author gatsby-config and gatsby-node in ESM syntax.
 // This feature was added in gatsby@5.3.0.
 
@@ -38,63 +40,63 @@ module.exports = {
     {
       resolve: `gatsby-head-style-boss`,
       options: {
-        config: {
-          minifyBrowserFunction: false,
-          styleConfigs: [
-            {
-              key: 'normalize',
-              displayName: 'Normalize2 Reset',
-              alwaysEnabled: true,
-              componentType: 'STYLE',
-              crossorigin: 'false',
-              pathToCSSFile: './src/styles/normalize2.css',
-            },
-            {
-              key: 'core',
-              displayName: 'Core Theme',
-              alwaysEnabled: true,
-              componentType: 'STYLE',
-              crossorigin: 'false',
-              pathToCSSFile: './src/styles/coreTheme.css',
-              minify: true,
-            },
-            {
-              key: 'light',
-              displayName: 'Default, Light Theme',
-              alwaysEnabled: false,
-              uses: 'default',
-              componentType: 'STYLE',
-              pathToCSSFile: './src/styles/lightTheme.css',
-              minify: false,
-            },
-            {
-              key: 'dark',
-              displayName: 'Dark Theme',
-              alwaysEnabled: false,
-              uses: 'dark',
-              componentType: 'STYLE',
-              pathToCSSFile: './src/styles/darkTheme.css',
-              minify: false,
-            },
-            {
-              key: 'burger',
-              displayName: 'Burger King',
-              componentType: 'LINK',
-              remoteHREF:
-                'https://www.edpike365.com/gatsby-head-style-boss-test/burger.css',
-              cacheRemoteCSS: false,
-            },
-            {
-              key: 'fire',
-              displayName: 'Fire Theme',
-              alwaysEnabled: false,
-              componentType: 'STYLE',
-              pathToCSSFile: './src/styles/fireTheme.css',
-              media: '(max-width: 1280px)',
-              minify: false,
-            },
-          ],
-        },
+        minifyBrowserFunction: false,
+        iifeDebugLevel: 5,
+        generalDebugLevel: 5,
+        styleConfigs: [
+          {
+            key: 'normalize',
+            displayName: 'Normalize2 Reset',
+            alwaysEnabled: true,
+            componentType: 'STYLE',
+            crossorigin: 'false',
+            pathToCSSFile: './src/styles/normalize2.css',
+          },
+          {
+            key: 'core',
+            displayName: 'Core Theme',
+            alwaysEnabled: true,
+            componentType: 'STYLE',
+            crossorigin: 'false',
+            pathToCSSFile: './src/styles/coreTheme.css',
+            minify: true,
+          },
+          {
+            key: 'light',
+            displayName: 'Default, Light Theme',
+            alwaysEnabled: false,
+            uses: 'default',
+            componentType: 'STYLE',
+            pathToCSSFile: './src/styles/lightTheme.css',
+            minify: false,
+          },
+          {
+            key: 'dark',
+            displayName: 'Dark Theme',
+            alwaysEnabled: false,
+            uses: 'dark',
+            componentType: 'STYLE',
+            pathToCSSFile: './src/styles/darkTheme.css',
+            minify: false,
+          },
+          {
+            key: 'burger',
+            displayName: 'Burger King',
+            componentType: 'LINK',
+            remoteHREF:
+              'https://www.edpike365.com/gatsby-head-style-boss-test/burger.css',
+            cacheRemoteCSS: false,
+          },
+          {
+            key: 'fire',
+            displayName: 'Fire Theme',
+            alwaysEnabled: false,
+            componentType: 'STYLE',
+            pathToCSSFile: './src/styles/fireTheme.css',
+            media: '(max-width: 1280px)',
+            minify: false,
+          },
+        ],
       },
     },
     {
@@ -225,7 +227,7 @@ module.exports = {
        options: {
          trackingId: `ADD YOUR TRACKING ID HERE`,
        },
-     },    
+     },
     */
     {
       resolve: `gatsby-plugin-feed`,
@@ -342,6 +344,41 @@ module.exports = {
           day: 'numeric',
           month: 'long',
           year: 'numeric',
+        },
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-sitemap',
+      options: {
+        // This query becomes the "data" that we can access below.
+        query: `
+        {
+          allSitePage {
+            nodes {
+              path
+            }
+          },
+          site {
+            siteMetadata {
+              siteUrl
+            }
+          }
+        }
+      `,
+        resolveSiteUrl: data => {
+          return data.site.siteMetadata.siteUrl
+        },
+        resolvePages: ({ allSitePage: { nodes: allPages } }) => {
+          return allPages.map(page => {
+            return { ...page }
+          })
+        },
+        serialize: ({ path, modifiedGmt }) => {
+          // path is from the data object generated by the query plugin above.
+          return {
+            url: path,
+            lastmod: modifiedGmt,
+          }
         },
       },
     },

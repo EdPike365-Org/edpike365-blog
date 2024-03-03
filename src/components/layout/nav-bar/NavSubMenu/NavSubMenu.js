@@ -44,7 +44,7 @@ const NavSubMenu = ({ title, uuid, children, defaultOpen = false }) => {
         {title} {isOpen ? '  -' : '  +'}
       </button>
       <ul
-        role="menu"
+        aria-hidden
         aria-labelledby={uuid}
         id={uuid + '-menu'}
         className={`

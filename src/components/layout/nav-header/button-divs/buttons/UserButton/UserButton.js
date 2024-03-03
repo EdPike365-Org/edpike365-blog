@@ -15,7 +15,7 @@ const UserButton = () => {
 
   function UserImage() {
     if (picture) {
-      return <img src={picture} alt="Profile" />
+      return <img src={picture} alt="Profile" referrerPolicy="no-referrer" />
     } else {
       return <UserCircleIcon />
     }

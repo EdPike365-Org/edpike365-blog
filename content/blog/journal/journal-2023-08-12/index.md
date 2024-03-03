@@ -19,7 +19,28 @@ tags:
 
 Caught up with Medium feed summer vacation. You'll notice a lack of full stack web app stuff and a ton of devops stuff. I'll loop back around to the full stack stuff once I get my DevOps/SRE demo ready.
 
-### Log (FIFO)
+### Log
+
+- [How enterprises are using open source LLMs: 16 examples](https://venturebeat.com/ai/how-enterprises-are-using-open-source-llms-16-examples/?utm_source=VentureBeat&utm_campaign=d5e91cc2f1-EMAIL_CAMPAIGN_2024_01_31_12_35&utm_medium=email&utm_term=0_-d5e91cc2f1-%5BLIST_EMAIL_ID%5D&mc_cid=d5e91cc2f1&mc_eid=f18606673c) Large (closed) public models by themselves have "little to no value" for enterprise.
+- https://www.youtube.com/watch?v=Vw1r2uoU_Fc
+- https://github.com/jcubic/jquery.terminal
+- https://js.cytoscape.org/
+- https://stackshare.io/posts/top-developer-tools-2023
+- https://www.youtube.com/playlist?list=PLIivdWyY5sqKUJ2gF6fh-ur2ApYGgUmac
+- [Ferret: Refer and Ground Anything Anywhere at Any Granularity](https://github.com/apple/ml-ferret?utm_source=substack&utm_medium=email)
+- [New technique can accelerate language models by 300x](https://venturebeat.com/ai/new-technique-can-accelerate-language-models-by-300x/?utm_source=substack&utm_medium=email)
+- [Introducing Stable LM 2 1.6B](https://stability.ai/news/introducing-stable-lm-2?utm_source=substack&utm_medium=email)
+- [microsoft phi-2](https://huggingface.co/microsoft/phi-2?utm_source=substack&utm_medium=email) 2.7B, as good as < 13B other models.
+- [The complete guide to LLM compression](https://bdtechtalks.com/2023/09/18/what-is-llm-compression/?utm_source=substack&utm_medium=email) SparseGPT one-shot pruning. LoRAPrune, combines low-rank adaptation (LoRA) with pruning to enhance the performance of LLMs on downstream tasks. LoRA is a parameter-efficient fine-tuning (PEFT). LLM-Pruner structured pruning. MiniLLM knowledge distilallation. Quantization: QAFT, QLoRA, PEQA, PTQ (post-training quantization)
+- [The complete guide to LLM fine-tuning](https://bdtechtalks.com/2023/07/10/llm-fine-tuning/?utm_source=substack&utm_medium=email)
+- [Gemini Embeddings Guide](https://ai.google.dev/docs/embeddings_guide?utm_source=email&utm_medium=newsletter&utm_campaign=tensorflow-jan24) converts text into numerical vectors
+- [Advancements in machine learning for machine learning](https://blog.research.google/2023/12/advancements-in-machine-learning-for.html?utm_source=email&utm_medium=newsletter&utm_campaign=tensorflow-jan24)
+- [Stack File](https://github.com/marketplace/stack-file) GitHub app that builds a stack file in your repo.
+- [Going on the road with Vanlife, built around PC gaming and real-life exploration](https://blogs.windows.com/windowsexperience/2023/12/13/vanlife-pc-gaming-asus-rog/?ocid=mti_jan24_txt)
+- [Cloud Cost Optimization Is Hard, Java Can Help](https://www.azul.com/blog/cloud-cost-optimization-is-hard/?utm_medium=email&utm_campaign=20240130-ES-January-Newsletter&utm_source=marketo&utm_content=&utm_term=&mkt_tok=MDU1LVdZVS0zMDgAAAGQ_2_M-8zQuQjl_mTbxqU8TLSaDCYOOg5CUGzWkbJgPAT1NkjRumIFPqdQIeUiRFVNTDWTdKPYQV3fhCOzFJThny7y-WqMLfXY-_WtJCi7) Azul Falcon JIT compiler
+- [The New CSS Color Format You Didn't Know You Needed; OKLCH()](https://dev.to/greenteaisgreat/the-new-css-color-format-you-didnt-know-you-needed-oklch-10hf) lch vs hsl. lch() produces color that appears identical no matter what screen its on.
+- [Defer and other reasons to try Angular again](https://www.learnwithjason.dev/defer-and-other-reasons-to-try-angular-again?ck_subscriber_id=1387554412&utm_source=convertkit&utm_medium=email&utm_campaign=The+funniest+4+Web+Devs+episode+yet%20-%2012946656)
+- [Qwik + Astro perf on perf on perf](https://www.learnwithjason.dev/qwik-astro-perf-on-perf-on-perf?ck_subscriber_id=1387554412&utm_source=convertkit&utm_medium=email&utm_campaign=The+funniest+4+Web+Devs+episode+yet%20-%2012946656)
 
 - Terraform is going essentially closed source and I'm learning about OpenTF, by the same folks who wrote Terragrunt, etc. Getting Java flashbacks. Was going to do a Pulumi dive anyway but moving that up. Was also planning closer look for Crossplane but that lives inside of Kubernetes and I need something outside _and_ vendor neutral.
 

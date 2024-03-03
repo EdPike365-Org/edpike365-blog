@@ -1,0 +1,6 @@
+{
+  "domain": "http:localhost:8888",
+  "siteMapFilePath": "./public/sitemap-0.xml",
+  "excludedURLs": ["https://www.edpike365.com/about-me-near/"],
+  "numURlsToProcess": -1
+}

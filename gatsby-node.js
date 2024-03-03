@@ -57,8 +57,8 @@ exports.onCreatePage = ({ page, actions }) => {
     arBlogStatusesToShow
   )
 
-  /* 
-  Since this section will have dynamic content that shouldn’t be rendered statically, 
+  /*
+  Since this section will have dynamic content that shouldn’t be rendered statically,
   you need to exclude it from the build. This indicates that /account is a client-only route.
   page.matchPath is a special key that's used for matching pages only on the client.
     */
@@ -101,7 +101,9 @@ exports.createSchemaCustomization = ({ actions }) => {
     }
 
     type Frontmatter {
+      kicker: String
       title: String
+      subtitle: String
       description: String
       date: Date @dateformat
     }

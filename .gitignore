@@ -74,3 +74,6 @@ yarn-error.log
 dist
 # Local Netlify folder
 .netlify
+
+# lighthosue reports files
+.lighthouse/reports/
